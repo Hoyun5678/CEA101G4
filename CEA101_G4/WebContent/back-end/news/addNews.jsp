@@ -5,7 +5,6 @@
 <%
   NewsVO newsVO = (NewsVO) request.getAttribute("newsVO");
 %>
-<%= newsVO==null %>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -30,7 +29,7 @@
 
 <style>
   table {
-	width: 450px;
+	width: 600px;
 	background-color: white;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -45,13 +44,17 @@
 
 </head>
 <body bgcolor='white'>
+ <div id="wrapper">
+        <%@ include file="/back-end/back-index-sidebar.jsp"%>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>最新消息新增 - addNews.jsp</h3></td><td>
-		 <h4><a href="/CEA101G4/back-end/news/select_page.jsp"><img src="images/pikachu.jpg" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+        <div id="page-content-wrapper">
+
+<!-- <table id="table-1"> -->
+<!-- 	<tr><td> -->
+<!-- 		 <h3>最新消息新增 - addNews.jsp</h3></td><td> -->
+<!-- 		 <h4><a href="/CEA101G4/back-end/news/select_page.jsp"><img src="images/pikachu.jpg" width="100" height="100" border="0">回首頁</a></h4> -->
+<!-- 	</td></tr> -->
+<!-- </table> -->
 
 <h3>資料新增:</h3>
 
@@ -69,8 +72,9 @@
 <table>
 	<tr>
 		<td>最新消息內容:</td>
-		<td><input type="TEXT" name="news_content" size="45"
-			 value="<%= (newsVO==null)? "123456" : newsVO.getNews_content()%>" /></td>
+<!-- 		<td><input type="TEXT" name="news_content" size="45" -->
+<%-- 			 value="<%= (newsVO==null)? "123456" : newsVO.getNews_content()%>" /></td> --%>
+			 <td><textarea name="news_content" style="width:400px;height:200px;"><%= (newsVO==null)? "123456" : newsVO.getNews_content()%></textarea></td>
 	</tr>
 	<tr>
 		<td>最新消息日期:</td>
@@ -83,5 +87,7 @@
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
+</div>
+</div>
 </body>
 </html>

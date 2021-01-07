@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/souvenir_order_detail/listAllSouvenirOrderDetail.jsp'>List</a> all souvenir_orders.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/souvenir_order_detail/listAllSouvenirOrderDetail.jsp'>List</a> all souvenir_orders.  <br><br></li>
   
   
   <li>
@@ -93,7 +93,7 @@
 <h3>會員管理</h3>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/souvenir_order_detail/addSouvenirOrderDetail.jsp'>Add</a> a new souvenir_order.</li>
+  <li><a href='<%=request.getContextPath()%>/back-end/souvenir_order_detail/addSouvenirOrderDetail.jsp'>Add</a> a new souvenir_order.</li>
 </ul>
 
 </body>

@@ -4,7 +4,7 @@
 <%@ page import="com.sell.model.*"%>
 <%@ page import="com.activity_period.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
@@ -34,7 +34,7 @@
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
-<title>活動管理</title>
+<title>週期管理</title>
 
 <style type="text/css">
 .sidenav {
@@ -150,6 +150,7 @@ width:50px;}
 									<thead>
 										<tr class="warning"
 											style="line-height: 25px; text-align: center;">
+											<th>活動期別編號</th>
 											<th>報名起始日</th>
 											<th>報名結束日</th>
 											<th>活動開始時間</th>
@@ -159,25 +160,43 @@ width:50px;}
 											<th>價格</th>
 											<th>狀態</th>
 											<th>已報名人數</th>
+											<th></th>
 											
 										</tr>
 									</thead>
 									<tbody>
 										<jsp:useBean id="actperSvc" scope="page"
 											class="com.activity_period.model.ActivityPeriodService" />
-										<jsp:useBean id="acttypeSvc" scope="page"
-											class="com.activity_type.model.ActivityTypeService" />
+										<jsp:useBean id="actproSvc" scope="page"
+											class="com.activity_product.model.ActivityProductService" />
 										<c:forEach var="actproVO"
 											items="${actproSvc.getAllbySellMemId(sellVO.sellMemId)}">
+											<c:forEach var="actperoVO"
+											items="${actperSvc.getAllActPerByActId(actproVO.act_id)}">
+											
 											<tr style="line-height: 25px; text-align: center;">
-											<td><img class="list-photo"src="<%=request.getContextPath()%>
-											/ActivityPhoto/ActivityPhoto.do?act_id=
-											${actproVO.act_id}&action=getListActPhoByActId"></td>
-												<td>${acttypeSvc.getOneActType(actproVO.act_type_id).act_type_name}</td>
-												<td>${actproVO.act_name}</td>
-												<td>${actproVO.act_price}</td>
-												<td class="act_content" style="max-width: 100px;">${actproVO.act_des}</td>
-												<td>${actproVO.act_add}</td>
+												<td>${actperoVO.act_period_id}</td>
+												<td><fmt:formatDate value="${actperoVO.act_sign_start}" pattern="yyyy-MM-dd"/></td>
+												<td><fmt:formatDate value="${actperoVO.act_sign_end}" pattern="yyyy-MM-dd"/></td>
+												<td><fmt:formatDate value="${actperoVO.act_period_start}" pattern="yyyy-MM-dd HH:mm"/></td>
+												<td><fmt:formatDate value="${actperoVO.act_period_end}" pattern="yyyy-MM-dd HH:mm"/></td>
+												<td>${actperoVO.act_up_limit}</td>
+												<td>${actperoVO.act_low_limit}</td>
+												<td>${actperoVO.act_cur_price}</td>
+												<td>
+												
+												<c:choose>
+  												<c:when test="${actperoVO.act_period_status==1}">
+  													正常
+  												</c:when>
+  												<c:when test="${actperoVO.act_period_status==0}">
+  													取消
+  												</c:when>
+  												<c:otherwise>
+  													延期
+  												</c:otherwise>
+												</c:choose></td>
+												<td>${actperoVO.act_sign_sum}</td>
 												<td class="btn_group" style="width: 100%;">
 													<form METHOD="post"
 														ACTION="<%=request.getContextPath()%>/ActivityProduct/ActivityProduct.do">
@@ -188,31 +207,9 @@ width:50px;}
 															value="${actproVO.act_id}"> <input type="hidden"
 															name="action" value="getOne_For_Update">
 													</form>
-													
-													
-													<form METHOD="post"
-														ACTION="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do">
-														<button type="submit"
-															class="btn btn-light btn-xs dt-edit"
-															style="margin-right: 16px;">圖片管理</button>
-														<input type="hidden" name="act_id"
-															value="${actproVO.act_id}"> <input type="hidden"
-															name="action" value="get_Photo_By_Act_id">
-													</form>
-													
-													
-													<form METHOD="post"
-														ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do">
-														<button type="submit"
-														class="btn btn-light btn-xs dt-delete">設定週期</button>
-														<input type="hidden" name="act_id"
-															value="${actproVO.act_id}"> <input type="hidden"
-															name="action" value="getOne_For_Insert">
-													</form>
-													
-													
 												</td>
 											</tr>
+										</c:forEach>
 										</c:forEach>
 									</tbody>
 								</table>

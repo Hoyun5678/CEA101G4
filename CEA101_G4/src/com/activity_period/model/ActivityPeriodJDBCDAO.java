@@ -28,6 +28,8 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 						+ "ACT_PERIOD_START, ACT_PERIOD_END, ACT_UP_LIMIT, ACT_LOW_LIMIT, ACT_CUR_PRICE,ACT_PERIOD_STATUS, ACT_SIGN_SUM FROM ACTIVITY_PERIOD";
 	private static final String GET_ONE_STMT = "SELECT ACT_PERIOD_ID, ACT_ID, ACT_SIGN_START, ACT_SIGN_END," 
 						+ "ACT_PERIOD_START, ACT_PERIOD_END, ACT_UP_LIMIT, ACT_LOW_LIMIT, ACT_CUR_PRICE,ACT_PERIOD_STATUS, ACT_SIGN_SUM FROM ACTIVITY_PERIOD where ACT_PERIOD_ID = ?";
+	private static final String GET_ALL_BY_ACT_ID = "SELECT ACT_PERIOD_ID, ACT_ID, ACT_SIGN_START, ACT_SIGN_END," 
+			+ "ACT_PERIOD_START, ACT_PERIOD_END, ACT_UP_LIMIT, ACT_LOW_LIMIT, ACT_CUR_PRICE,ACT_PERIOD_STATUS, ACT_SIGN_SUM FROM ACTIVITY_PERIOD where ACT_ID = ?";
 //	private static final String GET_Mem_ByDeptno_STMT = "SELECT empno,ename,job,to_char(hiredate,'yyyy-mm-dd') hiredate,sal,comm,deptno FROM emp2 where deptno = ? order by empno";
 //	
 //	private static final String DELETE_ACTIVITY_TYPE = "DELETE FROM ACTIVITY_TYPE where deptno = ?";
@@ -87,8 +89,64 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 	
 	@Override
 	public List<ActivityPeriodVO> getAllActPerByActId(String act_id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ActivityPeriodVO>list=new ArrayList<ActivityPeriodVO>();
+		ActivityPeriodVO actperVO=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ALL_BY_ACT_ID);
+			pstmt.setString(1, act_id);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				actperVO=new ActivityPeriodVO();
+				actperVO.setAct_period_id(rs.getString("act_period_id"));
+				actperVO.setAct_id(rs.getString("act_id"));
+				actperVO.setAct_sign_start(rs.getTimestamp("act_sign_start"));
+				actperVO.setAct_sign_end(rs.getTimestamp("act_sign_end"));
+				actperVO.setAct_period_start(rs.getTimestamp("act_period_end"));
+				actperVO.setAct_period_end(rs.getTimestamp("act_period_end"));
+				actperVO.setAct_up_limit(rs.getInt("act_up_limit"));
+				actperVO.setAct_low_limit(rs.getInt("act_low_limit"));
+				actperVO.setAct_cur_price(rs.getDouble("act_cur_price"));
+				actperVO.setAct_period_status(rs.getInt("act_period_status"));
+				actperVO.setAct_sign_sum(rs.getInt("act_sign_sum"));
+				list.add(actperVO);
+			}
+			
+			
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 		

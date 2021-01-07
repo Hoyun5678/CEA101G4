@@ -75,6 +75,7 @@
 </c:if>
 
 <table>
+<button><a href='<%=request.getContextPath()%>/back-end/news/addNews.jsp'>新增最新消息</a></button>
 	<tr>
 		<th>最新消息編號</th>
 		<th>最新消息內容</th>
@@ -104,7 +105,9 @@
 		</tr>
 	</c:forEach>
 </table>
+
 <%@ include file="page2.file" %>
+
 </div>
 </div>
 
