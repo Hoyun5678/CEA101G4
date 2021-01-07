@@ -12,7 +12,7 @@ import com.roomorderdetail.model.RoomOrderDetailVO;
 public class FoodSpotService {
 		private FoodSpotDAO_interface dao;
 		public FoodSpotService() {
-			dao = new FoodSpotDAO();
+			dao = new FoodSpotJDBCDAO();
 		}
 		public FoodSpotVO addFoodSpot(String sell_mem_id, String fas_spot_name, String fas_add, String fas_des, byte[] fas_photo, Double fas_latitude, Double fas_longitud) {
 			
