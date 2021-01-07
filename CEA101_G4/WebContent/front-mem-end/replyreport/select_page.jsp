@@ -16,9 +16,8 @@
 	margin-left: 1px;
 	padding: 50px;
 	border-style: dotted;
-	background-color: white;
+	background-color: #E9EEF4;;
 	border: 1px;
-	border-style: dotted;
 }
 
 .table td, .table th {
@@ -51,10 +50,6 @@ a:hover {
 
 .nav-profile {
 	height: 95%;
-}
-
-#container {
-	background: #E9EEF4;
 }
 </style>
 

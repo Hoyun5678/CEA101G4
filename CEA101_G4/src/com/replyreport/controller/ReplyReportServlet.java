@@ -70,8 +70,8 @@ public class ReplyReportServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("replyReportVO", replyReportVO); // 資料庫取出的replyReportVO物件,存入req
-				String url = "/front-mem-end/replyreport/listOneReplyReport.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneReplyReport.jsp
+				String url = "/front-mem-end/replyreport/front_listOne.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 front_listOne.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
@@ -94,15 +94,14 @@ public class ReplyReportServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數****************************************/
 				String reportId = req.getParameter("reportId");
-				
 				/***************************2.開始查詢資料****************************************/
 				ReplyReportService replyReportSvc = new ReplyReportService();
 				ReplyReportVO replyReportVO = replyReportSvc.getOneReplyReport(reportId);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("replyReportVO", replyReportVO);         // 資料庫取出的replyReportVO物件,存入req
-				String url = "/front-mem-end/replyreport/update_replyreport_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_replyreport_input.jsp
+				String url = "/front-mem-end/replyreport/front_update_replyreport.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
@@ -115,7 +114,7 @@ public class ReplyReportServlet extends HttpServlet {
 		}
 		
 		
-		if ("update".equals(action)) { // 來自update_replyreport_input.jsp的請求
+		if ("update".equals(action)) { // 來自front_update_replyreport.jsp的請求
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -158,10 +157,10 @@ public class ReplyReportServlet extends HttpServlet {
 				try {
 					reportResult = new Integer(req.getParameter("reportResult"));
 					if(reportResult != 0 && reportResult != 1) {
-						errorMsgs.add("請填數字0或1");
+						errorMsgs.add("請勾選檢舉狀態");
 						}
 				} catch (NumberFormatException e) {			
-					errorMsgs.add("請填數字0或1");
+					errorMsgs.add("請勾選檢舉狀態");
 
 				}
 
@@ -177,7 +176,7 @@ public class ReplyReportServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("replyReportVO", replyReportVO); // 含有輸入格式錯誤的replyReportVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/replyreport/update_replyreport_input.jsp");
+							.getRequestDispatcher("/front-mem-end/replyreport/front_update_replyreport.jsp");
 					failureView.forward(req, res);
 					return; //程式中斷
 				}
@@ -188,8 +187,8 @@ public class ReplyReportServlet extends HttpServlet {
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("replyReportVO", replyReportVO); // 資料庫update成功後,正確的的replyReportVO物件,存入req
-				String url = "/front-mem-end/replyreport/listOneReplyReport.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneReplyReport.jsp
+				String url = "/front-mem-end/replyreport/front_listOne.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交front_listOne.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
@@ -244,7 +243,7 @@ public class ReplyReportServlet extends HttpServlet {
 						errorMsgs.add("請填檢舉結果");
 						}
 				} catch (NumberFormatException e) {			
-					errorMsgs.add("請填數字0或1或2");
+					errorMsgs.add("請勾選檢舉狀態");
 
 				}
 				

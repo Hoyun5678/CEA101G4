@@ -3,11 +3,13 @@ package com.reply.model;
 import java.sql.*;
 import java.util.*;
 
+import util.Util;
+
 public class ReplyJDBCDAO implements ReplyDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "JEFF";
-	String passwd = "123456";
+	String driver = Util.DRIVER;
+	String url = Util.URL;
+	String userid = Util.USER;
+	String passwd = Util.PASSWORD;
 
 	private static final String INSERT_STMT = 
 			"INSERT INTO reply(reply_id, act_period_id, mem_id, reply_content, reply_visible) "
@@ -280,21 +282,21 @@ public class ReplyJDBCDAO implements ReplyDAO_interface {
 		ReplyJDBCDAO dao = new ReplyJDBCDAO();
 //
 //		// 新增
-//		ReplyVO replyVO1 = new ReplyVO();
-//		replyVO1.setActPeriodId("AP003");
-//		replyVO1.setMemId("MEM002");
-//		replyVO1.setReplyVisible(0);
-//		replyVO1.setReplyContent("讚讚讚");
-//		dao.insert(replyVO1);
+		ReplyVO replyVO1 = new ReplyVO();
+		replyVO1.setActPeriodId("AP003");
+		replyVO1.setMemId("MEM002");
+		replyVO1.setReplyVisible(0);
+		replyVO1.setReplyContent("這活動辦得太失敗了");
+		dao.insert(replyVO1);
 		
 		// 修改
-		ReplyVO replyVO2 = new ReplyVO();
-		replyVO2.setReplyId("RPL005");
-		replyVO2.setActPeriodId("AP001");
-		replyVO2.setMemId("MEM001");
-		replyVO2.setReplyVisible(1);
-		replyVO2.setReplyContent("讚讚");
-		dao.update(replyVO2);
+//		ReplyVO replyVO2 = new ReplyVO();
+//		replyVO2.setReplyId("RPL00");
+//		replyVO2.setActPeriodId("AP001");
+//		replyVO2.setMemId("MEM001");
+//		replyVO2.setReplyVisible(1);
+//		replyVO2.setReplyContent("讚讚");
+//		dao.update(replyVO2);
 
 		
 		// 刪除

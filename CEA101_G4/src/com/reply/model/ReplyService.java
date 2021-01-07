@@ -6,7 +6,7 @@ public class ReplyService {
 	private ReplyDAO_interface dao;
 	
 	public ReplyService() {
-		dao = new ReplyDAO();
+		dao = new ReplyJDBCDAO();
 	}
 	
 	public ReplyVO addReply(String actPeriodId, String memId, 

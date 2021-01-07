@@ -15,8 +15,9 @@
 	height: 96%;
 	margin-left: 1px;
 	padding: 50px;
-	border-style: dotted;
-	background-color: white;
+	
+	background-color: #E9EEF4;
+}
 	border: 1px;
 	border-style: dotted;
 }
@@ -74,8 +75,8 @@ a:hover {
 		</c:if>
 
 		<nav class="navbar navbar-dark bg-dark">
-			<a href='/CEA101G4/front-mem-end/reply/front_AllReply.jsp'>列出所有評論</a>
-			<a href='/CEA101G4/front-mem-end/reply/front_addReply.jsp'>新增一筆評論</a>
+			<a href='<%=request.getContextPath()%>/front-mem-end/reply/front_AllReply.jsp'>列出所有評論</a>
+			<a href='<%=request.getContextPath()%>/front-mem-end/reply/front_addReply.jsp'>新增一筆評論</a>
 
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/reply/reply.do">
@@ -88,18 +89,18 @@ a:hover {
 
 		<jsp:useBean id="replySvc" scope="page"
 			class="com.reply.model.ReplyService" />
-		<FORM METHOD="post"
-			ACTION="<%=request.getContextPath()%>/reply/reply.do" name="form1">
-			<b><font color=blue>複合查詢:</font></b> <br>
-			<br> <b>輸入評論編號:</b> <input type="text" name="replyId"
-				placeholder="RPL001"><br> <br>
-			<b>輸入活動期別編號:</b> <input type="text" name="actPeriodId"
-				placeholder="AP001"><br>
-			<br> <b>輸入會員編號:</b> <input type="text" name="memId"
-				placeholder="MEM001"><br>
-			<br> <input type="submit" value="送出">
-			<input type="hidden" name="action" value="listReply_ByCompositeQuery">
-		</FORM>
+<!-- 		<FORM METHOD="post" -->
+<%-- 			ACTION="<%=request.getContextPath()%>/reply/reply.do" name="form1"> --%>
+<!-- 			<b><font color=blue>複合查詢:</font></b> <br> -->
+<!-- 			<br> <b>輸入評論編號:</b> <input type="text" name="replyId" -->
+<!-- 				placeholder="RPL001"><br> <br> -->
+<!-- 			<b>輸入活動期別編號:</b> <input type="text" name="actPeriodId" -->
+<!-- 				placeholder="AP001"><br> -->
+<!-- 			<br> <b>輸入會員編號:</b> <input type="text" name="memId" -->
+<!-- 				placeholder="MEM001"><br> -->
+<!-- 			<br> <input type="submit" value="送出"> -->
+<!-- 			<input type="hidden" name="action" value="listReply_ByCompositeQuery"> -->
+<!-- 		</FORM> -->
 
 		<!-- 		<ul> -->
 		<!-- 			<li id=list> -->

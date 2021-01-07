@@ -99,7 +99,7 @@ th, td {
 		<tr>
 			<td>
 				<h3>
-					<a href="/CEA101G4/front-mem-end/reply/front_select_reply.jsp"
+					<a href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
 						class="btn btn-dark">¦^¤W­¶</a>
 				</h3>
 			</td>

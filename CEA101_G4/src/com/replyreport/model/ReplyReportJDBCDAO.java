@@ -3,11 +3,13 @@ import java.sql.*;
 import java.util.*;
 import com.replyreport.model.ReplyReportVO;
 
+import util.Util;
+
 public class ReplyReportJDBCDAO implements ReplyReportDAO_interface{
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "JEFF";
-	String passwd = "123456";
+	String driver = Util.DRIVER;
+	String url = Util.URL;
+	String userid = Util.USER;
+	String passwd = Util.PASSWORD;
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO reply_report(report_id, emp_id, reply_id, mem_id, report_result) "
