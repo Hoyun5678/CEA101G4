@@ -9,6 +9,7 @@ import java.util.Set;
 public interface ActivityPeriodDAO_interface {
 	public void insert(ActivityPeriodVO actperVO);
     public void update(ActivityPeriodVO actperVO);
+    public void upDateActPerStatus(String act_period_id,Integer act_period_status);
     public ActivityPeriodVO findByPrimaryKey(String act_period_id);
     public void delete(String act_period_id);
     public ActivityPeriodVO findbyaddress(ActivityPeriodVO act_period_id);
