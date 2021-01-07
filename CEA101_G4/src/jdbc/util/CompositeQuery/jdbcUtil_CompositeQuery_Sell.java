@@ -39,7 +39,7 @@ public class jdbcUtil_CompositeQuery_Sell {
 				else
 					whereCondition.append(" and " + aCondition);
 
-				System.out.println("有送出查詢資料的欄位數count = " + count);
+//				System.out.println("有送出查詢資料的欄位數count = " + count);
 			}
 		}
 		
@@ -69,7 +69,7 @@ public class jdbcUtil_CompositeQuery_Sell {
 		String finalSQL = "SELECT * FROM SELLER_MEMBER "
 		          + jdbcUtil_CompositeQuery_Sell.get_WhereCondition(map)
 		          + "ORDER BY SELL_MEM_ID";
-		System.out.println("●●finalSQL = " + finalSQL);
+//		System.out.println("●●finalSQL = " + finalSQL);
 
 	}
 }

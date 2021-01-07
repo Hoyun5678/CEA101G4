@@ -2,6 +2,7 @@ package com.room.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class RoomService {
 	
@@ -61,6 +62,10 @@ public class RoomService {
 
 	public List<RoomVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<RoomVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 	
 	public List<RoomVO> getMemIdRoomList(String sellMemId) {

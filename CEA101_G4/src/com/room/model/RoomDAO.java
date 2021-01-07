@@ -21,7 +21,7 @@ public class RoomDAO implements RoomDAO_interface {
 			"UPDATE ROOM_PRODUCT SET SELL_MEM_ID=?, ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_COLLECT=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
 	
 	@Override
-	public void insert(RoomVO roomVO) {
+	public RoomVO insert(RoomVO roomVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -30,7 +30,7 @@ public class RoomDAO implements RoomDAO_interface {
 			Class.forName(Util.DRIVER);
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
-
+			
 			pstmt.setString(1, roomVO.getSellMemId());
 			pstmt.setString(2, roomVO.getRoomName());
 			pstmt.setInt(3, roomVO.getRoomPrice());
@@ -39,9 +39,11 @@ public class RoomDAO implements RoomDAO_interface {
 			pstmt.setString(6, roomVO.getRoomDes());
 			pstmt.setInt(7, roomVO.getRoomCollect());
 			pstmt.setInt(8, roomVO.getRoomStatus());
-
+			
 			pstmt.executeUpdate();
-
+			
+			return roomVO;
+			
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "
@@ -295,6 +297,12 @@ public class RoomDAO implements RoomDAO_interface {
 	
 	
 	@Override
+	public List<RoomVO> getAll(Map<String, String[]> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public List<RoomVO> getByMemId(String sellMemId) {
 		// TODO Auto-generated method stub
 		return null;
@@ -360,6 +368,8 @@ public class RoomDAO implements RoomDAO_interface {
 			System.out.println();
 		}
 	}
+
+
 
 
 

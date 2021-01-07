@@ -291,7 +291,6 @@ public class SellServlet extends HttpServlet {
 				try {
 					sellMemBirth = java.sql.Date.valueOf(req.getParameter("sellMemBirth"));
 				} catch (IllegalArgumentException e) {
-					sellMemBirth = java.sql.Date.valueOf("2000-01-01");
 					errorMsgs.add("生日格式錯誤");					
 				}
 				
@@ -661,8 +660,8 @@ public class SellServlet extends HttpServlet {
 				
 				// set login
 				session.setAttribute("sellVO", sellVO);
-				String location = (String) session.getAttribute("location");
-
+//				String location = (String) session.getAttribute("location");
+//
 				String url = "/front-sell-end/sell/sellMemIndex.jsp";
 //				if(location != null) {
 //					url = location;
@@ -670,6 +669,7 @@ public class SellServlet extends HttpServlet {
 //				session.removeAttribute("location");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
+				res.sendRedirect(url);
 				
 			} catch(Exception e) {
 				e.printStackTrace();

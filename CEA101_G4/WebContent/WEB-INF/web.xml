@@ -76,7 +76,7 @@
 	
 <!-- 	昀芷姐姐的XML 沒有之一 -->
 	
-  <servlet>
+	<servlet>
 		<servlet-name>RoomServlet</servlet-name>
 		<servlet-class>com.room.controller.RoomServlet</servlet-class>
 	</servlet>
@@ -84,6 +84,16 @@
 		<servlet-name>RoomServlet</servlet-name>
 		<url-pattern>/room/room.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RoomOrderServlet</servlet-name>
+		<servlet-class>com.roomorder.controller.RoomOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RoomOrderServlet</servlet-name>
+		<url-pattern>/roomorder/roomorder.do</url-pattern>
+	</servlet-mapping>
+	
 	
 	<servlet>
 		<servlet-name>RoomPhotoServlet</servlet-name>

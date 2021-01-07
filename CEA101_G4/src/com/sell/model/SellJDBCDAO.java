@@ -502,7 +502,6 @@ public class SellJDBCDAO implements SellDAO_interface{
 		try {
 			Class.forName(Util.DRIVER);
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(INSERT_STMT);
 			String finalSQL = "SELECT * FROM SELLER_MEMBER "
 		          + jdbcUtil_CompositeQuery_Sell.get_WhereCondition(map)
 		          + "ORDER BY SELL_MEM_ID";

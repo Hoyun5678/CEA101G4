@@ -1,5 +1,6 @@
 package com.roomorderdetail.model;
 
+import java.sql.Connection;
 import java.util.*;
 
 public interface RoomOrderDetailDAO_interface {
@@ -8,6 +9,7 @@ public interface RoomOrderDetailDAO_interface {
 	public void delete(String room_order_id, String room_id);
 	public RoomOrderDetailVO findByPrimaryKey(String room_order_id);
 	public List<RoomOrderDetailVO> getAll();
+	void insertFromOrder(RoomOrderDetailVO rodVO, Connection con);
 
 	
 }

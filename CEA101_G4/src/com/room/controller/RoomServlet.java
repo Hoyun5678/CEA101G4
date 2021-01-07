@@ -385,6 +385,7 @@ public class RoomServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
+					System.out.println(errorMsgs);
 					req.setAttribute("roomVO", roomVO); // 含有輸入格式錯誤的roomVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/front-sell-end/room/addRoom.jsp");
@@ -394,12 +395,11 @@ public class RoomServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				RoomService roomSvc = new RoomService();
-				
 				roomVO = roomSvc.addRoom(sellMemId, roomName, roomPrice, roomCapacity, roomDes, roomStatus);
-				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/front-sell-end/room/listAllRoom.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllRoom.jsp
+				String url = "/front-sell-end/roomphoto/addRoomPhoto.jsp";
+				req.setAttribute("roomVO", roomVO);
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/

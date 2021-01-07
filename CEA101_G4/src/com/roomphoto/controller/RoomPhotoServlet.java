@@ -194,13 +194,13 @@ public class RoomPhotoServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				String roomPhotoId = req.getParameter("roomPhotoId");
-				String roomPhotoIdReg = "^ROOMPH\\d{3}$";
-				if (roomPhotoId == null || roomPhotoId.trim().length() == 0) {
-					errorMsgs.add("房間編號: 請勿空白");
-				} else if(!roomPhotoId.trim().matches(roomPhotoIdReg)) {
-					errorMsgs.add("房間照片編號格式為: 前綴ROOMPH+數字三碼 ex.ROOMPH999");
-	            }
+//				String roomPhotoId = req.getParameter("roomPhotoId");
+//				String roomPhotoIdReg = "^ROOMPH\\d{3}$";
+//				if (roomPhotoId == null || roomPhotoId.trim().length() == 0) {
+//					errorMsgs.add("房間編號: 請勿空白");
+//				} else if(!roomPhotoId.trim().matches(roomPhotoIdReg)) {
+//					errorMsgs.add("房間照片編號格式為: 前綴ROOMPH+數字三碼 ex.ROOMPH999");
+//	            }
 				
 				String roomId = req.getParameter("roomId").trim();
 				String roomIdReg = "^ROOM\\d{3}$";
@@ -211,11 +211,11 @@ public class RoomPhotoServlet extends HttpServlet {
 					errorMsgs.add("房間編號格式為: 前綴ROOM+數字三碼 ex.ROOM999");
 	            }
 								
-				String roomPhotoContent = req.getParameter("roomPhotoContent").trim();
+//				String roomPhotoContent = req.getParameter("roomPhotoContent").trim();
 				
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-sell-end/roomphoto/select_page.jsp");
+							.getRequestDispatcher("/front-sell-end/roomphoto/addRoomPhoto.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -232,10 +232,9 @@ public class RoomPhotoServlet extends HttpServlet {
 				for (byte[] pic : roomPhotoList) {
 
 					RoomPhotoVO roomPhotoVO = new RoomPhotoVO();
-					roomPhotoVO.setRoomPhotoId(roomPhotoId);
 					roomPhotoVO.setRoomId(roomId);
 					roomPhotoVO.setRoomPhoto(pic);
-					roomPhotoVO.setRoomPhotoContent(roomPhotoContent);
+					roomPhotoVO.setRoomPhotoContent("");
 
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("roomPhotoVO", roomPhotoVO);
@@ -246,12 +245,12 @@ public class RoomPhotoServlet extends HttpServlet {
 					}
 					/***************************2.開始新增資料***************************************/
 					RoomPhotoService roomPhotoSvc = new RoomPhotoService();
-					roomPhotoVO = roomPhotoSvc.addRoomPhoto(roomPhotoId, roomId, pic, roomPhotoContent);
+					roomPhotoVO = roomPhotoSvc.addRoomPhoto(roomId, pic, "");
 				
 				}
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/front-sell-end/roomphoto/listAllRoomPhoto.jsp";
+				String url = "/front-sell-end/room/listAllRoom.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);				
 
