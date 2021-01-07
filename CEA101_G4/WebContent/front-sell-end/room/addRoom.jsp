@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-listAllRoom.css">
 	<title>房間資料新增 - addRoom.jsp</title>
 </head>
@@ -23,10 +22,13 @@
 	    <div id="content">
 	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
 			<div class="container-fluid" style="padding: 0;">
-				<div class="container">
-					<h1>新增房間</h1>
+				<div class="container mt-4">
+					<div class="col-9 offset-1">
+		                <h2>新增房間</h2>
+		                <hr>
+		            </div>
 					<c:if test="${not empty errorMsgs}">
-						<div class="container">
+						<div class="col-9 offset-1">
 							<div class="alert alert-danger" role="alert">
 								<strong>新增失敗，請修正以下錯誤:</strong>
 								<ul>
@@ -39,42 +41,71 @@
 					</c:if>
 
                     <form class="form-horizontal" method="POST" action="<%=request.getContextPath()%>/room/room.do">
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="roomName">房間名稱:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="roomName" name="roomName" value='${empty roomVO ? "" : roomVO.roomName}' /> 
+                    	<div class="form-group">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">房間名稱:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block">
+                            	<input
+                                	type="text"
+                                    class="form-control"
+                                    id="roomName"
+                                    name="roomName"
+                                    value="${empty roomVO ? '' : roomVO.roomName}"
+                                />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="roomPrice">民宿價格/天:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="roomPrice" name="roomPrice" value='${empty roomVO ? "" : roomVO.roomPrice}' />
+						</div>
+                    	<div class="form-group">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿價格/天:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block">
+                            	<input
+                                	type="text"
+                                    class="form-control"
+                                    id="roomPrice"
+                                    name="roomPrice"
+                                    value="${empty roomVO ? '' : roomVO.roomPrice}"
+                                />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="roomCapacity">可容納人數:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="roomCapacity" name="roomCapacity" value='${empty roomVO ? "" : roomVO.roomCapacity}' />
+						</div>
+                    	<div class="form-group">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">可容納人數:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block">
+                            	<input
+                                	type="text"
+                                    class="form-control"
+                                    id="roomCapacity"
+                                    name="roomCapacity"
+                                    value="${empty roomVO ? '' : roomVO.roomCapacity}"
+                                />
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-sm-2" for="roomDes">民宿介紹:</label>
-                            <div class="col-sm-5">
-                                <textarea class="form-control" id="roomDes" name="roomDes" rows="7">${empty roomVO ? "" : roomVO.roomDes}</textarea>
+						</div>
+                    	<div class="form-group">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿介紹:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block">
+                            	<textarea class="form-control" id="roomDes" name="roomDes">${empty roomVO ? '' : roomVO.roomDes}
+                                </textarea>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">上架狀態:</label>
-                            <div class="col-sm-5" style="padding: 7px;">
-                                <input type="radio" id="roomSta0" name="roomStatus" value='0' ${empty roomVO ? "selected" : "" } />
+						</div>
+                    	<div class="form-group">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">上架狀態:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block" style="padding: 7px;">
+                                <input type="radio" id="roomSta0" name="roomStatus" value='0' ${empty roomVO || roomVO.roomStatus == 0 ? "checked" : "" } />
                                 <label for="roomSta0">下架     </label>
-                                <input type="radio" id="roomSta1" name="roomStatus" value='1' ${roomVO.roomStatus == 1 ? "selected" : "" } />
+                                <input type="radio" id="roomSta1" name="roomStatus" style='margin-left: 20px;' value='1' ${roomVO.roomStatus == 1 ? "checked" : "" } />
                                 <label for="roomSta1">上架   </label>
                             </div>
-                        </div>
+						</div>
+
                         <div class="form-group">
-                            <div class="col-sm-7 col-sm-offset-6">
+                            <div class="col-10 d-flex justify-content-end">
 								<input type="hidden" name="sellMemId" value="${sellVO.sellMemId}">
 								<input type="hidden" name="action" value="insert">
                                 <button type="submit" class="btn btn-primary" id="nextStep">下一步</button>

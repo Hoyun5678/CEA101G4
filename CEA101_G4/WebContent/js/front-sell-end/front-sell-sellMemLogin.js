@@ -2,6 +2,9 @@
         	
         	var contextPath = $('[name="contextPath"]').val();
     		var urlTarget = contextPath + "/sell/sell.do";
+    		$(document).click(function() {
+    			$('.alert').fadeIn("slow").addClass('d-none');
+    		})
         	
         	$('.message a').click(function(){
         		   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
@@ -91,7 +94,6 @@
         							  icon: "warning",
         							  dangerMode: true,
         							})
-        							
         					}
         				}
         			});

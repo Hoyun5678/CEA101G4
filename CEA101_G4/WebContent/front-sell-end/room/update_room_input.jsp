@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-listAllRoom.css">
     <title>房間資料修改 - update_room_input.jsp</title>
     <style>
@@ -43,7 +42,6 @@
 			        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do" name="form1">
 			            <table class="table align-middle">
 							<% 
-								String roomId = roomVO.getRoomId();
 								String sellMemId = roomVO.getSellMemId();
 							%>
 			                <tr>
