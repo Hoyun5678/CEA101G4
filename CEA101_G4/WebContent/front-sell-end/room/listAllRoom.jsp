@@ -12,10 +12,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">    
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-listAllRoom.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sideBar.css" />
     
 	<title>所有房間資料 - listAllRoom.jsp</title>
 </head>
@@ -28,7 +26,7 @@
 	    <%@ include file="/front-sell-end/sellMemSideBar.jsp"%>
 	    <div id="content">
 	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
-			<div class="container-fluid" style="padding: 0;">
+			<div class="container-fluid" style="padding: 0;">			
 				<table class="table table-striped table-hover align-middle" id="tableRoomList">
 					<thead class=".thead-dark">
 						<tr>
@@ -58,9 +56,8 @@
 							  </FORM>
 							</td>
 							<td>
-							  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomphoto/roomphoto.do" style="margin-bottom: 0px;">
+							  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/front-sell-end/roomphoto/listOneRoomPhoto.jsp" style="margin-bottom: 0px;">
 							     <input type="hidden" name="roomId"  value="${roomVO.roomId}">
-							     <input type="hidden" name="action"	value="getOne_For_Update">
 							     <button type="submit" class="btn btn-secondary edit">圖片</button>
 							  </FORM>
 							</td>
@@ -68,6 +65,11 @@
 					</c:forEach>
 					</tbody>
 				</table>
+				<div class="row" style="margin: 15px;">
+					<div class="col-md col-md-offset-10">
+						<button class="btn btn-primary" id="addRoom">新增房間</button>
+					</div>
+				</div>
 				<div class="row">
 					<c:if test="${not empty errorMsgs}">
 						<%-- 錯誤表列 from Servlet --%>
@@ -90,6 +92,15 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script>
+    	$(document).ready(function() {
+    		var contextPath = '<%=request.getContextPath()%>';
+    		$("#addRoom").click(function() {
+
+    			window.location.replace(contextPath + "/front-sell-end/room/addRoom.jsp");
+    		})
+    	})
+    </script>
 
     
 </body>

@@ -1,52 +1,34 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="roomOrderSvc" scope="page" class="com.roomorder.model.RoomOrderService" />
+<jsp:useBean id="roomOrderDetailSvc" scope="page" class="com.roomorderdetail.model.RoomOrderDetailService" />
 
-	<c:if test="${not empty errorMsgs}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="page-header">
-                    <h2>Using with Bootstrap Collapse</h2>
-                </div>
-                <div class="panel-group" id="steps">
-                    <!-- Step 1 -->
-                    <div class="panel panel-default">
-                        <a data-toggle="collapse" href="#step1">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">Account</h4>
-                            </div>
-                        </a>
-                        <div id="step1" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="panel panel-default">
-                        <a data-toggle="collapse" href="#step2">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">Account</h4>
-                            </div>
-                        </a>
-                        <div id="step2" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-	</c:if>
+<c:set var='sellMemId' scope="page" value='${param.sellMemId}' />
+<c:set var='checkInDate' scope="page" value='${param.checkInDate}' />
+
+<c:set var='roomOrderList' scope='page' value='${roomOrderSvc.getBySellMemIdAndDate(sellMemId, checkInDate)}' />
+	<c:forEach var="roomOrderVO" items="${roomOrderList}" varStatus="userStatus">
+		<div class="card">
+			<div class="card-header" id="headingOne">
+				<h5 class="mb-0">
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapse${userStatus.count}" aria-expanded="true" aria-controls="collapse${userStatus.count}">
+						訂購者: ${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId).room_guest_name}
+					</button>
+				</h5>
+			</div>
+	
+			<div id="collapse${userStatus.count}" class="collapse" aria-labelledby="headingOne">
+				<div class="card-body">
+					<div>入住期間: ${roomOrderVO.checkInDate} ~ ${roomOrderVO.checkOutDate}</div>
+					<div>訂單金額: ${roomOrderVO.roomOrderSum}</div>
+					<div>付款狀態: ${roomOrderVO.roomPaymentStatus == 0 ? '未付款': '已付款'}</div>
+					<div>訂單狀態: ${roomOrderVO.roomOrderStatus == 2 ? '已入住': '已成立'}</div>
+					 
+					
+					<div><button class="btn btn-secondary d-flex ml-auto">報到Check In</button></div>
+				
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+

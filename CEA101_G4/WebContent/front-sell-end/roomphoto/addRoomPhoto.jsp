@@ -1,10 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.roomphoto.model.*"%>
-
-<%
-	RoomPhotoVO roomPhotoVO = (RoomPhotoVO) request.getAttribute("roomPhotoVO");
-%>
 
 <html>
 <head>
@@ -31,56 +26,33 @@
     </style>
 </head>
 <body>
-	<jsp:useBean id="roomSvc" scope="page" class="com.room.model.RoomService" />
-	<c:set var="roomList" scope="session" value="${roomSvc.all}" />
-	<c:if test="${not empty sessionScope.sellMemLogin}">
-		<c:set var="sellMemLogin" scope="session" value="${sessionScope.sellMemLogin}"/>
-		<c:set var="roomList" scope="page" value="${roomSvc.getMemIdRoomList(sellMemLogin.sellMemId)}"/>
-	</c:if>
-
-<div class="container">
-	<h3>房間照片新增 - addRoomPhoto.jsp</h3>
-
-<br>
-
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-</div>
-<div class="container">
-	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomphoto/roomphoto.do" enctype="multipart/form-data">
-
-		<div>
-			<label for="exampleFormControlInput1" class="form-label">房間編號</label>
-			<select name="roomId">
-				<c:forEach var="roomVO" items="${roomList}">
-					<option value="${roomVO.roomId}"> ${roomVO.roomId} : ${roomVO.roomName}</option>
-				</c:forEach>
-			</select>
-		</div>
-		<div>
-			<label for="exampleFormControlTextarea1" class="form-label">圖片描述</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="roomPhotoContent" placeholder="可以寫一下您的圖片是什麼房間喔~"></textarea>
-		</div>
-		<div>
-			<label for="formFileMultiple" class="form-label">請選擇欲上傳的圖片</label>
-			<input class="form-control" type="file" id="formFileMultiple"  name="roomPhoto" multiple>
+	<div id="viewport">
+	    <%@ include file="/front-sell-end/sellMemSideBar.jsp"%>
+	    <div id="content">
+	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
+			<div class="container-fluid" style="padding: 0;">
+				<div class="container">
+					<form METHOD="post" ACTION="<%=request.getContextPath()%>/roomphoto/roomphoto.do" enctype="multipart/form-data">
+						<div>
+							<label class="form-label">房間名稱: ${roomVO.roomName}</label>
+						</div>
+						<div class="col-12">
+							<label for="formFileMultiple" class="form-label">請選擇欲上傳的圖片</label>
+							<input class="form-control" type="file" id="formFileMultiple"  name="roomPhoto" multiple>
+						</div>
+						<div class="row justify-content-start" id="preview">
+						</div>
+						<div class="uploadBtn">
+							<input type="hidden" name=roomId value="${roomVO.roomId}">
+							<input type="hidden" name="action" value="insert">
+							<button type="submit" class="btn btn-secondary">確認上傳</button>
+						</div>
+					</form>
+				</div>
 			</div>
-		<div class="row justify-content-start" id="preview">
 		</div>
-		<div class="uploadBtn">
-			<input type="hidden" name="roomPhotoId" value="ROOMPH033">
-			<input type="hidden" name="action" value="insert">
-			<button type="submit" class="btn btn-secondary">確認上傳</button>
-		</div>
-	</FORM>
-</div>
+	</div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -113,7 +85,7 @@
                                 let div = document.createElement('div');
                                 div.classList.add("col-3");
                                 div.innerHTML = `
-                                <label name="roomPhotoName" id="` + file.name + `"> ` + file.name + `</label><br>
+                                <label name="roomPhotoName" id="` + file.name + `"></label><br>
                                 <div class="img-div"><img class="img-thumbnail object-fit" src="` + e.target.result + `"></div>`;
                                 preview.append(div);
                             });
@@ -129,13 +101,13 @@
 
 		});
     	
-		function selectPic(picName) {
-			var tar = $("#" + picName)
-            tar.click(function() {
-            	tar.prop("checked", !tar.prop("checked"));
-            })
-            // console.log(ckbox.checked);
-    	}
+// 		function selectPic(picName) {
+// 			var tar = $("#" + picName)
+//             tar.click(function() {
+//             	tar.prop("checked", !tar.prop("checked"));
+//             })
+//             // console.log(ckbox.checked);
+//     	}
 
     </script>
 

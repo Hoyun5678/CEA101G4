@@ -3,26 +3,18 @@
 <%@ page import="com.room.model.*"%>
 <%@ page import="com.sell.model.*"%>
 
-<jsp:useBean id="roomSvc" scope="page" class="com.room.model.RoomService" />
-<c:set var="list" scope="page" value="${roomSvc.getAll()}"/>
-
 <html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sellMemIndex.css">
     
 	<title>所有房間資料 - listAllRoom.jsp</title>
 </head>
 <body>
-	<c:if test="${not empty sellVO}">
-		<c:set var="sellVO" scope="page" value="${sellVO}"/>
-		<c:set var="list" scope="page" value="${roomSvc.getMemIdRoomList(sellVO.sellMemId)}"/>
-	</c:if>
 	<div id="viewport">
 	    <%@ include file="/front-sell-end/sellMemSideBar.jsp"%>
 	    <div id="content">
@@ -31,8 +23,11 @@
 			
 				<div class="container">
                     <div class="row">
-                        <div class="calendarCol">
+                    	<div class="offset-1">
+                        <div class="calendarDiv">
                             <form>
+                            	<span><i class="zmdi zmdi-chevron-left"></i></span>
+                            	
                                 <select id="yearList" name="calendarYear"></select>
                                 <select id="monthList" name="calendarMonth">
                                     <option value="0">JAN</option>
@@ -48,8 +43,9 @@
                                     <option value="10">NOV</option>
                                     <option value="11">DEC</option>
                                 </select>
+                                <i class="zmdi zmdi-chevron-right"></i>
                             </form>
-                            <table class="calendar">
+                            <table class="calendarBody">
                                 <thead>
                                     <tr>
                                         <td>SUN</td>
@@ -64,10 +60,21 @@
                                 <tbody></tbody>
                             </table>
                         </div>
+                        </div>
+                        
+                        <div class="onSelectRoomOrder col-6">
+                        	<div class="displaySelectedDate">
+                        		<h4>預計Check in 列表</h4>
+                        	</div>
+                        	<div id="accordion">
+                        	</div>
+                    	</div>
                     </div>
                 </div>
 			</div>
 		</div>
+		<input type="hidden" name="contextPath" value="${pageContext.request.contextPath}" />
+		<input type="hidden" id="sellMemId" name="sellMemId" value="${sellVO.sellMemId}" />
 	</div>
 
     <!-- Optional JavaScript -->

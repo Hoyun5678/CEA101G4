@@ -20,18 +20,14 @@
 </head>
 <body>
 
-<div class="container-fluid" id="titleAndError">
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color:red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color:red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-</div>
+
 <div class="container">
+	<div class="searchTools">
+		<input type="text" name="keyWords">
+		<input type="text" name="checkInDate">
+		<input type="text" name="checkOutDate">
+		
+	</div>
 	<div class="container" id="searchResultRoomList">
 		<c:forEach var="roomVO" items="${roomSvc.all}" varStatus="rowStatus">
 		<div class="row roomContent">

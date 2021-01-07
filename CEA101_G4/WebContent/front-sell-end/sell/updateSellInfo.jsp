@@ -9,13 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
     
 	<title>民宿會員資料修改</title>
 	<style>
-            button {
-                float: right;
-            }
+	    button {
+	        float: right;
+	    }
+	    .help-block {
+	    	color: #E60000;
+	    	font-weight: bold;
+	    }
 	</style>
 </head>
 <body>
@@ -24,60 +27,103 @@
 	    <div id="content">
 	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
 			<div class="container-fluid" style="padding: 0;">
-				<div class="container">
-					<h1>民宿會員資料修改</h1>
-					<c:if test="${not empty errorMsgs}">
-						<div class="container">
-							<div class="alert alert-danger" role="alert">
-								<strong>更新失敗，請修正以下錯誤:</strong>
-								<ul>
-								<c:forEach var="message" items="${errorMsgs}">
-									<li>${message}
-								</c:forEach>
-								</ul>
-							</div>
-						</div>
-					</c:if>
-
+				<div class="container mt-4">
+					<div class="col-9 offset-1">
+		                <h2>民宿會員資料修改</h2>
+		                <hr>
+		            </div>
                     <form class="form-horizontal" method="POST" action="<%=request.getContextPath()%>/sell/sell.do">
+                    	<div class="form-group">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿會員姓名:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block">
+                            	<input
+                                	type="text"
+                                    class="form-control"
+                                    id="sellMemName"
+                                    name="sellMemName"
+                                    value="${sellVO.sellMemName}"
+                                />
+                            </div>
+						</div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemName">民宿會員姓名:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="sellMemName" name="sellMemName" value="${sellVO.sellMemName}" /> 
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">手機號碼:</label>
+                            </div>
+                            <div class="col-5 d-inline-block">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="sellMemTel"
+                                    name="sellMemTel"
+                                    value="${sellVO.sellMemTel}"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemTel">手機號碼:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="sellMemTel" name="sellMemTel" value="${sellVO.sellMemTel}" />
+                        	<div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">E-mail:</label>
+                            </div>
+                            <div class="col-5 d-inline-block">
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="sellMemMail"
+                                    name="sellMemMail"
+                                    value="${sellVO.sellMemMail}"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemMail">E-mail:</label>
-                            <div class="col-sm-5">
-                                <input type="email" class="form-control" id="sellMemMail" name="sellMemMail" value="${sellVO.sellMemMail}" />
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿名稱:</label>
+                            </div>
+                            <div class="col-5 d-inline-block">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="sellRoomName"
+                                    name="sellRoomName"
+                                    value="${sellVO.sellRoomName}"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellRoomName">民宿名稱:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="sellRoomName" name="sellRoomName" value="${sellVO.sellRoomName}" />
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿地址:</label>
+                            </div>                        
+                            <div class="col-5 d-inline-block">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="sellMemAddress"
+                                    name="sellMemAddress"
+                                    value="${sellVO.sellMemAddress}"
+                                />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemAddress">民宿地址:</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="sellMemAddress" name="sellMemAddress" value="${sellVO.sellMemAddress}" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-7">
+                            <div class="col-10">
 								<input type="hidden" name="sellMemId" value="${sellVO.sellMemId}">
 								<input type="hidden" name="action" value="updateInfo">
-                                <button type="submit" class="btn btn-default">送出修改</button>
+                                <button type="submit" class="btn btn-primary">送出修改</button>
                             </div>
                         </div>
                     </form>
+                    <div class="row">
+						<c:if test="${not empty errorMsgs}">
+							<%-- 錯誤表列 from Servlet --%>
+							<div class="alert alert-danger col-lg-6 col-lg-offset-1" role="alert" id="titleAndError">
+								<font style="color:red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color:red">${message}</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>
+					</div>
             	</div>
 			</div>
 		</div>

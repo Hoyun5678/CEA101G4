@@ -8,13 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-      
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	
 	<title>民宿會員基本資料</title>
 	<style>
-            button {
-                float: right;
-            }
+		button {
+            float: right;
+            margin: 10px;
+        }
 	</style>
 </head>
 <body>
@@ -23,16 +24,19 @@
 	    <div id="content">
 	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
 			<div class="container-fluid" style="padding: 0;">
-				<div class="container">
-                	<h1>民宿會員基本資料</h1>
-                	<form
-                    	class="form-horizontal"
-                    	method="POST"
+				<div class="container mt-4">
+					<div class="col-9 offset-1">
+		                <h2>民宿會員基本資料</h2>
+		                <hr>
+		            </div>
+                	<form class="form-horizontal" method="POST"
                     	action="<%=request.getContextPath()%>/front-sell-end/sell/updateSellInfo.jsp"
                         >
                     	<div class="form-group">
-                        	<label class="control-label col-sm-2" for="sellMemName">民宿會員姓名:</label>
-                        	<div class="col-sm-5">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿會員姓名:</label>
+                            </div>                    	
+                        	<div class="col-5 d-inline-block">
                             	<input
                                 	type="text"
                                     readonly
@@ -44,8 +48,10 @@
                             </div>
 						</div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemTel">手機號碼:</label>
-                            <div class="col-sm-5">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">手機號碼:</label>
+                            </div>
+                            <div class="col-5 d-inline-block">
                                 <input
                                     type="text"
                                     readonly
@@ -57,8 +63,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemMail">E-mail:</label>
-                            <div class="col-sm-5">
+                        	<div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">E-mail:</label>
+                            </div>
+                            <div class="col-5 d-inline-block">
                                 <input
                                     type="email"
                                     readonly
@@ -70,8 +78,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellRoomName">民宿名稱:</label>
-                            <div class="col-sm-5">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿名稱:</label>
+                            </div>
+                            <div class="col-5 d-inline-block">
                                 <input
                                     type="text"
                                     readonly
@@ -83,8 +93,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="sellMemAddress">民宿地址:</label>
-                            <div class="col-sm-5">
+                            <div class="col-4 d-inline-block">
+                            	<label class="d-flex justify-content-end">民宿地址:</label>
+                            </div>                        
+                            <div class="col-5 d-inline-block">
                                 <input
                                     type="text"
                                     readonly
@@ -96,13 +108,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-7">
+                            <div class="col-10">
                                 <input type="hidden" name="sellMemId" value="${sellVO.sellMemId}" />
                                 <input type="hidden" name="action" value="updateInfo" />
-                                <button type="submit" class="btn btn-default">修改基本資料</button>
-                                <a href="<%=request.getContextPath()%>/front-sell-end/sell/editSellPwd.jsp"
-                                    ><button type="button" class="btn btn-default">修改密碼</button></a
-                                >
+                                <button type="submit" class="btn btn-secondary">修改基本資料</button>
+                                <button type="button" class="btn btn-secondary" id="editPwdBtn">修改密碼</button>
                             </div>
                         </div>
                     </form>
@@ -129,6 +139,15 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+    	$(document).ready(function() {
+    		var contextPath = '<%=request.getContextPath()%>';
+			$('#editPwdBtn').click(function() {
+				window.location.replace(contextPath + '/front-sell-end/sell/editSellPwd.jsp');
+			})
+    	})
+
+    </script>
 
 </body>
 </html>
