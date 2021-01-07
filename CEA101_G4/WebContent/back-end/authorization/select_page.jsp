@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/authorization/listAllAuthorization.jsp'>List</a> all Authorizations.  <br><br></li>
+  <li><a href='"<%=request.getContextPath()%>/back-end/authorization/listAllAuthorization.jsp'>List</a> all Authorizations.  <br><br></li>
   
   
   <li>
@@ -81,7 +81,7 @@
 <h3>會員管理</h3>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/authorization/addAuthorization.jsp'>Add</a> a new emp.</li>
+  <li><a href='"<%=request.getContextPath()%>/back-end/authorization/addAuthorization.jsp'>Add</a> a new authorization.</li>
 </ul>
 
 </body>

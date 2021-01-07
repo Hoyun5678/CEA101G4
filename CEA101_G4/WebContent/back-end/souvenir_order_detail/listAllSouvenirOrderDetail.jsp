@@ -56,7 +56,7 @@ SouvenirOrderDetailService sodSvc = new SouvenirOrderDetailService();
 <table id="table-1">
 	<tr><td>
 		 <h3>所有特產訂單資料 - listAllSouvenir_Order.jsp</h3>
-		 <h4><a href="/CEA101G4/back-end/souvenir_order_detail/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/souvenir_order_detail/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
