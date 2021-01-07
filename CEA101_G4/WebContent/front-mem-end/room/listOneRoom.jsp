@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.room.model.*"%>   
-
+<%@ page import="com.member.model.*"%>   
+<% MemberVO memVO=(MemberVO)session.getAttribute("memVO"); %>
 
 <jsp:useBean id="roomVO" scope="request" class="com.room.model.RoomVO" />
+<jsp:useBean id="sellVO" scope="request" class="com.sell.model.SellVO" />
 <%-- <jsp:useBean id="rpVO" scope="request" class="com.roomphoto.model.RoomPhotoVO" /> --%>
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
 <jsp:useBean id="sellSvc" scope="page" class="com.sell.model.SellService" />
@@ -24,8 +26,10 @@
       
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+   
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/front-mem-end/oneRoom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
 <title>Insert title here</title>
 
 <style>
@@ -35,14 +39,19 @@ color:#dc3545;
 .black_heart{
 color:black;
 }
+
 </style>
 
 </head>
 <body>
 <%@ include file="/front-mem-end/topbar.jsp" %> 
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do">
  <div class="container">
         <div class="row">
             <div id="title">
+            <input type="hidden" name="sellMemId" value="${roomVO.sellMemId}" />
+			
+			<input type="hidden" name="memId" value="${memVO.mem_id}" />
                 <c:set var="sellVO" scope="page" value="${sellSvc.getOneSell(roomVO.sellMemId)}"/>
 				 <h3>${sellVO.sellRoomName}</h3>
                 <div class="fav_area">
@@ -72,7 +81,7 @@ color:black;
     <div class="container">
         <div class="upside">
             <div class="row">
-                <div class="col-lg-9">
+                
                     <div class="photogallery">
                    <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="6" step="1" varStatus="status">
                         <c:if test="${status.count % 6 == 1}" >
@@ -130,35 +139,8 @@ color:black;
                        
                     </c:forEach>
                     </div>
-                </div>
-                <div class="col-lg-3" id="rightside">
-                    <div id="firstcol">
-                        <div id="ratingscore">
-                            <h4 id="score">9.2</h4>
-                        </div>
-                        <div id="scoremeaning">
-                            <div id="up">完美，太漂亮了吧</div>
-                            <div id="down">/10 (89則評論)</div>
-                        </div>
-                        <div class="keyword">老闆娘太正</div>
-                        <div class="keyword">房間舒適</div>
-                    </div>
-                    <div id="secondcol">
-                        <div class="distance">
-                            <div>人氣景點</div>
-                            <div>中壢觀光夜市------------5.72 km </div>
-                            <div>中壢----------------------5.94 km</div>
-                            <div>華泰名品城---------------6.79 km</div>
-                            <div>虎頭山公園---------------6.91 km</div>
-                        </div>
-                    </div>
-                    <div id="thirdcol">
-                        <div class="googlemap">
-                            放地圖的地方
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
+
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -179,18 +161,30 @@ color:black;
                 <h5 id="emptitle">空房情形</h5>
                 <div class="row" id="emptyarea">
                     <div class="col-lg-4" id="checkin">
-                        <div class="datetitle">入住日期</div>
-                        <time class="indate" datetime="2021年1月22日(周五)"><a href="#" class="datelink">2021年1月22日(周五)</a></time>
+                        <div class="datetitle">入住日期</div> 
+                        <input type="text" name="checkInDate" value="2021-02-03" /> 
+                        
+              
                     </div>
                     <div class="col-lg-4" id="checkout">
                         <div class="datetitle">退房日期</div>
-                        <time class="outdate" datetime="2021年1月23日(周六)"><a href="#" class="datelink">2021年1月23日(周六)</a></time>
+                        <input type="text" name="checkOutDate" value="2021-02-05" />
                     </div>
                     <div class="col-lg-4" id="change">
                         <div id="day">共選了一晚</div>
                         <input id="changebtn" type="button" value="更改搜尋條件" name="changedate">
                     </div>
                 </div>
+<!--MODAL更改時間-->
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+				<span>入住日期: <input name="start_date" id="start_date" type="text" style="width:120px;"><i class="far fa-calendar-alt"></i></span>
+  				<span>退房日期: <input name="end_date"   id="end_date"   type="text" style="width:120px;"><i class="far fa-calendar-alt"></i></span>
+					
+    				<span class="close">&times;</span>
+ 					</div>
+				</div>
+				
                 <div class="bookroom">
                     <div class="room_header">
                         <div class="roomheader">客房類型</div>
@@ -202,12 +196,15 @@ color:black;
                     </div>
                      
                     <div class="room_product">
-<%--                     <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1"> --%>
-                        <div class="roomGrid roompic">${roomVO.roomName}</div>
-						 <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto"> 
+                     <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1"> 
+                        <div>
+                        	<div class="roomGrid roompic">${roomVO.roomName}</div>
+						 	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto" style="width:160px;height:120px;"> 
+                        </div>
                         <div class="roomGrid roominfo">${roomVO.roomDes}</div>
                         <div class="roomGrid roompeo">${roomVO.roomCapacity}位</div>
-                        <div class="roomGrid roompri">${roomVO.roomPrice}</div>
+                        <div class="roomGrid roompri">
+                        <input type="text" name="roomOrderSum" value="${roomVO.roomPrice}" /></div>
                         <div class="roomGrid roomamo">
                             <select>
                                 <option>選擇客房數</option>
@@ -216,17 +213,16 @@ color:black;
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
-                            </select></div>
-                        <div class="roomGrid bookbtn">
-                            <input id="bookbtn" type="button" value="現在就預訂" name="bookbtn">
+                            </select>
+                       </div>
+                         <input type="hidden" name="roomId" value="${roomVO.roomId}" />
+                         <input type="hidden" name="action" value="fillorderinfo" />
+			     		 <div class="roomGrid bookbtn">
+                            <button type="submit" id="bookbtn">現在就預訂</button>  
                         </div>
-                    </div>
-<%--                     </c:forEach> --%>
-                    
-                 
-                  
-                </div>
-            </div>
+                    </c:forEach> 
+                    </FORM>  
+              </div>
             <div id="food">
                 <div id="foodtitle">推薦美食與景點</div>
                 <div class="center">
@@ -252,7 +248,7 @@ color:black;
                 </div>
             </div>
            
-            <script>
+        <script>
         baguetteBox.run('.photogallery');
         const buttonsWrapper = document.querySelector(".map");
         const slides = document.querySelector(".inner");
@@ -313,7 +309,72 @@ color:black;
       	  		});
 //       		}
         	})
-            </script>
+        //MODAL更改時間
+         // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var changebtn = document.getElementById("changebtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        changebtn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    
 
 </body>
+ <link   rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
+    <script src="${pageContext.request.contextPath}/datetimepicker/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<style>
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 300px;   /* height:  300px; */
+  }
+</style>
+
+<script>
+$.datetimepicker.setLocale('zh'); 
+$(function(){
+	 $('#start_date').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    maxDate:$('#end_date').val()?$('#end_date').val():false
+	   })
+	  },
+	  timepicker:false
+	 });
+	 
+	 $('#end_date').datetimepicker({
+	  format:'Y-m-d',
+	  onShow:function(){
+	   this.setOptions({
+	    minDate:$('#start_date').val()?$('#start_date').val():false
+	   })
+	  },
+	  timepicker:false
+	 });
+});
+</script>
+
 </html>
