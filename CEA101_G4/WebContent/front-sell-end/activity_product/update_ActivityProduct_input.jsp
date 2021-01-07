@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>新增活動 - addActivityProduct.jsp</title>
+<title>修改活動 - addActivityProduct.jsp</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
 <link rel="stylesheet"
@@ -33,7 +33,7 @@
 			<%@ include file="/front-sell-end/sellNavBar.jsp"%>
 			<div class="container-fluid">
 				<div class="container">
-					<h1>新增活動</h1>
+					<h1>修改活動</h1>
 					<c:if test="${not empty errorMsgs}">
 						<div class="container">
 							<div class="alert alert-danger" role="alert">
