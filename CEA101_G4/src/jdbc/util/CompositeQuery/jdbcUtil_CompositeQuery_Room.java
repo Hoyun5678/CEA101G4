@@ -9,17 +9,17 @@ package jdbc.util.CompositeQuery;
 
 import java.util.*;
 
-public class jdbcUtil_CompositeQuery_Sell {
+public class jdbcUtil_CompositeQuery_Room {
 	public static String get_aCondition_For_Oracle(String columnName, String value) {
 		String aCondition = null;
-		if ("SELL_ACC_STATUS".equals(columnName) || "SELL_GENDER".equals(columnName)) // 用於其他
+		if ("ROOM_PRICE".equals(columnName) || "ROOM_CAPACITY".equals(columnName) || 
+				"ROOM_COLLECT".equals(columnName) || "ROOM_STATUS".equals(columnName)) // 用於其他
 			aCondition = columnName + "=" + value;
-		else if ("SELL_MEM_ID".equals(columnName) || "SELL_MEM_ACCOUNT".equals(columnName) || "SELL_MEM_PWD".equals(columnName)
-				 || "SELL_MEM_NAME".equals(columnName) || "SELL_MEM_TEL".equals(columnName) || "SELL_ROOM_NAME".equals(columnName)
-				 || "SELL_MEM_ADDRESS".equals(columnName) || "SELL_MEM_MAIL".equals(columnName) || "SELL_MEM_ID_NUMBER".equals(columnName)) // 用於varchar
+		else if ("ROOM_ID".equals(columnName) || "SELL_MEM_ID".equals(columnName) || "ROOM_NAME".equals(columnName)
+				 || "ROOM_DES".equals(columnName)) // 用於varchar
 			aCondition = columnName + " like '%" + value + "%'";
-		else if ("SELL_MEM_BIRTH".equals(columnName))                          // 用於Oracle的date
-			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";
+//		else if ("SELL_MEM_BIRTH".equals(columnName))                          // 用於Oracle的date
+//			aCondition = "to_char(" + columnName + ",'yyyy-mm-dd')='" + value + "'";
 
 		return aCondition + " ";
 	}
@@ -67,7 +67,7 @@ public class jdbcUtil_CompositeQuery_Sell {
 //		map.put("SELL_JOINTIME", new String[] { "getXXX" });
 
 		String finalSQL = "SELECT * FROM SELLER_MEMBER "
-		          + jdbcUtil_CompositeQuery_Sell.get_WhereCondition(map)
+		          + jdbcUtil_CompositeQuery_Room.get_WhereCondition(map)
 		          + "ORDER BY SELL_MEM_ID";
 //		System.out.println("●●finalSQL = " + finalSQL);
 

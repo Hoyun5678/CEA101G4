@@ -2,6 +2,8 @@ package com.room.model;
 
 import java.util.*;
 
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Room;
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Sell;
 import util.Util;
 
 import java.sql.*;
@@ -14,7 +16,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 //	"INSERT INTO ROOM_PRODUCT(ROOM_ID, SELL_MEM_ID, ROOM_NAME, ROOM_PRICE, ROOM_CAPACITY, ROOM_ON_TIME, ROOM_DES, ROOM_COLLECT, ROOM_STATUS)"
 //	+" VALUES ('ROOM' || LPAD(ROOM_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT * FROM ROOM_PRODUCT ORDER BY ROOM_STATUS DESC, ROOM_ID DESC";
+		"SELECT * FROM ROOM_PRODUCT ORDER BY ROOM_ID DESC";
 	private static final String GET_ONE_STMT = 
 		"SELECT * FROM ROOM_PRODUCT WHERE ROOM_ID = ?";
 	private static final String DELETE = 
@@ -24,28 +26,42 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 	private static final String GET_BYMEMID_STMT = 
 		"SELECT * FROM ROOM_PRODUCT WHERE SELL_MEM_ID = ? ORDER BY ROOM_STATUS DESC, ROOM_ID DESC";
 	
+	
+	
 	@Override
-	public void insert(RoomVO roomVO) {
+	public RoomVO insert(RoomVO roomVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 			Class.forName(Util.DRIVER);
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(INSERT_STMT);
-
+			
+			String[] cols = new String[] {"ROOM_ID"};
+			con.setAutoCommit(false);
+						
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
+			
 			pstmt.setString(1, roomVO.getSellMemId());
 			pstmt.setString(2, roomVO.getRoomName());
 			pstmt.setInt(3, roomVO.getRoomPrice());
 			pstmt.setInt(4, roomVO.getRoomCapacity());
-//			pstmt.setTimestamp(5, roomVO.getRoomOnTime());
 			pstmt.setString(5, roomVO.getRoomDes());
-//			pstmt.setInt(7, roomVO.getRoomCollect());
 			pstmt.setInt(6, roomVO.getRoomStatus());
 
 			pstmt.executeUpdate();
-
+			
+			rs = pstmt.getGeneratedKeys();
+			String nextKey = "";
+			while(rs.next()) {
+				nextKey = rs.getString(1);
+				roomVO.setRoomId(nextKey);
+			}
+			con.commit();
+			con.setAutoCommit(true);
+			return roomVO;
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "
@@ -297,6 +313,77 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 		return list;
 	}
 	
+	
+	@Override
+	public List<RoomVO> getAll(Map<String, String[]> map) {
+		List<RoomVO> list = new ArrayList<RoomVO>();
+		RoomVO roomVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			String finalSQL = "SELECT * FROM ROOM_PRODUCT"
+					+ jdbcUtil_CompositeQuery_Room.get_WhereCondition(map);
+			
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("finalSQL = " + finalSQL);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				roomVO = new RoomVO();
+				roomVO.setRoomId(rs.getString("ROOM_ID"));
+				roomVO.setSellMemId(rs.getString("SELL_MEM_ID"));
+				roomVO.setRoomName(rs.getString("ROOM_NAME"));
+				roomVO.setRoomPrice(rs.getInt("ROOM_PRICE"));
+				roomVO.setRoomCapacity(rs.getInt("ROOM_CAPACITY"));
+				roomVO.setRoomOnTime(rs.getTimestamp("ROOM_ON_TIME"));
+				roomVO.setRoomDes(rs.getString("ROOM_DES"));
+				roomVO.setRoomCollect(rs.getInt("ROOM_COLLECT"));
+				roomVO.setRoomStatus(rs.getInt("ROOM_STATUS"));
+				list.add(roomVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 	@Override
 	public List<RoomVO> getByMemId(String sellMemId) {
 		List<RoomVO> list = new ArrayList<RoomVO>();
@@ -426,5 +513,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 			System.out.println();
 		}
 	}
+
+
 
 }
