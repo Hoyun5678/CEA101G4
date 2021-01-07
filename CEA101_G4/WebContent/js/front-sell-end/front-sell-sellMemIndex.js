@@ -59,6 +59,7 @@
             }
 
             let drawCal = function (firstDateOfMonth) {
+//            	console.log('firstDateOfMonth = ' + firstDateOfMonth);
                 let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
                 let tr, td, a
                 let startFrom = firstDateOfMonth.getDay()
@@ -106,14 +107,14 @@
             $(document).ready(function () {
             	var contextPath = $('[name="contextPath"]').val();
             	var urlTarget = contextPath + '/front-sell-end/toolforms/collapsibleGroup.jsp';
-            	console.log('url = ' + urlTarget);
+//            	console.log('url = ' + urlTarget);
             	
+            	let yearList = document.getElementById('yearList')
                 let monthList = document.getElementById('monthList')
                 let changeMonth = function () {
                     delCal(new Date(yearList.value, monthList.value, 1), drawCal)
                 }
 
-                $('#yearList').change(changeMonth)
                 monthList.addEventListener('change', changeMonth)
                 let today = new Date()
 
@@ -124,6 +125,7 @@
                     option.innerText = i
                     if (i === today.getFullYear()) option.selected = true
                 }
+                $('#yearList').change(changeMonth)
 
                 let monOptions = monthList.getElementsByTagName('option')
                 for (let i = 0; i < monOptions.length; i++) {
@@ -139,7 +141,7 @@
 //                	sel.stop(true, true).addClass('onSelect', 3000);
                 	sel.fadeOut(0, function(){
                 	    $(this).addClass('onSelect'); //or any other class
-                	}).fadeIn(500);
+                	}).fadeIn(400);
                 	
                 	$.ajax({
                 		url: urlTarget,
@@ -153,9 +155,31 @@
                 			$('#accordion').stop(true, true).fadeOut(100, function() {
                 				$('.displaySelectedDate h4').html(sel.attr('value') + '  預計Check in 列表');
                 				$(this).html(data);
-                			}).fadeIn(500);
+                			}).fadeIn(400);
                 		}
                 	})
+                })
+                
+                $(document).on('click', '.lastMonth span', function() {
+                	let y = parseInt($('#yearList').val()) - 1;
+                	let m = parseInt($('#monthList').val()) - 1;
+                	if(m === 0) {
+                		$('#monthList').val('11').change();
+                		$('#yearList').val(y).change();
+                	} else {
+                		$('#monthList').val(m).change();
+                	}
+                })
+                
+                $(document).on('click', '.nextMonth span', function() {
+                	let y = parseInt($('#yearList').val()) + 1;
+                	let m = parseInt($('#monthList').val()) + 1;
+                	if(m === 11) {
+                		$('#monthList').val('0').change();
+                		$('#yearList').val(y).change();
+                	} else {
+                		$('#monthList').val(m).change();
+                	}
                 })
                 
                 
