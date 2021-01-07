@@ -6,7 +6,7 @@
 	ReplyVO replyVO = (ReplyVO) request.getAttribute("replyVO");
 %>
 <%-- <%= replyVO==null %>--${replyVO.deptno}-- --%>
-
+<!-- zz -->
 <html>
 <head>
 <link rel="stylesheet"
