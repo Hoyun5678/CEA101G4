@@ -77,7 +77,7 @@
 <body>
 
 	<%@ include file="/front-mem-end/bar.jsp"%>
-	<!-- 這邊是你原本sidebar的位置 -->
+	<!-- 這邊是你原本sidebar的位置ㄛ -->
 
 
 	<div id="photowall" class="row">
