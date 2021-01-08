@@ -46,6 +46,11 @@ public class ActivityPeriodService {
 		dao.insert(actperVO);
 	}
 	
+	public void upDateActPerStatus(String act_period_id,Integer act_period_status) {
+		dao.upDateActPerStatus(act_period_id, act_period_status);
+		
+	}
+	
 
 //	public void deleteActType(String act_type_id) {
 //		dao.delete(act_type_id);

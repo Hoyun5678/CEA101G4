@@ -37,6 +37,7 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 
 	private static final String UPDATE = "UPDATE  ACTIVITY_PERIOD set ACT_ID=?, ACT_SIGN_START=?, ACT_SIGN_END=?,"
 			+ "ACT_PERIOD_START=?, ACT_PERIOD_END=?, ACT_UP_LIMIT=?, ACT_LOW_LIMIT=?, ACT_CUR_PRICE=?,ACT_PERIOD_STATUS=?, ACT_SIGN_SUM=? where ACT_PERIOD_ID=?";
+	private static final String UPDATE_ACTPERIOD_STATUS = "UPDATE  ACTIVITY_PERIOD set ACT_PERIOD_STATUS=? where ACT_PERIOD_ID=?";
 
 	@Override
 	public void insert(ActivityPeriodVO actperVO) {
@@ -267,7 +268,54 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 		}
 		return actperVO;
 	}
+	@Override
+	public void upDateActPerStatus(String act_period_id, Integer act_period_status) {
+		ActivityPeriodVO actperVO=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
 
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_ACTPERIOD_STATUS);
+			pstmt.setInt(1, act_period_status);
+			pstmt.setString(2, act_period_id);
+			rs=pstmt.executeQuery();
+			
+				
+			
+			
+			
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 	@Override
 	public void delete(String act_period_id) {
 		// TODO Auto-generated method stub
@@ -418,6 +466,8 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 //		actperVO.setAct_period_status(1);
 //		actperVO.setAct_sign_sum(16);
 //		dao.insert(actperVO);
+//		//修改活動期別狀態=============================
+		dao.upDateActPerStatus("AP001", 2);
 		//修改=====================================
 //		ActivityPeriodVO actperVO2 = new ActivityPeriodVO();
 //		actperVO2.setAct_id("ACT003");
@@ -444,24 +494,28 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 //		System.out.println(actperVO3.getAct_cur_price());
 //		System.out.println(actperVO3.getAct_period_status());
 //		System.out.println(actperVO3.getAct_sign_sum());
-		//查詢 getAll================================
-		List<ActivityPeriodVO>list=dao.getAll();
-		for(ActivityPeriodVO aActPer:list) {
-			
-			System.out.println(aActPer.getAct_id());
-			System.out.println(aActPer.getAct_sign_start());
-			System.out.println(aActPer.getAct_sign_end());
-			System.out.println(aActPer.getAct_period_start());
-			System.out.println(aActPer.getAct_period_end());
-			System.out.println(aActPer.getAct_up_limit());
-			System.out.println(aActPer.getAct_low_limit());
-			System.out.println(aActPer.getAct_cur_price());
-			System.out.println(aActPer.getAct_period_status());
-			System.out.println(aActPer.getAct_sign_sum());
-			System.out.println("=============================");
-		}
+//		//查詢 getAll================================
+//		List<ActivityPeriodVO>list=dao.getAll();
+//		for(ActivityPeriodVO aActPer:list) {
+//			
+//			System.out.println(aActPer.getAct_id());
+//			System.out.println(aActPer.getAct_sign_start());
+//			System.out.println(aActPer.getAct_sign_end());
+//			System.out.println(aActPer.getAct_period_start());
+//			System.out.println(aActPer.getAct_period_end());
+//			System.out.println(aActPer.getAct_up_limit());
+//			System.out.println(aActPer.getAct_low_limit());
+//			System.out.println(aActPer.getAct_cur_price());
+//			System.out.println(aActPer.getAct_period_status());
+//			System.out.println(aActPer.getAct_sign_sum());
+//			System.out.println("=============================");
+//		}
+		
+		
 		
 	}
+
+	
 
 
 

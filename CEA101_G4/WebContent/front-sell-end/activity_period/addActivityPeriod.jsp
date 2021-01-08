@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>新增週期</title>
+  <title>新增週期</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css'>
@@ -22,7 +22,7 @@
 
 <body>
     <!-- partial:index.partial.html -->
-    <div class="container">
+  
         <div id="viewport">
             <%@ include file="/front-sell-end/sellMemSideBar.jsp"%>
             <div id="content">
@@ -96,6 +96,7 @@
                 </div>
             </div>
         </div>
+    
         <!-- /.container -->
         <!-- partial -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
