@@ -50,6 +50,15 @@
     <url-pattern>/ActivityPeriod/ActivityPeriod.do</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>ActivityOrderServlet</servlet-name>
+    <servlet-class>com.activity_order.controller.ActivityOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ActivityOrderServlet</servlet-name>
+    <url-pattern>/ActivityOrder/ActivityOrder.do</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>ActivityTypeServlet</servlet-name>
     <servlet-class>com.activity_type.controller.ActivityTypeServlet</servlet-class>
