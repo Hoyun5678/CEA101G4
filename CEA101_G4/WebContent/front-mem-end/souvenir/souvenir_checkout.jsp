@@ -13,7 +13,7 @@
         
 </style>
 <body bgcolor="#FFFFFF">
-	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
+	<%@ include file="/front-mem-end/bar.jsp"%>
 
 <hr><p><center>
 

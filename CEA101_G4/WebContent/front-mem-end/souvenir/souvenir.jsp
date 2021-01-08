@@ -76,7 +76,7 @@
 
 <body>
 
-	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
+	<%@ include file="/front-mem-end/bar.jsp"%>
 	<!-- 這邊是你原本sidebar的位置 -->
 
 

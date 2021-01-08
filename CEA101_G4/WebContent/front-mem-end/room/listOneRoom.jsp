@@ -74,7 +74,7 @@ color:black;
 
 </head>
 <body>
-<%@ include file="/front-mem-end/topbar.jsp" %> 
+	<%@ include file="/front-mem-end/bar.jsp"%>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do">
  <div class="container">
         <div class="row">

@@ -45,7 +45,7 @@
 
 </head>
 <body bgcolor='white'>
-	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
+	<%@ include file="/front-mem-end/bar.jsp"%>
 <h3>確認購買資訊:</h3>
 
 <%-- 錯誤表列 --%>

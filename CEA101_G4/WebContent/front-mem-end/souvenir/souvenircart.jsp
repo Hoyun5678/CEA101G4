@@ -16,7 +16,7 @@
 </style>
 <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 <body bgcolor="#FFFFFF">
-	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
+	<%@ include file="/front-mem-end/bar.jsp"%>
 <%Vector<SouvenirProductVO> buylist = (Vector<SouvenirProductVO>) session.getAttribute("soupVO");%>
 <%if (buylist != null && (buylist.size() > 0)) {%>
 <br>
