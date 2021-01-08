@@ -24,6 +24,9 @@ public class ActivityOrderService {
 	public ActivityOrderVO getOneOrder(String act_order_id) {
 		return dao.findByPrimaryKey(act_order_id);
 	}
+	public void memCancelActOrder(ActivityOrderVO actordVO) {
+		dao.update(actordVO);
+	}
 
 //	public Set<ActivityOrderVO> getEmpsByDeptno(String act_order_id) {
 //		return dao.getEmpsByDeptno(act_order_id);

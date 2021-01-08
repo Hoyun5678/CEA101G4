@@ -80,6 +80,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 			}
 		}
 	}
+	
 
 	@Override
 	public void update(ActivityOrderVO actoVO) {
@@ -364,6 +365,8 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 		
 		
 	}
+
+	
 }
 
 
