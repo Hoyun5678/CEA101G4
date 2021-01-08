@@ -14,7 +14,7 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>評論留言新增 - addReplyReport.jsp</title>
+<title>檢舉留言新增 - addReplyReport.jsp</title>
 
 <style>
 table#table-1 {
@@ -92,7 +92,7 @@ form {
 	text-align: center;
 }
 
-.input-group-text:hover {
+.input-group-text {
 	background-color: white;
 }
 </style>
@@ -119,8 +119,8 @@ form {
 
 		<div id=actrow>
 			<tr>
-				<td>活動期別編號:</td>
-				<td><input type="TEXT" class="input-group-text" name="empId"
+				<td><b>活動期別編號:</td>
+				<td><input type="TEXT" name="empId" class="input-group-text"
 					value="<%=(replyReportVO == null) ? "EMP00" : replyReportVO.getEmpId()%>" /></td>
 			</tr>
 		</div>
@@ -134,10 +134,11 @@ form {
 		<div id=actrow>
 
 			<tr>
-				<td>評論內容:</td>
-				<td><textarea class="form-control" aria-label="With textarea"
-						name="replyId" size="45"
-						value="<%=(replyReportVO == null) ? "RPL00" : replyReportVO.getReplyId()%>" /></textarea></td>
+				<td>檢舉評論編號:</td>
+				<td><input type="TEXT" name="replyId" class="input-group-text"
+					
+					value="<%=(replyReportVO == null) ? "RPL00" : replyReportVO.getReplyId()%>" />
+				</td>
 			</tr>
 		</div>
 		<div id=actrow>
@@ -145,7 +146,7 @@ form {
 				<td>檢舉結果狀態:</td>
 				<td><input type="radio" name="reportResult" size="45" value="0" />待處理
 					<input type="radio" name="reportResult" size="45" value="1" />已處理同意
-					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td>
+					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</b></td>
 			</tr>
 		</div>
 		<div id=submit>

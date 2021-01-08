@@ -80,7 +80,7 @@ ul {
 		<div class="header-nav">
 
 			<div class="nav">
-				<ul>
+				<ul><b>
 					<li class="nav-item" id="active">
 						<div class="font-icon">
 							<a class="nav-link" href="#">住宿</a>
@@ -110,14 +110,14 @@ ul {
 								class="far fa-user-circle fa-2x" id="user"></i>
 							</a>
 						</div>
-					</li>
+					</li></b>
 				</ul>
 			</div>
 		</div>
 
 		<div class="content">
 			<div class="content-header">
-				<h1>評論檢舉資料查詢</h1>
+				<h1>評論檢舉資料</h1>
 			</div>
 			<%@ include file="/front-mem-end/replyreport/select_page.jsp"%>
 		</div>

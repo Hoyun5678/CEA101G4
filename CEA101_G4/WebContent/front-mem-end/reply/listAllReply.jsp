@@ -81,7 +81,6 @@ h2 {
 				<th>¬¡°Êµû½×ª¬ºA</th>
 				<th></th>
 				<th></th>
-				<th></th>
 			</tr>
 			<%@ include file="page1.file"%>
 			<c:forEach var="replyVO" items="${list}" begin="<%=pageIndex%>"

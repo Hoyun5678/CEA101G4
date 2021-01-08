@@ -11,7 +11,7 @@
 <head>
 
 <link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -65,7 +65,7 @@ form {
 	text-align: center;
 }
 
-.input-group-text:hover {
+.input-group-text {
 	background-color: white;
 }
 
@@ -91,6 +91,10 @@ th, td {
 .nav ul {
 	height: 64px;
 	float: right;
+}
+
+.input-group-text {
+	background-color: white;
 }
 </style>
 
@@ -120,28 +124,28 @@ th, td {
 
 		<div id=actrow>
 			<tr>
-				<td>檢舉編號:<font color=red><b></b></font></td>
-				<td><%=replyReportVO.getReportId()%></td>
+				<td><b>評論檢舉編號:<font color=red><b></b></font></td>
+				<td><%=replyReportVO.getReportId()%></td><br>
 			</tr>
 			<br>
 			<tr>
-				<td>評論檢舉編號:</td>
-				<td><input type="TEXT" name="empId" size="45"
-					value="<%=replyReportVO.getEmpId()%>" /></td>
+				<td>評論員工編號:</td>
+				<td><input type="TEXT" name="empId" class="input-group-text" 
+					size="20" value="<%=replyReportVO.getEmpId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>會員編號:</td>
-				<td><input type="TEXT" name="memId" size="45"
-					value="<%=replyReportVO.getMemId()%>" /></td>
+				<td><input type="TEXT" name="memId" class="input-group-text" 
+					size="20" value="<%=replyReportVO.getMemId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>評論編號:</td>
-				<td><input name="replyId" type="TEXT"
-					value="<%=replyReportVO.getReplyId()%>" /></td>
+				<td><input type="TEXT" name="replyId" class="input-group-text" 
+					size="20" value="<%=replyReportVO.getReplyId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
@@ -149,7 +153,7 @@ th, td {
 				<td>檢舉結果狀態:</td>
 				<td><input type="radio" name="reportResult" size="45" value="0" />待處理
 					<input type="radio" name="reportResult" size="45" value="1" />已處理同意
-					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td>
+					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td></b>
 			</tr>
 		</div>
 

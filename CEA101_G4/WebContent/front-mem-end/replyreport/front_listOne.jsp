@@ -69,44 +69,44 @@
 				</div>
 				<div class="nav">
 					<ul>
-						<li class="nav-item" id="active">
-							<div class="font-icon">
-								<a class="nav-link" href="#">住宿</a>
-							</div>
+						<b>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">住宿</a>
+								</div>
 						</li>
-						<li class="nav-item" id="active">
-							<div class="font-icon">
-								<a class="nav-link" href="#">體驗</a>
-							</div>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">體驗</a>
+								</div>
 						</li>
-						<li class="nav-item" id="active">
-							<div class="font-icon">
-								<a class="nav-link" href="#">伴手禮</a>
-							</div>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">伴手禮</a>
+								</div>
 						</li>
-						<li class="nav-item" id="active">
-							<div class="font-icon">
-								<a class="nav-link" href="#">加入平台</a>
-							</div>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">加入平台</a>
+								</div>
 						</li>
-						<li class="nav-profile">
-							<div class="nav-profile-name">
+							<li class="nav-profile">
+								<div class="nav-profile-name">
 
-								<a
-									href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp">
-									<i class="fas fa-bars 4x" id="list"></i> <i
-									class="far fa-user-circle fa-2x" id="user"></i>
-								</a>
-							</div>
-						</li>
-
+									<a
+										href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp">
+										<i class="fas fa-bars 4x" id="list"></i> <i
+										class="far fa-user-circle fa-2x" id="user"></i>
+									</a>
+								</div>
+						</li> </b>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="content">
 			<div class="content-header">
-				<h1>評論資料查詢</h1>
+				<h1>評論檢舉資料</h1>
 			</div>
 			<%@ include file="/front-mem-end/replyreport/listOneReplyReport.jsp"%>
 

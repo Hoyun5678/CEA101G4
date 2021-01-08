@@ -97,7 +97,7 @@ form {
 	text-align: center;
 }
 
-.input-group-text:hover {
+.input-group-text {
 	background-color: white;
 }
 
@@ -134,44 +134,50 @@ form {
 
 		<div id=actrow>
 			<tr>
-				<td>評論編號:<font color=red><b>*</b></font></td>
-				<td><%=replyVO.getReplyId()%></td>
+				<td><b>評論編號 </td>
+				<td><font><input type="hidden"><%=replyVO.getReplyId()%></font></td>
+
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
-				<td>活動期別編號:</td>
-				<td><input type="TEXT" name="actPeriodId" size="45"
-					value="<%=replyVO.getActPeriodId()%>" /></td>
-			</tr>
-		</div>
-		<div id=actrow>
-			<tr>
-				<td>會員編號:</td>
-				<td><input type="TEXT" name="memId" size="45"
-					value="<%=replyVO.getMemId()%>" /></td>
-			</tr>
-		</div>
-		<div id=actrow>
-			<tr>
-				<td>活動評論內容:</td>
-				<td><input name="replyContent" type="TEXT"
-					value="<%=replyVO.getReplyContent()%>" /></td>
+				<td>會員編號</td>
+				<td><font><input type="hidden" name="memId"
+						value="<%=replyVO.getMemId()%>"><%=replyVO.getMemId()%></font></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>活動評論時間:</td>
-				<td><input name="replyTime" type="TEXT"
-					value="<%SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			out.print(ft.format(replyVO.getReplyTime()));%>" /></td>
+				<td><input type="hidden" name="replyTime"
+					value="<%=replyVO.getReplyTime()%>"> <%
+ 	SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+ 	out.print(ft.format(replyVO.getReplyTime()));
+ %></td>
 			</tr>
 		</div>
+		<div id=actrow>
+			<tr>
+				<td>活動期別編號:</td>
+				<td><input type="TEXT" class="input-group-text"
+					name="actPeriodId" size="20" value="<%=replyVO.getActPeriodId()%>" /></td>
+			</tr>
+		</div>
+
+		<div id=actrow>
+			<tr>
+				<td>活動評論內容:</td>
+				<td><textarea name="replyContent" class="form-control"
+						aria-label="With textarea"><%=replyVO.getReplyContent()%></Textarea>
+			</tr>
+		</div>
+
 		<div id=actrow>
 			<tr>
 				<td>活動評論狀態:</td>
 				<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示
 					<input type="radio" name="replyVisible" size="45" value="1" />顯示</td>
+				</b>
 			</tr>
 		</div>
 
@@ -192,6 +198,7 @@ form {
 			<input type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>
+	<br>
 	<div id=backhome>
 		<tr>
 			<td>

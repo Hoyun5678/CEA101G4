@@ -75,7 +75,7 @@ ul {
 		<div class="header-nav">
 
 			<div class="nav">
-				<ul>
+				<ul><b>
 					<li class="nav-item" id="active">
 						<div class="font-icon">
 							<a class="nav-link" href="#">¦í±J</a>
@@ -105,7 +105,7 @@ ul {
 								class="far fa-user-circle fa-2x" id="user"></i>
 							</a>
 						</div>
-					</li>
+					</li></b>
 				</ul>
 			</div>
 		</div>

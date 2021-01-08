@@ -70,7 +70,7 @@
 				<div class="nav">
 					<ul>
 						<li class="nav-item" id="active">
-							<div class="font-icon">
+							<div class="font-icon"><b>
 								<a class="nav-link" href="#">住宿</a>
 							</div>
 						</li>
@@ -87,7 +87,7 @@
 						<li class="nav-item" id="active">
 							<div class="font-icon">
 								<a class="nav-link" href="#">加入平台</a>
-							</div>
+							</div></b>
 						</li>
 						<li class="nav-profile">
 							<div class="nav-profile-name">
@@ -105,7 +105,7 @@
 
 			<div class="content">
 				<div class="content-header">
-					<h1>評論檢舉資料查詢</h1>
+					<h1>評論檢舉資料</h1>
 				</div>
 				<%@ include file="/front-mem-end/replyreport/listAllReplyReport.jsp"%>
 

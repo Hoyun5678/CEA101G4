@@ -28,6 +28,10 @@
 .nav-profile {
 	height: 60px;
 }
+
+.nav {
+	float: right;
+}
 </style>
 
 <body id=body>
@@ -66,7 +70,7 @@
 					<!--<i class="fa fa-navicon"></i>-->
 				</div>
 				<div class="nav">
-					<ul>
+					<ul><b>
 						<li class="nav-item" id="active">
 							<div class="font-icon">
 								<a class="nav-link" href="#">住宿</a>
@@ -96,7 +100,7 @@
 									class="far fa-user-circle fa-2x" id="user"></i>
 								</a>
 							</div>
-						</li>
+						</li></b>
 					</ul>
 				</div>
 			</div>
@@ -105,7 +109,8 @@
 			<div class="content-header">
 				<h1>評論檢舉資料</h1>
 			</div>
-			<%@ include file="/front-mem-end/replyreport/update_replyreport_input.jsp"%>
+			<%@ include
+				file="/front-mem-end/replyreport/update_replyreport_input.jsp"%>
 
 		</div>
 	</section>

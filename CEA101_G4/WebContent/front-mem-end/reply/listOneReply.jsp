@@ -38,9 +38,7 @@ h4 {
 	color: blue;
 	color: blue;
 }
-</style>
 
-<style>
 table {
 	background-color: white;
 	margin-top: 5px;
@@ -56,7 +54,7 @@ th, td {
 	text-align: center;
 }
 
-#tbody:hover {
+#tbody {
 	background-color: white;
 }
 
