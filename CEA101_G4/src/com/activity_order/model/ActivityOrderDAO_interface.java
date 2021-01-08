@@ -10,6 +10,6 @@ public interface ActivityOrderDAO_interface {
     public ActivityOrderVO findByPrimaryKey(String act_order_id);
 //    public void delete(String mem_id,String act_period_id);
     public List<ActivityOrderVO> getAll();
-    public Set<ActivityOrderVO> getActivityByMemid(String mem_id);
+    public List<ActivityOrderVO> getActivityByMemid(String mem_id);
 
 }
