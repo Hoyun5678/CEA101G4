@@ -1,26 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<<<<<<< HEAD
 <%@ page import="com.room.model.*"%>   
 <%@ page import="com.member.model.*"%>   
 <% MemberVO memVO=(MemberVO)session.getAttribute("memVO"); %>
-=======
 <%@ page import="com.room.model.*"%>
->>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 
 <jsp:useBean id="roomVO" scope="request" class="com.room.model.RoomVO" />
-<<<<<<< HEAD
 <jsp:useBean id="sellVO" scope="request" class="com.sell.model.SellVO" />
 <%-- <jsp:useBean id="rpVO" scope="request" class="com.roomphoto.model.RoomPhotoVO" /> --%>
-=======
->>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
 <jsp:useBean id="sellSvc" scope="page" class="com.sell.model.SellService" />
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -37,18 +30,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
 
 <title>Insert title here</title>
-=======
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <!--     <link rel="stylesheet" href="css/style.css"> -->
->>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 
 <title>Insert title here</title>
 <style>
-<<<<<<< HEAD
 .red_heart{
 color:#dc3545;
 }
@@ -78,14 +68,12 @@ color:black;
 	}
 
 	
->>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 </style>
 
 
 
 </head>
 <body>
-<<<<<<< HEAD
 <%@ include file="/front-mem-end/topbar.jsp" %> 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do">
  <div class="container">
