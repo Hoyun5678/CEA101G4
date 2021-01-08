@@ -11,11 +11,15 @@ public class ReplyDAO implements ReplyDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/JEFF");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G4");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CEA101G4";
+	String passwd = "CEA101G4";
 	
 	private static final String INSERT_STMT = 
 			"INSERT INTO reply(reply_id, act_period_id, mem_id, reply_content, reply_visible) "

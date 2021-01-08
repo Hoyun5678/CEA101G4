@@ -6,7 +6,7 @@ public class ReplyReportService {
 	private ReplyReportDAO_interface dao;
 	
 	public ReplyReportService() {
-		dao = new ReplyReportDAO();
+		dao = new ReplyReportJDBCDAO();
 	}
 	
 	public ReplyReportVO addReplyReport(String empId, String memId, 

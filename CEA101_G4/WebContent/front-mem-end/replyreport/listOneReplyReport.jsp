@@ -9,28 +9,14 @@
 
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
 <title>評論資料 - listOneReplyReport.jsp</title>
 
 <style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
-}
-
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
-}
-
 table {
-	width: 600px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -41,7 +27,16 @@ table, th, td {
 }
 
 th, td {
-	padding: 5px;
+	padding: 8px;
+	text-align: center;
+}
+
+#tbody {
+	background-color: white;
+}
+
+#backhome {
+	margin-top: 40px;
 	text-align: center;
 }
 </style>
@@ -49,38 +44,42 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-	<table id="table-1">
+	<h3>評論編號資料 - ListOneReplyReport.jsp</h3>
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>評論檢舉編號</th>
+				<th>員工編號</th>
+				<th>評論編號</th>
+				<th>會員編號</th>
+				<th>評論檢舉結果</th>
+			</tr>
+		</thead>
+		<tbody id=tbody>
+			<tr>
+				<%-- 			<td><%=replyReportVO.getReplyId()%></td> --%>
+
+				<td>${replyReportVO.reportId}</td>
+				<td>${replyReportVO.empId}</td>
+				<td>${replyReportVO.replyId}</td>
+				<td>${replyReportVO.memId}</td>
+				<td>${replyReportVO.reportResult}</td>
+
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<div id=backhome>
 		<tr>
 			<td>
-				<h3>評論編號資料 - ListOneReplyReport.jsp</h3>
 				<h4>
-					<a href="/CEA101G4/replyreport/select_page.jsp"><img
-						src="images/灰底的老虎.png" width="100" height="32" border="0">回上頁</a>
+					<a
+						href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"
+						class="btn btn-dark">回首頁</a>
 				</h4>
 			</td>
 		</tr>
-	</table>
-
-	<table>
-		<tr>
-			<th>評論檢舉編號</th>
-			<th>員工編號</th>
-			<th>評論編號</th>
-			<th>會員編號</th>
-			<th>評論檢舉結果</th>
-
-		</tr>
-		<tr>
-			<%-- 			<td><%=replyReportVO.getReplyId()%></td> --%>
-
-			<td>${replyReportVO.reportId}</td>
-			<td>${replyReportVO.empId}</td>
-			<td>${replyReportVO.replyId}</td>
-			<td>${replyReportVO.memId}</td>
-			<td>${replyReportVO.reportResult}</td>
-		</tr>
-	</table>
-
+	</div>
 </body>
 </html>

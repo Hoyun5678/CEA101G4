@@ -31,8 +31,14 @@ ul {
 	font-size: 12px;
 }
 
-#container {
-	background: #E9EEF4;
+.nav-logo-image img {
+	width: 50%;
+	float: left;
+	margin-left: 60px;
+}
+
+.nav-item {
+	height: 60px;
 }
 </style>
 <body id=body>
@@ -41,7 +47,7 @@ ul {
 			<div class="nav-logo-image">
 				<a
 					href="<%=request.getContextPath()%>/front-mem-end/front-index.jsp">
-					<img src="<%=request.getContextPath()%>/image/LOGO/tiger2.png"
+					<img src="<%=request.getContextPath()%>/image/LOGO/logo.png"
 					alt="SuperGoing">
 				</a>
 			</div>
@@ -53,7 +59,7 @@ ul {
 						class="fa"></i> 首頁</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>評論查詢</a></li>
+						class="fa"></i>評論區</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
 						class="fa"></i>評論檢舉查詢</a></li>
@@ -69,42 +75,44 @@ ul {
 		<div class="header-nav">
 
 			<div class="nav">
-				<ul>
-					<li class="nav-settings">
+				<ul><b>
+					<li class="nav-item" id="active">
 						<div class="font-icon">
-							<i class="fa fa-tasks"></i>
+							<a class="nav-link" href="#">住宿</a>
 						</div>
 					</li>
-					<li class="nav-mail">
+					<li class="nav-item" id="active">
 						<div class="font-icon">
-							<i class="fa fa-envelope-o"></i>
+							<a class="nav-link" href="#">體驗</a>
 						</div>
 					</li>
-					<li class="nav-calendar">
+					<li class="nav-item" id="active">
 						<div class="font-icon">
-							<i class="fa fa-calendar"></i>
+							<a class="nav-link" href="#">伴手禮</a>
 						</div>
 					</li>
-					<li class="nav-chat">
+					<li class="nav-item" id="active">
 						<div class="font-icon">
-							<i class="fa fa-comments-o"></i>
+							<a class="nav-link" href="#">加入平台</a>
 						</div>
 					</li>
 					<li class="nav-profile">
 						<div class="nav-profile-name">
+
 							<a
 								href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp">
-								使用者<i class="fa fa-caret-down"></i>
+								<i class="fas fa-bars 4x" id="list"></i> <i
+								class="far fa-user-circle fa-2x" id="user"></i>
 							</a>
 						</div>
-					</li>
+					</li></b>
 				</ul>
 			</div>
 		</div>
 
 		<div class="content">
 			<div class="content-header">
-				<h1>評論資料查詢</h1>
+				<h1>評論區</h1>
 			</div>
 			<%@ include file="/front-mem-end/reply/select_page.jsp"%>
 		</div>

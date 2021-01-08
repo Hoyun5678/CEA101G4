@@ -17,6 +17,20 @@
 .nav {
 	float: right;
 }
+
+.nav-logo-image img {
+	width: 50%;
+	float: left;
+	margin-left: 60px;
+}
+
+.nav-item {
+	height: 60px;
+}
+
+.nav-profile {
+	height: 60px;
+}
 </style>
 <body id=body>
 	<section id="sidebar">
@@ -24,7 +38,7 @@
 			<div class="nav-logo-image">
 				<a
 					href="<%=request.getContextPath()%>/front-mem-end/front-index.jsp">
-					<img src="<%=request.getContextPath()%>/image/LOGO/tiger2.png"
+					<img src="<%=request.getContextPath()%>/image/LOGO/logo.png"
 					alt="SuperGoing">
 				</a>
 			</div>
@@ -36,7 +50,7 @@
 						class="fa"></i> 首頁</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>評論查詢</a></li>
+						class="fa"></i>評論區</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
 						class="fa"></i>評論檢舉查詢</a></li>
@@ -55,41 +69,46 @@
 				</div>
 				<div class="nav">
 					<ul>
-						<li class="nav-settings">
-							<div class="font-icon">
-								<i class="fa fa-tasks"></i>
-							</div>
+						<b>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">住宿</a>
+								</div>
 						</li>
-						<li class="nav-mail">
-							<div class="font-icon">
-								<i class="fa fa-envelope-o"></i>
-							</div>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">體驗</a>
+								</div>
 						</li>
-						<li class="nav-calendar">
-							<div class="font-icon">
-								<i class="fa fa-calendar"></i>
-							</div>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">伴手禮</a>
+								</div>
 						</li>
-						<li class="nav-chat">
-							<div class="font-icon">
-								<i class="fa fa-comments-o"></i>
-							</div>
+							<li class="nav-item" id="active">
+								<div class="font-icon">
+									<a class="nav-link" href="#">加入平台</a>
+								</div>
 						</li>
-						<li class="nav-profile">
-							<div class="nav-profile-name">
-								使用者<i class="fa fa-caret-down"></i>
-							</div>
+							<li class="nav-profile">
+								<div class="nav-profile-name">
+
+									<a
+										href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp">
+										<i class="fas fa-bars 4x" id="list"></i> <i
+										class="far fa-user-circle fa-2x" id="user"></i>
+									</a>
+								</div>
+						</li> </b>
+					</ul>
 				</div>
-				</li>
-				</ul>
 			</div>
-		</div>
 		</div>
 		<div class="content">
 			<div class="content-header">
-				<h1>評論資料查詢</h1>
+				<h1>評論檢舉資料</h1>
 			</div>
-			<%@ include file="/front-mem-end/reply/listOneReply.jsp"%>
+			<%@ include file="/front-mem-end/replyreport/listOneReplyReport.jsp"%>
 
 		</div>
 	</section>

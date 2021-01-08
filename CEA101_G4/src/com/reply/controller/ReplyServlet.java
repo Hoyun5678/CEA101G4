@@ -166,10 +166,10 @@ public class ReplyServlet extends HttpServlet {
 				try {
 					replyVisible = new Integer(req.getParameter("replyVisible"));
 					if(replyVisible != 0 && replyVisible != 1) {
-						errorMsgs.add("請填數字0或1");
+						errorMsgs.add("請勾選評論狀態");
 						}
 				} catch (NumberFormatException e) {			
-					errorMsgs.add("請填數字0或1");
+					errorMsgs.add("請勾選評論狀態");
 
 				}
 

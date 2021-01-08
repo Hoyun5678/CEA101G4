@@ -10,10 +10,9 @@
 	pageContext.setAttribute("list", list);
 %>
 
-
 <html>
 <head>
-<title>所有評論資料 - listAllReply.jsp</title>
+<title>所有評論資料</title>
 </head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -110,12 +109,17 @@ h2 {
 						<input type="submit" value="刪除" class="btn btn-danger"> <input
 							type="hidden" name="replyId" value="${replyVO.replyId}">
 						<input type="hidden" name="action" value="delete">
-					</FORM> <!-- 				<td> --> <!-- 					<FORM METHOD="post" --> <%-- 						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do" --%>
-					<!-- 						style="margin-bottom: 0px;"> --> <!-- 						<input type="submit" value="檢舉" class="btn btn-warning"> <input -->
-					<%-- 							type="hidden" name="replyId" value="${replyVO.replyId}"> --%>
-					<!-- 						<input type="hidden" name="action" value="getOne_For_Update"> -->
-					<!-- 					</FORM> -->
+					</FORM>
 				</td>
+<!-- 				<td> -->
+<!-- 					<FORM METHOD="post" -->
+<%-- 						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do" --%>
+<!-- 						style="margin-bottom: 0px;"> -->
+<!-- 						<input type="submit" value="檢舉" class="btn btn-warning"> <input -->
+<%-- 							type="hidden" name="replyId" value="${replyVO.replyId}"> --%>
+<!-- 						<input type="hidden" name="action" value="insert"> -->
+<!-- 					</FORM> -->
+<!-- 				</td> -->
 			</tr>
 			</c:forEach>
 		</tbody>

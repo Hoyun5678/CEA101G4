@@ -1,3 +1,4 @@
+
 package com.activity_period.controller;
 
 import java.io.IOException;
@@ -28,9 +29,7 @@ public class ActivityPeriodServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
-		
-		
+
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -80,38 +79,37 @@ public class ActivityPeriodServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		
+
 		if ("getOne_For_Insert".equals(action)) { // 來自listAllEmp.jsp的請求
-			
-						List<String> errorMsgs = new LinkedList<String>();
-						// Store this set in the request scope, in case we need to
-						// send the ErrorPage view.
-						req.setAttribute("errorMsgs", errorMsgs);
-			
-						try {
-							/*************************** 1.接收請求參數 ****************************************/
-							String act_id = req.getParameter("act_id");
-			
-							/*************************** 2.開始查詢資料 ****************************************/
-							ActivityPeriodVO actperVO =new ActivityPeriodVO();
-							actperVO.setAct_id(act_id);
-			
-							/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-							req.setAttribute("actperVO", actperVO); // 資料庫取出的empVO物件,存入req
-							String url = "/front-sell-end/activity_period/addActivityPeriod.jsp";
-							RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-							successView.forward(req, res);
-			
-							/*************************** 其他可能的錯誤處理 **********************************/
-						} catch (Exception e) {
-							errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-							RequestDispatcher failureView = req.getRequestDispatcher("/front-sell-end/activity_product/listOneActivityPorduct.jsp");
-							failureView.forward(req, res);
-						}
-					}
-		
-		
-	
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String act_id = req.getParameter("act_id");
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				ActivityPeriodVO actperVO = new ActivityPeriodVO();
+				actperVO.setAct_id(act_id);
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("actperVO", actperVO); // 資料庫取出的empVO物件,存入req
+				String url = "/front-sell-end/activity_period/addActivityPeriod.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-sell-end/activity_product/listOneActivityPorduct.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
 //		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 //
 //			List<String> errorMsgs = new LinkedList<String>();
@@ -279,6 +277,37 @@ public class ActivityPeriodServlet extends HttpServlet {
 //			}
 //		}
 //
+		if ("upDateActivityPeriodStatus".equals(action)) { // 來自update_emp_input.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+
+				String act_period_id = req.getParameter("act_period_id").trim();
+				Integer act_period_status=Integer.parseInt(req.getParameter("act_period_status"));
+
+
+				/*************************** 2.開始新增資料 ***************************************/
+				ActivityPeriodService actperSvc = new ActivityPeriodService();
+				actperSvc.upDateActPerStatus(act_period_id, act_period_status);
+
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/front-sell-end/activity_period/listOneActivityPeriod.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-sell-end/activity_period/listOneActivityPeriod.jsp");
+				failureView.forward(req, res);
+			}
+		}
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -296,27 +325,30 @@ public class ActivityPeriodServlet extends HttpServlet {
 				} else if (!act_id.trim().matches(mpwdReg)) {
 					errorMsgs.add("會員密碼錯誤");
 				}
-				java.sql.Timestamp act_sign_start =new java.sql.Timestamp(java.sql.Date.valueOf(req.getParameter("act_sign_start")).getTime());
-				java.sql.Timestamp act_sign_end = new java.sql.Timestamp(java.sql.Date.valueOf(req.getParameter("act_sign_end")).getTime());
-				java.sql.Timestamp act_period_start =java.sql.Timestamp.valueOf(req.getParameter("act_period_start")+":00.0");
-				java.sql.Timestamp act_period_end =java.sql.Timestamp.valueOf(req.getParameter("act_period_end")+":00.0");
-				Integer act_up_limit=Integer.parseInt(req.getParameter("act_up_limit"));
-				Integer act_low_limit=Integer.parseInt(req.getParameter("act_low_limit"));
-				Double act_cur_price=Double.parseDouble(req.getParameter("act_cur_price"));
-				Integer act_period_status,act_sign_sum;
-				if(req.getParameter("act_period_status")==null) {
-					act_period_status=1;
-				}else {
-					
-					act_period_status=Integer.parseInt(req.getParameter("act_period_status"));
+				java.sql.Timestamp act_sign_start = new java.sql.Timestamp(
+						java.sql.Date.valueOf(req.getParameter("act_sign_start")).getTime());
+				java.sql.Timestamp act_sign_end = new java.sql.Timestamp(
+						java.sql.Date.valueOf(req.getParameter("act_sign_end")).getTime());
+				java.sql.Timestamp act_period_start = java.sql.Timestamp
+						.valueOf(req.getParameter("act_period_start") + ":00.0");
+				java.sql.Timestamp act_period_end = java.sql.Timestamp
+						.valueOf(req.getParameter("act_period_end") + ":00.0");
+				Integer act_up_limit = Integer.parseInt(req.getParameter("act_up_limit"));
+				Integer act_low_limit = Integer.parseInt(req.getParameter("act_low_limit"));
+				Double act_cur_price = Double.parseDouble(req.getParameter("act_cur_price"));
+				Integer act_period_status, act_sign_sum;
+				if (req.getParameter("act_period_status") == null) {
+					act_period_status = 1;
+				} else {
+
+					act_period_status = Integer.parseInt(req.getParameter("act_period_status"));
 				}
-				if(req.getParameter("act_sign_sum")==null) {
-					act_sign_sum=5;
-				}else {
-					
-					act_sign_sum=Integer.parseInt(req.getParameter("act_sign_sum"));
+				if (req.getParameter("act_sign_sum") == null) {
+					act_sign_sum = 5;
+				} else {
+
+					act_sign_sum = Integer.parseInt(req.getParameter("act_sign_sum"));
 				}
-				
 
 				ActivityPeriodVO actperVO = new ActivityPeriodVO();
 				actperVO.setAct_id(act_id);
@@ -333,15 +365,15 @@ public class ActivityPeriodServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("actperVO", actperVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-sell-end/activity_period/addActivityPeriod.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-sell-end/activity_period/addActivityPeriod.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 				/*************************** 2.開始新增資料 ***************************************/
 				ActivityPeriodService actperSvc = new ActivityPeriodService();
-				actperSvc.insert(act_id, act_sign_start, act_sign_end, 
-						act_period_start, act_period_end, act_up_limit, 
+				actperSvc.insert(act_id, act_sign_start, act_sign_end, act_period_start, act_period_end, act_up_limit,
 						act_low_limit, act_cur_price, act_period_status, act_sign_sum);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
@@ -352,7 +384,8 @@ public class ActivityPeriodServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-sell-end/activity_period/addActivityPeriod.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-sell-end/activity_period/addActivityPeriod.jsp");
 				failureView.forward(req, res);
 			}
 		}

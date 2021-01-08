@@ -13,6 +13,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
+
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>評論留言新增 - addReply.jsp</title>
 
@@ -97,7 +99,7 @@ form {
 	text-align: center;
 }
 
-.input-group-text:hover {
+.input-group-text {
 	background-color: white;
 }
 </style>
@@ -124,7 +126,7 @@ form {
 
 		<div id=actrow>
 			<tr>
-				<td>活動期別編號:</td>
+				<td><b>活動期別編號:</td>
 				<td><input type="TEXT" class="input-group-text"
 					name="actPeriodId"
 					value="<%=(replyVO == null) ? "AP00" : replyVO.getActPeriodId()%>" /></td>
@@ -141,29 +143,35 @@ form {
 			<tr>
 				<td>活動評論內容:</td>
 
-				<td> <textarea class="form-control" aria-label="With textarea"
+				<td><textarea class="form-control" aria-label="With textarea"
 						name="replyContent"
 						value="<%=(replyVO == null) ? "" : replyVO.getReplyContent()%>"></textarea></td>
 			</tr>
 		</div>
+
+
+
+
 		<div id=actrow>
 			<tr>
 				<td>活動評論狀態:</td>
 				<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示
-					<input type="radio" name="replyVisible" size="45" value="1" />顯示</td>
+					<input type="radio" name="replyVisible" size="45" value="1" />顯示</td></b>
 			</tr>
 		</div>
 		<div id=submit>
 			<input type="hidden" name="action" value="insert"> <input
 				type="submit" class="btn btn-success" value="送出新增">
-
 		</div>
 	</FORM>
+
+	<br>
 	<div id=backhome>
 		<tr>
 			<td>
 				<h3>
-					<a href="/CEA101G4/front-mem-end/reply/front_select_reply.jsp"
+					<a
+						href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
 						class="btn btn-dark">回上頁</a>
 				</h3>
 			</td>

@@ -11,11 +11,15 @@ public class ReplyReportDAO implements ReplyReportDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/JEFF");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	String userid = "CEA101G4";
+	String passwd = "CEA101G4";
 
 	private static final String INSERT_STMT = "INSERT INTO reply_report(report_id, emp_id, reply_id, mem_id, report_result) "
 			+ "VALUES ('REP'|| LPAD(REPLY_REPORT_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?)";

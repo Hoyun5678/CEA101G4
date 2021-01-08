@@ -30,6 +30,7 @@
 </head>
 <style>
    .col {
+  
             margin-left: 30px;
             border: 1px solid #333;
             margin-top: 2px;

@@ -38,9 +38,7 @@ h4 {
 	color: blue;
 	color: blue;
 }
-</style>
 
-<style>
 table {
 	background-color: white;
 	margin-top: 5px;
@@ -56,7 +54,7 @@ th, td {
 	text-align: center;
 }
 
-#tbody:hover {
+#tbody {
 	background-color: white;
 }
 
@@ -99,7 +97,7 @@ th, td {
 		<tr>
 			<td>
 				<h3>
-					<a href="/CEA101G4/front-mem-end/reply/front_select_reply.jsp"
+					<a href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
 						class="btn btn-dark">¦^¤W­¶</a>
 				</h3>
 			</td>
