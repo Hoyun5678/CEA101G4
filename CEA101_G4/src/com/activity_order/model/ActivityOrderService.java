@@ -17,7 +17,10 @@ public class ActivityOrderService {
 	public List<ActivityOrderVO> getAll() {
 		return dao.getAll();
 	}
-
+	
+	public List<ActivityOrderVO> getActOrderByMemId(String mem_id) {
+		return dao.getActivityByMemid(mem_id);
+	}
 	public ActivityOrderVO getOneOrder(String act_order_id) {
 		return dao.findByPrimaryKey(act_order_id);
 	}
