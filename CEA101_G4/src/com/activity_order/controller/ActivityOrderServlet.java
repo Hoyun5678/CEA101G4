@@ -100,9 +100,8 @@ public class ActivityOrderServlet extends HttpServlet {
 					/*************************** 2.開始查詢資料 ****************************************/
 					ActivityOrderService actOrdSvc = new ActivityOrderService();
 					ActivityOrderVO actordVO = actOrdSvc.getOneOrder(act_order_id);
-					System.out.println(act_order_id);
-					actordVO.setAct_order_status(2);
-					actordVO.setAct_payment_status(3);
+					actordVO.setAct_order_status(2);//設定 訂單為 已取消狀態
+					actordVO.setAct_payment_status(3);//設定付款狀態為 退款中
 					actOrdSvc.memCancelActOrder(actordVO);
 					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 					String url = "/front-mem-end/activity_order/listOneActivityOrder.jsp";

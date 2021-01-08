@@ -27,7 +27,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 						+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER";
 	private static final String GET_BY_MEM_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID," 
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where MEM_ID=?";
-	private static final String GET_ONE_STMT = "SELECT MEM_ID, ACT_PERIOD_ID,"
+	private static final String GET_ONE_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where ACT_ORDER_ID = ?";
 //	private static final String GET_Mem_ByDeptno_STMT = "SELECT empno,ename,job,to_char(hiredate,'yyyy-mm-dd') hiredate,sal,comm,deptno FROM emp2 where deptno = ? order by empno";
 //	
@@ -100,7 +100,6 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 			pstmt.setInt(6, actoVO.getAct_payment_status());
 			pstmt.setString(7, actoVO.getAct_order_remarks());
 			pstmt.setString(8, actoVO.getAct_order_id());
-
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -147,6 +146,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 			while (rs.next()) {
 				// deptVO 也稱為 Domain objects
 				actoVO = new ActivityOrderVO();
+				actoVO.setAct_order_id(rs.getString("ACT_ORDER_ID"));
 				actoVO.setMem_id(rs.getString("MEM_ID"));
 				actoVO.setAct_period_id(rs.getString("ACT_PERIOD_ID"));
 				actoVO.setAct_order_amount(rs.getInt("ACT_ORDER_AMOUNT"));
@@ -331,26 +331,26 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //		dao.insert(actoVO);
 		//修改 update=====================================
 //		ActivityOrderVO actoVO2=new ActivityOrderVO();
-//		actoVO2.setMem_id("MEM003");
-//		actoVO2.setAct_period_id("AP003");
+//		actoVO2.setMem_id("MEM001");
+//		actoVO2.setAct_period_id("AP001");
 //		actoVO2.setAct_order_amount(10);
 //		actoVO2.setAct_sum_price(18800D);
-//		actoVO2.setAct_order_status(1);
-//		actoVO2.setAct_payment_status(1);
+//		actoVO2.setAct_order_status(2);
+//		actoVO2.setAct_payment_status(3);
 //		actoVO2.setAct_order_remarks("你是不是專題快不行了 ㄎㄎ");
 //		actoVO2.setAct_order_id("AO001");
 //		dao.update(actoVO2);
 		//查詢 getAll====================================
-		List<ActivityOrderVO> list = dao.getAll();
-		for (ActivityOrderVO aActo : list) {
-			System.out.print(aActo.getAct_order_id() + ",");
-			System.out.print(aActo.getMem_id() + ",");
-			System.out.print(aActo.getAct_period_id() + ",");
-			System.out.print(aActo.getAct_order_amount() + ",");
-			System.out.print(aActo.getAct_sum_price() + ",");
-			System.out.print(aActo.getAct_order_status() + ",");
-			System.out.print(aActo.getAct_order_remarks());
-			System.out.println();
+//		List<ActivityOrderVO> list = dao.getAll();
+//		for (ActivityOrderVO aActo : list) {
+//			System.out.print(aActo.getAct_order_id() + ",");
+//			System.out.print(aActo.getMem_id() + ",");
+//			System.out.print(aActo.getAct_period_id() + ",");
+//			System.out.print(aActo.getAct_order_amount() + ",");
+//			System.out.print(aActo.getAct_sum_price() + ",");
+//			System.out.print(aActo.getAct_order_status() + ",");
+//			System.out.print(aActo.getAct_order_remarks());
+//			System.out.println();
 		//查詢 getByPK===================================
 //		ActivityOrderVO actoVO3 = dao.findByPrimaryKey("AO003");
 //		System.out.println(actoVO3.getMem_id() + ",");
@@ -367,7 +367,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 	}
 
 	
-}
+
 
 
 

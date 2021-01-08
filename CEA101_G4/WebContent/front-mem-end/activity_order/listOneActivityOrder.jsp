@@ -143,7 +143,7 @@
                             <tbody>
                                 <jsp:useBean id="actordSvc" scope="page" class="com.activity_order.model.ActivityOrderService" />
                                 <c:forEach var="actordVO" items="${actordSvc.getActOrderByMemId(memVO.mem_id)}">
-                                    <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do">
+                                    <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
                                         <tr style="line-height: 25px; text-align: center;">
                                             <td>${actordVO.act_order_id}</td>
                                             <td>${actordVO.act_period_id}</td>
@@ -191,7 +191,8 @@
                                                     <c:otherwise>
                                             <td class="btn_group" style="width: 100%;">
                                                 <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">取消訂單</button>
-                                                <input type="hidden" name="act_period_id" value="${actperoVO.act_period_id}"> <input type="hidden" name="action" value="upDateActivityPeriodStatus">
+                                                <input type="hidden" name="act_order_id" value="${actordVO.act_order_id}"> 
+                                                <input type="hidden" name="action" value="memCancelActOrder">
                                                       	  
                                             </td>
                                                     </c:otherwise>
