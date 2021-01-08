@@ -16,10 +16,10 @@
 </style>
 <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 <body bgcolor="#FFFFFF">
-<%@ include file="/front-mem-end/front-mem-topbar.jsp"%>
+	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
 <%Vector<SouvenirProductVO> buylist = (Vector<SouvenirProductVO>) session.getAttribute("soupVO");%>
 <%if (buylist != null && (buylist.size() > 0)) {%>
-
+<br>
 <table border="1" width="740">
 	<tr bgcolor="#999999">
 		<th width="200">特產名稱</th><th width="100">價格</th>

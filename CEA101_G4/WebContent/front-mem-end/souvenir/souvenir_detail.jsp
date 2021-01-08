@@ -36,7 +36,7 @@ img {
 }
 </style>
 <body align="center">
-	<%@ include file="/front-mem-end/front-mem-topbar.jsp"%>
+	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
 
 
 	<div class="container">

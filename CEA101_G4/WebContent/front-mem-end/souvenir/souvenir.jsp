@@ -121,7 +121,7 @@
 					
 					<div class="price">$${soupVO.sou_price}元</div>
 						<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/shopping/shopping.do"
+								ACTION="<%=request.getContextPath()%>/souvenir_product/SouvenirProductServlet"
 								style="margin-bottom: 0px;">
 								<input class="input-group-text" type="submit" value="詳情">
 								<input type="hidden" name="sou_id" value="${soupVO.sou_id}">
