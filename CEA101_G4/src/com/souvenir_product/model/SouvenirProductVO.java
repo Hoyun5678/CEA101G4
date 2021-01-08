@@ -15,6 +15,7 @@ public class SouvenirProductVO implements Serializable {
 	private Integer sou_like_count;
 	private String sou_des;
 	private Integer sou_status;
+	private int quantity;
 	public String getSou_id() {
 		return sou_id;
 	}
@@ -69,6 +70,11 @@ public class SouvenirProductVO implements Serializable {
 	public void setSou_status(Integer sou_status) {
 		this.sou_status = sou_status;
 	}
-	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}	
 	
 }

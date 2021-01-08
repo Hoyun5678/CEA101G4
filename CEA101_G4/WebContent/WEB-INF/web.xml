@@ -181,6 +181,14 @@
 		<servlet-name>SouvenirOrderDetailServlet</servlet-name>
 		<url-pattern>/souvenir_order_detail/souvenir_order_detail.do</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ShoppingServlet</servlet-name>
+		<servlet-class>com.shopping.controller.ShoppingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShoppingServlet</servlet-name>
+		<url-pattern>/shopping/shopping.do</url-pattern>
+	</servlet-mapping>
 <!-- 繼元的XML 沒有之一 -->
 <servlet>
 		<servlet-name>ReplyServlet</servlet-name>

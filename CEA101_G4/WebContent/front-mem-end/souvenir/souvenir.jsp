@@ -75,7 +75,7 @@
 
 <body>
 
-	<%@ include file="/front-mem-end/front-mem-topbar.jsp"%>
+	<%@ include file="/front-mem-end/shopping-topbar.jsp"%>
 	<!-- 這邊是你原本sidebar的位置 -->
 
 
@@ -111,20 +111,31 @@
 <!-- 						 </i> -->
 <!-- 						 </FORM> -->
 					</div>
-					<a href="#" class="add-to-cart">Add to Cart</a>
+      				</form>     				
+<!-- 					<a href="#" class="add-to-cart">Add to Cart</a> -->
 				</div>
 						
 				<figcaption>
 					<h2 class="productname">${soupVO.sou_name}</h2>
+					
 					<div class="price">$${soupVO.sou_price}元</div>
 						<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/souvenir_product/SouvenirProductServlet"
+								ACTION="<%=request.getContextPath()%>/shopping/shopping.do"
 								style="margin-bottom: 0px;">
 								<input class="input-group-text" type="submit" value="詳情">
 								<input type="hidden" name="sou_id" value="${soupVO.sou_id}">
 								<input type="hidden" name="action" value="checkSouvenirDetail">
 							</FORM>
+					   
 				</figcaption>
+				<Form name="soupVO" action="<%=request.getContextPath()%>/shopping/shopping.do" method="POST">
+					<div align="center" style="display:inline;">數量： <input type="text" name="quantity" size="3" value=1></div>
+					<input type="submit" value="加入購物車">
+					<input type="hidden" name="sou_name" value="${soupVO.sou_name}">
+					<input type="hidden" name="sou_price" value="${soupVO.sou_price}">
+             		<input type="hidden" name="sou_id" value="${soupVO.sou_id}">
+      				<input type="hidden" name="action" value="ADD"> 
+      				</Form> 
 			</figure>
 		</div>
 		</c:forEach>

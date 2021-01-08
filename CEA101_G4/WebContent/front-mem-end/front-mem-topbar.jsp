@@ -29,7 +29,7 @@
                         <a class="nav-link" href="#">體驗</a>
                     </li>
                     <li class="nav-item" id="active">
-                        <a class="nav-link" href="#">伴手禮</a>
+                        <a class="nav-link" href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenir.jsp">伴手禮</a>
                     </li>
                     <li class="nav-item" id="active">
                         <a class="nav-link" href="#">加入平台</a>
