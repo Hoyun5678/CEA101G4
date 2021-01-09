@@ -2,79 +2,146 @@
 <%@ page import="com.roomproductcollect.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-
+<%@ page import="com.member.model.*"%> 
+<%@ page import="com.room.model.*"%> 
+<jsp:useBean id="collectSvc" scope="request" class="com.roomproductcollect.model.RoomProductCollectService" />
+<jsp:useBean id="roomSvc" scope="request" class="com.room.model.RoomService" />
+<jsp:useBean id="sellSvc" scope="request" class="com.sell.model.SellService" />
+<jsp:useBean id="rpSvc" scope="request" class="com.roomphoto.model.RoomPhotoService" />
+<% MemberVO memVO=(MemberVO)session.getAttribute("memVO");
+%>
 
 <%
 RoomProductCollectService rpcSvc = new RoomProductCollectService();
-List<String> rpcListMem = (List)request.getAttribute("rpcListMem");
-
-//rpcListMem.get(0)// 這只是你的第一台哀鳳 你要MEMID就是要GETMEMID
-
-
+List<String> rpcListMem = (List<String>)request.getAttribute("rpcListMem");
+pageContext.setAttribute("rpcListMem", rpcListMem);
 %>
+
+
 
 <html>
 <head>
-<title>訂單資料 - listOneRoomProductCollect.jsp</title>
 
+<meta charset="UTF-8">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+<title>我的收藏</title>
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 600px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-</style>
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900|Open Sans:400,600,800');
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+}
+
+body {
+    background-color: #F1F2F3;
+}
+
+
+.card-container {
+    padding: 100px 0px;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+}
+
+.profile-card-2 {
+    max-width: 300px;
+    max-height: 400px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 10px;
+    display:inline-block;
+    margin-left:100px;
+}
+
+.profile-card-2 img {
+    transition: all linear 0.25s;
+    width:100%;
+    height:100%;
+     object-fit:cover;
+}
+
+.profile-card-2 .profile-name {
+    position: absolute;
+    left: 30px;
+    bottom: 70px;
+    font-size: 30px;
+    color: #FFF;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-icons {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    color: #FFF;
+    transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-username {
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+    color: #FFF;
+    font-size: 13px;
+    transition: all linear 0.25s;
+}
+
+.profile-card-2 .profile-icons .fa {
+    margin: 5px;
+}
+
+.profile-card-2:hover img {
+    filter: grayscale(100%);
+}
+
+.profile-card-2:hover .profile-name {
+    bottom: 80px;
+}
+
+.profile-card-2:hover .profile-username {
+    bottom: 60px;
+}
+
+.profile-card-2:hover .profile-icons {
+    right: 40px;
+}
+
+
+</style>
 </head>
-<body bgcolor='white'>
-
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>房間收藏 - ListOneRoomProductCollect.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/front-end/roomproductcollect/select_page.jsp">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<table>
-	<tr>
-		<th>會員編號</th>
-		<th>房間編號</th>		
-	</tr>
-	<c:forEach var="getMem" items="${rpcListMem}">
-		 <tr>
-			<td>${getMem.mem_id}</td>
-			<td>${getMem.room_id}</td>
-		</tr>
-	</c:forEach>
-</table>
-
-
+<body>
+ 	<div class="heading">
+		<h2>收藏清單</h2>
+	</div>
+	<div class="container">
+	<div class="row">
 	
+		<div class="col-md-4">
+		<c:forEach var="rpcListMem" items="${rpcListMem}">         
+    <div class="profile-card-2">
+    	<a href="<%=request.getContextPath()%>/room/room.do?roomId=${rpcListMem}&action=checkRoomDetail">
+    	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${rpcListMem}&action=getOnePhotoByRoomId" class="img img-responsive">
+        <div class="profile-name">${sellSvc.getOneSell(roomSvc.getOneRoom(rpcListMem).sellMemId).sellRoomName}</div>
+        <div class="profile-username">${roomSvc.getOneRoom(rpcListMem).roomName} $ ${roomSvc.getOneRoom(rpcListMem).roomPrice}</div>
+        <div class="profile-icons"><i class="far fa-heart"></i>${collectSvc.getCountCollect(rpcListMem)}</div>
+    </a>
+    </div>
+	</c:forEach>
+	</div>
+	</div>
+      
 </body>
 </html>

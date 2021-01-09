@@ -4,13 +4,14 @@
 <%@ page import="com.room.model.*"%>   
 <%@ page import="com.member.model.*"%>   
 <% MemberVO memVO=(MemberVO)session.getAttribute("memVO"); %>
-<%@ page import="com.room.model.*"%>
 
 <jsp:useBean id="roomVO" scope="request" class="com.room.model.RoomVO" />
 <jsp:useBean id="sellVO" scope="request" class="com.sell.model.SellVO" />
 <%-- <jsp:useBean id="rpVO" scope="request" class="com.roomphoto.model.RoomPhotoVO" /> --%>
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
 <jsp:useBean id="sellSvc" scope="page" class="com.sell.model.SellService" />
+<jsp:useBean id="rpcSvc" scope="page" class="com.roomproductcollect.model.RoomProductCollectService" />
+<jsp:useBean id="fsSvc" scope="page" class="com.foodspot.model.FoodSpotService" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +31,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
 
 <title>Insert title here</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<!--     <link rel="stylesheet" href="css/style.css"> -->
 
-<title>Insert title here</title>
 <style>
 .red_heart{
 color:#dc3545;
@@ -46,35 +40,11 @@ color:#dc3545;
 color:black;
 }
 
-=======
-		/* 圖片輪播設定 */
-		
-	.carousel-item {
-		height: 350px;
-		
-	}
-	.carousel-item img {
-		width: 100%;
-		
-		over-flow: hidden;
-		position: absolute;
-		top: 50%;
-		left: 0;
-		transform: translateY(-50%);
-	}
-	
-	#map {
-    height: 100%;
-	}
-
-	
 </style>
-
-
 
 </head>
 <body>
-	<%@ include file="/front-mem-end/bar.jsp"%>
+<%@ include file="/front-mem-end/bar.jsp" %> 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do">
  <div class="container">
         <div class="row">
@@ -90,7 +60,7 @@ color:black;
                     <h6> <a class="area" href="#">${sellVO.sellMemAddress}</a></h6>
                     <i class="fas fa-share-alt 2x" id="share"></i>
                     <font face="monospace" ;font color="#8E8787"><u>分享</u></font>
-                    <c:set var="checkcount" scope="page" value="${rpcSvc.getCollect('MEM003',roomVO.roomId)}"/>
+                    <c:set var="checkcount" scope="page" value="${rpcSvc.getCollect(memVO.mem_id,roomVO.roomId)}"/>
                     
                     <c:if test="${checkcount==true}">
                     <i class="far fa-heart 2x red_heart" id="fav"></i>
@@ -221,38 +191,27 @@ color:black;
                         <div class="roomheader">客房介紹</div>
                         <div class="roomheader">適合人數</div>
                         <div class="roomheader">今日價格</div>
-                        <div class="roomheader">房數</div>
                         <div class="roomheader">心動不如馬上行動</div>
-                    </div>
-                     
-                    <div class="room_product">
-                     <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1"> 
+                    </div>                    
+                    <div class="room_product"> 
+                    <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1">                  
                         <div>
                         	<div class="roomGrid roompic">${roomVO.roomName}</div>
 						 	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto" style="width:160px;height:120px;"> 
                         </div>
                         <div class="roomGrid roominfo">${roomVO.roomDes}</div>
                         <div class="roomGrid roompeo">${roomVO.roomCapacity}位</div>
-                        <div class="roomGrid roompri">
-                        <input type="text" name="roomOrderSum" value="${roomVO.roomPrice}" /></div>
-                        <div class="roomGrid roomamo">
-                            <select>
-                                <option>選擇客房數</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                       </div>
-                         <input type="hidden" name="roomId" value="${roomVO.roomId}" />
-                         <input type="hidden" name="action" value="fillorderinfo" />
-			     		 <div class="roomGrid bookbtn">
-                            <button type="submit" id="bookbtn">現在就預訂</button>  
-                        </div>
-                    </c:forEach> 
-                    </FORM>  
-              </div>
+                        <div class="roomGrid roompri">${roomVO.roomPrice}</div>                                     
+                        <input type="hidden" name="roomOrderSum" value="${roomVO.roomPrice}" />
+                        <input type="hidden" name="roomId" value="${roomVO.roomId}" />
+                        <input type="hidden" name="action" value="fillorderinfo" />
+			     		<div class="roomGrid bookbtn">
+                        	<button type="submit" id="bookbtn">現在就預訂</button>  
+                        </div> 
+                        </c:forEach>
+                    </div> 
+                </div>                   
+                                  
             <div id="food">
                 <div id="foodtitle">推薦美食與景點</div>
                 <div class="center">
@@ -277,15 +236,13 @@ color:black;
                     </div>
                 </div>
             </div>
-           
+            </div>
+           </FORM> 
         <script>
         baguetteBox.run('.photogallery');
         const buttonsWrapper = document.querySelector(".map");
         const slides = document.querySelector(".inner");
-=======
->>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 
-<<<<<<< HEAD
         buttonsWrapper.addEventListener("click", e => {
             if (e.target.nodeName === "BUTTON") {
                 Array.from(buttonsWrapper.children).forEach(item =>
@@ -310,6 +267,7 @@ color:black;
 //       				  '請先登入～'
 //       			  )
 //       		}else{
+	
       	  		var action_for = "addCollect";
       	  		var heart = $("#fav");
       	  		console.log("inside");
@@ -320,8 +278,8 @@ color:black;
       	  			url: "<%= request.getContextPath() %>/roomproductcollect/roomproductcollect.do",
       	  			data: {
       	  				"action":action_for,
-      	  				"mem_id":"MEM003",
-      	  				"room_id":"${roomVO.roomId}",
+      	  				"mem_id":'${memVO.mem_id}',
+      	  				"room_id":'${roomVO.roomId}',
       	  				},
       	  			dataType: "text", //可放xml,json,script,html
       	  			cache:false,
@@ -370,106 +328,9 @@ color:black;
         }
     </script>
     
-=======
-	<div class="container">
-		<div class="row">
-			<div class="col-12">照片
-				<div id="indicators${rowStatus.index}" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" varStatus="status">
-						
-						<li data-target="#indicators${rowStatus.index}" data-slide-to='<c:out value="${status.index}" />' class=""></li>
-						</c:forEach>
-					</ol>
-				<div class="carousel-inner">
-					<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}">
-					<div class="carousel-item">
-						<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto" class="d-block">
-					</div>
-					</c:forEach>
-	
-				</div>
-				<a class="carousel-control-prev" href="#indicators${rowStatus.index}" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#indicators${rowStatus.index}" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">房間資訊
-				<div>房間名稱: ${roomVO.roomName}</div>
-				<div>住宿價格/天: ${roomVO.roomPrice}</div>
-				<div>房間容納人數: ${roomVO.roomCapacity}</div>
-				<div>房間上架時間: <fmt:formatDate value="${roomVO.roomOnTime}" type="both" pattern="yyyy-MM-dd HH:mm:ss" /></div>
-				<div>房間收藏次數: ${roomVO.roomCollect}</div>
-				<div>房間敘述: ${roomVO.roomDes}</div>
-			</div>
-			<div class="col-6">Google 地圖
-				<div id="map" class="">
-				</div>
-			</div>
-			<div class="col-6">關於房東
-			<c:set var="sellVO" scope="page" value="${sellSvc.getOneSell(roomVO.sellMemId)}"/>
-				<div>房東名字: ${sellVO.sellMemName}</div>
-			
-			
-			</div>
-			<div class="col-6">訂房狀態(日曆)</div>
-		</div>
-	</div>
-	
-	<div>
-		<form id="insertRoomOrder" action="<%=request.getContextPath() %>/roomorder/roomorder.do" method="POST">
-			<div>測試新增訂單</div>
-			<input type="text" name="sellMemId" value="${sellVO.sellMemId}" />
-			<input type="text" name="roomId" value="${roomVO.roomId}" />
-			<input type="text" name="memId" value="MEM005" />
-			<input type="text" name="checkInDate" value="2021-02-03" />
-			<input type="text" name="checkOutDate" value="2021-02-05" />
-			<input type="text" name="expectArrTime" value="2021-02-03 15:00:00" />
-			<input type="text" name="roomOrderRemarks" value="我要帶狗狗" />
-			<input type="text" name="roomOrderSum" value="20000" />
-			<input type="text" name="room_cur_price" value="10000" />
-			<input type="text" name="room_guest_name" value="123" />
-			<input type="text" name="room_guest_mail" value="有mail" />
-			<input type="text" name="room_guest_tel" value=" 0912333444" />
-			<input type="hidden" name="action" value="insert" />
-			
-			<button type="submit">新增訂單</button>
-		</form>
-	</div>
-
-	<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<!--     <script -->
-<!--   		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK-5rFDe76_LASpBLJJSHYd1JM7W9ttWg"> -->
-<!--  	</script> -->
-	<script>
-    	$(document).ready(function() {
-			$(".carousel-indicators li:first-child").addClass("active");
-			$(".carousel-inner .carousel-item:first-child").addClass("active");
-			initMap();
-
-		});
-		let initMap = function() {
-			let map = new google.maps.Map(document.getElementById("map"), {
-				center: { lat: 24.9576852, lng: 121.2250143 },
-				zoom: 15,
-			});
-		} 
-	</script>
->>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 
 </body>
- <link   rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
     <script src="${pageContext.request.contextPath}/datetimepicker/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.full.js"></script>
 

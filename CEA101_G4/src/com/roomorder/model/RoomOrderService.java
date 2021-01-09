@@ -35,6 +35,24 @@ public class RoomOrderService {
 		return roomOrderVO;
 	}
 	
+	public RoomOrderVO fillRoomOrderInfo(String sellMemId, String memId, Date checkInDate,
+			Date checkOutDate, Integer roomOrderSum) {
+		
+		RoomOrderVO roomOrderVO = new RoomOrderVO();
+		
+		roomOrderVO.setSellMemId(sellMemId);
+		roomOrderVO.setMemId(memId);
+		
+		roomOrderVO.setCheckInDate(checkInDate);
+		roomOrderVO.setCheckOutDate(checkOutDate);
+		
+		
+		roomOrderVO.setRoomOrderSum(roomOrderSum);
+
+		
+		return roomOrderVO;
+	}
+	
 //	public RoomOrderVO updateRoomOrder(String roomOrderId, String sellMemId, String memId, Timestamp roomOrderTime,
 //			Date checkInDate, Date checkOutDate, Timestamp expectArrTime, String roomOrderRemarks,
 //			Integer roomOrderSum, Integer roomOrderStatus, Integer roomPaymentStatus) {
@@ -92,10 +110,6 @@ public class RoomOrderService {
 	
 	public List<RoomOrderVO> getByMemId(String sellMemId) {
 		return dao.getByMemId(sellMemId);
-	}
-	
-	public List<RoomOrderVO> getBySellMemIdAndDate(String sellMemId, String selectedDate) {
-		return dao.getBySellMemIdAndDate(sellMemId, selectedDate);
 	}
 
 }

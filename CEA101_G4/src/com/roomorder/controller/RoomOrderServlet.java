@@ -6,8 +6,10 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.room.model.RoomService;
 import com.roomorder.model.*;
 import com.roomorderdetail.model.RoomOrderDetailVO;
+import com.roomphoto.model.RoomPhotoService;
 
 
 public class RoomOrderServlet extends HttpServlet {
@@ -20,7 +22,6 @@ public class RoomOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println(action);
 		
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
@@ -69,58 +70,6 @@ public class RoomOrderServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneRoomOrder.jsp
 				successView.forward(req, res);
 
-				/*************************** 其他可能的錯誤處理 *************************************/
-			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/select_page.jsp.jsp");
-				failureView.forward(req, res);
-			}
-		}
-		
-		if ("selectDateRoomOrder".equals(action)) { // 來自sellMemIndex.jsp的請求
-			
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-			try {
-				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				String checkInDate = req.getParameter("checkInDate");
-				if (checkInDate == null || checkInDate.trim().length() == 0) {
-					errorMsgs.add("請輸入日期");
-				}
-				
-				String sellMemId = req.getParameter("sellMemId");
-				if (checkInDate == null || checkInDate.trim().length() == 0) {
-					errorMsgs.add("請輸入sellMemId");
-				}
-				System.out.println("sellMemId : " + sellMemId);
-				System.out.println("checkInDate : " + checkInDate);
-				
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/select_page.jsp");
-					failureView.forward(req, res);
-					return;// 程式中斷
-				}
-				
-				/*************************** 2.開始查詢資料 *****************************************/
-				RoomOrderService roomOrderService = new RoomOrderService();
-				List<RoomOrderVO> list = roomOrderService.getBySellMemIdAndDate(sellMemId, checkInDate);
-
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/select_page.jsp");
-					failureView.forward(req, res);
-					return;// 程式中斷
-				}
-				
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("roomOrderList", list);
-				String url = "/front-sell-end/sell/sellMemIndex.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-				
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
@@ -365,7 +314,188 @@ public class RoomOrderServlet extends HttpServlet {
 //				failureView.forward(req, res);
 //			}
 //		}
+		if ("fillorderinfo".equals(action)) { // 來自addEmp.jsp的請求
 
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+								
+				String sellMemId = req.getParameter("sellMemId").trim();
+				
+				String sellMemIdReg = "^[(a-zA-Z0-9)]{2,100}$";
+				if (sellMemId == null || sellMemId.trim().length() == 0) {
+					errorMsgs.add("民宿會員編號請勿空白");
+				} else if (!sellMemId.trim().matches(sellMemIdReg)) {
+					errorMsgs.add("民宿會員編號: 只能是英文字母、數字 , 且長度必需在2到10之間");
+				}
+				
+				String memId = req.getParameter("memId").trim();
+				String memIdReg = "^[(a-zA-Z0-9)]{2,100}$";
+				if (memId == null || memId.trim().length() == 0) {
+					errorMsgs.add("會員編號請勿空白");
+				} else if (!memId.trim().matches(memIdReg)) {
+					errorMsgs.add("會員編號: 只能是英文字母、數字 , 且長度必需在2到10之間");
+				}
+				
+				
+				java.sql.Date checkInDate = null;
+				try {
+					checkInDate = java.sql.Date.valueOf(req.getParameter("checkInDate"));
+				} catch (IllegalArgumentException e) {
+					errorMsgs.add("check in 日期格式有誤");					
+				}
+				
+				java.sql.Date checkOutDate = null;
+				try {
+					checkOutDate = java.sql.Date.valueOf(req.getParameter("checkOutDate"));
+				} catch (IllegalArgumentException e) {
+					errorMsgs.add("check out 日期格式有誤");					
+				}
+								
+//				java.sql.Timestamp expectArrTime = null;
+//				try {
+//					expectArrTime = java.sql.Timestamp.valueOf(req.getParameter("expectArrTime"));
+//				} catch (IllegalArgumentException e) {
+//					errorMsgs.add("expectArrTime 時間格式有誤");					
+//				}
+				
+//				String roomOrderRemarks = req.getParameter("roomOrderRemarks");
+				
+				Integer roomOrderSum = null;
+				try {
+					roomOrderSum =new Integer(req.getParameter("roomOrderSum").trim());
+				} catch (NumberFormatException e) {
+					roomOrderSum = new Integer(0);
+					errorMsgs.add("請輸入數字.");
+				}
+				
+
+				
+//				Integer roomOrderStatus = new Integer(0);
+//				try {
+//					roomOrderStatus =new Integer(req.getParameter("roomOrderStatus").trim());
+//				} catch (NumberFormatException e) {
+//					roomOrderStatus = new Integer(0);
+//					errorMsgs.add("請輸入數字.");
+//				}
+//				
+//				
+//				Integer roomPaymentStatus = new Integer(0);
+//				try {
+//					roomPaymentStatus = new Integer(req.getParameter("roomPaymentStatus").trim());
+//				} catch (NumberFormatException e) {
+//					roomPaymentStatus = new Integer(0);
+//					errorMsgs.add("請輸入數字.");
+//				}
+							
+				
+				RoomOrderVO roomOrderVO = new RoomOrderVO();
+				roomOrderVO.setSellMemId(sellMemId);
+				roomOrderVO.setMemId(memId);
+				roomOrderVO.setCheckInDate(checkInDate);
+				roomOrderVO.setCheckOutDate(checkOutDate);
+//				roomOrderVO.setExpectArrTime(expectArrTime);
+//				roomOrderVO.setRoomOrderRemarks(roomOrderRemarks);
+				roomOrderVO.setRoomOrderSum(roomOrderSum);
+//				roomOrderVO.setRoomOrderStatus(roomOrderStatus);
+//				roomOrderVO.setRoomPaymentStatus(roomPaymentStatus);
+				
+//				List<RoomOrderDetailVO> list = new ArrayList<RoomOrderDetailVO>();
+//				RoomOrderDetailVO roomOrderDetailVO = null;
+//				while() {
+//					roomOrderDetailVO = new RoomOrderDetailVO();
+//					
+//					String roomId = null;
+//					try {
+//						roomId = req.getParameter("roomId").trim();
+//					} catch(Exception e) {
+//						errorMsgs.add("房間編號room_id 格式有誤");
+//					}
+					
+//					Integer room_cur_price = null;
+//					try {
+//						room_cur_price = new Integer(req.getParameter("room_cur_price").trim());
+//
+//					} catch (NumberFormatException e) {
+//						room_cur_price = new Integer(0);
+//						errorMsgs.add("房間價格請輸入數字.");
+//					}
+					
+					
+//					String room_guest_name = null;
+//					try {
+//						room_guest_name = req.getParameter("room_guest_name").trim();
+//					} catch(Exception e) {
+//						errorMsgs.add("訂購人姓名room_guest_name 格式有誤");
+//					}
+					
+//					String room_guest_mail = null;
+//					try {
+//						room_guest_mail = req.getParameter("room_guest_mail").trim();
+//					} catch(Exception e) {
+//						errorMsgs.add("訂購人email room_guest_mail 格式有誤");
+//					}
+//					
+//					String room_guest_tel = null;
+//					try {
+//						room_guest_tel = req.getParameter("room_guest_tel").trim();
+//					} catch(Exception e) {
+//						errorMsgs.add("訂購人電話room_guest_tel 格式有誤");
+//					}
+
+//					roomOrderDetailVO.setRoom_id(roomId);
+//					roomOrderDetailVO.setRoom_cur_price(room_cur_price);
+//					roomOrderDetailVO.setRoom_guest_name(room_guest_name);
+//					roomOrderDetailVO.setRoom_guest_mail(room_guest_mail);
+//					roomOrderDetailVO.setRoom_guest_tel(room_guest_tel);
+//					
+//					list.add(roomOrderDetailVO);
+//				}
+				
+				String roomId = req.getParameter("roomId");
+				System.out.println(roomId);
+				String roomIdReg = "^ROOM\\d{3}$";
+				if (roomId == null || roomId.trim().length() == 0) {
+					errorMsgs.add("房間編號: 請勿空白");
+				} else if(!roomId.trim().matches(roomIdReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("房間編號格式為: ROOM+數字三碼 ex.ROOM999");
+	            }
+				
+
+
+				
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("roomOrderVO", roomOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					System.out.println("fill roomOrder錯誤 :" + errorMsgs);
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/room/listOneRoom.jsp");
+					failureView.forward(req, res);
+					return; // 程式中斷
+				}
+
+				/*************************** 2.開始新增資料 ***************************************/
+				RoomOrderService roomOrderService = new RoomOrderService();
+				roomOrderVO = roomOrderService.fillRoomOrderInfo(sellMemId, memId, checkInDate, checkOutDate, 
+						 roomOrderSum);
+				
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/front-mem-end/roomorder/fillRoomOrder.jsp";
+				req.setAttribute("roomOrderVO", roomOrderVO);
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				System.out.println("roomOrderServlet 聽說是額外的錯誤.. " + errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/listOneRoom.jsp");
+				failureView.forward(req, res);
+			}
+		}
 		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
