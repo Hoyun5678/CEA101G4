@@ -12,7 +12,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/front-mem-end/listOneMem.css">
 <style>
-#mem_submit{
+#logo{
+    margin-top: -25px;
 }
 </style>
 
