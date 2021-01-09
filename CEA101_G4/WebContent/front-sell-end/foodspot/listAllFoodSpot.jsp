@@ -68,7 +68,7 @@
   
 
 <body>
-<%@ include file="/front-sell-end/bar.jsp" %> 
+<%@ include file="/front-sell-end/sellMemSideBar.jsp" %> 
 
  <div class="content">
         <div class="content-header">
@@ -85,7 +85,7 @@
 	</ul>
 </c:if>
     
-<div class="main">
+<div class="main" style="margin-left: 255px;width: 1000px;"/>
 <div class="right">
 <button type="button" class="btn" id="add" onclick="window.location.href='<%=request.getContextPath()%>/front-sell-end/foodspot/addFoodSpot.jsp'"><i class="fa fa-plus" style="padding-right:5px"></i>新增</button>
 

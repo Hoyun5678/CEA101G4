@@ -11,13 +11,13 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/front-sell-end/food.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/front-sell-end/front-sell-food.css">
 <title>美食景點資料新增 </title>
 
 
 </head>
 
-<%@ include file="/front-sell-end/bar.jsp" %> 
+<%@ include file="/front-sell-end/sellMemSideBar.jsp" %> 
 	
 <%-- 錯誤表列 --%>
 <div>
@@ -32,6 +32,7 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 </div>
 
 <div class="container">
+<h3>新增美食與景點</h3>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodspot/foodspot.do" name="form1" enctype="multipart/form-data">
 <div class="row">
 	<div class="col-4">
