@@ -9,7 +9,7 @@ public class RoomProductCollectService {
 	private RoomProductCollectDAO_interface dao;
 	
 	public RoomProductCollectService() {
-		dao = new RoomProductCollectDAO();
+		dao = new RoomProductCollectJDBCDAO();
 	}
 	
 	public int addCollect(String mem_id, String room_id) {
