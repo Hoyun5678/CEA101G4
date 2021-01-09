@@ -123,6 +123,7 @@ body {
 </style>
 </head>
 <body>
+<%@ include file="/front-mem-end/bar.jsp" %>
  	<div class="heading">
 		<h2>收藏清單</h2>
 	</div>
