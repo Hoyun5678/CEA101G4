@@ -299,7 +299,7 @@ public class RoomPhotoJDBCDAO implements RoomPhotoDAO_interface{
 				roomPhotoVO = new RoomPhotoVO();
 				roomPhotoVO.setRoomPhotoId(rs.getString("ROOM_PHOTO_ID"));
 				roomPhotoVO.setRoomId(rs.getString("ROOM_ID"));
-//				roomPhotoVO.setRoomPhoto(rs.getBytes("ROOM_PHOTO"));
+				roomPhotoVO.setRoomPhoto(rs.getBytes("ROOM_PHOTO"));
 				roomPhotoVO.setRoomPhotoContent(rs.getString("ROOM_PHOTO_CONTENT"));
 				list.add(roomPhotoVO);
 			}
