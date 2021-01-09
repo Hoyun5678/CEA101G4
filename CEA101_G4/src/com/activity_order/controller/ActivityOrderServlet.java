@@ -102,7 +102,7 @@ public class ActivityOrderServlet extends HttpServlet {
 					ActivityOrderVO actordVO = actOrdSvc.getOneOrder(act_order_id);
 					actordVO.setAct_order_status(2);//設定 訂單為 已取消狀態
 					actordVO.setAct_payment_status(3);//設定付款狀態為 退款中
-					actOrdSvc.memCancelActOrder(actordVO);
+					actOrdSvc.changeActOrderStatus(actordVO);
 					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 					String url = "/front-mem-end/activity_order/listOneActivityOrder.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
@@ -111,7 +111,39 @@ public class ActivityOrderServlet extends HttpServlet {
 					/*************************** 其他可能的錯誤處理 **********************************/
 				} catch (Exception e) {
 					errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/listAllSouvenirOrder.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/activity_order/listOneActivityOrder.jsp");
+					failureView.forward(req, res);
+				}
+			}
+			
+			
+			
+			if ("sellMemConfirmRefund".equals(action)) { // 來自listAllEmp.jsp的請求
+
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+
+				try {
+					/*************************** 1.接收請求參數 ****************************************/
+					String act_order_id = req.getParameter("act_order_id");
+
+					/*************************** 2.開始查詢資料 ****************************************/
+					ActivityOrderService actOrdSvc = new ActivityOrderService();
+					ActivityOrderVO actordVO = actOrdSvc.getOneOrder(act_order_id);
+					actordVO.setAct_order_status(2);//設定 訂單為 已取消狀態
+					actordVO.setAct_payment_status(4);//設定付款狀態為 以退款
+					actOrdSvc.changeActOrderStatus(actordVO);
+					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+					String url = "/front-sell-end/activity_order/sellListOneActivityOrder.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+					successView.forward(req, res);
+
+					/*************************** 其他可能的錯誤處理 **********************************/
+				} catch (Exception e) {
+					errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-sell-end/activity_order/sellListOneActivityOrder.jsp");
 					failureView.forward(req, res);
 				}
 			}

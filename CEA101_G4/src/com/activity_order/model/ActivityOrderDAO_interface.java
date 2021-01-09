@@ -11,5 +11,6 @@ public interface ActivityOrderDAO_interface {
 //    public void delete(String mem_id,String act_period_id);
     public List<ActivityOrderVO> getAll();
     public List<ActivityOrderVO> getActivityByMemid(String mem_id);
+    public List<ActivityOrderVO> getActOrderByActPerId(String act_period_id);
 
 }

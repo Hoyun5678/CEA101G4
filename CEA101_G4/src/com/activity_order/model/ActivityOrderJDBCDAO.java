@@ -27,6 +27,8 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 						+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER";
 	private static final String GET_BY_MEM_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID," 
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where MEM_ID=?";
+	private static final String GET_BY_ACT_PERIOD_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID," 
+			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where ACT_PERIOD_ID=?";
 	private static final String GET_ONE_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where ACT_ORDER_ID = ?";
 //	private static final String GET_Mem_ByDeptno_STMT = "SELECT empno,ename,job,to_char(hiredate,'yyyy-mm-dd') hiredate,sal,comm,deptno FROM emp2 where deptno = ? order by empno";
@@ -253,6 +255,70 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<ActivityOrderVO> getActOrderByActPerId(String act_period_id) {
+		List<ActivityOrderVO> list = new ArrayList<ActivityOrderVO>();
+		ActivityOrderVO actoVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_BY_ACT_PERIOD_ID_STMT);
+			pstmt.setString(1, act_period_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				actoVO = new ActivityOrderVO();
+				actoVO.setAct_order_id(rs.getString("ACT_ORDER_ID"));
+				actoVO.setMem_id(rs.getString("MEM_ID"));
+				actoVO.setAct_period_id(rs.getString("ACT_PERIOD_ID"));
+				actoVO.setAct_order_amount(rs.getInt("ACT_ORDER_AMOUNT"));
+				actoVO.setAct_sum_price(rs.getDouble("ACT_SUM_PRICE"));
+				actoVO.setAct_order_status(rs.getInt("ACT_ORDER_STATUS"));
+				actoVO.setAct_payment_status(rs.getInt("ACT_PAYMENT_STATUS"));
+				actoVO.setAct_order_remarks(rs.getString("ACT_ORDER_REMARKS"));
+				list.add(actoVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	@Override
 	public List<ActivityOrderVO> getActivityByMemid(String mem_id) {
@@ -362,6 +428,9 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //		System.out.println(actoVO3.getAct_order_remarks());
 //		System.out.println("---------------------");
 		}
+
+
+	
 		
 		
 	}

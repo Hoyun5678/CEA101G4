@@ -21,10 +21,14 @@ public class ActivityOrderService {
 	public List<ActivityOrderVO> getActOrderByMemId(String mem_id) {
 		return dao.getActivityByMemid(mem_id);
 	}
+	
+	public List<ActivityOrderVO> getActOrderByActPerId(String act_period_id) {
+		return dao.getActOrderByActPerId(act_period_id);
+	}
 	public ActivityOrderVO getOneOrder(String act_order_id) {
 		return dao.findByPrimaryKey(act_order_id);
 	}
-	public void memCancelActOrder(ActivityOrderVO actordVO) {
+	public void changeActOrderStatus(ActivityOrderVO actordVO) {
 		dao.update(actordVO);
 	}
 
