@@ -19,7 +19,7 @@
 </head>
 <body bgcolor='white'>
 
-	<%@include file="/front-mem-end/mem/mem_center_page.jsp"%>
+	<%@include file="/front-mem-end/bar.jsp"%>
 
 
 	<div>

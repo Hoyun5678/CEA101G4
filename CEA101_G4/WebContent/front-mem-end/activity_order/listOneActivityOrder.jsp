@@ -123,6 +123,7 @@
 
 <%--         <%@include file="/front-mem-end/mem/mem_center_page.jsp"%> --%>
 <body>
+<%@include file="/front-mem-end/bar.jsp"%>
     <div class="container-fluid">
         <div class="container">
             <div class="row">
