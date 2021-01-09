@@ -11,8 +11,9 @@
 		<div class="card">
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
-					<button class="btn btn-link" data-toggle="collapse" data-target="#collapse${userStatus.count}" aria-expanded="true" aria-controls="collapse${userStatus.count}">
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapse${userStatus.count}" aria-expanded="true" aria-controls="collapse${userStatus.count}" style="text-decoration: none;" >
 						訂購者: ${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId).room_guest_name}
+						${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId).room_guest_tel}
 					</button>
 				</h5>
 			</div>

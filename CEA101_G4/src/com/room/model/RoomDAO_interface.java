@@ -1,5 +1,6 @@
 package com.room.model;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public interface RoomDAO_interface {
 //    public List<RoomVO> getFilter(Map<String, String[]> map); 
     
     public List<RoomVO> getByMemId(String sellMemId);
+	List<RoomVO> getByDateRange(String from, String to);
 	
 	
 }

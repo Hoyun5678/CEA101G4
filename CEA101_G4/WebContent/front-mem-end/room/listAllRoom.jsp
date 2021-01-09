@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
     
-<title>所有房間資料 - listAllRoom.jsp</title>
+<title>房間搜尋</title>
 
 </head>
 <body>
@@ -23,6 +23,7 @@
 
 <div class="container">
 	<div class="searchTools">
+		<>
 		<input type="text" name="keyWords">
 		<input type="text" name="checkInDate">
 		<input type="text" name="checkOutDate">
@@ -79,8 +80,6 @@
 	</div>
 </div>
 
-
-<%-- <%@ include file="page2.file" %> --%>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

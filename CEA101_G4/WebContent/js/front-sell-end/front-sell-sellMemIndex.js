@@ -134,7 +134,7 @@
                 drawCal(new Date(today.getFullYear(), today.getMonth(), 1))
                 
                 
-                $(document).on('click', '.calendarBody td', function() {
+                $(document).on('click', '.calendarBody tbody td', function() {
                 	console.log($(this).attr('value'));
                 	var sel = $(this);
                 	$('.calendarBody td').removeClass('onSelect');
