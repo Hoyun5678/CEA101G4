@@ -144,6 +144,7 @@ public class ActivityPhotoServlet extends HttpServlet {
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				String url = "/front-sell-end/activity_photo/listAllActPho.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				req.setAttribute("act_id", act_id);
 				req.setAttribute("list", list);
 				successView.forward(req, res);
 
