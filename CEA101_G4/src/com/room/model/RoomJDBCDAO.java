@@ -412,6 +412,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 			} while(fromToLong < to.getTime());
 			System.out.println("not qualified roomVO : " + listOrderedRoomId);
 			
+			// return qulified roomVO List
 			list = (List<RoomVO>) list.stream()
 					.filter(e -> !listOrderedRoomId.contains(e.getRoomId()))
 					.collect(Collectors.toList());

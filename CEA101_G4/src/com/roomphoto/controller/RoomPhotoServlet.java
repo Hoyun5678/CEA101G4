@@ -302,7 +302,11 @@ public class RoomPhotoServlet extends HttpServlet {
 				byte[] buffer = roomPhotoServiceSvc.getOneRoomPhoto(roomPhotoId).getRoomPhoto();
 				out.write(buffer);
 			} catch (Exception e) {
-				System.out.println(roomPhotoId + "沒圖片");
+				InputStream in = getServletContext().getResourceAsStream("/image/nophoto/none2.jpg");//回傳inputStream;/斜線代表該專案路徑
+				byte[] b= new byte[in.available()];
+				in.read(b);
+				out.write(b);
+				in.close();
 			}finally {
 				out.close();
 			}

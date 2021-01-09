@@ -87,11 +87,23 @@ public class RoomServlet extends HttpServlet {
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				// sel 關鍵字
-				String sel = req.getParameter("sel");
+				RoomService roomSvc = new RoomService();
+				
+				
+				
 				
 				// datefilter checkin&checkout 格式: 01/29/2021 - 02/02/2021
 				String datefilter = req.getParameter("datefilter");
+				if(datefilter == null || datefilter.length() < 1) {
+					System.out.println("使用者未輸入日期");
+				} else {
+					// 處理日期格式
+					
+					
+				}
+				
+				// sel 關鍵字
+				String sel = req.getParameter("sel");
 				
 				// roomCapacity
 				String roomCapacity = req.getParameter("roomCapacity");

@@ -5,6 +5,9 @@
 
 <c:set var='sellMemId' scope="page" value='${param.sellMemId}' />
 <c:set var='checkInDate' scope="page" value='${param.checkInDate}' />
+<% System.out.println(request.getParameter("sellMemId"));
+System.out.println(request.getParameter("checkInDate"));
+%>
 
 <c:set var='roomOrderList' scope='page' value='${roomOrderSvc.getBySellMemIdAndDate(sellMemId, checkInDate)}' />
 	<c:forEach var="roomOrderVO" items="${roomOrderList}" varStatus="userStatus">

@@ -111,5 +111,9 @@ public class RoomOrderService {
 	public List<RoomOrderVO> getByMemId(String sellMemId) {
 		return dao.getByMemId(sellMemId);
 	}
+	
+	public List<RoomOrderVO> getBySellMemIdAndDate(String sellMemId, String selectedDate) {
+		return dao.getBySellMemIdAndDate(sellMemId, selectedDate);
+	}
 
 }
