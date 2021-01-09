@@ -306,6 +306,17 @@ public class RoomPhotoServlet extends HttpServlet {
 				out.close();
 			}
 		}
+	
+	if ("getOnePhotoByRoomId".equals(action)) {
+		res.setContentType("image/jpeg");
+		ServletOutputStream out = res.getOutputStream();
+		String roomId = req.getParameter("roomId");
+			RoomPhotoService roomPhotoServiceSvc = new RoomPhotoService();
+			byte[] buffer = roomPhotoServiceSvc.getByRoomId(roomId).get(0).getRoomPhoto();
+			out.write(buffer);
+			System.out.println(roomId + "沒圖片");
+			out.close();
+		}
 	}
 	
 	
