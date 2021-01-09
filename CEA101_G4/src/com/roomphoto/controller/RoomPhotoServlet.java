@@ -308,7 +308,7 @@ public class RoomPhotoServlet extends HttpServlet {
 		}
 	
 	if ("getOnePhotoByRoomId".equals(action)) {
-		res.setContentType("image/jpeg");
+		res.setContentType("image/*");
 		ServletOutputStream out = res.getOutputStream();
 		String roomId = req.getParameter("roomId");
 			RoomPhotoService roomPhotoServiceSvc = new RoomPhotoService();
