@@ -20,7 +20,7 @@
 </head>
 <body style="background-color: #40444e;">
 
-<%@include file="/front-mem-end/front-nav-bar.jsp" %>
+<%@include file="/front-nav-bar.jsp" %>
 <div class="container" style="margin-top: 200px;">
 
 	<div class="container" id="searchResultRoomList">
@@ -30,8 +30,7 @@
 			<div id="indicators${rowStatus.index}" class="carousel slide" data-ride="carousel">
 				<ol class="carousel-indicators">
 					<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" varStatus="status">
-					
-					<li data-target="#indicators${rowStatus.index}" data-slide-to='<c:out value="${status.index}" />' class=""></li>
+						<li data-target="#indicators${rowStatus.index}" data-slide-to='<c:out value="${status.index}" />' class=""></li>
 					</c:forEach>
 				</ol>
 			<div class="carousel-inner">

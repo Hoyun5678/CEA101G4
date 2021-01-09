@@ -330,7 +330,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 
 			Class.forName(Util.DRIVER);
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			String finalSQL = "SELECT * FROM ROOM_PRODUCT"
+			String finalSQL = "SELECT * FROM ROOM_PRODUCT LEFT JOIN SELLER_MEMBER ON ROOM_PRODUCT.SELL_MEM_ID = SELLER_MEMBER.SELL_MEM_ID "
 					+ jdbcUtil_CompositeQuery_Room.get_WhereCondition(map);
 			
 			pstmt = con.prepareStatement(finalSQL);

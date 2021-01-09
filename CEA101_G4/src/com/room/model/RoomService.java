@@ -1,5 +1,6 @@
 package com.room.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,10 @@ public class RoomService {
 	
 	public List<RoomVO> getMemIdRoomList(String sellMemId) {
 		return dao.getByMemId(sellMemId);
+	}
+	
+	public List<RoomVO> getByDateRange(Date from, Date to) {
+		return dao.getByDateRange(from, to);
 	}
 	
 
