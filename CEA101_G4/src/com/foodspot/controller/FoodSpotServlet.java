@@ -194,7 +194,6 @@ public class FoodSpotServlet extends HttpServlet {
 		}
 			
 		
-		
 			
 		
 		if ("update".equals(action)) { // 來自update_foodspot_input.jsp的請求

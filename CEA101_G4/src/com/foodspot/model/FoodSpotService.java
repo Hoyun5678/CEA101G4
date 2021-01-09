@@ -54,6 +54,10 @@ public class FoodSpotService {
 		public FoodSpotVO getOneFoodSpot(String fas_id) {
 			return dao.findByPrimaryKey(fas_id);
 		}
+		
+		public List <FoodSpotVO> getOneBySell(String sell_mem_id) {
+			return dao.findBySell(sell_mem_id);
+		}
 
 		public List<FoodSpotVO> getAll() {
 			List<FoodSpotVO> list = new ArrayList<>();

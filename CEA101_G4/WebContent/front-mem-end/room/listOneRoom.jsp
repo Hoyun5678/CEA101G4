@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.room.model.*"%>   
 <%@ page import="com.member.model.*"%>   
+<%@ page import="com.foodspot.model.*"%> 
 <% MemberVO memVO=(MemberVO)session.getAttribute("memVO"); %>
 
 <jsp:useBean id="roomVO" scope="request" class="com.room.model.RoomVO" />
@@ -211,13 +212,13 @@ color:black;
                         </c:forEach>
                     </div> 
                 </div>                   
-                                  
+           </div>            
             <div id="food">
                 <div id="foodtitle">推薦美食與景點</div>
                 <div class="center">
                     <div class="wrapper">
                         <div class="inner">
-                        <c:forEach var="fsVO" items="${fsSvc.getAll()}">
+                        <c:forEach var="fsVO" items="${fsSvc.getOneBySell(roomVO.sellMemId)}">
                             <div class="card">
                                 <img src="${pageContext.request.contextPath}/foodspot/foodspot.do?fas_id=${fsVO.fas_id}&action=getFSPhoto">
                                 <div class="content">
@@ -225,7 +226,7 @@ color:black;
                                     <h3>${fsVO.fas_des}</h3>
                                 </div>
                             </div>
-                            </c:forEach>
+                        </c:forEach>
                             
                         </div>
                     </div>
@@ -236,7 +237,7 @@ color:black;
                     </div>
                 </div>
             </div>
-            </div>
+            
            </FORM> 
         <script>
         baguetteBox.run('.photogallery');

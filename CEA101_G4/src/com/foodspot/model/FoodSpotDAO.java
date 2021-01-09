@@ -34,6 +34,8 @@ public class FoodSpotDAO implements FoodSpotDAO_interface {
 			"DELETE FROM FOOD_SPOT where FAS_ID = ?";
 	private static final String GET_ONE_STMT =
 			"SELECT FAS_ID, SELL_MEM_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM Food_Spot where FAS_ID = ?";
+	private static final String GET_BY_SELL =
+			"SELECT FAS_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM Food_Spot where SELL_MEM_ID = ?";
 	private static final String GET_ALL_STMT =
 			"SELECT FAS_ID, SELL_MEM_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM Food_Spot order by FAS_ID";
 //	private static final String GET_ONE_FAS_PHOTO =
@@ -231,6 +233,69 @@ public class FoodSpotDAO implements FoodSpotDAO_interface {
 					}
 					return fsVO;
 				}
+
+	@Override
+	public List<FoodSpotVO> findBySell(String sell_mem_id) {
+		List<FoodSpotVO> list = new ArrayList<FoodSpotVO>();
+		FoodSpotVO fsVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_SELL);
+
+			pstmt.setString(1, sell_mem_id);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+			
+				fsVO = new FoodSpotVO();
+				fsVO.setFas_id(rs.getString("fas_id"));	
+				fsVO.setSell_mem_id(rs.getString("sell_mem_id"));
+				fsVO.setFas_spot_name(rs.getString("fas_spot_name"));
+				fsVO.setFas_add(rs.getString("fas_add"));
+				fsVO.setFas_des(rs.getString("fas_des"));
+				fsVO.setFas_photo(rs.getBytes("fas_photo"));
+				fsVO.setFas_latitude(rs.getDouble("fas_latitude"));
+				fsVO.setFas_longitud(rs.getDouble("fas_longitud"));
+				list.add(fsVO);
+			}
+
+			// Handle any driver errors
+					} catch (SQLException se) {
+						throw new RuntimeException("A database error occured. "
+								+ se.getMessage());
+						// Clean up JDBC resources
+					} finally {
+						if (rs != null) {
+							try {
+								rs.close();
+							} catch (SQLException se) {
+								se.printStackTrace(System.err);
+							}
+						}
+						if (pstmt != null) {
+							try {
+								pstmt.close();
+							} catch (SQLException se) {
+								se.printStackTrace(System.err);
+							}
+						}
+						if (con != null) {
+							try {
+								con.close();
+							} catch (Exception e) {
+								e.printStackTrace(System.err);
+							}
+						}
+					}
+					return list;
+	}
+
+
 
 	@SuppressWarnings("null")
 	@Override
