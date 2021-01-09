@@ -31,29 +31,58 @@
                     <li class="nav-item" id="active">
                         <a class="nav-link" href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenir.jsp">伴手禮</a>
                     </li>
-                    <li class="nav-item" id="active">
-                        <a class="nav-link" href="#">加入平台</a>
-                    </li>
-                     <li class="nav-item" id="active">
-                        <a class="nav-link" href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenircart.jsp">購物車</a>
-                    </li>
-                    <div class="dropdown">
+                    
+                    	<c:if test="${empty sessionScope.memVO}">
+							 <li class="nav-item" id="active">
+                       			 <a class="nav-link" href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp">登入會員</a>
+                    		</li>
+					
+						</c:if>
+						<c:if test="${not empty sessionScope.memVO}">
+							
+							 <li class="nav-item" id="active">
+                       			 <a class="nav-link" href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenircart.jsp">購物車</a>
+                    		</li>
+                    	<div class="dropdown">
                     	
                     		<div id="account"onclick="myFunction()" class="dropbtn">                       		
                             	<i class="fas fa-bars 4x" id="list"></i>
                             	<i class="far fa-user-circle fa-2x" id="user"></i>                        	
                    			</div>
                    		
-                    <div id="myDropdown" class="dropdown-content">
-                     	<a href="#"><i class="far fa-user"style="padding-right: 13px;"></i>管理帳戶</a>
-                     	<a href="#"><i class="fas fa-hotel"></i>房間訂單</a>
-                    	<a href="#"><i class="fas fa-umbrella-beach"style="padding-right: 8px;"></i>活動訂單</a>
-                    	<a href="#"><i class="fas fa-gifts" style="padding-right: 8px;"></i>伴手禮訂單</a>
-                    	<a href="<%=request.getContextPath()%>/roomproductcollect/roomproductcollect.do?mem_id=${memVO.mem_id}&action=showCollect"><i class="fab fa-gratipay"style="padding-right: 12px;"></i>我的收藏</a>
-                   		<a href="#"><i class="far fa-comments" style="padding-right:12px;"></i>評語</a>
-                    	<a href="#"><i class="fas fa-sign-out-alt"style="padding-right: 12px;"></i>登出</a>
-                    </div>
-                    </div>                  
+                    		<div id="myDropdown" class="dropdown-content">
+                     			<a href="<%=request.getContextPath()%>/front-mem-end/mem/listOneMem.jsp"><i class="far fa-user"style="padding-right: 13px;"></i>管理帳戶</a>
+                     			<a href="#"><i class="fas fa-hotel"></i>房間訂單</a>
+                    			<a href="<%=request.getContextPath()%>/front-mem-end/activity_order/listOneActivityOrder.jsp"><i class="fas fa-umbrella-beach"style="padding-right: 8px;"></i>活動訂單</a>
+                    			<a href="#"><i class="fas fa-gifts" style="padding-right: 8px;"></i>伴手禮訂單</a>
+                    			<a href="<%=request.getContextPath()%>/roomproductcollect/roomproductcollect.do?mem_id=${memVO.mem_id}&action=showCollect"><i class="fab fa-gratipay"style="padding-right: 12px;"></i>我的收藏</a>
+                   				<a href="#"><i class="far fa-comments" style="padding-right:12px;"></i>評語</a>
+                    			<a href="<%=request.getContextPath()%>/member/member.do?action=log_out"><i class="fas fa-sign-out-alt"style="padding-right: 12px;"></i>登出</a>
+                    		</div>
+                    	</div>                  
+						</c:if>
+                    
+                   
+<!--                      <li class="nav-item" id="active"> -->
+<%--                         <a class="nav-link" href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenircart.jsp">購物車</a> --%>
+<!--                     </li> -->
+<!--                     <div class="dropdown"> -->
+                    	
+<!--                     		<div id="account"onclick="myFunction()" class="dropbtn">                       		 -->
+<!--                             	<i class="fas fa-bars 4x" id="list"></i> -->
+<!--                             	<i class="far fa-user-circle fa-2x" id="user"></i>                        	 -->
+<!--                    			</div> -->
+                   		
+<!--                     <div id="myDropdown" class="dropdown-content"> -->
+<!--                      	<a href="#"><i class="far fa-user"style="padding-right: 13px;"></i>管理帳戶</a> -->
+<!--                      	<a href="#"><i class="fas fa-hotel"></i>房間訂單</a> -->
+<!--                     	<a href="#"><i class="fas fa-umbrella-beach"style="padding-right: 8px;"></i>活動訂單</a> -->
+<!--                     	<a href="#"><i class="fas fa-gifts" style="padding-right: 8px;"></i>伴手禮訂單</a> -->
+<%--                     	<a href="<%=request.getContextPath()%>/roomproductcollect/roomproductcollect.do?mem_id=${memVO.mem_id}&action=showCollect"><i class="fab fa-gratipay"style="padding-right: 12px;"></i>我的收藏</a> --%>
+<!--                    		<a href="#"><i class="far fa-comments" style="padding-right:12px;"></i>評語</a> -->
+<!--                     	<a href="#"><i class="fas fa-sign-out-alt"style="padding-right: 12px;"></i>登出</a> -->
+<!--                     </div> -->
+<!--                     </div>                   -->
                 </ul>
             </div>
         </nav>
