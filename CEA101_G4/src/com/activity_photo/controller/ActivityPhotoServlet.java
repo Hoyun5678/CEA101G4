@@ -109,51 +109,52 @@ public class ActivityPhotoServlet extends HttpServlet {
 		}
 
 
-//		if ("upDate_By_Act_id".equals(action)) { // 來自select_page.jsp的請求
+		if ("upDate_By_Act_id".equals(action)) { // 來自select_page.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			ActivityPhotoVO actphoVO=null;
+			ActivityPhotoService actphSvc = new ActivityPhotoService();
+			try {
+//				接多張圖片========================================================================
+				String act_id = req.getParameter("act_id").trim();
+				Collection<Part> col = req.getParts();
+				for (Part part : col) {
+
+					if (part.getContentType() != null && part.getContentType().indexOf("image") >= 0) {
+
+						InputStream in = part.getInputStream();
+						byte[] act_photo = new byte[in.available()];
+						in.read(act_photo);
+						in.close();
+
+						actphoVO = new ActivityPhotoVO();
+						actphoVO.setAct_photo_content("");
+						actphoVO.setAct_id(act_id);
+						actphoVO.setAct_photo(act_photo);
+						// *************************** 2.開始修改資料 *****************************************
+						actphSvc.insert(actphoVO);
+					}
+
+				}
+						List<ActivityPhotoVO>list=actphSvc.getActPhoByActId(act_id);
 //
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//			ActivityPhotoVO actphoVO=null;
-//			try {
-////				接多張圖片========================================================================
-//				String act_id = req.getParameter("act_id").trim();
-//				Collection<Part> col = req.getParts();
-//				for (Part part : col) {
-//
-//					if (part.getContentType() != null && part.getContentType().indexOf("image") >= 0) {
-//
-//						InputStream in = part.getInputStream();
-//						byte[] act_photo = new byte[in.available()];
-//						in.read(act_photo);
-//						in.close();
-//
-//						actphoVO = new ActivityPhotoVO();
-//						actphoVO.setAct_photo_content("");
-//						actphoVO.setAct_id(act_id);
-//						actphoVO.setAct_photo(act_photo);
-//						// *************************** 2.開始修改資料 *****************************************
-//						ActivityPhotoService actphSvc = new ActivityPhotoService();
-//						actphSvc.insert(actphoVO);
-//					}
-//
-//				}
-//
-//				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-//				req.setAttribute("actphoVO", actphoVO); // 資料庫update成功後,正確的的empVO物件,存入req
-//				String url = "/front-sell-end/activity_photo/listAllActPho.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-//				successView.forward(req, res);
-//
-////				/*************************** 其他可能的錯誤處理 *************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("修改資料失敗:" + e.getMessage());
-//				e.printStackTrace();
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-sell-end/activity_photo/upLoad_PhotoM.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
+				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
+				String url = "/front-sell-end/activity_photo/listAllActPho.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				req.setAttribute("list", list);
+				successView.forward(req, res);
+
+//				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				e.printStackTrace();
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-sell-end/activity_photo/listAllActPho.jsp");
+				failureView.forward(req, res);
+			}
+		}
 
 		if ("get_Photo_By_Act_photo_id".equals(action)) { // 來自select_page.jsp的請求
 
@@ -235,6 +236,7 @@ public class ActivityPhotoServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("list", list); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("act_id", act_id);
 				String url = "/front-sell-end/activity_photo/listAllActPho.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
 				successView.forward(req, res);
@@ -286,15 +288,17 @@ public class ActivityPhotoServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String act_photo_id = req.getParameter("act_photo_id");
-
+				String act_id=req.getParameter("act_id");
 				/*************************** 2.開始刪除資料 ***************************************/
 				ActivityPhotoService actphoSvc = new ActivityPhotoService();
 				actphoSvc.deleteActPho(act_photo_id);
-				;
+				List<ActivityPhotoVO> list=actphoSvc.getActPhoByActId(act_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-sell-end/activity_photo/listAllActPho.jsp";
+				req.setAttribute("list", list);
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/

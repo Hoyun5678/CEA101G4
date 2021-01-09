@@ -34,5 +34,8 @@ public class ActivityPhotoService {
 	public void update(ActivityPhotoVO actphoVO) {
 		dao.update(actphoVO);
 	}
+	public void insert(ActivityPhotoVO actphoVO){
+		dao.insert(actphoVO);
+	}
 	
 }
