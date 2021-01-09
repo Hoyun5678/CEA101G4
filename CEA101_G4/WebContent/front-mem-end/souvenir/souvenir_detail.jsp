@@ -34,6 +34,9 @@ img {
 	margin-top: 5px;
 	text-align: center;
 }
+.navbar-brand #logo {
+	height : 15% ;
+}
 </style>
 <body align="center">
 	<%@ include file="/front-mem-end/bar.jsp"%>
