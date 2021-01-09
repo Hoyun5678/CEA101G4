@@ -35,7 +35,7 @@
             <a href="<%=request.getContextPath()%>/front-sell-end/activity_period/listOneActivityPeriod.jsp"> <i class="zmdi zmdi-settings"></i> 活動期別管理 </a>
         </li>
         <li>
-            <a href="#"> <i class="zmdi zmdi-settings"></i> 活動訂單管理 </a>
+            <a href="<%=request.getContextPath()%>/front-sell-end/activity_order/sellListOneActivityOrder.jsp"> <i class="zmdi zmdi-settings"></i> 活動訂單管理 </a>
         </li>
         <li>
             <a href="#"> <i class="zmdi zmdi-settings"></i> 美食與景點管理 </a>
