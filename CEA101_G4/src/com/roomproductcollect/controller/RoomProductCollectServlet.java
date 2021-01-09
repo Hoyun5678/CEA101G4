@@ -32,11 +32,12 @@ public class RoomProductCollectServlet extends HttpServlet {
 			throws ServletException, IOException {
 	
 	req.setCharacterEncoding("UTF-8");
+	res.setContentType("text/html; charset=utf-8");
 	PrintWriter out = res.getWriter();
 	String action = req.getParameter("action");
 	
 	if ("showCollect".equals(action)) { // 來自select_page.jsp的請求
-
+		req.setCharacterEncoding("UTF-8");
 		List<String> errorMsgs = new LinkedList<String>();
 		// Store this set in the request scope, in case we need to
 		// send the ErrorPage view.
@@ -55,7 +56,7 @@ System.out.println("111");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomproductcollect/select_page.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/bar.jsp");
 				failureView.forward(req, res);
 				return;//程式中斷
 			}
@@ -72,7 +73,7 @@ System.out.println(JSON.toJSONString(rpcListMem)+"我是getmemid");
 		} catch (Exception e) {
 			errorMsgs.add("無法取得資料:" + e.getMessage());
 			System.out.println(e);
-			RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomproductcollect/select_page.jsp");
+			RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/bar.jsp");
 			failureView.forward(req, res);
 		}
 	}
