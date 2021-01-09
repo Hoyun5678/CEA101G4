@@ -1,0 +1,262 @@
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei ";
+            font-size: 15px;
+            color: #999;
+            margin: 0;
+        }
+
+        .container-left {
+            width: 368px;
+            height: 521px;
+            background-color: #e1e6e0;
+            text-align: center;
+
+        }
+
+        .infotitle {
+            font-size: 18px;
+            font-weight: 600;
+            color: #464b45;
+            margin-bottom: 30px;
+            margin-top: 25px;
+        }
+        .col-lg-6#checkin, #checkout, #sellinfo, #orderpic, #stay, #choosetype, #arrtime {
+            display: inline-block;
+        }
+        #sellinfo {
+            color: #686d67;
+        }
+        #orderimg {
+            width: 160px;
+
+        }
+
+        .datetitle {
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            color: #464b45;
+            margin-top: 10px;
+        }
+
+        .datelink {
+            color: #545658;
+            text-decoration: none;
+            background-color: transparent;
+            text-align: center;
+            display: grid;
+            margin-top: 15px;
+        }
+        #checkin :after {
+            content: "";
+            position: absolute;
+            border-right: 1px solid #7e978e;
+            height: 50px;
+            bottom: 280px;
+            top: 280px;
+            left: 365px;
+        }
+        /*         #checkout :after {
+            content: "";
+            position: absolute;
+            border-bottom: 1px solid #7e978e;
+            width: 200px;
+            left: 80px;
+            top: 180px;
+        } */
+
+        /*         #stay :after {
+            content: "";
+            position: absolute;
+            border-bottom: 1px solid #7e978e;
+            width: 200px;
+            left: 80px;
+            top: 285px;
+        }
+        #choosetype :after {
+            content: "";
+            position: absolute;
+            border-bottom: 1px solid #7e978e;
+            width: 200px;
+            left: 80px;
+            top: 350px;
+        } */
+        #choosetype {
+            margin-right: 15px;
+
+            margin-left: 15px;
+        }
+        #choose {
+            /* margin-top: -5px; */
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            color: #464b45;
+        }
+        #stay {
+            margin-right: 30px;
+        }
+        #ordthird {
+            text-align: center;
+            margin-left: 5px;
+        }
+        #arrtime {
+            font-weight: 600;
+            font- size: 16px;
+            /* margin-left: 25px; */
+            color: #464b45;
+            margin-left: 15px;
+        }
+        #seltime {
+            margin-top: 7px;
+        }
+        #checkin {
+            margin-right: 10px;
+        }
+        #checkout {
+            margin-left: 10px;
+        }
+        #night, #roomtype {
+            color: #646463;
+            margin-top: 5px;
+        }
+
+        #day {
+            text-align: center;
+            margin-top: 20px;
+            font-family: Microsoft JhengHei;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        #price {
+            font-size: 24px;
+            font-weight: 500;
+            color: #646463;
+            font-family: Raleway;
+        }
+        #roomprice {
+            font-size: 18px;
+            font-weight: 600;
+            color: #545658;
+            margin-bottom: 10px;
+            margin-top: 30px;
+        }
+        .container>.row {
+            padding-bottom: 10px;
+        }
+        #sameasmem {
+            margin-bottom: 15px;
+        }
+        /* Style the form */
+        .wrapper {
+            height: 100vh;
+            background-color: #f9f6f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+        }
+        .inner {
+            display: flex;
+            background: #fff;
+            width: 920px;
+            height: 521px;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+            -ms-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+            -o-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+        }
+        .form-content {
+            width: 60%;
+            padding-top: 40px;
+            padding-left: 51px;
+            padding-right: 51px;
+        }
+        .form-header {
+            text-align: center;
+        }
+
+        h3 {
+            font-family: "Microsoft JhengHei ";
+            font-size: 22px;
+            color: #56706f;
+            text-transform: uppercase;
+            letter-spacing: 7px;
+            padding: 5px 15px;
+            display: inline-block;
+            border: 1px solid #dad8e4;
+
+
+        }
+        p {
+            font-family: "Microsoft JhengHei ";
+            font-size: 20px;
+            color: #6d7f52;
+            text-align: center;
+
+        }
+        .form-holder input {
+            padding: 10px;
+            width: 300px;
+            font-size: 17px;
+            font-family: Raleway;
+            margin: 10px;
+            margin-left: 70px;
+            border: 0;
+            border-bottom: 1px solid #666;
+            text-align: center;
+        }
+        .form-holder input.invalid {
+            background-color: #C5E4C1;
+        }
+
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+        .tab {
+            display: none;
+        }
+
+        /* Mark the active step: */
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #4CAF50;
+        }
+        button {
+            border: 2px solid #5c615c;
+            color: #686d67;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-family: Raleway;
+            cursor: pointer;
+            /*         border-radius: 10px; */
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #prevBtn {
+            background-color: #bbbbbb;
+        }
