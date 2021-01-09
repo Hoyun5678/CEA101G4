@@ -1,6 +1,7 @@
 package com.roomorderdetail.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.roomordereddate.model.RoomOrderedDateDAO;
+import com.roomordereddate.model.RoomOrderedDateVO;
 
 public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 	
@@ -300,12 +304,16 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 
 
 	@Override
-	public void insertFromOrder(RoomOrderDetailVO rodVO, Connection con) {
+	public void insertFromOrder(RoomOrderDetailVO rodVO, java.sql.Connection con, Date checkInDate, Date checkOutDate) {
 		PreparedStatement pstmt = null;
 		
+		
 		try {
-
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String roomOrderId = rodVO.getRoom_order_id();
+			String roomId = rodVO.getRoom_id();
 
 			pstmt.setString(1, rodVO.getRoom_order_id());
 			pstmt.setString(2, rodVO.getRoom_id());
@@ -314,8 +322,23 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 			pstmt.setString(5, rodVO.getRoom_guest_mail());
 			pstmt.setString(6, rodVO.getRoom_guest_tel());
 			
-
 			pstmt.executeUpdate();
+			
+			System.out.println("1. order detail DAO -> insrt from order()");
+			RoomOrderedDateDAO dao = new RoomOrderedDateDAO();
+			long checkInDateToLong = checkInDate.getTime();
+			RoomOrderedDateVO aRoomOrderedDate = null;
+			System.out.println("2. order detail DAO -> insrt from order()");
+			do {
+				aRoomOrderedDate = new RoomOrderedDateVO();
+				aRoomOrderedDate.setRoomOrderId(roomOrderId);
+				aRoomOrderedDate.setRoomId(roomId);
+				Date d = new Date(checkInDateToLong);
+				aRoomOrderedDate.setRoomOrderDate(d);
+				System.out.println("roomOrderId = " + roomOrderId + " , roomId = " + roomId + " , Date = " + d.toString());
+				dao.insertFromOrderDetail(aRoomOrderedDate, con);
+				checkInDateToLong += 24 * 60 * 60 * 1000L;
+			} while(checkInDateToLong < checkOutDate.getTime());
 
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "

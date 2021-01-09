@@ -569,7 +569,7 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 			for (RoomOrderDetailVO aRoomOrderDetail : list) {
 				aRoomOrderDetail.setRoom_order_id(nextRoomOrderId);
 //				aRoomOrderDetail.setRoom_id(aRoomOrderDetail.getRoom_id());
-				dao.insertFromOrder(aRoomOrderDetail, con);
+				dao.insertFromOrder(aRoomOrderDetail, con, roomOrderVO.getCheckInDate(), roomOrderVO.getCheckOutDate());
 			}
 			con.commit();
 			con.setAutoCommit(true);

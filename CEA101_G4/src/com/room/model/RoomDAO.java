@@ -2,6 +2,8 @@ package com.room.model;
 
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
+
 import util.Util;
 
 
@@ -367,6 +369,12 @@ public class RoomDAO implements RoomDAO_interface {
 			System.out.println(room.getRoomStatus());
 			System.out.println();
 		}
+	}
+
+	@Override
+	public List<RoomVO> getByDateRange(Date from, Date to) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

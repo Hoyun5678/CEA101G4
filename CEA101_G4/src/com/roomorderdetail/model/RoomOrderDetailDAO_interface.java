@@ -1,6 +1,7 @@
 package com.roomorderdetail.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.*;
 
 public interface RoomOrderDetailDAO_interface {
@@ -9,7 +10,7 @@ public interface RoomOrderDetailDAO_interface {
 	public void delete(String room_order_id, String room_id);
 	public RoomOrderDetailVO findByPrimaryKey(String room_order_id);
 	public List<RoomOrderDetailVO> getAll();
-	void insertFromOrder(RoomOrderDetailVO rodVO, Connection con);
+	public void insertFromOrder(RoomOrderDetailVO rodVO, java.sql.Connection con, Date checkInDate, Date checkOutDate);
 
 	
 }

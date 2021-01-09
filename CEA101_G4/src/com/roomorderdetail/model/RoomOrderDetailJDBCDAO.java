@@ -1,7 +1,12 @@
 package com.roomorderdetail.model;
 import java.util.*;
 
+import com.roomordereddate.model.*;
+
+import util.Util;
+
 import java.sql.*;
+import java.sql.Date;
 
 
 public class RoomOrderDetailJDBCDAO implements RoomOrderDetailDAO_interface {
@@ -25,14 +30,13 @@ public class RoomOrderDetailJDBCDAO implements RoomOrderDetailDAO_interface {
 	
 		
 	@Override
-	public void insertFromOrder(RoomOrderDetailVO rodVO, java.sql.Connection con) {
+	public void insertFromOrder(RoomOrderDetailVO rodVO, java.sql.Connection con, Date checkInDate, Date checkOutDate) {
 		PreparedStatement pstmt = null;
-		
 		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String roomOrderId = rodVO.getRoom_order_id();
+			String roomId = rodVO.getRoom_id();
 
 			pstmt.setString(1, rodVO.getRoom_order_id());
 			pstmt.setString(2, rodVO.getRoom_id());
@@ -42,12 +46,23 @@ public class RoomOrderDetailJDBCDAO implements RoomOrderDetailDAO_interface {
 			pstmt.setString(6, rodVO.getRoom_guest_tel());
 			
 			pstmt.executeUpdate();
+			
+			RoomOrderedDateJDBCDAO dao = new RoomOrderedDateJDBCDAO();
+			long checkInDateToLong = checkInDate.getTime();
+			RoomOrderedDateVO aRoomOrderedDate = null;
+			do {
+				aRoomOrderedDate = new RoomOrderedDateVO();
+				aRoomOrderedDate.setRoomOrderId(roomOrderId);
+				aRoomOrderedDate.setRoomId(roomId);
+				aRoomOrderedDate.setRoomOrderDate(new Date(checkInDateToLong));
+				dao.insertFromOrderDetail(aRoomOrderedDate, con);
+				checkInDateToLong += 24 * 60 * 60 * 1000L;
+			} while(checkInDateToLong < checkOutDate.getTime());
+			
+//			con.commit();
+//			con.setAutoCommit(true);
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

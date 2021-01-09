@@ -537,6 +537,8 @@ public class RoomOrderServlet extends HttpServlet {
 				} catch (IllegalArgumentException e) {
 					errorMsgs.add("check out 日期格式有誤");					
 				}
+				if(checkOutDate.getTime() < checkInDate.getTime())
+					errorMsgs.add("check out 日期需大於check in 日期");
 								
 				java.sql.Timestamp expectArrTime = null;
 				try {
@@ -555,7 +557,6 @@ public class RoomOrderServlet extends HttpServlet {
 					errorMsgs.add("請輸入數字.");
 				}
 				
-
 				
 				Integer roomOrderStatus = new Integer(0);
 //				try {
@@ -585,7 +586,7 @@ public class RoomOrderServlet extends HttpServlet {
 				roomOrderVO.setRoomOrderSum(roomOrderSum);
 				roomOrderVO.setRoomOrderStatus(roomOrderStatus);
 				roomOrderVO.setRoomPaymentStatus(roomPaymentStatus);
-				
+								
 				List<RoomOrderDetailVO> list = new ArrayList<RoomOrderDetailVO>();
 				RoomOrderDetailVO roomOrderDetailVO = null;
 //				while() {
@@ -637,6 +638,9 @@ public class RoomOrderServlet extends HttpServlet {
 					
 					list.add(roomOrderDetailVO);
 //				}
+					
+					
+				
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
