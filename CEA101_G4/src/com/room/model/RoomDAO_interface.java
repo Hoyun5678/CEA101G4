@@ -16,7 +16,7 @@ public interface RoomDAO_interface {
 //    public List<RoomVO> getFilter(Map<String, String[]> map); 
     
     public List<RoomVO> getByMemId(String sellMemId);
-	List<RoomVO> getByDateRange(String from, String to);
+	List<RoomVO> getByDateRange(Date from, Date to);
 	
 	
 }
