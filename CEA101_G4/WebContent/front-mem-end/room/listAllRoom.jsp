@@ -18,17 +18,11 @@
 <title>房間搜尋</title>
 
 </head>
-<body>
+<body style="background-color: #40444e;">
 
+<%@include file="/front-mem-end/front-nav-bar.jsp" %>
+<div class="container" style="margin-top: 200px;">
 
-<div class="container">
-	<div class="searchTools">
-		<>
-		<input type="text" name="keyWords">
-		<input type="text" name="checkInDate">
-		<input type="text" name="checkOutDate">
-		
-	</div>
 	<div class="container" id="searchResultRoomList">
 		<c:forEach var="roomVO" items="${roomSvc.all}" varStatus="rowStatus">
 		<div class="row roomContent">
@@ -89,6 +83,27 @@
     	$(document).ready(function() {
 			$(".carousel-indicators li:first-child").addClass("active");
 			$(".carousel-inner .carousel-item:first-child").addClass("active");
+			
+			
+		    $(window).scroll(function () {
+		        if ($(window).scrollTop() >= 300) {
+		            $('.header').addClass('upup');
+		            $('.cc').hide();
+		            $('.justify-content-md-center').addClass('shsh');
+		            $('.header').removeClass('open');
+		            $('.shsh').click(function () {
+		                $('.header').removeClass('upup');
+		                $('.header').addClass('open');
+		                $('.cc').show();
+		                $('.justify-content-md-center').removeClass('shsh');
+		            });
+		        } else {
+		            $('.header').removeClass('upup');
+		            $('.header').removeClass('open');
+		            $('.cc').show();
+		            $('.justify-content-md-center').removeClass('shsh');
+		        }
+		    });
 			
 		});
 	</script>

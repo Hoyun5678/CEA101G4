@@ -77,6 +77,69 @@ public class RoomServlet extends HttpServlet {
 			}
 		}
 		
+		if("getByMultiCondition".equals(action)) {
+			System.out.println("test getByMulti");
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				// sel 關鍵字
+				String sel = req.getParameter("sel");
+				
+				// datefilter checkin&checkout 格式: 01/29/2021 - 02/02/2021
+				String datefilter = req.getParameter("datefilter");
+				
+				// roomCapacity
+				String roomCapacity = req.getParameter("roomCapacity");
+				
+				System.out.println("sel = " + sel);
+				System.out.println("datefilter = " + datefilter);
+				System.out.println("roomCapacity = " + roomCapacity);
+				
+				
+
+				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/front-sell-end/room/select_page.jsp");
+//					failureView.forward(req, res);
+//					return;//程式中斷
+//				}
+//				
+//				/***************************2.開始查詢資料*****************************************/
+//				RoomService roomSvc = new RoomService();
+//				RoomVO roomVO = roomSvc.getOneRoom(roomId);
+//				if (roomVO == null) {
+//					errorMsgs.add("查無資料");
+//				}
+//				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/front-sell-end/room/select_page.jsp");
+//					failureView.forward(req, res);
+//					return;//程式中斷
+//				}
+//				
+//				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+//				req.setAttribute("list", roomVO); // 資料庫取出的roomVO物件,存入req
+				String url = "/front-mem-end/room/listAllRoom.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-sell-end/room/select_page.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
+		
 		
 		if ("checkRoomDetail".equals(action)) { // 來自mem/listAllRoom.jsp的請求
 

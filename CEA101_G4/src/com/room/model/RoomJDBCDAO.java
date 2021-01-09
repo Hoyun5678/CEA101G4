@@ -389,7 +389,6 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 	
 	@Override
 	public List<RoomVO> getByDateRange(Date from, Date to) {
-		RoomVO roomVO = null;
 		RoomService roomSvc = new RoomService();
 		List<RoomVO> list = roomSvc.getAll();
 		Connection con = null;
@@ -410,7 +409,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 					listOrderedRoomId.add(rs.getString(1));
 				}
 				fromToLong += 24 * 60 * 60 * 1000L;
-			}while(fromToLong < to.getTime());
+			} while(fromToLong < to.getTime());
 			System.out.println("not qualified roomVO : " + listOrderedRoomId);
 			
 			list = (List<RoomVO>) list.stream()

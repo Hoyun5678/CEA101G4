@@ -18,7 +18,6 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/index.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="<%=request.getContextPath()%>/js/index.js"></script>
 
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -49,12 +48,11 @@
 		<div class="ceee">
 			<div class="header">
 				<div class="navone">
-					<a
-						href="<%=request.getContextPath()%>/front-mem-end/front-index.jsp"><img
+					<a href="<%=request.getContextPath()%>/front-mem-end/front-index.jsp"><img
 						src="<%=request.getContextPath()%>/image/LOGO/logo.png" alt=""
 						id="navlogo"></a>
 					<div class="align-self-center underline" id="room_act">
-						<h4>住宿</h4>
+						<a href="<%=request.getContextPath()%>/front-mem-end/room/listAllRoom.jsp"><h4>住宿</h4></a>
 					</div>
 					<div class="align-self-center underline" id="act_act">
 						<h4>體驗活動</h4>
@@ -63,21 +61,17 @@
 						<h4>特產</h4>
 					</div>
 					<div class="align-self-center underline">
-						
-							<c:if test="${not empty sessionScope.memVO}">
-							<div class="align-self-center underline" id="mem_act">
-					
-								<a href="<%=request.getContextPath()%>/front-mem-end/mem/mem_center_page.jsp"><h4>${memVO.mem_name} 會員中心</h4></a>
-							</div></c:if>
+						<c:if test="${not empty sessionScope.memVO}">
+							<a href="<%=request.getContextPath()%>/front-mem-end/mem/mem_center_page.jsp"><h4>${memVO.mem_name} 會員中心</h4></a>
+						</c:if>
 
-							<c:if test="${empty sessionScope.memVO}">
-								<div class="align-self-center underline" id="mem_act"><a
-									href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp"><h4>登入會員</h4></a>
-							</div></c:if>
-						
+						<c:if test="${empty sessionScope.memVO}">
+							<a href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp"><h4>登入會員</h4></a>
+						</c:if>
 					</div>
 				</div>
 				<div class="navtwo">
+				<form METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do" id="formRoom">
 					<div class="container" id="room">
 						<div class="justify-content-md-center">
 							<div class="align-self-center cc ">
@@ -87,16 +81,18 @@
 								入住與退房日期：<input type="text" name="datefilter" value="" />
 							</div>
 							<div class="align-self-center cc ">
-								人數：<input type="number" value="2" min="1" max="20" step="1">
+								人數：<input type="number" value="2" min="1" max="20" step="1" name="roomCapacity">
 							</div>
+							<input type="hidden" name="action" value="getByMultiCondition" />
 							<div class="bigbig">
-								<input type="checkbox" id="checkyes"> <label
+								<label id="roomSearchBtn"
 									for="checkyes"><span class="fas fa-search"></span>
 								</label>
 							</div>
 						</div>
 					</div>
-					<form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do" name="form1">
+				</form>
+				<form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do" name="form1">
 					<div class="container" id="act">
 						<div class="justify-content-md-center">
 							<div class="align-self-center cc ">
@@ -113,7 +109,7 @@
 						</div>
 					</div>
 					<input type="hidden" name="action" value="listEmps_ByCompositeQuery">
-					</form>
+				</form>
 				</div>
 			</div>
 		</div>

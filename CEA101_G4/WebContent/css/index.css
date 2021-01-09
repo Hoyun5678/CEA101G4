@@ -466,7 +466,7 @@
             position: relative;
         }
 
-        .underline>h4 {
+        .underline h4 {
             font-weight: bold;
         }
 

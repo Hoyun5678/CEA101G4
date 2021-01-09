@@ -87,5 +87,10 @@ $(function () {
     $('.align-self-center').click(function () {
         $(this).children('input').focus();
     });
+    
+    $(document).on('click', '#roomSearchBtn', function() {
+    	alert('');
+    	$('#formRoom').submit();
+    })
 
 });
