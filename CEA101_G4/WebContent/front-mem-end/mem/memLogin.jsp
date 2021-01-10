@@ -35,6 +35,8 @@
 	href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css'>
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 <style>
 #success_message {
 	display: none;
@@ -51,13 +53,12 @@
 .container:hover {
 	opacity: 1;
 }
-.forget_lightbox{
-/* display:none; */
-}
+
 
 #btn {
 	text-align: center;
 }
+
 </style>
 <script>
 	window.console = window.console || function(t) {
@@ -80,8 +81,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<div class="forget_lightbox"><%@include file="/front-mem-end/mem/forget.jsp"%></div>
+<%@include file="/front-mem-end/mem/forget.jsp"%>
 
 	<div class="container">
 		<form class="well form-horizontal" METHOD="post"
@@ -114,16 +114,20 @@
 					</div>
 				</div>
 				<div class="form-group" style="text-align: center;">
-						<label class="col-md-4 control-label"></label> <input
-							type="hidden" name="action" value="mem_login">
+						<label class="col-md-4 control-label"></label> 
+						<input type="hidden" name="action" value="mem_login">
 						<div class="col-md-4">
 							<button type="submit" class="btn btn-warning">
 								送出 <span class="glyphicon glyphicon-send"></span>
 							</button>
 							
-							<a href="<%=request.getContextPath()%>/front-mem-end/mem/regis.jsp" class="btn btn-success">註冊一般會員</a>
+							<a href="<%=request.getContextPath()%>/front-mem-end/mem/regis.jsp" class="btn btn-success">註冊一般會員 <i class="fas fa-user"></i></a>
+							<button type="button" class="btn btn-info" id="mem_forget">
+								忘記密碼 <i class="fas fa-grin-beam-sweat  fa-1x"></i>
+							</button>
 						</div>
 					</div>
+					
 
 			</fieldset>
 		</form>
@@ -143,7 +147,14 @@
 		<script id="rendered-js">
 	var urlTarget = "<%=request.getContextPath()%>/member/member.do";
 		$(document).ready(function() {
-				
+			
+			
+			  $("#mem_forget").click(function() {
+	                $("#forget_light_box").css("display", "block");
+	                $("#a1").css("display","block");
+	                
+	            });
+			  
 			
 				//前端攔截=================================================================
 					

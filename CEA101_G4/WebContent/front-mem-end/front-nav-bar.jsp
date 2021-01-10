@@ -62,7 +62,7 @@
 					</div>
 					<div class="align-self-center underline">
 						<c:if test="${not empty sessionScope.memVO}">
-							<a href="<%=request.getContextPath()%>/front-mem-end/mem/mem_center_page.jsp"><h4><i class="fas fa-child fa-1x" style="color: ghostwhite;"></i>會員中心</h4></a>
+							<a href="<%=request.getContextPath()%>/front-mem-end/mem/listOneMem.jsp"><h4><i class="fas fa-child fa-1x" style="color: ghostwhite;"></i>會員中心</h4></a>
 						</c:if>
 
 						<c:if test="${empty sessionScope.memVO}">
@@ -81,7 +81,7 @@
 								入住與退房日期：<input type="text" name="datefilter" value="" />
 							</div>
 							<div class="align-self-center cc ">
-								人數：<input type="number" value="2" min="1" max="20" step="1" name="roomCapacity">
+								人數：<input type="number"  min="1" max="20" step="1" name="roomCapacity">
 							</div>
 							<input type="hidden" name="action" value="getByMultiCondition" />
 							<div class="bigbig">
