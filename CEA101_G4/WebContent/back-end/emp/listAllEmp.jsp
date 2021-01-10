@@ -86,7 +86,7 @@
 			<td>${empVO.emp_pwd}</td>
 			<td>${empVO.emp_name}</td>
 			<td>${empVO.emp_acc_status}</td>
-			<td>${empVO.emp_gender}</td> 
+			<td>${empVO.emp_gender eq 0?"男":"女"}</td> 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
