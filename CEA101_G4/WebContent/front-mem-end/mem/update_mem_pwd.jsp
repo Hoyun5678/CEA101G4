@@ -87,8 +87,9 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 }
-input{
-padding-right: 25.5px!important;}
+#contact_form_updatepwd input{
+width: 140px !important;
+}
 
 </style>
 <script>
@@ -110,7 +111,7 @@ padding-right: 25.5px!important;}
 	<div class="container" id="fix_pwd">
 		<form class="well form-horizontal" METHOD="post"
 			ACTION="<%=request.getContextPath()%>/member/member.do" name="form1"
-			id="contact_form_updatepwd" style="text-align: center;">
+			id="contact_form_updatepwd" style="text-align: center;height: auto;">
 			
 			<fieldset id="test">
 				<!-- Form Name -->
