@@ -41,15 +41,11 @@ public class RoomOrderService {
 		RoomOrderVO roomOrderVO = new RoomOrderVO();
 		
 		roomOrderVO.setSellMemId(sellMemId);
-		roomOrderVO.setMemId(memId);
-		
+		roomOrderVO.setMemId(memId);	
 		roomOrderVO.setCheckInDate(checkInDate);
 		roomOrderVO.setCheckOutDate(checkOutDate);
-		
-		
 		roomOrderVO.setRoomOrderSum(roomOrderSum);
 
-		
 		return roomOrderVO;
 	}
 	

@@ -6,10 +6,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.room.model.RoomService;
 import com.roomorder.model.*;
 import com.roomorderdetail.model.RoomOrderDetailVO;
-import com.roomphoto.model.RoomPhotoService;
 
 
 public class RoomOrderServlet extends HttpServlet {
@@ -19,6 +17,7 @@ public class RoomOrderServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -123,8 +122,25 @@ public class RoomOrderServlet extends HttpServlet {
 				Integer roomOrderStatus = null;
 				try {
 					roomOrderStatus = new Integer (req.getParameter("roomOrderStatus").trim());
+					switch(roomOrderStatus) {
+					case 0: // 未付款
+						roomOrderStatus = 1; // 已確認
+						break;
+					case 1: // 付款失敗
+						roomOrderStatus = 4; // 已取消
+						break;
+					case 2: // 已付款
+						break;
+					case 3: // 退款中
+						roomOrderStatus = 4; // 已取消
+						break;
+					case 4: // 已退款
+						roomOrderStatus = 5; // 已完成/關閉訂單
+						break;
+					}
 				} catch (NumberFormatException e) {
 					errorMsgs.add("請輸入數字.");
+					
 				}
 
 				RoomOrderVO roomOrderVO = new RoomOrderVO();
@@ -376,6 +392,8 @@ public class RoomOrderServlet extends HttpServlet {
 				} catch (IllegalArgumentException e) {
 					errorMsgs.add("check out 日期格式有誤");					
 				}
+				if(checkOutDate.getTime() < checkInDate.getTime())
+					errorMsgs.add("check out 日期需大於check in 日期");
 								
 //				java.sql.Timestamp expectArrTime = null;
 //				try {
@@ -386,15 +404,21 @@ public class RoomOrderServlet extends HttpServlet {
 				
 //				String roomOrderRemarks = req.getParameter("roomOrderRemarks");
 				
-				Integer roomOrderSum = null;
+				Integer roomPrice = null;
 				try {
-					roomOrderSum =new Integer(req.getParameter("roomOrderSum").trim());
+					roomPrice = new Integer(req.getParameter("roomPrice").trim());
+
 				} catch (NumberFormatException e) {
-					roomOrderSum = new Integer(0);
-					errorMsgs.add("請輸入數字.");
+					roomPrice = new Integer(0);
+					errorMsgs.add("房間價格請輸入數字.");
 				}
 				
-
+				int countday=(int) ((checkOutDate.getTime()-checkInDate.getTime())/(1000*60*60*24));		
+				System.out.println(countday);
+				
+				
+				Integer roomOrderSum = (int) (countday*roomPrice);
+				System.out.println(roomOrderSum);
 				
 //				Integer roomOrderStatus = new Integer(0);
 //				try {
@@ -500,12 +524,13 @@ public class RoomOrderServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				RoomOrderService roomOrderService = new RoomOrderService();
-				roomOrderVO = roomOrderService.fillRoomOrderInfo(sellMemId, memId, checkInDate, checkOutDate, 
-						 roomOrderSum);
+				roomOrderVO = roomOrderService.fillRoomOrderInfo(sellMemId, memId, checkInDate, checkOutDate, roomOrderSum );
 				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/roomorder/fillRoomOrder.jsp";
-				req.setAttribute("roomOrderVO", roomOrderVO);
+				String url = "/front-mem-end/roomorder/addRoomOrder.jsp";
+				req.setAttribute("roomOrderVO", roomOrderVO); 
+				req.setAttribute("countday", countday+"");
+				
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
@@ -513,7 +538,7 @@ public class RoomOrderServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				System.out.println("roomOrderServlet 聽說是額外的錯誤.. " + errorMsgs);
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/listOneRoom.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/room/listOneRoom.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -565,7 +590,8 @@ public class RoomOrderServlet extends HttpServlet {
 				try {
 					expectArrTime = java.sql.Timestamp.valueOf(req.getParameter("expectArrTime"));
 				} catch (IllegalArgumentException e) {
-					errorMsgs.add("expectArrTime 時間格式有誤");					
+					errorMsgs.add("expectArrTime 時間格式有誤");	
+					
 				}
 				
 				String roomOrderRemarks = req.getParameter("roomOrderRemarks");
@@ -686,8 +712,8 @@ public class RoomOrderServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				System.out.println("roomOrderServlet 聽說是額外的錯誤.. " + errorMsgs);
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/addRoomOrder.jsp");
+				System.out.println("insert這邊roomOrderServlet 聽說是額外的錯誤.. " + errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/room/listOneRoom.jsp");
 				failureView.forward(req, res);
 			}
 		}
