@@ -62,7 +62,7 @@
 					</div>
 					<div class="align-self-center underline">
 						<c:if test="${not empty sessionScope.memVO}">
-							<a href="<%=request.getContextPath()%>/front-mem-end/mem/mem_center_page.jsp"><h4>${memVO.mem_name} 會員中心</h4></a>
+							<a href="<%=request.getContextPath()%>/front-mem-end/mem/mem_center_page.jsp"><h4><i class="fas fa-child fa-1x" style="color: ghostwhite;"></i>會員中心</h4></a>
 						</c:if>
 
 						<c:if test="${empty sessionScope.memVO}">
