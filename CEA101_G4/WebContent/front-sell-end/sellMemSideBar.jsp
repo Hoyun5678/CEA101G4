@@ -5,11 +5,25 @@
 <head>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sideBar.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
+<style>
+#header-img{
+    width: 116px;
+    height: 55px;
+    
+}
+header{
+background-image:
+		url("../../image/mem_center/mem_back.jpg");
+background-size:cover;
+background-repeat:no-repeat;
+opacity: 0.4;
+}
+</style>
 </head>
 <body>
 <div id="sidebar">
     <header>
-        <a href="#">Super Going</a>
+        <img src="<%=request.getContextPath()%>/image/LOGO/tiger2.png" id="header-img">
     </header>
     <ul class="nav">
         <li>
@@ -32,7 +46,7 @@
             <a href="<%=request.getContextPath()%>/front-sell-end/activity_product/listOneActivityProduct.jsp"> <i class="zmdi zmdi-calendar"></i> 活動管理 </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/front-sell-end/activity_period/listOneActivityPeriod.jsp"> <i class="zmdi zmdi-settings"></i> 活動期別管理 </a>
+            <a href="<%=request.getContextPath()%>/front-sell-end/activity_period/listOneActivityPeriod.jsp"> <i class="zmdi zmdi-calendar"></i> 活動期別管理 </a>
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/front-sell-end/activity_order/sellListOneActivityOrder.jsp"> <i class="zmdi zmdi-settings"></i> 活動訂單管理 </a>
