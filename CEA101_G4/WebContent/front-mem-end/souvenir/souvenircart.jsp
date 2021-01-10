@@ -8,22 +8,28 @@
  <link rel="stylesheet" type="text/css" href="css/back-index-sidebar.css">
 </head>
 <style>
-		@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-        @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-        #countQuantity{
-        	display:inline;"
-        }
+#centertable{
+            margin-left: 50%;
+            transform: translateX(-50%);
+}
+
+*{
+text-align: center;
+}
 </style>
 <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
-<body bgcolor="#FFFFFF">
+<body>
 	<%@ include file="/front-mem-end/bar.jsp"%>
 <%Vector<SouvenirProductVO> buylist = (Vector<SouvenirProductVO>) session.getAttribute("soupVO");%>
 <%if (buylist != null && (buylist.size() > 0)) {%>
 <br>
-<table border="1" width="740">
-	<tr bgcolor="#999999">
-		<th width="200">特產名稱</th><th width="100">價格</th>
-		<th width="60">數量</th><th width="120"></th>
+<div class="container">
+<table id="centertable" class="table-sm table-hover" border="1" width="740">
+	<tr>
+		<th scope="col" width="200">特產名稱</th>
+		<th scope="col" width="100">價格</th>
+		<th scope="col" width="60">數量</th>
+		<th scope="col" width="120"></th>
 	</tr>
 	
 	<%
@@ -39,7 +45,7 @@
           <form name="deleteForm" action="<%=request.getContextPath()%>/shopping/shopping.do" method="POST">
               <input type="hidden" name="action" value="DELETECART">
               <input type="hidden" name="del" value="<%= index %>">
-              <input type="submit" value="刪除"></div>
+              <input type="submit" class="btn btn-outline-danger" value="刪除"></div>
         </td></form>
 	</tr>
 	<%}%>
@@ -47,8 +53,9 @@
 <p>
           <form name="checkoutForm" action="<%=request.getContextPath()%>/shopping/shopping.do" method="POST">
               <input type="hidden" name="action"	value="CHECKOUT"> 
-              <input type="submit" value="付款結帳">
+              <input type="submit" class="btn btn-success" value="付款結帳">
           </form>
 <%}%>
+</div>
 </body>
 </html>
