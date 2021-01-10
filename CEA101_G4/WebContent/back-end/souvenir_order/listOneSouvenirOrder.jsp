@@ -222,10 +222,65 @@ table.table.table-dark.table-striped {
 			<td>${soVO.sou_shipment_fee}</td>
 			<td>${soVO.sou_order_sum_price}</td>
 			<td>${soVO.sou_order_remarks}</td>
-			<td>${soVO.sou_shipping_method}</td>
-			<td>${soVO.sou_order_status}</td>  
-			<td>${soVO.sou_payment_status}</td>  
-			<td>${soVO.sou_shipment_status}</td> 
+			<td><c:choose>
+													<c:when test="${soVO.sou_shipping_method==0}">
+                                                        	宅配
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_shipping_method==1}">
+                                                       	 	超商取貨
+                                                    </c:when>
+                                                </c:choose></td>
+					<td><c:choose>
+                                                    <c:when test="${soVO.sou_order_status==0}">
+                                                        	處理中
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_order_status==1}">
+                                                       	 已確認
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_order_status==2}">
+                                                       	 已完成
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_order_status==3}">
+                                                    	 已取消
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_order_status==4}">
+                                                    	  已關閉
+                                                    </c:when>
+                                                </c:choose></td>
+					<td><c:choose>
+                                                    <c:when test="${soVO.sou_shipment_status==0}">
+                                                        	未付款
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_payment_status==1}">
+                                                       	 付款失敗
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_payment_status==2}">
+                                                       	 超過付款時間
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_payment_status==3}">
+                                                    	    已付款
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_payment_status==4}">
+                                                    	  退款中
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                      	  已退款
+                                                    </c:otherwise>
+                                                </c:choose></td>
+					<td><c:choose>
+                                                    <c:when test="${soVO.sou_shipment_status==0}">
+                                                       	訂單處理中
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_shipment_status==1}">
+                                                       	 準備出貨
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_shipment_status==2}">
+                                                       	已出貨
+                                                    </c:when>
+                                                    <c:when test="${soVO.sou_shipment_status==3}">
+                                                    	    已到貨
+                                                    </c:when>                    
+                                                </c:choose></td>
 			<td><fmt:formatDate value="${soVO.sou_order_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 	</tr>
 </table>

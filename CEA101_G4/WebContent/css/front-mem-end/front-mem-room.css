@@ -30,7 +30,10 @@
 		border-radius: 10px;
 		margin-top: 10px;
 		padding: 10px;
-		box-shadow: 2px 2px 5px #ccc;
+		box-shadow: 2px 2px 5px #8c8e98;
+		background-color: #5a5c69;
+		color: #ccc;
+		height: 230px;
 	}
 	.carousel-item {
  		width: 100%;

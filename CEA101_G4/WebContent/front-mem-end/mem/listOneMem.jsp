@@ -15,6 +15,7 @@
 #logo{
     margin-top: -25px;
 }
+
 </style>
 
 </head>
@@ -26,68 +27,107 @@
 	<div>
 		<%@include file="/front-mem-end/mem/update_mem_pwd.jsp"%>
 	</div>
-
+	
 
 	<FORM METHOD="post"
 		ACTION="<%=request.getContextPath()%>/member/member.do" name="form1">
 		<table>
-			<tr>
-				<td>會員編號:</td>
-				<td><input
-			type="text" name="mem_id" value="${memVO.mem_id}" readonly/></td>
-			</tr>
-			<tr>
-				<td>會員帳號:</td>
-				<td><input type="TEXT" name="mem_account" size="45"
-					value="${memVO.mem_account}" readonly /></td>
-			</tr>
-			<tr>
-				<td>會員姓名:</td>
-				<td><input type="TEXT" name="mem_name" size="45"
-					value="${memVO.mem_name}" readonly/></td>
-			</tr>
-			<tr>
-				<td>會員生日:</td>
-				<td><input type="TEXT" name="mem_birth" size="45" id="f_date1"
-					value="${memVO.mem_birth}" readonly/></td>
-			</tr>
-			<tr>
-				<td>會員電話:</td>
-				<td><input type="TEXT" name="mem_tel" size="45"
-					value="${memVO.mem_tel}" readonly class="can_change"/></td>
-			</tr>
-			<tr>
-				<td>會員地址:</td>
-				<td><input type="TEXT" name="mem_address" size="45"
-					value="${memVO.mem_address}" readonly class="can_change"/></td>
-			</tr>
-
-			<tr>
-				<td>會員信箱:</td>
-				<td><input type="TEXT" name="mem_mail" size="45"
-					value="${memVO.mem_mail}" readonly /></td>
-			</tr>
-			<tr>
-				<td>會員性別:</td>
-				<td>${memVO.mem_gender eq 0?"男":"女"}
-				<input type="hidden" name="mem_gender" size="45"
-					value="${memVO.mem_gender}" readonly /></td>
-			</tr>
-
+			 <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員編號:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control" id="mem_id" name="mem_id" value="${memVO.mem_id}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員帳號:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control" id="mem_account" name="mem_account" value="${memVO.mem_id}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員姓名:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control can_change" id="mem_name" name="mem_name" value="${memVO.mem_name}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員生日:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control" id="mem_birth" name="mem_birth" value="${memVO.mem_birth}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員電話:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control can_change" id="mem_tel" name="mem_tel" value="${memVO.mem_tel}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員地址:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control can_change" id="mem_address" name="mem_address" value="${memVO.mem_address}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員信箱:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control" id="mem_mail" name="mem_mail" value="${memVO.mem_mail}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-4 d-inline-block">
+                <label class="d-flex justify-content-end">會員性別:</label>
+            </div>
+            <div class="col-5 d-inline-block">
+                <input type="text" readonly class="form-control" id="mem_gender"  value="${memVO.mem_gender eq 0?"男":"女"}" />
+                <input type="hidden" value="memVO.mem_gender" name="mem_gender"/>
+            </div>
+        </div>
 
 		</table>
-		<input type="hidden" name="action" value="update" /> 
-		<button type="button" class="btn btn-warning" id="mem_change">
-			修改<span class="glyphicon glyphicon-send"></span>
-		</button>
-		<button type="submit" class="btn btn-warning" id="mem_submit">
-			送出<span class="glyphicon glyphicon-send"></span>
-		</button>
-		<button type="button" class="btn btn-warning" id="pwd_light_box">
-			修改密碼<span class="glyphicon glyphicon-send"></span>
-		</button>
+		<div class="form-group">
+        <div class="col-10" style="text-align: center;">
+            <input type="hidden" name="action" value="update" />
+            <button type="button" class="btn btn-warning" id="mem_change" style="margin-left: 70px;">
+                修改<span class="glyphicon glyphicon-send"></span>
+            </button>
+            <button type="submit" class="btn btn-warning" id="mem_submit" style="display:none;margin-left: 70px;">
+                送出<span class="glyphicon glyphicon-send"></span>
+            </button>
+            <button type="button" class="btn btn-warning" id="pwd_light_box">
+                修改密碼<span class="glyphicon glyphicon-send"></span>
+            </button>
+        </div>
+    </div>
 	</FORM>
-
+	
+					<div class="row">
+						<c:if test="${not empty errorMsgs}">
+							<%-- 錯誤表列 from Servlet --%>
+							<div class="alert alert-danger col-lg-3 col-lg-offset-1" role="alert" id="titleAndError">
+								<font style="color:red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color:red">${message}</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>
+					</div>
 
 </body>
 <script
@@ -109,9 +149,10 @@
         	$("#mem_change").click(function(){
         		$("#mem_change").css("display","none");
         		$(".can_change").removeAttr("readonly");
-        		$(".can_change").css("outline","2px solid gray");
+        		$("#mem_submit").css("display","inline");
         	});
             $("#pwd_light_box").click(function() {
+                $("#a1").css("display", "block");
                 $("#fix_pwd").css("display", "block");
             });
 
@@ -153,7 +194,8 @@
                         mem_pwd: {
                             validators: {
                                 stringLength: {
-                                    min: 8
+                                    min: 8,
+                                    message: '請輸入密碼，有效長度至少為8'
                                 },
 
                                 notEmpty: {
@@ -224,6 +266,8 @@
                             },
                             'json');
                 });
+
+
 
         })
 </script>

@@ -74,8 +74,7 @@ SouvenirOrderDetailVO sodVO = (SouvenirOrderDetailVO) request.getAttribute("sodV
 	</tr>
 	<tr>
 		<td>特產商品編號:</td>
-		<td><input type="TEXT" name="sou_id" size="45"
-			 value="<%=sodVO.getSou_id()%>" /></td>
+		<td><%=sodVO.getSou_id()%></td>
 	</tr>
 	<tr>
 		<td>特產訂購數量:</td>
@@ -92,6 +91,7 @@ SouvenirOrderDetailVO sodVO = (SouvenirOrderDetailVO) request.getAttribute("sodV
 <br>
 <input type="hidden" name="action" value="update">
 <input type="hidden" name="sou_order_id" value="<%=sodVO.getSou_order_id()%>">
+<input type="hidden" name="sou_id" value="<%=sodVO.getSou_id()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

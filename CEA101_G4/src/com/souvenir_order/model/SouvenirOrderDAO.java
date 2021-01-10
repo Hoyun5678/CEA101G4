@@ -1,6 +1,7 @@
 package com.souvenir_order.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.souvenir_order.model.SouvenirOrderVO;
+import com.souvenir_order_detail.model.SouvenirOrderDetailJDBCDAO;
+import com.souvenir_order_detail.model.SouvenirOrderDetailVO;
 
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_SouvenirOrder;
 
@@ -371,6 +374,93 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 			}
 		}
 		return list;
+	}
+	@Override 
+	public void insertWithDetail( SouvenirOrderVO soVO , List<SouvenirOrderDetailVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			
+			// 1●設定於 pstm.executeUpdate()之前
+    		con.setAutoCommit(false);
+			
+    		// 先新增部門
+			String cols[] = {"sou_id"};
+			pstmt = con.prepareStatement(INSERT_STMT , cols);			
+			pstmt.setString(1, soVO.getEmp_id());
+			pstmt.setString(2, soVO.getMem_id());
+			pstmt.setString(3, soVO.getSou_receiver_name());
+			pstmt.setString(4, soVO.getSou_receiver_address());
+			pstmt.setString(5, soVO.getSou_receiver_phone());
+			pstmt.setInt(6, soVO.getSou_shipment_fee());
+			pstmt.setInt(7, soVO.getSou_order_sum_price());
+			pstmt.setString(8, soVO.getSou_order_remarks());
+			pstmt.setInt(9, soVO.getSou_shipping_method());
+			pstmt.setInt(10, soVO.getSou_order_status());
+			pstmt.setInt(11, soVO.getSou_payment_status());
+			pstmt.setInt(12, soVO.getSou_shipment_status());
+
+			pstmt.executeUpdate();
+			//掘取對應的自增主鍵值
+			String next_sou_id = null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_sou_id = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_sou_id +"(剛新增成功的特產編號)");
+			} else {
+				System.out.println("未取得自增主鍵值");
+			}
+			rs.close();
+			// 再同時新增員工
+			SouvenirOrderDetailJDBCDAO dao = new SouvenirOrderDetailJDBCDAO();
+			System.out.println("list.size()-A="+list.size());
+			for (SouvenirOrderDetailVO aSOD : list) {
+				aSOD.setSou_id(new String(next_sou_id)) ;
+				dao.insert2(aSOD,con);
+			}
+
+			// 2●設定於 pstm.executeUpdate()之後
+			con.commit();
+			con.setAutoCommit(true);
+			System.out.println("list.size()-B="+list.size());
+			System.out.println("新增訂單編號" + next_sou_id + "時,共有" + list.size()
+					+ "產品同時被新增");
+			
+			// Handle any driver errors
+		}  catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-SO");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 	public static void main(String[] args) {
 		SouvenirOrderDAO dao = new SouvenirOrderDAO();

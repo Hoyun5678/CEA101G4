@@ -2,6 +2,7 @@ package com.room.controller;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -75,6 +76,103 @@ public class RoomServlet extends HttpServlet {
 						.getRequestDispatcher("/front-sell-end/room/select_page.jsp");
 				failureView.forward(req, res);
 			}
+		}
+		
+		if("getByMultiCondition".equals(action)) {
+			System.out.println("test getByMulti");
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				RoomService roomSvc = new RoomService();
+				List<RoomVO> dateFilterRoomList = null;
+				List<RoomVO> conditionFilterRoomList = null;
+				List<RoomVO> resultRoomList = null;
+				Map<String, String[]> queryMap = new TreeMap<String, String[]>();
+				
+				
+				
+				// datefilter checkin&checkout 格式: 01/29/2021 - 02/02/2021
+				String datefilter = req.getParameter("datefilter");
+				if(datefilter == null || datefilter.trim().length() < 1) {
+					System.out.println("使用者未輸入日期");
+				} else {
+					// 處理日期格式
+					String[] dateList = datefilter.split(" ~ ");
+					dateFilterRoomList = roomSvc.getByDateRange(java.sql.Date.valueOf(dateList[0]), java.sql.Date.valueOf(dateList[1]));
+				}
+				
+				// sel 關鍵字
+				String sel = req.getParameter("sel");
+				if(sel == null || sel.trim().length() < 1) {
+					System.out.println("使用者未輸入地點");
+				} else {
+					queryMap.put("ROOM_NAME", new String[] { sel });
+					queryMap.put("ROOM_DES", new String[] { sel });
+					queryMap.put("SELL_MEM_ADDRESS", new String[] { sel });
+				}
+				
+				// roomCapacity
+				Integer roomCapacity = null;
+				try {
+					roomCapacity = Integer.parseInt(req.getParameter("roomCapacity"));
+				} catch(Exception e) {
+					errorMsgs.add("入住人數格式錯誤 " + e.getMessage());
+				}
+				queryMap.put("ROOM_CAPACITY", new String[] { roomCapacity.toString() });
+
+//				 Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-index.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+//				
+//				/***************************2.開始查詢資料*****************************************/
+				roomSvc = new RoomService();
+				conditionFilterRoomList = roomSvc.getAll(queryMap);
+				System.out.println("dateList = " + dateFilterRoomList);
+				System.out.println("conList = " + conditionFilterRoomList);
+				
+				List<String> dateStringList = new ArrayList<String>();
+				dateFilterRoomList.forEach(e -> dateStringList.add(e.getRoomId()));
+				
+				resultRoomList = conditionFilterRoomList.stream()
+						.filter(e -> dateStringList.contains(e.getRoomId()))
+						.collect(Collectors.toList());
+				
+				
+//				if (roomVO == null) {
+//					errorMsgs.add("查無資料");
+//				}
+//				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					RequestDispatcher failureView = req
+//							.getRequestDispatcher("/front-sell-end/room/select_page.jsp");
+//					failureView.forward(req, res);
+//					return;//程式中斷
+//				}
+//				
+//				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("list", resultRoomList); // 資料庫取出的roomVO物件,存入req
+				System.out.println("對還不對啦 ..." + resultRoomList);
+				String url = "/front-mem-end/room/listAllRoom.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-sell-end/room/select_page.jsp");
+				failureView.forward(req, res);
+			}
+			
 		}
 		
 		

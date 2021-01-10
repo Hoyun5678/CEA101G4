@@ -645,6 +645,8 @@ public class SellServlet extends HttpServlet {
 
 				SellVO sellVO = sellSvc.getSellByCol("SELL_MEM_ACCOUNT", sellMemAccount);
 				String sellMemPwd = req.getParameter("sellMemPwd").trim();
+				System.out.println("sellMemAccount = " + sellMemAccount);
+				System.out.println("sellMemPwd = " + sellMemPwd);
 				
 				if (sellVO == null || !sellMemPwd.equals(sellVO.getSellMemPwd())) {
 					errorMsgs.add("帳號或密碼錯誤，請重新登入！");

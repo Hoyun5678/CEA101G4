@@ -26,6 +26,7 @@
         /* table_list樣式開始 */
         .listTable{
             /* border: 1px solid red; */
+            text-align:center;
             margin: 50px auto;
             padding: 10px;
             border-radius: 5px;
@@ -73,6 +74,34 @@
             border: 3px solid #fce40d !important;
             background-color: #fff !important;
         }
+        .btn1{
+        
+            letter-spacing: 2px;
+            padding: 10px;
+            outline: none;
+            cursor: pointer;
+            width: 95px;
+            background-color: #fce40d !important;
+            border: 3px solid #fce40d !important;
+            padding:10px !important;
+            border-radius:0px !important;
+            color: #332926;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn1:hover{
+        font-weight: 600;
+            letter-spacing: 2px;
+            padding: 10px;
+            outline: none;
+            cursor: pointer;
+            width: 95px;
+            background-color: #fce40d !important;
+            border: 3px solid #fce40d !important;
+            padding:10px !important;
+            border-radius:0px !important;
+            color: #332926;
+            transition: all 0.2s ease-in-out;
+        }
         .submitBtn{
             font-weight: 600;
             letter-spacing: 2px;
@@ -101,6 +130,8 @@
             z-index: 0;
             top: 0;
             left: 0;
+            display:none;
+            
         }
         .itemLightbox{
             /* border: 1px solid red;  */
@@ -119,6 +150,7 @@
             /* box-shadow: 0px 5px 40px -22px #8b8b8b; */
             box-shadow: 0px 5px 34px -19px #000000;
             z-index: 1;
+            display:none;
         }
         .close{
             position: absolute;
@@ -183,17 +215,28 @@
 	 <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" />
 	  <c:forEach var="actperVO" items="${actperSvc.all}">
     <table class="listTable">
-        <tr>
-            <td><img class="list-photo"src="<%=request.getContextPath()%>
+    	<tr>
+    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>
 											/ActivityPhoto/ActivityPhoto.do?act_id=
 											${actperVO.act_id}&action=getListActPhoByActId"></td>
+    	<td>活動名稱</td>
+    	<td>活動時間</td>
+    	<td>活動價格</td>
+    	<td>活動地點</td>
+    	
+    	
+    	</tr>
+        <tr>
+            
             <td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
-            <td>資料2</td>
-            <td>資料3</td>
-            <td>資料4</td>
-            <td><button class="btn">查看商品</button></td>
-            <td><input type="submit" value="參加" class="submitBtn"></td>
+            <td>${actperVO.act_period_start}</td>
+            <td>${actperVO.act_cur_price}</td>
+            <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
+            <td><button class="btn" type="button">查看商品</button></td>
+            <td><button class="btn1">瀏覽評論</button></td>
+            
         </tr>
+        
     </table>
     <!-- 表格結束 -->
     <!-- 燈箱開始 -->
@@ -223,27 +266,30 @@
             <!-- 輪播結束 -->
             <!-- 這是商品資料 -->
             <div class="itemData">
-                <form class="itemForm">
+                
                     <table class="itemTable">
+                     <form method="post" action="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
                         <tr>
-                            <th>商品資料1</th>
+                            <td>活動介紹</td>
                         </tr>
                         <tr>
-                            <td>商品資料2</td>
+                            <td>${actproSvc.getOneActPro(actperVO.act_id).act_des}</td>
                         </tr>
-                        <tr>
-                            <td>商品資料3商品資料3商品資料3商品資料3商品資料3商品資料3</td>
-                        </tr>
-                        <tr>
-                            <td>商品資料4</td>
-                        </tr>
-                        <tr>
-                            <td>商品資料5</td>
-                        </tr>
+                        <tr><td>活動參與人數</td><td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td></tr>
+                        <tr><td>備註: <input type="textarea" name="act_order_remarks"></td></tr>
+                        
+                        
+                  
+            <input type="hidden" name="action" value="insert">
+            <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
+            <input type="submit" class="submitBtn" value="參加">
+            </form>
+            
+                       
                     </table>
                     <!-- button先放這 -->
-                    <input type="submit" value="參加" class="submitBtn">
-                </form>
+                   
+                
             </div>
         </div>
     </div>
@@ -280,8 +326,8 @@
         let bg = document.getElementsByClassName('itemLightboxBg');
         for (let i = 0; i < viewBtn.length; i++) { lightbox[i].style.display = 'none';
             bg[i].style.display = 'none';
-            window.addEventListener('load', function() { viewBtn[i].addEventListener('click', function() { lightbox[i].style.display = '';
-                    bg[i].style.display = ''; });
+            window.addEventListener('load', function() { viewBtn[i].addEventListener('click', function() { lightbox[i].style.display = 'block';
+                    bg[i].style.display = 'block'; });
                 closeBtn[i].addEventListener('click', function() { lightbox[i].style.display = 'none';
                     bg[i].style.display = 'none'; }); }); }
     </script>

@@ -26,7 +26,7 @@
             	<i class="zmdi zmdi-widgets"></i> 房間管理 </a>
         </li>
         <li>
-            <a href="#"> <i class="zmdi zmdi-calendar"></i> 房間訂單管理 </a>
+            <a href="<%=request.getContextPath()%>/front-sell-end/roomorder/listAllRoomOrder.jsp"> <i class="zmdi zmdi-calendar"></i> 房間訂單管理 </a>
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/front-sell-end/activity_product/listOneActivityProduct.jsp"> <i class="zmdi zmdi-calendar"></i> 活動管理 </a>

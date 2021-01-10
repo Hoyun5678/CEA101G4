@@ -330,7 +330,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 
 			Class.forName(Util.DRIVER);
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			String finalSQL = "SELECT * FROM ROOM_PRODUCT"
+			String finalSQL = "SELECT * FROM ROOM_PRODUCT LEFT JOIN SELLER_MEMBER ON ROOM_PRODUCT.SELL_MEM_ID = SELLER_MEMBER.SELL_MEM_ID "
 					+ jdbcUtil_CompositeQuery_Room.get_WhereCondition(map);
 			
 			pstmt = con.prepareStatement(finalSQL);
@@ -389,7 +389,6 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 	
 	@Override
 	public List<RoomVO> getByDateRange(Date from, Date to) {
-		RoomVO roomVO = null;
 		RoomService roomSvc = new RoomService();
 		List<RoomVO> list = roomSvc.getAll();
 		Connection con = null;
@@ -410,9 +409,10 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 					listOrderedRoomId.add(rs.getString(1));
 				}
 				fromToLong += 24 * 60 * 60 * 1000L;
-			}while(fromToLong < to.getTime());
+			} while(fromToLong < to.getTime());
 			System.out.println("not qualified roomVO : " + listOrderedRoomId);
 			
+			// return qulified roomVO List
 			list = (List<RoomVO>) list.stream()
 					.filter(e -> !listOrderedRoomId.contains(e.getRoomId()))
 					.collect(Collectors.toList());

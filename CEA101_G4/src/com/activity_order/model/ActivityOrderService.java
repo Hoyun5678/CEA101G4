@@ -31,6 +31,11 @@ public class ActivityOrderService {
 	public void changeActOrderStatus(ActivityOrderVO actordVO) {
 		dao.update(actordVO);
 	}
+	
+	public void insertActivityOrder(ActivityOrderVO actordVO) {
+		dao.insert(actordVO);
+	}
+
 
 //	public Set<ActivityOrderVO> getEmpsByDeptno(String act_order_id) {
 //		return dao.getEmpsByDeptno(act_order_id);

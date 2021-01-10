@@ -1,5 +1,6 @@
         @import "../css/common/nav.css";
         @import "../css/common/footer.css";
+        @import url("https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous")
         
         
         a {
@@ -466,7 +467,7 @@
             position: relative;
         }
 
-        .underline>h4 {
+        .underline h4 {
             font-weight: bold;
         }
 
