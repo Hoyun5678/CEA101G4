@@ -10,8 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.activity_order.model.*;
+import com.activity_period.model.ActivityPeriodService;
+import com.member.model.MemberVO;
 
 public class ActivityOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -315,143 +318,61 @@ public class ActivityOrderServlet extends HttpServlet {
 //				}
 //			}
 //
-//			if ("insert".equals(action)) { // 來自addEmp.jsp的請求
-//
-//				List<String> errorMsgs = new LinkedList<String>();
-//				// Store this set in the request scope, in case we need to
-//				// send the ErrorPage view.
-//				req.setAttribute("errorMsgs", errorMsgs);
-//
-//				try {
-//					/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-//					String emp_id = req.getParameter("emp_id").trim();
-//					String empIdReg = "^[(a-zA-Z0-9)]{2,100}$";
-//					if (emp_id == null || emp_id.trim().length() == 0) {
-//						errorMsgs.add("員工編號請勿空白");
-//					} else if (!emp_id.trim().matches(empIdReg)) {
-//						errorMsgs.add("員工編號: 只能是英文字母、數字和 , 且長度必需在2到10之間");
-//					}
-//					String mem_id = req.getParameter("mem_id").trim();
-//					String memIdReg = "^[(a-zA-Z0-9)]{2,100}$";
-//					if (mem_id == null || mem_id.trim().length() == 0) {
-//						errorMsgs.add("會員編號請勿空白");
-//					} else if (!mem_id.trim().matches(memIdReg)) {
-//						errorMsgs.add("會員編號: 只能是英文字母、數字和 , 且長度必需在2到10之間");
-//					}
-////					java.sql.Timestamp sou_order_date = null;
-////					try {
-////						String sod=req.getParameter("sou_order_date").trim();
-////						sou_order_date = java.sql.Timestamp.valueOf(sod);
-////					} catch (IllegalArgumentException e) {
-////						sou_order_date = new java.sql.Timestamp(System.currentTimeMillis());
-////						errorMsgs.add("請加入時間");
-////					}
-//					String sou_receiver_name = req.getParameter("sou_receiver_name").trim();
-//					if (sou_receiver_name == null || emp_id.trim().length() == 0) {
-//						errorMsgs.add("收穫人姓名請勿空白");
-//					} 
-//					String sou_receiver_address = req.getParameter("sou_receiver_address").trim();
-//					if (sou_receiver_name == null || emp_id.trim().length() == 0) {
-//						errorMsgs.add("收穫人地址請勿空白");
-//					} 
-//					
-//					String sou_receiver_phone = req.getParameter("sou_receiver_phone").trim();
-//					String sRPReg = "09\\d{8}";
-//					if (sou_receiver_phone == null || sou_receiver_phone.trim().length() == 0) {
-//						errorMsgs.add("收穫人電話請勿空白");
-//					} else if (!sou_receiver_phone.trim().matches(sRPReg)) {
-//						errorMsgs.add("收穫人電話: 只能是數字 ,開頭為09 且長度必需是10喔");
-//					}
-//					
-//					
-//					Integer sou_shipment_fee = null;
-//					try {
-//						sou_shipment_fee =new Integer(req.getParameter("sou_shipment_fee").trim());
-//					} catch (NumberFormatException e) {
-//						sou_shipment_fee = new Integer(0);
-//						errorMsgs.add("請輸入數字.");
-//					}
-//					Integer sou_order_sum_price = null;
-//					try {
-//						sou_order_sum_price =new Integer(req.getParameter("sou_order_sum_price").trim());
-//					} catch (NumberFormatException e) {
-//						sou_order_sum_price = new Integer(0);
-//						errorMsgs.add("請輸入數字.");
-//					}
-//					String sou_order_remarks = req.getParameter("sou_order_remarks").trim();
-//					Integer sou_shipping_method = null;
-//					try {
-//						sou_shipping_method =new Integer(req.getParameter("sou_shipping_method").trim());
-//					} catch (NumberFormatException e) {
-//						sou_shipping_method = new Integer(0);
-//						errorMsgs.add("請輸入數字.");
-//					}
-//					Integer sou_order_status = null;
-//					try {
-//						sou_order_status =new Integer(req.getParameter("sou_order_status").trim());
-//					} catch (NumberFormatException e) {
-//						sou_order_status = new Integer(0);
-//						errorMsgs.add("請輸入數字.");
-//					}
-//					Integer sou_payment_status = null;
-//					try {
-//						sou_payment_status =new Integer(req.getParameter("sou_payment_status").trim());
-//					} catch (NumberFormatException e) {
-//						sou_payment_status = new Integer(0);
-//						errorMsgs.add("請輸入數字.");
-//					}
-//					Integer sou_shipment_status = null;
-//					try {
-//						sou_shipment_status =new Integer(req.getParameter("sou_shipment_status").trim());
-//					} catch (NumberFormatException e) {
-//						sou_shipment_status = new Integer(0);
-//						errorMsgs.add("請輸入數字.");
-//					}
-//			
-//
-//					SouvenirOrderVO soVO = new SouvenirOrderVO();
-//					soVO.setEmp_id(emp_id);
-//					soVO.setMem_id(mem_id);
-////					soVO.setSou_order_date(sou_order_date);
-//					soVO.setSou_receiver_name(sou_receiver_name);
-//					soVO.setSou_receiver_address(sou_receiver_address);
-//					soVO.setSou_receiver_phone(sou_receiver_phone);
-//					soVO.setSou_shipment_fee(sou_shipment_fee);
-//					soVO.setSou_order_sum_price(sou_order_sum_price);
-//					soVO.setSou_order_remarks(sou_order_remarks);
-//					soVO.setSou_shipping_method(sou_shipping_method);
-//					soVO.setSou_order_status(sou_order_status);
-//					soVO.setSou_payment_status(sou_payment_status);
-//					soVO.setSou_shipment_status(sou_shipment_status);
-//					
-//			
-//					// Send the use back to the form, if there were errors
-//					if (!errorMsgs.isEmpty()) {
-//						req.setAttribute("soVO", soVO); // 含有輸入格式錯誤的empVO物件,也存入req
-//						RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
-//						failureView.forward(req, res);
-//						return;
-//					}
-//
-//					/*************************** 2.開始新增資料 ***************************************/
-//					SouvenirOrderService soSvc = new SouvenirOrderService();
-//					soVO = soSvc.addSouvenirOrder(emp_id, mem_id,
-//							sou_receiver_name, sou_receiver_address, sou_receiver_phone, sou_shipment_fee,
-//							 sou_order_sum_price, sou_order_remarks, sou_shipping_method,
-//							sou_order_status, sou_payment_status, sou_shipment_status);
-//
-//					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-//					String url = "/back-end/souvenir_order/listAllSouvenirOrder.jsp";
-//					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-//					successView.forward(req, res);
-//
-//					/*************************** 其他可能的錯誤處理 **********************************/
-//				} catch (Exception e) {
-//					errorMsgs.add(e.getMessage());
-//					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
-//					failureView.forward(req, res);
-//				}
-//			}
+			if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+
+				try {
+					/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+					//確認一般會員登入狀態
+					HttpSession session = req.getSession();
+					MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+					if(memVO==null) {   //確認是否登入 為登入導置登入頁面
+						RequestDispatcher plsLogin = req.getRequestDispatcher("/front-mem-end/mem/memLogin.jsp");
+						plsLogin.forward(req, res);
+						return;
+					}
+					String mem_id = memVO.getMem_id();
+					String act_period_id=req.getParameter("act_period_id");
+					ActivityPeriodService actperSvc=new ActivityPeriodService();
+					System.out.println(req.getParameter("act_order_amount"));
+					Integer act_order_amount=Integer.parseInt(req.getParameter("act_order_amount"));
+					Double act_cur_price=actperSvc.getOneActPeriod(act_period_id).getAct_cur_price();
+					Double act_sum_price=act_order_amount*act_cur_price;
+					Integer act_order_status=1;//以確認訂單狀態
+					Integer act_payment_status=0;//付款狀態為 未付款
+					String act_order_remarks=req.getParameter("act_order_remarks");
+			
+
+					ActivityOrderVO actordVO = new ActivityOrderVO();
+					actordVO.setMem_id(mem_id);
+					actordVO.setAct_period_id(act_period_id);
+					actordVO.setAct_order_amount(act_order_amount);
+					actordVO.setAct_sum_price(act_sum_price);
+					actordVO.setAct_order_status(act_order_status);
+					actordVO.setAct_payment_status(act_payment_status);
+					actordVO.setAct_order_remarks(act_order_remarks);
+			
+
+					/*************************** 2.開始新增資料 ***************************************/
+					ActivityOrderService actordSvc = new ActivityOrderService();
+					actordSvc.insertActivityOrder(actordVO);
+
+					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+					String url = "/front-mem-end/activity_order/listOneActivityOrder.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+					successView.forward(req, res);
+
+					/*************************** 其他可能的錯誤處理 **********************************/
+				} catch (Exception e) {
+					errorMsgs.add(e.getMessage());
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
+					failureView.forward(req, res);
+				}
+			}
 //
 //			if ("delete".equals(action)) { // 來自listAllSouvenir_Order.jsp
 //
