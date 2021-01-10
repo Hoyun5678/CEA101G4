@@ -20,7 +20,7 @@
 </head>
 <body style="background-color: #40444e;">
 
-<%@include file="/front-nav-bar.jsp" %>
+<%@include file="/front-mem-end/front-nav-bar.jsp" %>
 <div class="container" style="margin-top: 200px;">
 
 <c:set var="list" value="${param.list}" scope="page" />
