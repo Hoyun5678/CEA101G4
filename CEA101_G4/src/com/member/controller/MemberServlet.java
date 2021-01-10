@@ -271,8 +271,10 @@ public class MemberServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-				String mem_id = req.getParameter("mem_id").trim();
-
+				HttpSession session = req.getSession();
+				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+				String mem_id=memVO.getMem_id();
+				
 //				String mem_account = req.getParameter("mem_account").trim();
 //				String maccountReg = "^[(a-zA-Z0-9)]{2,100}$";
 //				if (mem_account == null || mem_account.trim().length() == 0) {
@@ -289,13 +291,13 @@ public class MemberServlet extends HttpServlet {
 //					errorMsgs.add("會員帳號: 只能是英文字母、數字和 , 且長度必需在2到10之間");
 //				}
 
-//				String mem_name = req.getParameter("mem_name");
-//				String mnameReg = "^[(\u4e00-\u9fa5)]{2,100}$";
-//				if (mem_name == null || mem_name.trim().length() == 0) {
-//					errorMsgs.add("會員姓名: 請勿空白");
-//				} else if (!mem_name.trim().matches(mnameReg)) { // 以下練習正則(規)表示式(regular-expression)
-//					errorMsgs.add("會員姓名: 只能是中文, 且長度必需在2到10之間");
-//				}
+				String mem_name = req.getParameter("mem_name");
+				String mnameReg = "^[(\u4e00-\u9fa5)]{2,100}$";
+				if (mem_name == null || mem_name.trim().length() == 0) {
+					errorMsgs.add("會員姓名: 請勿空白");
+				} else if (!mem_name.trim().matches(mnameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("會員姓名: 只能是中文, 且長度必需在2到10之間");
+				}
 
 //				java.sql.Date mem_birth = null;
 //				try {
@@ -318,9 +320,11 @@ public class MemberServlet extends HttpServlet {
 				String mem_address = null;
 				try {
 					mem_address = req.getParameter("mem_address").trim();
+					if(mem_address.isEmpty()) {
+						errorMsgs.add("請輸入地址");
+					}
 				} catch (NullPointerException e) {
 					mem_address = "";
-					errorMsgs.add("請打入地址.");
 				}
 
 //				String mem_mail = null;
@@ -362,8 +366,6 @@ public class MemberServlet extends HttpServlet {
 //					errorMsgs.add("請加入時間");
 //				}
 
-				MemberService memSvc = new MemberService();
-				MemberVO memVO=memSvc.getOneMem(mem_id);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memVO", memVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -373,9 +375,9 @@ public class MemberServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
-	
+				MemberService memSvc=new MemberService();
 				
-				memVO = memSvc.updateMemNormal(mem_id,  mem_tel, mem_address);
+				memVO = memSvc.updateMemNormal(mem_id,mem_name, mem_tel, mem_address);
 				
 //				memVO = memSvc.updateMem(mem_id, mem_account, mem_pwd, mem_name, mem_birth, mem_tel, mem_address,
 //						mem_mail, mem_id_number, mem_acc_status, mem_gender, mem_jointime);

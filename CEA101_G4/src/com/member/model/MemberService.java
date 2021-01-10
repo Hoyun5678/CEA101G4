@@ -26,13 +26,13 @@ public class MemberService {
 		return memVO;
 		
 	}
-	public MemberVO updateMemNormal(String mem_id,String mem_tel,String mem_address) {
+	public MemberVO updateMemNormal(String mem_id,String mem_name,String mem_tel,String mem_address) {
 		MemberService memSvc=new MemberService();
 		MemberVO memVO=memSvc.getOneMem(mem_id);
 		memVO.setMem_id(memVO.getMem_id());
 		memVO.setMem_account(memVO.getMem_account());
 		memVO.setMem_pwd(memVO.getMem_pwd());
-		memVO.setMem_name(memVO.getMem_name());
+		memVO.setMem_name(mem_name);
 		memVO.setMem_birth(memVO.getMem_birth());
 		memVO.setMem_tel(mem_tel);
 		memVO.setMem_address(mem_address);
