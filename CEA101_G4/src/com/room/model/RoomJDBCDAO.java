@@ -334,7 +334,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 					+ jdbcUtil_CompositeQuery_Room.get_WhereCondition(map);
 			
 			pstmt = con.prepareStatement(finalSQL);
-//			System.out.println("finalSQL = " + finalSQL);
+			System.out.println("finalSQL = " + finalSQL);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -410,7 +410,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 				}
 				fromToLong += 24 * 60 * 60 * 1000L;
 			} while(fromToLong < to.getTime());
-//			System.out.println("not qualified roomVO : " + listOrderedRoomId);
+			System.out.println("not qualified roomVO : " + listOrderedRoomId);
 			
 			// return qulified roomVO List
 			list = (List<RoomVO>) list.stream()
