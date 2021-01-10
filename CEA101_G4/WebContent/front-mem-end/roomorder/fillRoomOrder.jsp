@@ -47,7 +47,7 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
                     <div class="row"> 
 <%--                     <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId()}" begin="1" end="1">                   --%>
                         <div class="col-lg-6" id="orderpic">
-                            <img id="orderimg" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomVO.roomId}&action=getOnePhotoByRoomId">                       
+                            <img id="orderimg" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomVO.roomId }&action=getOnePhotoByRoomId">                       
                         </div>
 <%--                         </c:forEach> --%>
                       
@@ -58,31 +58,27 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4" id="checkin">
+                        <div class="col-lg-6" id="checkin">
                             <div class="datetitle">入住日期 ${roomOrderVO.checkInDate}</div>
                         </div>
-                        <div class="col-lg-4" id="checkout">
+                        <div class="col-lg-6" id="checkout">
                             <div class="datetitle">退房日期${roomOrderVO.checkOutDate}</div>
                         </div>
                     </div>
-                   <div class="row" id="ordthird">
-                        <div class="col-3" id="stay">
-                            <div class="datetitle">總共入住</div>
-                            <div id="night">${countday}晚</div>
-                        </div>
-                        <div class="col-3" id="choosetype">
+                    <div class="row" id="ordthird">                      
+                        <div class="col-12" id="choosetype">
                             <div id="choose">已選擇</div>
                             <div id="roomtype">${roomVO.roomName}</div>
-                        </div>                                          
+                        </div>
                         <div class="col-3" id="arrtime">預計抵達時間
                             <div id="seltime">
-                              <input name="expectArrTime" id="sellecttime" placeholder="請選擇抵達時間" type="text">                             
+                              <input name="sellarrtime" id="sellecttime" placeholder="請選擇抵達時間" type="text">                             
                             </div>
                         </div>
                     </div>
                     <div id="roomprice">房價總額</div>
                     <div id="price">$ ${roomOrderVO.roomOrderSum}</div>
-                    
+                
                 </div>
                 
                 <div class="form-content">
@@ -94,19 +90,19 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
                         <p>請輸入入住者資料</p>
                         <button type="button" class="button" onClick="sameAsMem()" id="memBtn">同會員資料</button>
                         <div class="form-holder">
-                            <input type="text" class="form-control" placeholder="請輸入姓名..." id="guestName" name="room_guest_name" required value="${roomOrderDetailVO.getRoom_guest_name()}">
+                            <input type="text" class="form-control" placeholder="請輸入姓名..." id="guestName" name="name" required value="${roomOrderDetailVO.setRoom_guest_name}">
                             <div class="valid-feedback"></div>
                         </div>
                         <div class="form-holder">
-                            <input type="email" class="form-control" placeholder="請輸入信箱..." id="guestMail" name="room_guest_mail" required value="${roomOrderDetailVO.getRoom_guest_mail()}" />
+                            <input type="email" class="form-control" name="email" placeholder="請輸入信箱..." id="guestMail" name="email" required value="${roomOrderDetailVO.setRoom_guest_mail()}" />
                             <div class="valid-feedback"></div>
                         </div>
                         <div class="form-holder">
-                            <input type="tel" class="form-control" placeholder="請輸入手機..." id="guestTel" name="room_guest_tel" required value="${roomOrderDetailVO.getRoom_guest_tel()}" />
+                            <input type="tel" class="form-control" name="tel" placeholder="請輸入手機..." id="guestTel" name="tel" required value="${roomOrderDetailVO.setRoom_guest_tel()}" />
                             <div class="valid-feedback"></div>
                         </div>
                         <div class="form-holder">
-                            <input type="text" class="form-control"  placeholder="備註..." id="remark" name="roomOrderRemarks"  value="${roomOrderVO.getRoomOrderRemarks()}"/>
+                            <input type="text" class="form-control" name="remark" placeholder="備註..." id="remark" name="remark"  value="${roomOrderVO.getRoomOrderRemarks()}"/>
                             <div class="valid-feedback"></div>
                         </div>
                     </div>
@@ -249,14 +245,12 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
             </div>        
 		
 			
-            <input type="hidden" name="sellMemId" value="${roomOrderVO.sellMemId}" />
-             <input type="hidden" name="roomId" value="${roomVO.roomId}" />
-            <input type="hidden" name="memId" value="${roomOrderVO.memId}" />
-            <input type="hidden" name="checkInDate" value="${roomOrderVO.checkInDate}" />
-            <input type="hidden" name="checkOutDate" value="${roomOrderVO.checkOutDate}" />  
-<%--             <input type="hidden" name="expectArrTime" value="${roomOrderVO.expectArrTime}" />          --%>
+            <input type="hidden" name="sellMemId" value="${roomorderVO.sellMemId}" />
+            <input type="hidden" name="memId" value="${roomorderVO.memId}" />
+            <input type="hidden" name="checkInDate" value="${roomorderVO.checkInDate}" />
+            <input type="hidden" name="checkOutDate" value="${roomorderVO.checkOutDate}" />           
 			<input type="hidden" name="roomOrderSum" value="${roomOrderVO.roomOrderSum}" />
-			<input type="hidden" name="room_cur_price" value="${roomVO.roomPrice}" />
+			<input type="hidden" name="room_cur_price" value="${roomOrderVO.roomOrderSum}" />
             <input type="hidden" name="action" value="insert" />
             
         </form>
@@ -266,19 +260,10 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
 <script type="text/javascript">
 //神奇小按鈕
 function sameAsMem(){
-	var name = '${memVO.mem_name}';
-	$("#guestName").attr('value',name);
-//     document.getElementById("guestName").value=memName;
-	
-	var mail = '${memVO.mem_mail}';
-	$("#guestMail").attr('value',mail);
-	
-	var tel = '${memVO.mem_tel}';
-	$("#guestTel").attr('value',tel);
-	
-	var remark = '無';
-	$("#remark").attr('value',remark);
-	
+    document.getElementById("guestName").value='${memVO.mem_name}';
+	document.getElementById("guestMail").value="${memVO.mem_mail}";
+	document.getElementById("guestTel").value="${memVO.mem_tel}";
+	document.getElementById("remark").value="無";
 }
 function rememberCC(){
     document.getElementById("name").value='${memVO.mem_name}';
@@ -587,7 +572,7 @@ function showTab(n) {
     } else {
         document.getElementById("prevBtn").style.display = "inline";
     }
-    if (n == 1) {
+    if (n == (x.length - 1)) {
         document.getElementById("nextBtn").innerHTML = "Submit";
     } else {
         document.getElementById("nextBtn").innerHTML = "Next";
@@ -597,7 +582,6 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
-	debugger
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("tab");
     // Exit the function if any field in the current tab is invalid:

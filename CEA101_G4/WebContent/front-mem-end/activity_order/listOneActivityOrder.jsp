@@ -120,10 +120,10 @@
         </c:forEach>
     </ul>
 </c:if>
-
 <%--         <%@include file="/front-mem-end/mem/mem_center_page.jsp"%> --%>
+
 <body>
-<%@include file="/front-mem-end/bar.jsp"%>
+    <%@include file="/front-mem-end/bar.jsp"%>
     <div class="container-fluid">
         <div class="container">
             <div class="row">
@@ -144,62 +144,76 @@
                             <tbody>
                                 <jsp:useBean id="actordSvc" scope="page" class="com.activity_order.model.ActivityOrderService" />
                                 <c:forEach var="actordVO" items="${actordSvc.getActOrderByMemId(memVO.mem_id)}">
-                                    <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
-                                        <tr style="line-height: 25px; text-align: center;">
-                                            <td>${actordVO.act_order_id}</td>
-                                            <td>${actordVO.act_period_id}</td>
-                                            <td>${actordVO.act_sum_price}</td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${actordVO.act_order_status==0}">
-                                                      	 待審核
-                                                    </c:when>
-                                                    <c:when test="${actordVO.act_order_status==1}">
-                                                      	  已確認
-                                                    </c:when>
-                                                    <c:when test="${actordVO.act_order_status==2}">
-                                                      	  已取消
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                       	 已完成
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${actordVO.act_payment_status==0}">
-                                                        	未付款
-                                                    </c:when>
-                                                    <c:when test="${actordVO.act_payment_status==1}">
-                                                       	 付款失敗
-                                                    </c:when>
-                                                    <c:when test="${actordVO.act_payment_status==2}">
-                                                       	 已付款
-                                                    </c:when>
-                                                    <c:when test="${actordVO.act_payment_status==3}">
-                                                    	    退款中
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                      	  已退款
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                            <td>${actordVO.act_order_remarks}</td>
-                                             <c:choose>
-                                                    <c:when test="${actordVO.act_order_status==2}">
-                                                      	<td></td>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                            <td class="btn_group" style="width: 100%;">
-                                                <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">取消訂單</button>
-                                                <input type="hidden" name="act_order_id" value="${actordVO.act_order_id}"> 
-                                                <input type="hidden" name="action" value="memCancelActOrder">
-                                                      	  
-                                            </td>
-                                                    </c:otherwise>
-                                             </c:choose>
-                                        </tr>
-                                    </form>
+                                    <tr style="line-height: 25px; text-align: center;">
+                                        <td>${actordVO.act_order_id}</td>
+                                        <td>${actordVO.act_period_id}</td>
+                                        <td>${actordVO.act_sum_price}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${actordVO.act_order_status==0}">
+                                                    待審核
+                                                </c:when>
+                                                <c:when test="${actordVO.act_order_status==1}">
+                                                    已確認
+                                                </c:when>
+                                                <c:when test="${actordVO.act_order_status==2}">
+                                                    已取消
+                                                </c:when>
+                                                <c:otherwise>
+                                                    已完成
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${actordVO.act_payment_status==0}">
+                                                    未付款
+                                                </c:when>
+                                                <c:when test="${actordVO.act_payment_status==1}">
+                                                    付款失敗
+                                                </c:when>
+                                                <c:when test="${actordVO.act_payment_status==2}">
+                                                    已付款
+                                                </c:when>
+                                                <c:when test="${actordVO.act_payment_status==3}">
+                                                    退款中
+                                                </c:when>
+                                                <c:otherwise>
+                                                    已退款
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>${actordVO.act_order_remarks}</td>
+                                        <td class="btn_group" style="width: 100%;">
+                                        
+                                            <c:choose>
+                                                <c:when test="${actordVO.act_payment_status==0}">
+                                                    <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
+                                                        <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">付款</button>
+                                                        <input type="hidden" name="act_order_id" value="${actordVO.act_order_id}">
+                                                        <input type="hidden" name="action" value="memPayTheBill">
+                                                    </form>
+                                                </c:when>
+                                                
+                                                 <c:when test="${actordVO.act_order_status==3}">
+                                                    <form METHOD="post" ACTION="">
+                                                        <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">評論</button>
+                                                    </form>
+                                                </c:when>
+                                                
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${(actordVO.act_order_status!=2)&&(actordVO.act_order_status!=3) }">
+                                                    <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
+                                                        <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">取消訂單</button>
+                                                        <input type="hidden" name="act_order_id" value="${actordVO.act_order_id}">
+                                                        <input type="hidden" name="action" value="memCancelActOrder">
+                                                    </form>
+                                                </c:when>
+                                            </c:choose>
+                                           
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                             </tbody>
                         </table>

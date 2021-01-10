@@ -8,10 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.room.model.RoomJDBCDAO;
 import com.room.model.RoomVO;
 import com.roomorderdetail.model.RoomOrderDetailDAO;
-import com.roomorderdetail.model.RoomOrderDetailJDBCDAO;
 import com.roomorderdetail.model.RoomOrderDetailVO;
 
 import util.Util;
@@ -567,10 +565,10 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 			
 			rs.close();
 			// insert detail
-			RoomOrderDetailJDBCDAO dao = new RoomOrderDetailJDBCDAO();
+			RoomOrderDetailDAO dao = new RoomOrderDetailDAO();
 			for (RoomOrderDetailVO aRoomOrderDetail : list) {
 				aRoomOrderDetail.setRoom_order_id(nextRoomOrderId);
-				aRoomOrderDetail.setRoom_id(aRoomOrderDetail.getRoom_id());
+//				aRoomOrderDetail.setRoom_id(aRoomOrderDetail.getRoom_id());
 				dao.insertFromOrder(aRoomOrderDetail, con, roomOrderVO.getCheckInDate(), roomOrderVO.getCheckOutDate());
 			}
 			con.commit();
@@ -604,29 +602,6 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 			}
 		}
 		
-	}
-	
-	public static void main(String[] args) {
-//		/SELL001
-		
-		RoomOrderJDBCDAO dao = new RoomOrderJDBCDAO();
-		List<RoomOrderVO> list = dao.getBySellMemId("SELL001");
-		
-		
-		for (RoomOrderVO roomOrderVO : list) {
-			System.out.print(roomOrderVO.getRoomOrderId() + ",");
-			System.out.print(roomOrderVO.getSellMemId() + ",");
-			System.out.print(roomOrderVO.getMemId() + ",");
-			System.out.print(roomOrderVO.getRoomOrderTime() + ",");
-			System.out.print(roomOrderVO.getCheckInDate() + ",");
-			System.out.print(roomOrderVO.getCheckOutDate() + ",");
-			System.out.print(roomOrderVO.getExpectArrTime() + ",");
-			System.out.print(roomOrderVO.getRoomOrderRemarks() + ",");
-			System.out.print(roomOrderVO.getRoomOrderSum() + ",");
-			System.out.print(roomOrderVO.getRoomOrderStatus() + ",");
-			System.out.println(roomOrderVO.getRoomPaymentStatus());
-			System.out.println();
-		}
 	}
 	
 
