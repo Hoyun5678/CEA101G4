@@ -23,8 +23,9 @@
 <%@include file="/front-nav-bar.jsp" %>
 <div class="container" style="margin-top: 200px;">
 
+<c:set var="list" value="${param.list}" scope="page" />
 	<div class="container" id="searchResultRoomList">
-		<c:forEach var="roomVO" items="${roomSvc.all}" varStatus="rowStatus">
+		<c:forEach var="roomVO" items="${not empty list ? list: roomSvc.all}" varStatus="rowStatus">
 		<div class="row roomContent">
 		<div class="col-4 imgCol">
 			<div id="indicators${rowStatus.index}" class="carousel slide" data-ride="carousel">

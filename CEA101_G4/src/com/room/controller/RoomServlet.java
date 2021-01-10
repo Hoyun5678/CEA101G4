@@ -2,6 +2,7 @@ package com.room.controller;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -90,6 +91,7 @@ public class RoomServlet extends HttpServlet {
 				RoomService roomSvc = new RoomService();
 				List<RoomVO> dateFilterRoomList = null;
 				List<RoomVO> conditionFilterRoomList = null;
+				List<RoomVO> resultRoomList = null;
 				Map<String, String[]> queryMap = new TreeMap<String, String[]>();
 				
 				
@@ -137,7 +139,12 @@ public class RoomServlet extends HttpServlet {
 				System.out.println("dateList = " + dateFilterRoomList);
 				System.out.println("conList = " + conditionFilterRoomList);
 				
-//				dateFilterRoomList.forEach(e -> e.getRoomId());
+				List<String> dateStringList = new ArrayList<String>();
+				dateFilterRoomList.forEach(e -> dateStringList.add(e.getRoomId()));
+				
+				resultRoomList = conditionFilterRoomList.stream()
+						.filter(e -> dateStringList.contains(e.getRoomId()))
+						.collect(Collectors.toList());
 				
 				
 //				if (roomVO == null) {
@@ -152,7 +159,8 @@ public class RoomServlet extends HttpServlet {
 //				}
 //				
 //				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-//				req.setAttribute("list", roomVO); // 資料庫取出的roomVO物件,存入req
+				req.setAttribute("list", resultRoomList); // 資料庫取出的roomVO物件,存入req
+				System.out.println("對還不對啦 ..." + resultRoomList);
 				String url = "/front-mem-end/room/listAllRoom.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
