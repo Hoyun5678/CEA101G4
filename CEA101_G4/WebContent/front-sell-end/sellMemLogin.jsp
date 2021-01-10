@@ -29,7 +29,7 @@
 
         <div class="form">
             <form class="register-form" method="POST" action="<%=request.getContextPath()%>/front-sell-end/sellMemRegis.jsp">
-                <input type="text" name="sellMemAccount" placeholder="username" />
+                <input type="text" name="sellMemAccount" placeholder="username" autocomplete="off" />
                 <input type="password" placeholder="password" name="sellMemPwd" />
                 <input type="password" placeholder="confirm password" name="sellMemPwdRe" />
                 <button type="button" class="createBtn">create</button>
