@@ -63,10 +63,32 @@ margin:0px auto;
 width:200px;
 }
 #fix_pwd{
-position:fixed;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index:80;
+width: 50%;
 display:none;
-}
 
+}
+#a1 {
+ width: 100%;
+height: 100%;
+/* 相對於目前設備垂直高度 類似百分比 */
+ background-color: rgba(0, 0, 0, 0.5);
+ position: absolute;
+ cursor: pointer;
+display:none;
+position:fixed;
+z-index:9;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+input{
+padding-right: 25.5px!important;}
 
 </style>
 <script>
@@ -84,6 +106,7 @@ display:none;
 
 
 <body translate="no">
+<div id="a1" onclick="closeDiv()" title="左鍵一下關B"></div>
 	<div class="container" id="fix_pwd">
 		<form class="well form-horizontal" METHOD="post"
 			ACTION="<%=request.getContextPath()%>/member/member.do" name="form1"
@@ -128,138 +151,21 @@ display:none;
 							<input id="mem_account_1" type="hidden" name="mem_account"
 			value="${memVO.mem_account}" class="form-control">
 							<input type="hidden" name="action" value="change_mem_pwd"/>
-							<button type="submit" class="btn btn-info">
+							<button type="submit" class="btn btn-info" id="submit-btn">
 								修改密碼 <span class="glyphicon glyphicon-ok"></span>
 							</button>
 			</fieldset>
 		</form>
-	</div>
-	<!-- /.container -->
-<!-- 	<script -->
-<!-- 		src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script> -->
-<!-- 	<script -->
-<!-- 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
-<!-- 	<script -->
-<!-- 		src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script> -->
-<!-- 	<script -->
-<!-- 		src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script> -->
+	
+</div>
+<script type="text/javascript">
+function closeDiv() {
+    let a1 = document.getElementById("a1").style.display = "none";
+    let fix_pwd = document.getElementById("fix_pwd").style.display = "none";
+}
 
 
-
-<!-- 	<script	src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'></script> -->
-	<script id="rendered-js">
-<%-- 	var urlTarget = "<%=request.getContextPath()%>/member/member.do"; --%>
-// 		$(document)
-// 				.ready(
-// 						function() {
-
-// 							//前端攔截=================================================================
-
-// 							$('#contact_form')
-// 									.bootstrapValidator(
-// 											{
-// 												// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-// 												feedbackIcons : {
-// 													valid : 'glyphicon glyphicon-ok',
-// 													invalid : 'glyphicon glyphicon-remove',
-// 													validating : 'glyphicon glyphicon-refresh'
-// 												},
-
-// 												fields : {
-// 													mem_pwd_old : {
-// 														trigger:"blur",
-// 														validators : {
-
-// 															notEmpty : {
-// 																message : '請輸入舊密碼'
-// 															},
-// 															remote : {
-// 																url : urlTarget,
-// 																delay : 2000,
-// 																type : "POST",
-// 																data : {
-// 																	action : "get_pwd_check",
-// 																	mem_pwd_old : $(this).val(),
-// 																	mem_account:$("#mem_account_1").val()
-// 																},
-// 																message : '舊密碼錯誤',
-																
-// 															},
-
-// 														}
-// 													},
-
-// 													mem_pwd : {
-// 														validators : {
-// 															stringLength : {
-// 																min : 8
-// 															},
-
-// 															notEmpty : {
-// 																message : '請輸入密碼，有效長度至少為8'
-// 															},
-// 															regexp : {
-// 																regexp : /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/,
-// 																message : '密碼需要大小寫字母與數字組合'
-// 															},
-// 														}
-// 													},
-// 													mem_pwd_re : {
-// 														validators : {
-// 															stringLength : {
-// 																min : 8
-// 															},
-
-// 															notEmpty : {
-// 																message : '請輸入密碼，有效長度至少為8'
-// 															},
-// 															identical : {
-// 																field : 'mem_pwd',
-// 																message : '密碼確認欄位需與密碼一致'
-// 															}
-// 														}
-// 													},
-// 												}
-// 											})
-// 									.
-
-// 									on(
-// 											'success.form.bv',
-// 											function(e) {
-// 												$('#success_message')
-// 														.slideDown({
-// 															opacity : "show"
-// 														}, "slow"); // Do something ...
-// 												$('#contact_form').data(
-// 														'bootstrapValidator')
-// 														.resetForm();
-
-// 												// Prevent form submission
-// 												e.preventDefault();
-
-// 												// Get the form instance
-// 												var $form = $(e.target);
-
-// 												// Get the BootstrapValidator instance
-// 												var bv = $form
-// 														.data('bootstrapValidator');
-
-// 												// Use Ajax to submit form data
-// 												$
-// 														.post(
-// 																$form
-// 																		.attr('action'),
-// 																$form
-// 																		.serialize(),
-// 																function(result) {
-// 																	console
-// 																			.log(result);
-// 																}, 'json');
-// 											});
-
-// 						})
-// 		//# sourceURL=pen.js
-</script> 
+</script>
 </body>
 
 </html>

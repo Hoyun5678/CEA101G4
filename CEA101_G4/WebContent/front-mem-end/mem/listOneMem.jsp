@@ -15,6 +15,7 @@
 #logo{
     margin-top: -25px;
 }
+
 </style>
 
 </head>
@@ -151,6 +152,7 @@
         		$("#mem_submit").css("display","inline");
         	});
             $("#pwd_light_box").click(function() {
+                $("#a1").css("display", "block");
                 $("#fix_pwd").css("display", "block");
             });
 
@@ -192,7 +194,8 @@
                         mem_pwd: {
                             validators: {
                                 stringLength: {
-                                    min: 8
+                                    min: 8,
+                                    message: '請輸入密碼，有效長度至少為8'
                                 },
 
                                 notEmpty: {
@@ -263,6 +266,8 @@
                             },
                             'json');
                 });
+
+
 
         })
 </script>
