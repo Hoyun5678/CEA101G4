@@ -82,15 +82,7 @@ display:none;
 </head>
 
 
-<body>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
+
 <body translate="no">
 	<div class="container" id="fix_pwd">
 		<form class="well form-horizontal" METHOD="post"
