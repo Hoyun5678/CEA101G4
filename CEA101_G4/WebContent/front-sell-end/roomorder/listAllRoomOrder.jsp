@@ -41,7 +41,6 @@
 					<tbody>
 				
 					<c:forEach var="roomOrderVO" items="${list}" >
-					<c:set var="roomOrderVO" value="${roomOrderVO}" scope="request"/>
 						<c:set var="roomOrderDetailVO" scope="page" value="${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId)}" />
 						<tr>
 							<td>${roomOrderDetailVO.room_id}</td>
@@ -51,48 +50,15 @@
 							<td>
 							  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do" style="margin-bottom: 0px;">
 							     <input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
-							     <input type="hidden" name="roomOrderStatus"  value="${roomOrderVO.roomOrderStatus}">
-							     <input type="hidden" name="roomPaymentStatus"  value="${roomOrderVO.roomPaymentStatus}">
-							     <%
-							     	RoomOrderVO rovo = (RoomOrderVO) request.getAttribute("roomOrderVO");
-							     	Integer roomPaymentStatus = rovo.getRoomPaymentStatus();
-							     	String payBtnDisplay = "";
-							     	String payBtnCls = "";
-							     	
-									switch(roomPaymentStatus) {
-									case 0: // 未付款
-										payBtnDisplay = "未付款";
-										payBtnCls = "btn-danger";
-										break;
-									case 1: // 付款失敗
-										payBtnDisplay = "付款失敗";
-										payBtnCls = "btn-secondary";
-										break;
-									case 2: // 已付款
-										payBtnDisplay = "已付款";
-										payBtnCls = "btn-success";
-										break;
-									case 3: // 退款中
-										payBtnDisplay = "退款中";
-										payBtnCls = "btn-secondary";
-										break;
-									case 4: // 已退款
-										payBtnDisplay = "已退款";
-										payBtnCls = "btn-dark";
-										break;
-									}
-									request.setAttribute("payBtnDisplay", payBtnDisplay);
-									request.setAttribute("payBtnCls", payBtnCls);
-							     %>
 							     <input type="hidden" name="action"	value="updatePaymentStatus">
-							     <button type="button" class="btn ${payBtnCls} editBtn">${payBtnDisplay}</button>
+							     <button type="button" class="btn btn-secondary edit" id="roomPaymentStatusBtn">${roomOrderVO.roomPaymentStatus}</button>
 							  </FORM>
 							</td>
 							<td>
 							  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do" style="margin-bottom: 0px;">
 							     <input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
 							     <input type="hidden" name="action"  value="updateOrderStatus">
-							     <button type="button" class="btn btn-secondary editBtn">${roomOrderVO.roomOrderStatus}</button>
+							     <button type="button" class="btn btn-secondary edit" id="roomOrderStatusBtn">${roomOrderVO.roomOrderStatus}</button>
 							  </FORM>
 							</td>
 						</tr>
@@ -129,12 +95,10 @@
     <script>
     	$(document).ready(function() {
     		var contextPath = '<%=request.getContextPath()%>';
-    		var urlTarget = contextPath + '/roomorder/roomorder.do';
-    		
-    		$('.editBtn').click(function() {
-    			$(this).parent('form').submit();
-    		})
+    		$("#addRoom").click(function() {
 
+    			window.location.replace(contextPath + "/front-sell-end/room/addRoom.jsp");
+    		})
     	})
     </script>
 

@@ -175,36 +175,35 @@ public class RoomOrderServlet extends HttpServlet {
 				Integer roomPaymentStatus = null;
 				try {
 					roomPaymentStatus = new Integer (req.getParameter("roomPaymentStatus").trim());
-					switch(roomPaymentStatus) {
-					case 0: // 未付款
-						roomPaymentStatus = 2; // 已付款
-						roomOrderStatus = 1; // 已確認
-						break;
-					case 1: // 付款失敗
-						roomOrderStatus = 4; // 已取消
-						break;
-					case 2: // 已付款
-						break;
-					case 3: // 退款中
-						roomOrderStatus = 4; // 已取消
-						break;
-					case 4: // 已退款
-						roomOrderStatus = 5; // 已完成/關閉訂單
-						break;
-					}
 				} catch (NumberFormatException e) {
 					errorMsgs.add("請輸入數字.");
 				}
-				System.out.println("roomOrderId = " + roomOrderId);
-				System.out.println("roomOrderStatus = " + roomOrderStatus);
-				System.out.println("roomPaymentStatus = " + roomPaymentStatus);
+				
+				switch(roomPaymentStatus) {
+				case 0: // 未付款
+					roomPaymentStatus = 2; // 已付款
+					roomOrderStatus = 1; // 已確認
+					break;
+				case 1: // 付款失敗
+					roomOrderStatus = 4; // 已取消
+					break;
+				case 2: // 已付款
+					break;
+				case 3: // 退款中
+					roomOrderStatus = 4; // 已取消
+					break;
+				case 4: // 已退款
+					roomOrderStatus = 5; // 已完成/關閉訂單
+					break;
+				
+				}
+				
 
 				RoomOrderVO roomOrderVO = new RoomOrderVO();
 				roomOrderVO.setRoomOrderId(roomOrderId);
 				roomOrderVO.setRoomOrderStatus(roomOrderStatus);
 				roomOrderVO.setRoomPaymentStatus(roomPaymentStatus);
-				
-				
+
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("roomOrderVO", roomOrderVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -219,8 +218,9 @@ public class RoomOrderServlet extends HttpServlet {
 			
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("roomOrderVO", roomOrderVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/front-sell-end/roomorder/listAllRoomOrder.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				String location = req.getServletPath() + req.getPathInfo();
+				String url = "/front-mem-end/roomorder/listOneRoomOrder.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(location); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
