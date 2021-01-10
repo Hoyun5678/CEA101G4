@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.souvenir_order.model.*"%>
-<%@ page import="com.member.model.*"%>
+
 <%
   SouvenirOrderVO soVO = (SouvenirOrderVO) request.getAttribute("soVO");
 %>
-<%MemberVO memVO = (MemberVO) session.getAttribute("memVO");  %>
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -60,14 +60,15 @@
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/souvenir_order/souvenir_order.do" name="form2">
 <table>
-
-		<td><input type="hidden" name="emp_id" size="45"
+	<tr>
+		<td>員工編號:</td>
+		<td><input type="TEXT" name="emp_id" size="45"
 			 value="<%= (soVO==null)? "EMP003" : soVO.getEmp_id()%>" /></td>
-
+	</tr>
 	<tr>
 		<td>會員編號:</td>
 		<td><input type="TEXT" name="mem_id" size="45"
-			 value="<%= (memVO==null)? "" : memVO.getMem_id()%>" /></td>
+			 value="<%= (soVO==null)? "MEM004" : soVO.getMem_id()%>" /></td>
 	</tr>
 <!-- 	<tr> -->
 <!-- 		<td>特產訂購日期:</td> -->
@@ -77,7 +78,7 @@
 	<tr>
 		<td>特產收貨人姓名:</td>
 		<td><input type="TEXT" name="sou_receiver_name" size="45"
-			 value="<%= (memVO==null)? "" : memVO.getMem_name()%>" /></td>
+			 value="<%= (soVO==null)? "信彰" : soVO.getSou_receiver_name()%>" /></td>
 	</tr>
 	<tr>
 		<td>特產收貨人地址:</td>

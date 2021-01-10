@@ -523,7 +523,7 @@ public class MemberServlet extends HttpServlet {
 				MailService send_mail=new MailService(); //大吳的寄信JAVA
 				MailCertification cer = new MailCertification();
 				String mem_id=memSvc.getOneMemByAccount(mem_account).getMem_id();
-				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。http://localhost:8081/CEA101G4/member/member.do?action=certification&rand_num="
+				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。http://localhost:8081/"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
 						+ cer.insertCode(mem_id) + "&mem_id=" + mem_id;
 				send_mail.sendMail(mem_mail, "宿購易你最愛的旅遊平台", mailMsg);
 
@@ -533,9 +533,14 @@ public class MemberServlet extends HttpServlet {
 //				req.setAttribute("success", "success");
 //				successView.forward(req, res);
 //				有表單的跳轉請用 sendRedirect 否則刷F5會有重複提交的動作
-				String url="http://localhost:8081/CEA101G4/front-mem-end/front-index.jsp";
-				res.sendRedirect(url);
-				out.print("success");
+				
+				String url = "/front-mem-end/front-index.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				successView.forward(req, res);
+				
+//				String url="http://localhost:8081/CEA101G4/front-mem-end/front-index.jsp";
+//				res.sendRedirect(url);
+//				out.print("success");
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
@@ -602,6 +607,7 @@ public class MemberServlet extends HttpServlet {
 			String mailMsg = "敬愛的"+mem_name+"會員您好:已將您的密碼更改為"+new_rand_pwd+
 					"  請盡速登入更改您的密碼，宿購易 您最愛的旅遊平台 關心您";
 			send_mail.sendMail(mem_mail, "宿購易 "+mem_name+"會員您好已更改您的密碼", mailMsg);
+			return;
 
 		}
 		

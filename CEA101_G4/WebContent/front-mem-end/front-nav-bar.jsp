@@ -60,9 +60,9 @@
 					<div class="align-self-center underline" id="sou_act">
 						<h4>特產</h4>
 					</div>
-					<div class="align-self-center underline">
+					<div class="align-self-center underline" style="width: 120px;">
 						<c:if test="${not empty sessionScope.memVO}">
-							<a href="<%=request.getContextPath()%>/front-mem-end/mem/listOneMem.jsp"><h4><i class="fas fa-child fa-1x" style="color: ghostwhite;"></i>會員中心</h4></a>
+							<a href="<%=request.getContextPath()%>/front-mem-end/mem/listOneMem.jsp"><h4>${memVO.mem_name}你好<i class="fas fa-child fa-1x" style="color: ghostwhite;"></i></h4></a>
 						</c:if>
 
 						<c:if test="${empty sessionScope.memVO}">
@@ -72,19 +72,16 @@
 				</div>
 				<div class="navtwo">
 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do" id="formRoom">
-				<c:set var="sel" scope="page" value="${param.sel}" />
-				<c:set var="datefilter" scope="page" value="${param.datefilter}" />
-				<c:set var="roomCapacity" scope="page" value="${param.roomCapacity}" />
 					<div class="container" id="room">
 						<div class="justify-content-md-center">
 							<div class="align-self-center cc ">
-								地點： <input type="text" name="sel" value='${ not empty sel ? sel : "" }'>
+								地點： <input type="text" name="sel" autocomplete="off">
 							</div>
 							<div class="align-self-center cc ">
-								入住與退房日期：<input type="text" name="datefilter" readonly autocomplete="off" value='${ not empty datefilter ? datefilter : "" }' />
+								入住與退房日期：<input type="text" name="datefilter" value="" />
 							</div>
 							<div class="align-self-center cc ">
-								人數：<input type="number" value="2" min="1" max="20" autocomplete="off" step="1" name="roomCapacity" value='${ not empty roomCapacity ? roomCapacity : "" }'>
+								人數：<input type="number"  min="1" max="20" step="1" name="roomCapacity">
 							</div>
 							<input type="hidden" name="action" value="getByMultiCondition" />
 							<div class="bigbig">

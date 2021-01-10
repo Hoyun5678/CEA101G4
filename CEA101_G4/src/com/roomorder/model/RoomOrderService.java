@@ -41,11 +41,15 @@ public class RoomOrderService {
 		RoomOrderVO roomOrderVO = new RoomOrderVO();
 		
 		roomOrderVO.setSellMemId(sellMemId);
-		roomOrderVO.setMemId(memId);	
+		roomOrderVO.setMemId(memId);
+		
 		roomOrderVO.setCheckInDate(checkInDate);
 		roomOrderVO.setCheckOutDate(checkOutDate);
+		
+		
 		roomOrderVO.setRoomOrderSum(roomOrderSum);
 
+		
 		return roomOrderVO;
 	}
 	
@@ -104,12 +108,8 @@ public class RoomOrderService {
 		return dao.getAll();
 	}
 	
-	public List<RoomOrderVO> getByMemId(String memId) {
-		return dao.getByMemId(memId);
-	}
-	
-	public List<RoomOrderVO> getBySellMemId(String sellMemId) {
-		return dao.getBySellMemId(sellMemId);
+	public List<RoomOrderVO> getByMemId(String sellMemId) {
+		return dao.getByMemId(sellMemId);
 	}
 	
 	public List<RoomOrderVO> getBySellMemIdAndDate(String sellMemId, String selectedDate) {

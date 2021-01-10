@@ -123,6 +123,7 @@ public class SouvenirOrderDetailServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String sou_id = req.getParameter("sou_id").trim();		
 				Integer sou_order_amount = null;
 				try {
 					sou_order_amount =new Integer(req.getParameter("sou_order_amount").trim());
@@ -137,14 +138,13 @@ public class SouvenirOrderDetailServlet extends HttpServlet {
 					sou_price = new Integer(0);
 					errorMsgs.add("請輸入數字.");
 				}
-				String sou_id = req.getParameter("sou_id").trim();		
 				String sou_order_id = req.getParameter("sou_order_id").trim();		
 				
 
 				SouvenirOrderDetailVO sodVO = new SouvenirOrderDetailVO();
+				sodVO.setSou_id(sou_id);
 				sodVO.setSou_order_amount(sou_order_amount);
 				sodVO.setSou_price(sou_price);
-				sodVO.setSou_id(sou_id);
 				sodVO.setSou_order_id(sou_order_id);
 				
 				
