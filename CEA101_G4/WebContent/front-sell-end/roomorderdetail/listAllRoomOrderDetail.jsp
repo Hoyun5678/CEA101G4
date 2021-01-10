@@ -58,7 +58,7 @@
 
 </head>
 <body>
-<%@ include file="/front-sell-end/bar.jsp" %> 
+<%@ include file="/front-sell-end/sellMemSideBar.jsp" %> 
 <div class="content">
     <div class="content-header">
        <h2>房間訂單管理</h2>

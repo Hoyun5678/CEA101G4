@@ -15,7 +15,7 @@
 
 </head>
 <body bgcolor='white'>
-<%@ include file="/front-sell-end/bar.jsp" %> 
+<%@ include file="/front-sell-end/sellMemSideBar.jsp" %> 
 
 <%-- ¿ù»~ªí¦C --%>
 <c:if test="${not empty errorMsgs}">

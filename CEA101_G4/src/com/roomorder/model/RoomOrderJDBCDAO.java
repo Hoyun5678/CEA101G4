@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.room.model.RoomVO;
 import com.roomorderdetail.model.RoomOrderDetailDAO;
+import com.roomorderdetail.model.RoomOrderDetailJDBCDAO;
 import com.roomorderdetail.model.RoomOrderDetailVO;
 
 import util.Util;
@@ -565,10 +566,10 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 			
 			rs.close();
 			// insert detail
-			RoomOrderDetailDAO dao = new RoomOrderDetailDAO();
+			RoomOrderDetailJDBCDAO dao = new RoomOrderDetailJDBCDAO();
 			for (RoomOrderDetailVO aRoomOrderDetail : list) {
 				aRoomOrderDetail.setRoom_order_id(nextRoomOrderId);
-//				aRoomOrderDetail.setRoom_id(aRoomOrderDetail.getRoom_id());
+				aRoomOrderDetail.setRoom_id(aRoomOrderDetail.getRoom_id());
 				dao.insertFromOrder(aRoomOrderDetail, con, roomOrderVO.getCheckInDate(), roomOrderVO.getCheckOutDate());
 			}
 			con.commit();
