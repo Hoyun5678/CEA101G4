@@ -324,10 +324,9 @@ public class FoodSpotServlet extends HttpServlet {
 		try {
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String sell_mem_id = req.getParameter("sell_mem_id").trim();
-			String sell_mem_id_Reg = "^SELL\\d{3}$";
 			if (sell_mem_id == null || sell_mem_id.trim().length() == 0) {
 				errorMsgs.add("帳號請勿空白");
-			} else if (!sell_mem_id.trim().matches(sell_mem_id_Reg)) {
+			} else {
 				errorMsgs.add("民宿會員帳號: SELL開頭接三個可以是0-9的數字");
 			}
 

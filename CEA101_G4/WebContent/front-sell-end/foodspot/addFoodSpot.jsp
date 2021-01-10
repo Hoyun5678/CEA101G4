@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodspot.model.*"%>
-
+<%@ page import="com.sell.model.*"%>   
+<% SellVO sellVO=(SellVO)session.getAttribute("sellVO"); %>
 <%
 FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 %>
@@ -38,9 +39,9 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 	<div class="col-4">
        <label for="sellmemid" class="text-small-uppercase">民宿會員編號:</label>
     </div>
-    <div class="col-8">   
-           <input class="text-body" id="fsname" type="TEXT" name="sell_mem_id" size="45" required
-			 value="<%= (fsVO==null)? "SELL003" : fsVO.getSell_mem_id()%>" />
+    <div class="col-8"style=" padding-top: 14px;padding-left: 10px;">   
+    		${sellVO.sellMemId}
+           <input type="hidden" name="sell_mem_id" value="${sellVO.getSellMemName()}" />
     </div>
     </div>
 

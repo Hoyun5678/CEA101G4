@@ -202,8 +202,8 @@ color:black;
                         </div>
                         <div class="roomGrid roominfo">${roomVO.roomDes}</div>
                         <div class="roomGrid roompeo">${roomVO.roomCapacity}位</div>
-                        <div class="roomGrid roompri">${roomVO.roomPrice}</div>                                     
-                        <input type="hidden" name="roomOrderSum" value="${roomVO.roomPrice}" />
+                        <div class="roomGrid roompri">$ ${roomVO.roomPrice}</div>                                     
+                        <input type="hidden" name="roomPrice" value="${roomVO.roomPrice}" />
                         <input type="hidden" name="roomId" value="${roomVO.roomId}" />
                         <input type="hidden" name="action" value="fillorderinfo" />
 			     		<div class="roomGrid bookbtn">

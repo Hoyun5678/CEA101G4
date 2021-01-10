@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodspot.model.*"%>
-
+<%@ page import="com.sell.model.*"%>   
+<% SellVO sellVO=(SellVO)session.getAttribute("sellVO"); %>
 <%
   FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
@@ -29,6 +30,7 @@
 </c:if>
 </div>
 <div class="container">
+<h3>修改美食與景點</h3>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodspot/foodspot.do" name="form1" enctype="multipart/form-data">
 <div class="row">
 	<div class="col-4">
@@ -43,9 +45,10 @@
 	<div class="col-4">
        <span>民宿會員編號:</span>
     </div>
-    <div class="col-8">   
-           <input type="TEXT" name="sell_mem_id" size="45" 
-			 value="<%= (fsVO==null)? "SELL001" : fsVO.getSell_mem_id()%>" />
+    <div class="col-8" style="padding-top:10px;padding-left: 14px;">   
+       ${fsVO.sell_mem_id}
+           <input type="hidden" name="sell_mem_id" 
+			 value="<%= fsVO.getSell_mem_id()%>" />
     </div>
     </div>
 
