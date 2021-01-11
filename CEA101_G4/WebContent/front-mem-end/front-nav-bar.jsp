@@ -16,7 +16,7 @@
 <script src="<%=request.getContextPath()%>/js/index.js"></script>
 
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/index.css">
+	href="<%=request.getContextPath()%>/css/index-nav-bar.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script type="text/javascript"
