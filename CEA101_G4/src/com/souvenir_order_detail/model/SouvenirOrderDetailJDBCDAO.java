@@ -21,7 +21,8 @@ public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interf
 	private static final String GET_ALL_STMT = "SELECT * FROM SOUVENIR_ORDER_DETAIL ORDER BY SOU_ORDER_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM SOUVENIR_ORDER_DETAIL WHERE SOU_ORDER_ID = ?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_ORDER_DETAIL WHERE SOU_ORDER_ID = ? AND SOU_ID = ?";
-	private static final String UPDATE = "UPDATE SOUVENIR_ORDER_DETAIL SET  SOU_ID = ?, SOU_ORDER_AMOUNT = ?,  SOU_PRICE = ? WHERE SOU_ORDER_ID = ?";
+	private static final String UPDATE = "UPDATE SOUVENIR_ORDER_DETAIL SET SOU_ORDER_AMOUNT = ?,  SOU_PRICE = ? WHERE SOU_ORDER_ID = ? AND SOU_ID = ?";
+	private static final String INSERT_STMT2 = "INSERT INTO SOUVENIR_ORDER_DETAIL(SOU_ID, SOU_ORDER_AMOUNT, SOU_PRICE,SOU_ORDER_ID) VALUES(?, ?, ?, ?)";
 	@Override
 	public void insert(SouvenirOrderDetailVO sodVO) {
 		// TODO Auto-generated method stub
@@ -185,9 +186,9 @@ public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interf
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, sodVO.getSou_id());
-			pstmt.setInt(2, sodVO.getSou_order_amount());
-			pstmt.setInt(3, sodVO.getSou_price());
+			pstmt.setInt(1, sodVO.getSou_order_amount());
+			pstmt.setInt(2, sodVO.getSou_price());
+			pstmt.setString(3, sodVO.getSou_id());
 			pstmt.setString(4, sodVO.getSou_order_id());
 			
 
@@ -281,11 +282,50 @@ public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interf
 		}
 		return list;
 	}
+	@Override
+	 public void insert2 (SouvenirOrderDetailVO sodVO , Connection con) {
+		PreparedStatement pstmt = null;
+		
+		try {
+     		pstmt = con.prepareStatement(INSERT_STMT2);
+     		
+			pstmt.setString(1, sodVO.getSou_id());
+			pstmt.setInt(2, sodVO.getSou_order_amount());
+			pstmt.setInt(3, sodVO.getSou_price());
+			pstmt.setString(4, sodVO.getSou_order_id());
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-SO");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+		}
+	 }
 		public static void main(String[] args) {
 			SouvenirOrderDetailJDBCDAO dao = new SouvenirOrderDetailJDBCDAO();
 			//新增
 //			SouvenirOrderDetailVO souvenirorderdetailVO1 = new SouvenirOrderDetailVO();
-//			souvenirorderdetailVO1.setSou_order_id("SO001");
+//			souvenirorderdetailVO1.setSou_order_id("SO002");
 //			souvenirorderdetailVO1.setSou_id("SOU003");
 //			souvenirorderdetailVO1.setSou_order_amount(30);
 //			souvenirorderdetailVO1.setSou_price(40);
@@ -302,12 +342,12 @@ public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interf
 //			dao.delete("SO001","SOU001");
 //			EmpVO emp_authVO3 = dao.findByPrimaryKey("EMP002");
 //			System.out.print(emp_authVO3.getEmp_id() + ",");
-			SouvenirOrderDetailVO souvenirorderdetailVO2 = new SouvenirOrderDetailVO();
-			souvenirorderdetailVO2.setSou_id("SOU003");
-			souvenirorderdetailVO2.setSou_order_amount(30);
-			souvenirorderdetailVO2.setSou_price(40);
-			souvenirorderdetailVO2.setSou_order_id("SO001");
-			dao.update(souvenirorderdetailVO2);
+//			SouvenirOrderDetailVO souvenirorderdetailVO2 = new SouvenirOrderDetailVO();
+//			souvenirorderdetailVO2.setSou_id("SOU003");
+//			souvenirorderdetailVO2.setSou_order_amount(30);
+//			souvenirorderdetailVO2.setSou_price(40);
+//			souvenirorderdetailVO2.setSou_order_id("SO001");
+//			dao.update(souvenirorderdetailVO2);
 			
 		}
 	}	

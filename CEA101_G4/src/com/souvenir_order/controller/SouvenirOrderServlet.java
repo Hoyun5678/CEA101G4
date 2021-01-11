@@ -1,6 +1,7 @@
 package com.souvenir_order.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.souvenir_order_detail.model.SouvenirOrderDetailVO;
 import com.souvenir_order.model.SouvenirOrderService;
 import com.souvenir_order.model.SouvenirOrderVO;
 
@@ -360,11 +362,35 @@ public class SouvenirOrderServlet extends HttpServlet {
 				soVO.setSou_payment_status(sou_payment_status);
 				soVO.setSou_shipment_status(sou_shipment_status);
 				
-		
+				List<SouvenirOrderDetailVO> list = new ArrayList<SouvenirOrderDetailVO>();
+				SouvenirOrderDetailVO sodVO = null;
+				sodVO = new SouvenirOrderDetailVO();
+				Integer sou_order_amount = null;
+				
+				try {
+					sou_order_amount =new Integer(req.getParameter("sou_order_amount").trim());
+				} catch (NumberFormatException e) {
+					sou_order_amount = new Integer(0);
+					errorMsgs.add("請輸入數字.");
+				}
+				Integer sou_price = null;
+				try {
+					sou_price =new Integer(req.getParameter("sou_price").trim());
+				} catch (NumberFormatException e) {
+					sou_price = new Integer(0);
+					errorMsgs.add("請輸入數字.");
+				}
+				String sou_id = req.getParameter("sou_id").trim();
+				
+				sodVO.setSou_order_amount(sou_order_amount);
+				sodVO.setSou_price(sou_price);
+				sodVO.setSou_id(sou_id);
+				list.add(sodVO);
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("soVO", soVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -374,17 +400,17 @@ public class SouvenirOrderServlet extends HttpServlet {
 				soVO = soSvc.addSouvenirOrder(emp_id, mem_id,
 						sou_receiver_name, sou_receiver_address, sou_receiver_phone, sou_shipment_fee,
 						 sou_order_sum_price, sou_order_remarks, sou_shipping_method,
-						sou_order_status, sou_payment_status, sou_shipment_status);
+						sou_order_status, sou_payment_status, sou_shipment_status, list);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/souvenir_order/listAllSouvenirOrder.jsp";
+				String url = "/front-mem-end/souvenir/souvenir.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
 				failureView.forward(req, res);
 			}
 		}
