@@ -510,7 +510,7 @@ public class RoomOrderServlet extends HttpServlet {
 						 roomOrderSum);
 				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/roomorder/fillRoomOrder.jsp";
+				String url = "/front-mem-end/roomorder/addRoomOrder.jsp";
 				req.setAttribute("roomOrderVO", roomOrderVO);
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
