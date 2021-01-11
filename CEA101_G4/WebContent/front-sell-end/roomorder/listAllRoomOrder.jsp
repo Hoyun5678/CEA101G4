@@ -30,6 +30,7 @@
 				<table class="table table-striped table-hover align-middle" id="tableRoomList">
 					<thead class=".thead-dark">
 						<tr>
+							<th>訂單Id</th>
 							<th>房間名稱</th>
 							<th>入住期間</th>
 							<th>入住者</th>
@@ -44,6 +45,7 @@
 					<c:set var="roomOrderVO" value="${roomOrderVO}" scope="request"/>
 						<c:set var="roomOrderDetailVO" scope="page" value="${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId)}" />
 						<tr>
+							<td>${roomOrderVO.roomOrderId}</td>
 							<td>${roomOrderDetailVO.room_id}</td>
 							<td>${roomOrderVO.checkInDate} <br>~ ${roomOrderVO.checkOutDate}</td>
 							<td>${roomOrderDetailVO.room_guest_name}</td>
@@ -53,6 +55,7 @@
 							     <input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
 							     <input type="hidden" name="roomOrderStatus"  value="${roomOrderVO.roomOrderStatus}">
 							     <input type="hidden" name="roomPaymentStatus"  value="${roomOrderVO.roomPaymentStatus}">
+							     <input type="hidden" name="reqFrom"  value="/front-sell-end/roomorder/listAllRoomOrder.jsp">
 							     <%
 							     	RoomOrderVO rovo = (RoomOrderVO) request.getAttribute("roomOrderVO");
 							     	Integer roomPaymentStatus = rovo.getRoomPaymentStatus();
@@ -91,8 +94,45 @@
 							<td>
 							  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/roomorder/roomorder.do" style="margin-bottom: 0px;">
 							     <input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
-							     <input type="hidden" name="action"  value="updateOrderStatus">
-							     <button type="button" class="btn btn-secondary editBtn">${roomOrderVO.roomOrderStatus}</button>
+							     <input type="hidden" name="roomOrderStatus"  value="${roomOrderVO.roomOrderStatus}">
+							     <input type="hidden" name="reqFrom"  value="/front-sell-end/roomorder/listAllRoomOrder.jsp">
+							     <%
+							     	Integer roomOrderStatus = rovo.getRoomOrderStatus();
+							     	String orderBtnDisplay = "";
+							     	String orderBtnCls = "";
+							     	
+									switch(roomOrderStatus) {
+									case 0: // 待審核
+										orderBtnDisplay = "待審核";
+										orderBtnCls = "btn-danger";
+										break;
+									case 1: // 已確認
+										orderBtnDisplay = "已確認";
+										orderBtnCls = "btn-primary";
+										break;
+									case 2: // 已CHECK IN
+										orderBtnDisplay = "已CHECK IN";
+										orderBtnCls = "btn-success";
+										break;
+									case 3: // 已CHECK OUT
+										orderBtnDisplay = "已CHECK OUT";
+										orderBtnCls = "btn-success";
+										break;
+									case 4: // 已取消
+										orderBtnDisplay = "已取消";
+										orderBtnCls = "btn-dark";
+										break;
+									case 5: // 已完成(已關閉)
+										orderBtnDisplay = "已完成(已關閉)";
+										orderBtnCls = "btn-secondary";
+										break;
+									}
+									request.setAttribute("orderBtnDisplay", orderBtnDisplay);
+									request.setAttribute("orderBtnCls", orderBtnCls);
+							     %>
+							     
+							     <input type="hidden" name="action" value="updateOrderStatus">
+							     <button type="button" class="btn ${orderBtnCls} editBtn">${orderBtnDisplay}</button>
 							  </FORM>
 							</td>
 						</tr>

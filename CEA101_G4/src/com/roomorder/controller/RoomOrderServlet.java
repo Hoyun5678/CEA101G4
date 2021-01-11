@@ -119,12 +119,42 @@ public class RoomOrderServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String roomOrderId = req.getParameter("roomOrderId").trim();
+				System.out.println("roomOrderId = " + roomOrderId);
 				
 				Integer roomOrderStatus = null;
 				try {
 					roomOrderStatus = new Integer (req.getParameter("roomOrderStatus").trim());
 				} catch (NumberFormatException e) {
 					errorMsgs.add("請輸入數字.");
+				}
+				
+				String reqFrom = "";
+				reqFrom = req.getParameter("reqFrom");
+				
+				if(reqFrom.equals("/front-sell-end/roomorder/listAllRoomOrder.jsp")) {
+					// btn要求
+					switch(roomOrderStatus) {
+					case 0: // 待審核
+						roomOrderStatus = 1;
+						break;
+					case 1: // 已確認
+						roomOrderStatus = 2;
+						break;
+					case 2: // 已CHECK IN
+						roomOrderStatus = 3;
+						break;
+					case 3: // 已CHECK OUT
+						roomOrderStatus = 4;
+						break;
+					case 4: // 已取消
+						roomOrderStatus = 5;
+						break;
+					case 5: // 已完成(已關閉)
+						break;
+					}
+					
+				} else {
+					
 				}
 
 				RoomOrderVO roomOrderVO = new RoomOrderVO();
@@ -145,8 +175,7 @@ public class RoomOrderServlet extends HttpServlet {
 			
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("roomOrderVO", roomOrderVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/front-mem-end/roomorder/listOneRoomOrder.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(reqFrom); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
