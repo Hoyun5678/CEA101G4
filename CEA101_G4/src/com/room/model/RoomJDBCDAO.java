@@ -13,23 +13,23 @@ import java.sql.Date;
 public class RoomJDBCDAO implements RoomDAO_interface {
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO ROOM_PRODUCT(ROOM_ID, SELL_MEM_ID, ROOM_NAME, ROOM_PRICE, ROOM_CAPACITY, ROOM_DES, ROOM_STATUS, ROOM_ON_TIME)"
-			+" VALUES ('ROOM' || LPAD(ROOM_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
-//	"INSERT INTO ROOM_PRODUCT(ROOM_ID, SELL_MEM_ID, ROOM_NAME, ROOM_PRICE, ROOM_CAPACITY, ROOM_ON_TIME, ROOM_DES, ROOM_COLLECT, ROOM_STATUS)"
-//	+" VALUES ('ROOM' || LPAD(ROOM_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String GET_ALL_STMT = 
-		"SELECT * FROM ROOM_PRODUCT ORDER BY ROOM_ID DESC";
-	private static final String GET_ONE_STMT = 
-		"SELECT * FROM ROOM_PRODUCT WHERE ROOM_ID = ?";
-	private static final String DELETE = 
-		"DELETE FROM ROOM_PRODUCT WHERE ROOM_ID = ?";
-	private static final String UPDATE = 
-		"UPDATE ROOM_PRODUCT SET SELL_MEM_ID=?, ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_COLLECT=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
-	private static final String GET_BYMEMID_STMT = 
-		"SELECT * FROM ROOM_PRODUCT WHERE SELL_MEM_ID = ? ORDER BY ROOM_STATUS DESC, ROOM_ID DESC";
-	private static final String GET_BYDATERANGE_STMT = 
-		"SELECT ROOM_ID FROM ROOM_ORDERED_DATE_RECORD " + 
-		"WHERE TO_DATE(?, 'yyyy-MM-dd') in ROOM_ORDERED_DATE";
+			"INSERT INTO ROOM_PRODUCT(ROOM_ID, SELL_MEM_ID, ROOM_NAME, ROOM_PRICE, ROOM_CAPACITY, ROOM_DES, ROOM_STATUS, ROOM_ON_TIME)"
+				+" VALUES ('ROOM' || LPAD(ROOM_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+//		"INSERT INTO ROOM_PRODUCT(ROOM_ID, SELL_MEM_ID, ROOM_NAME, ROOM_PRICE, ROOM_CAPACITY, ROOM_ON_TIME, ROOM_DES, ROOM_COLLECT, ROOM_STATUS)"
+//		+" VALUES ('ROOM' || LPAD(ROOM_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?, ?, ?, ?, ?)";
+		private static final String GET_ALL_STMT = 
+			"SELECT * FROM ROOM_PRODUCT ORDER BY ROOM_ID DESC";
+		private static final String GET_ONE_STMT = 
+			"SELECT * FROM ROOM_PRODUCT WHERE ROOM_ID = ?";
+		private static final String DELETE = 
+			"DELETE FROM ROOM_PRODUCT WHERE ROOM_ID = ?";
+		private static final String UPDATE = 
+			"UPDATE ROOM_PRODUCT SET SELL_MEM_ID=?, ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_COLLECT=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
+		private static final String GET_BYMEMID_STMT = 
+			"SELECT * FROM ROOM_PRODUCT WHERE SELL_MEM_ID = ? ORDER BY ROOM_STATUS DESC, ROOM_ID DESC";
+		private static final String GET_BYDATERANGE_STMT = 
+			"SELECT ROOM_ID FROM ROOM_ORDERED_DATE_RECORD " + 
+			"WHERE TO_DATE(?, 'yyyy-MM-dd') in ROOM_ORDERED_DATE";
 	
 	@Override
 	public RoomVO insert(RoomVO roomVO) {
@@ -410,7 +410,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 				}
 				fromToLong += 24 * 60 * 60 * 1000L;
 			} while(fromToLong < to.getTime());
-			System.out.println("not qualified roomVO : " + listOrderedRoomId);
+//			System.out.println("not qualified roomVO : " + listOrderedRoomId);
 			
 			// return qulified roomVO List
 			list = (List<RoomVO>) list.stream()
