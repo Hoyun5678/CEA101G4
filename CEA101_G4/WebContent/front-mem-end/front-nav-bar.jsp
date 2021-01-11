@@ -13,7 +13,7 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/index.js"></script>
+<script src="<%=request.getContextPath()%>/js/index-nav-bar.js"></script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/index-nav-bar.css">
