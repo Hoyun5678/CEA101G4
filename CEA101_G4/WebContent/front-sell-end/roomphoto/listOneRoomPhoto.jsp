@@ -16,6 +16,39 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     
 	<title>民宿會員 - 查看房間圖片</title>
+	<style>
+		img {
+			max-width: 100%;
+		}
+ 		.photoBox div { 
+  			max-width: 100%;  
+  			height: 160px;
+			position: relative;
+ 			overflow: hidden; 
+ 		} 
+ 		.photoBox div:active { 
+  			top: 2px;
+  			left: 2px;
+  			opacity: .7;
+  			filter: grayscale();
+ 		} 
+ 		
+		.photoBox div img {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+		}
+		.toDelete {
+			opacity: .7;
+			filter: grayscale();
+		}
+		.btns {
+			position: fixed;
+			right: 10%;
+			bottom: 10%;
+		}
+	</style>
 </head>
 <body>
 	<div id="viewport">
@@ -24,43 +57,29 @@
 			<%@ include file="/front-sell-end/sellNavBar.jsp"%>
 			<div class="container-fluid" style="padding: 0;">
 				<div class="container">
-					<h1>${roomVO.roomName}的展示圖片</h1>
-                	
-					<div class="row">
-						<c:if test="${not empty errorMsgs}">
-							<%-- 錯誤表列 from Servlet --%>
-							<div class="alert alert-danger col-lg-6 col-lg-offset-1" role="alert" id="titleAndError">
-								<font style="color:red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errorMsgs}">
-										<li style="color:red">${message}</li>
-									</c:forEach>
-								</ul>
-							</div>
-						</c:if>
-					</div>
-					
+
 					<div class="container custom-width" id="showPics">
 						<div class="row">
-						
+							<div class="offset-1 col-10" style="margin-top: 30px;">
+								<h2>${roomVO.roomName}的展示圖片</h2>
+							</div>
 							<c:forEach var="roomPhotoVO" items="${list}" >
 								<div class="col-12 col-sm-6 col-lg-4 photoBox">
 									<div>
-										<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto" class="img-thumbnail object-fit">
-										<input type="hidden" name="roomPhotoId" value="${roomPhotoVO.roomPhotoId}">
-										<button type="button" class="btn btn-outline-info editBtn">修改</button>
+										<img class="roomPhotoImg" name="${roomPhotoVO.roomPhotoId}" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+										<input type="hidden" name="roomPhotoId" value="${roomPhotoVO.roomPhotoId}" class="roomPId">
 									</div>
 								</div>
 							</c:forEach>
-						
 						</div>
 					</div>
-					
-					
-					
                 </div>
 			</div>
 		</div>
+	</div>
+	<div class="btns">
+		<button class="deleteBtn btn btn-danger d-none">刪除圖片</button>
+		<button class="uploadBtn btn btn-primary" style="margin-left: 10px;">上傳圖片</button>
 	</div>
 
     <!-- Optional JavaScript -->
@@ -68,6 +87,51 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		var contextPath = '<%=request.getContextPath()%>';
+    		var urlTarget = contextPath + '/roomphoto/roomphoto.do';
+    		
+    		$('.roomPhotoImg').click(function() {
+    			$(this).toggleClass('toDelete');
+    			
+    			let toDeleteList = $('.toDelete');
+    			if(toDeleteList.length > 0) {
+    				$('.deleteBtn').removeClass('d-none');
+    			} else {
+    				$('.deleteBtn').addClass('d-none');
+    			}
+    		})
+    		
+    		
+    		$(document).on('click', '.deleteBtn', function() {
+    			let toDelete = document.querySelector('.toDelete');
+    			do {
+    				console.log(toDelete[0]);
+    				var pare = toDelete[0].parentNode.parentNode;
+    				$.ajax({
+    					url: urlTarget, 
+    					type: "POST",
+    					data: {
+    						"action": "delete",
+    						"roomPhotoId": toDelete[0].name,
+    					},
+    					success: function(data) {
+    						console.log(data);
+    					},
+    				})
+    				pare.innerHTML =``;
+    				toDelete = $('.toDelete');
+    				} while (toDelete);
+    		})
+    		
+    		$(document).on('click', '.uploadBtn', function() {
+    			
+    		})
+    		
+    	})
+    </script>
 	
 </body>
 </html>

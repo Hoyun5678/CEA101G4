@@ -273,22 +273,25 @@ public class RoomPhotoServlet extends HttpServlet {
 	
 			try {
 				/***************************1.接收請求參數***************************************/
-				String roomId = req.getParameter("roomId");
+				String roomPhotoId = req.getParameter("roomPhotoId");
 				
 				/***************************2.開始刪除資料***************************************/
-				RoomService roomSvc = new RoomService();
-				roomSvc.deleteRoom(roomId);
+				RoomPhotoService roomPhotoSvc = new RoomPhotoService();
+				roomPhotoSvc.deleteRoomPhoto(roomPhotoId);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/front-sell-end/room/listAllRoom.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
+				String url = "/front-sell-end/sell/listOneRoomPhoto.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+//				successView.forward(req, res);
+				PrintWriter out = res.getWriter();
+				out.print("delete " + roomPhotoId);
+				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-sell-end/room/listAllRoom.jsp");
+						.getRequestDispatcher("/front-sell-end/sell/listOneRoomPhoto.jsp");
 				failureView.forward(req, res);
 			}
 		}
