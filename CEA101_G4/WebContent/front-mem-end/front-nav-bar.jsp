@@ -96,13 +96,15 @@
 					</div>
 				</form>
 				<form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do" name="form1">
+				<c:set var="key_word" scope="page" value="${param.key_word}" />
+				<c:set var="datefilter1" scope="page" value="${param.datefilter1}" />
 					<div class="container" id="act">
 						<div class="justify-content-md-center">
 							<div class="align-self-center cc ">
 								關鍵字：<input type="text" name="key_word" autocomplete="off">
 							</div>
 							<div class="align-self-center cc ">
-								體驗日期：<input type="text" name="datefilter1" value="" />
+								體驗日期：<input type="text" name="datefilter1" value="" onkeydown="return false" autocomplete="off" />
 							</div>
 							<div class="bigbig">
 								<input type="submit" id="checkyes2"> <label
@@ -111,7 +113,7 @@
 							</div>
 						</div>
 					</div>
-					<input type="hidden" name="action" value="listEmps_ByCompositeQuery">
+					<input type="hidden" name="action" value="getActPeriodByKeyDate">
 				</form>
 				</div>
 			</div>
