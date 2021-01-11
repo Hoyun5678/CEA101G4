@@ -51,7 +51,7 @@
             });
 
             $(window).scroll(function() {
-                if ($(window).scrollTop() >= 30) {
+                if ($(window).scrollTop() >= 3) {
                     $('.header').addClass('upup');
                     $('.cc').hide();
                     $('.justify-content-md-center').addClass('shsh');
