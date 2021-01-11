@@ -102,7 +102,7 @@
 								關鍵字：<input type="text" name="key_word" autocomplete="off">
 							</div>
 							<div class="align-self-center cc ">
-								體驗日期：<input type="text" name="datefilter" value="" />
+								體驗日期：<input type="text" name="datefilter1" value="" />
 							</div>
 							<div class="bigbig">
 								<input type="submit" id="checkyes2"> <label
