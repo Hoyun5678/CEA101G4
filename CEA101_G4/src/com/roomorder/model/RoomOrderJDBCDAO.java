@@ -604,5 +604,27 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 		
 	}
 	
+	public static void main(String[] args) {
+//		/SELL001
+		
+		RoomOrderJDBCDAO dao = new RoomOrderJDBCDAO();
+		List<RoomOrderVO> list = dao.getBySellMemId("SELL001");
+		
+		
+		for (RoomOrderVO roomOrderVO : list) {
+			System.out.print(roomOrderVO.getRoomOrderId() + ",");
+			System.out.print(roomOrderVO.getSellMemId() + ",");
+			System.out.print(roomOrderVO.getMemId() + ",");
+			System.out.print(roomOrderVO.getRoomOrderTime() + ",");
+			System.out.print(roomOrderVO.getCheckInDate() + ",");
+			System.out.print(roomOrderVO.getCheckOutDate() + ",");
+			System.out.print(roomOrderVO.getExpectArrTime() + ",");
+			System.out.print(roomOrderVO.getRoomOrderRemarks() + ",");
+			System.out.print(roomOrderVO.getRoomOrderSum() + ",");
+			System.out.print(roomOrderVO.getRoomOrderStatus() + ",");
+			System.out.println(roomOrderVO.getRoomPaymentStatus());
+			System.out.println();
+		}
+	}
 
 }
