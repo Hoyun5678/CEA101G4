@@ -22,7 +22,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/front-mem-end/bar.css">
 </head>
-
+ 
 <body>
 	<div class=”container”>
 		<nav
