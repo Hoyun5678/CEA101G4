@@ -365,7 +365,7 @@ public class RoomOrderServlet extends HttpServlet {
 //				failureView.forward(req, res);
 //			}
 //		}
-		if ("fillorderinfo".equals(action)) { // 來自addEmp.jsp的請求
+		if ("fillorderinfo".equals(action)) { // listOneRoom-->addRoomOrder
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -384,8 +384,12 @@ public class RoomOrderServlet extends HttpServlet {
 				}					
 				String sellMemId = req.getParameter("sellMemId");
 				String memId = req.getParameter("memId");
-				java.sql.Date checkInDate = null;
-				java.sql.Date checkOutDate = null;				
+				
+				java.sql.Date checkInDate = null;				
+				checkInDate = java.sql.Date.valueOf(req.getParameter("checkInDate"));
+														
+				java.sql.Date checkOutDate = null;
+				checkOutDate = java.sql.Date.valueOf(req.getParameter("checkOutDate"));																											
 								
 //				java.sql.Timestamp expectArrTime = null;
 //				try {
@@ -395,12 +399,16 @@ public class RoomOrderServlet extends HttpServlet {
 //				}
 				
 //				String roomOrderRemarks = req.getParameter("roomOrderRemarks");
+				Integer roomPrice = null;
+				roomPrice = new Integer(req.getParameter("roomPrice").trim());
 				
-				Integer roomOrderSum = null;
-				roomOrderSum =new Integer(req.getParameter("roomOrderSum"));
+				int countday=(int) ((checkOutDate.getTime()-checkInDate.getTime())/(1000*60*60*24));		
+				System.out.println(countday);
 				
 				
-
+				Integer roomOrderSum = (int) (countday*roomPrice);
+				System.out.println(roomOrderSum);
+				
 				
 //				Integer roomOrderStatus = new Integer(0);
 //				try {
@@ -485,15 +493,6 @@ public class RoomOrderServlet extends HttpServlet {
 				
 				String roomId = req.getParameter("roomId");
 				System.out.println(roomId);
-				String roomIdReg = "^ROOM\\d{3}$";
-				if (roomId == null || roomId.trim().length() == 0) {
-					errorMsgs.add("房間編號: 請勿空白");
-				} else if(!roomId.trim().matches(roomIdReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("房間編號格式為: ROOM+數字三碼 ex.ROOM999");
-	            }
-				
-
-
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -506,12 +505,13 @@ public class RoomOrderServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				RoomOrderService roomOrderService = new RoomOrderService();
-				roomOrderVO = roomOrderService.fillRoomOrderInfo(sellMemId, memId, checkInDate, checkOutDate, 
-						 roomOrderSum);
+				roomOrderVO = roomOrderService.fillRoomOrderInfo(sellMemId, memId, checkInDate, checkOutDate, roomOrderSum );
 				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-mem-end/roomorder/addRoomOrder.jsp";
-				req.setAttribute("roomOrderVO", roomOrderVO);
+				req.setAttribute("roomOrderVO", roomOrderVO); 
+				req.setAttribute("countday", countday+"");
+				
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
@@ -523,7 +523,7 @@ public class RoomOrderServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+		if ("insert".equals(action)) { //一般會員增加一筆房間訂單addRoomOrder-->listOneRoomOrder
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -534,23 +534,8 @@ public class RoomOrderServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				
-				String sellMemId = req.getParameter("sellMemId").trim();
-				String sellMemIdReg = "^[(a-zA-Z0-9)]{2,100}$";
-				if (sellMemId == null || sellMemId.trim().length() == 0) {
-					errorMsgs.add("民宿會員編號請勿空白");
-				} else if (!sellMemId.trim().matches(sellMemIdReg)) {
-					errorMsgs.add("民宿會員編號: 只能是英文字母、數字 , 且長度必需在2到10之間");
-				}
-				
-				String memId = req.getParameter("memId").trim();
-				String memIdReg = "^[(a-zA-Z0-9)]{2,100}$";
-				if (memId == null || memId.trim().length() == 0) {
-					errorMsgs.add("會員編號請勿空白");
-				} else if (!memId.trim().matches(memIdReg)) {
-					errorMsgs.add("會員編號: 只能是英文字母、數字 , 且長度必需在2到10之間");
-				}
-				
-				
+				String sellMemId = req.getParameter("sellMemId");
+				String memId = req.getParameter("memId");	
 				java.sql.Date checkInDate = null;
 				try {
 					checkInDate = java.sql.Date.valueOf(req.getParameter("checkInDate"));
@@ -576,6 +561,10 @@ public class RoomOrderServlet extends HttpServlet {
 				
 				String roomOrderRemarks = req.getParameter("roomOrderRemarks");
 				
+				
+				int countday=(int) ((checkOutDate.getTime()-checkInDate.getTime())/(1000*60*60*24));		
+				System.out.println(countday);
+
 				Integer roomOrderSum = null;
 				try {
 					roomOrderSum =new Integer(req.getParameter("roomOrderSum").trim());
@@ -686,6 +675,7 @@ public class RoomOrderServlet extends HttpServlet {
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-mem-end/roomorder/listOneRoomOrder.jsp";
 				req.setAttribute("roomOrderVO", roomOrderVO);
+				req.setAttribute("countday", countday+"");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
