@@ -22,6 +22,20 @@
         	text-align: right;
         	margin-top: 20px;
         }
+        
+/*         .container { */
+/*         	border: 1px solid blue; */
+/*         	position: fixed; */
+/*         	width: 100%; */
+/*         	height: 100%; */
+/*         } */
+        
+        #formFileMultiple {
+        	width: 100%;
+        	height: 60%;
+        	box-shadow: 2px 2px 5px #8c8e98;
+        	background-color: #f3f3f3;
+        }
 
     </style>
 </head>
@@ -37,13 +51,13 @@
 							<label class="form-label">房間名稱: ${roomVO.roomName}</label>
 						</div>
 						<div class="col-12">
-							<label for="formFileMultiple" class="form-label">請選擇欲上傳的圖片</label>
+							<label for="formFileMultiple" class="form-label uploadLab">請選擇欲上傳的圖片</label>
 							<input class="form-control" type="file" id="formFileMultiple"  name="roomPhoto" multiple>
 						</div>
 						<div class="row justify-content-start" id="preview">
 						</div>
 						<div class="uploadBtn">
-							<input type="hidden" name=roomId value="${roomVO.roomId}">
+							<input type="hidden" name=roomId value="${param.roomId}">
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-secondary">確認上傳</button>
 						</div>

@@ -10,10 +10,9 @@ public class RoomPhotoService {
 		dao = new RoomPhotoJDBCDAO();
 	}
 	
-	public RoomPhotoVO addRoomPhoto(String roomPhotoId, String roomId, byte[] roomPhoto, String roomPhotoContent) {
+	public RoomPhotoVO addRoomPhoto(String roomId, byte[] roomPhoto, String roomPhotoContent) {
 		RoomPhotoVO roomPhotoVO = new RoomPhotoVO();
 		
-		roomPhotoVO.setRoomPhotoId(roomPhotoId);
 		roomPhotoVO.setRoomId(roomId);
 		roomPhotoVO.setRoomPhoto(roomPhoto);
 		roomPhotoVO.setRoomPhotoContent(roomPhotoContent);
