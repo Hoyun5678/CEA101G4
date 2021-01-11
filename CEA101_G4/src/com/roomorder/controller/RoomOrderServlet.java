@@ -673,7 +673,7 @@ public class RoomOrderServlet extends HttpServlet {
 						expectArrTime, roomOrderRemarks, roomOrderSum, roomOrderStatus, roomPaymentStatus, list);
 				roomOrderVO = roomOrderService.getOneRoomOrder(roomOrderVO.getRoomOrderId());
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/roomorder/listOneRoomOrder.jsp";
+				String url = "/front-mem-end/roomorder/listOneRoomOrder2.jsp";
 				req.setAttribute("roomOrderVO", roomOrderVO);
 				req.setAttribute("countday", countday+"");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
