@@ -14,6 +14,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
+    <style type="text/css">
+    img {
+     height: auto !important; 
+}</style>
     
 <title>房間搜尋</title>
 

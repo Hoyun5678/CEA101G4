@@ -159,6 +159,9 @@
                 		}
                 	})
                 })
+                let tClick = new Date();
+                $('.calendarBody tbody td[value="' + tClick +'"]').click();
+                
                 
                 $(document).on('click', '.lastMonth span', function() {
                 	let y = parseInt($('#yearList').val()) - 1;

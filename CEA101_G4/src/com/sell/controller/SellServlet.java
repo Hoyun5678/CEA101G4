@@ -246,6 +246,7 @@ public class SellServlet extends HttpServlet {
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			HttpSession session = req.getSession();
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 //				String sellMemId = req.getParameter("sellMemId").trim();
@@ -387,7 +388,9 @@ public class SellServlet extends HttpServlet {
 				sellVO = sellSvc.addSell(sellMemAccount, sellMemPwd, sellMemName, sellMemBirth, sellMemTel, sellRoomName, sellMemAddress, sellLatitude, sellLongitud, sellMemMail, sellMemIdNumber, sellGender);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				session.setAttribute("sellVO", sellVO);
 				String url = "/front-sell-end/sell/sellMemIndex.jsp";
+				
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllRoom.jsp
 				successView.forward(req, res);				
 				

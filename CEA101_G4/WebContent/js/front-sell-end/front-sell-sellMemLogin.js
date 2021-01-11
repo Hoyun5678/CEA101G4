@@ -26,10 +26,29 @@
 						})
         			return
         		};
+        		if($(".register-form [name='sellMemAccount']").val().length < 8){
+					swal({
+						  title: "Try again",
+						  text: "帳號長度需大於8位數",
+						  icon: "warning",
+						  dangerMode: true,
+						})
+        			return
+        		};
+
         		if(!checkColLength(".register-form [name='sellMemPwd']")){
 					swal({
 						  title: "Try again",
 						  text: "密碼為必填欄位",
+						  icon: "warning",
+						  dangerMode: true,
+						})
+        			return
+        		};
+        		if($(".register-form [name='sellMemPwd']").val().length < 8){
+					swal({
+						  title: "Try again",
+						  text: "密碼長度需大於8位數",
 						  icon: "warning",
 						  dangerMode: true,
 						})
@@ -44,6 +63,7 @@
 						})
         			return
         		};
+        		
         		if($(".register-form [name='sellMemPwd']").val() !== $(".register-form [name='sellMemPwdRe']").val()) {
 					swal({
 						  title: "Try again",
@@ -72,8 +92,18 @@
         	
             $(".register-form [name='sellMemAccount']").blur(function() {
             	var input = $(".register-form [name='sellMemAccount']");
-            	console.log("value = " + input.val());
-            	console.log("input.val().length() = " + input.val().length);
+            	
+        		if(input.val().length < 8){
+					swal({
+						  title: "Try again",
+						  text: "帳號長度需大於8位數",
+						  icon: "warning",
+						  dangerMode: true,
+						})
+        			return
+        		};
+            	
+            	
             	if(input.val().length > 0) {
         			$.ajax({
         				url: urlTarget,
