@@ -88,7 +88,17 @@
 <!--      </FORM> -->
 <!--   </li> -->
 </ul>
-
+<ul>  
+  <li>   
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/souvenir_order_detail/souvenir_order_detail.do" name="form1">
+        <b><font color=blue>萬用複合查詢:</font></b> <br>           
+       <b>輸入特產訂單編號:</b>
+       <input type="text" name="sou_order_id" value="SO001"><br>
+        <input type="submit" value="送出">
+        <input type="hidden" name="action" value="listSouvenirOrderDetails_ByCompositeQuery">
+     </FORM>
+  </li>
+</ul>
 
 <h3>會員管理</h3>
 

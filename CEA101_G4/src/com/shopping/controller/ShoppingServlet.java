@@ -94,10 +94,12 @@ public class ShoppingServlet extends HttpServlet {
 
 		String quantity = req.getParameter("quantity");
 		String sou_name = req.getParameter("sou_name");
+		String sou_id = req.getParameter("sou_id");
 		Integer sou_price = new Integer(req.getParameter("sou_price"));			
-	
+		
 		SouvenirProductVO soupVO = new SouvenirProductVO();
 		soupVO.setSou_name(sou_name);
+		soupVO.setSou_id(sou_id);
 		soupVO.setSou_price(sou_price);
 		soupVO.setQuantity((new Integer(quantity)).intValue());
 		return soupVO;

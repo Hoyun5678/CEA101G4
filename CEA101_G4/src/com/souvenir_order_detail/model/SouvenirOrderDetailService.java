@@ -1,6 +1,8 @@
 package com.souvenir_order_detail.model;
 
 import java.util.List;
+import java.util.Map;
+
 
 
 public class SouvenirOrderDetailService {
@@ -40,6 +42,9 @@ public class SouvenirOrderDetailService {
 
 	public SouvenirOrderDetailVO getOneSouvenirOrderDetail(String sou_order_id) {
 		return dao.findByPrimaryKey(sou_order_id);
+	}
+	public List<SouvenirOrderDetailVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 
 	public List<SouvenirOrderDetailVO> getAll() {

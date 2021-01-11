@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.souvenir_order_detail.model.SouvenirOrderDetailVO;
 import com.souvenir_order.model.SouvenirOrderService;
@@ -253,7 +254,7 @@ public class SouvenirOrderServlet extends HttpServlet {
 			}
 		}
 
-		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+		if ("insert".equals(action)) {//同時新增特產訂單及訂單明細
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -276,14 +277,6 @@ public class SouvenirOrderServlet extends HttpServlet {
 				} else if (!mem_id.trim().matches(memIdReg)) {
 					errorMsgs.add("會員編號: 只能是英文字母、數字和 , 且長度必需在2到10之間");
 				}
-//				java.sql.Timestamp sou_order_date = null;
-//				try {
-//					String sod=req.getParameter("sou_order_date").trim();
-//					sou_order_date = java.sql.Timestamp.valueOf(sod);
-//				} catch (IllegalArgumentException e) {
-//					sou_order_date = new java.sql.Timestamp(System.currentTimeMillis());
-//					errorMsgs.add("請加入時間");
-//				}
 				String sou_receiver_name = req.getParameter("sou_receiver_name").trim();
 				if (sou_receiver_name == null || emp_id.trim().length() == 0) {
 					errorMsgs.add("收穫人姓名請勿空白");
@@ -346,62 +339,31 @@ public class SouvenirOrderServlet extends HttpServlet {
 					errorMsgs.add("請輸入數字.");
 				}
 		
-
+				String[] sou_order_amount = req.getParameterValues("sou_order_amount"); //多值
+				String[] sou_price = req.getParameterValues("sou_price");//多值
+				String[] sou_id = req.getParameterValues("sou_id");//多值
+				
 				SouvenirOrderVO soVO = new SouvenirOrderVO();
-				soVO.setEmp_id(emp_id);
-				soVO.setMem_id(mem_id);
-//				soVO.setSou_order_date(sou_order_date);
-				soVO.setSou_receiver_name(sou_receiver_name);
-				soVO.setSou_receiver_address(sou_receiver_address);
-				soVO.setSou_receiver_phone(sou_receiver_phone);
-				soVO.setSou_shipment_fee(sou_shipment_fee);
-				soVO.setSou_order_sum_price(sou_order_sum_price);
-				soVO.setSou_order_remarks(sou_order_remarks);
-				soVO.setSou_shipping_method(sou_shipping_method);
-				soVO.setSou_order_status(sou_order_status);
-				soVO.setSou_payment_status(sou_payment_status);
-				soVO.setSou_shipment_status(sou_shipment_status);
-				
-				List<SouvenirOrderDetailVO> list = new ArrayList<SouvenirOrderDetailVO>();
-				SouvenirOrderDetailVO sodVO = null;
-				sodVO = new SouvenirOrderDetailVO();
-				Integer sou_order_amount = null;
-				
-				try {
-					sou_order_amount =new Integer(req.getParameter("sou_order_amount").trim());
-				} catch (NumberFormatException e) {
-					sou_order_amount = new Integer(0);
-					errorMsgs.add("請輸入數字.");
-				}
-				Integer sou_price = null;
-				try {
-					sou_price =new Integer(req.getParameter("sou_price").trim());
-				} catch (NumberFormatException e) {
-					sou_price = new Integer(0);
-					errorMsgs.add("請輸入數字.");
-				}
-				String sou_id = req.getParameter("sou_id").trim();
-				
-				sodVO.setSou_order_amount(sou_order_amount);
-				sodVO.setSou_price(sou_price);
-				sodVO.setSou_id(sou_id);
-				list.add(sodVO);
-				
-				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("soVO", soVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+			
 				/*************************** 2.開始新增資料 ***************************************/
 				SouvenirOrderService soSvc = new SouvenirOrderService();
-				soVO = soSvc.addSouvenirOrder(emp_id, mem_id,
-						sou_receiver_name, sou_receiver_address, sou_receiver_phone, sou_shipment_fee,
-						 sou_order_sum_price, sou_order_remarks, sou_shipping_method,
-						sou_order_status, sou_payment_status, sou_shipment_status, list);
-
+				List<SouvenirOrderDetailVO> list = new ArrayList<SouvenirOrderDetailVO>();
+				soVO = soSvc.addSouvenirOrder(emp_id, mem_id, sou_receiver_name, sou_receiver_address, sou_receiver_phone, sou_shipment_fee, sou_order_sum_price, sou_order_remarks, sou_shipping_method, sou_order_status, sou_payment_status, sou_shipment_status);
+				for(int i=0;i<sou_order_amount.length;i++) {
+					SouvenirOrderDetailVO sodVO = new SouvenirOrderDetailVO();
+					sodVO.setSou_id(sou_id[i]);
+					sodVO.setSou_order_amount(Integer.parseInt(sou_order_amount[i]));
+					sodVO.setSou_price(Integer.parseInt(sou_price[i]));
+					list.add(sodVO);
+				}
+				soSvc.insertWithSouvenirOrderDetail(soVO, list);
+				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-mem-end/souvenir/souvenir.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp

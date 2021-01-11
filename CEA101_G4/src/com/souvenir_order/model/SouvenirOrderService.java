@@ -17,7 +17,7 @@ public class SouvenirOrderService {
 	public SouvenirOrderVO addSouvenirOrder(String emp_id, String mem_id,
 			String sou_receiver_name, String sou_receiver_address, String sou_receiver_phone, Integer sou_shipment_fee,
 			Integer sou_order_sum_price, String sou_order_remarks, Integer sou_shipping_method,
-			Integer sou_order_status, Integer sou_payment_status, Integer sou_shipment_status, List<SouvenirOrderDetailVO> list) {
+			Integer sou_order_status, Integer sou_payment_status, Integer sou_shipment_status) {
 
 		SouvenirOrderVO soVO = new SouvenirOrderVO();
 		soVO.setEmp_id(emp_id);
@@ -32,7 +32,7 @@ public class SouvenirOrderService {
 		soVO.setSou_order_status(sou_order_status);
 		soVO.setSou_payment_status(sou_payment_status);
 		soVO.setSou_shipment_status(sou_shipment_status);
-		dao.insertWithDetail(soVO, list);
+//		dao.insert(soVO);
 
 		return soVO;
 	}
@@ -75,5 +75,8 @@ public class SouvenirOrderService {
 	}
 	public List<SouvenirOrderVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
+	}
+	public void insertWithSouvenirOrderDetail(SouvenirOrderVO soVO,List<SouvenirOrderDetailVO> list) {
+		 dao.insertWithDetail(soVO, list);
 	}
 }

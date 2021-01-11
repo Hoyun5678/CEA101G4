@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import com.emp.model.EmpJDBCDAO;
-import com.emp.model.EmpVO;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_SouvenirOrderDetail;
+
+
 
 
 public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interface{
@@ -257,6 +260,67 @@ public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interf
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	@Override
+	public List<SouvenirOrderDetailVO> getAll(Map<String, String[]> map) {
+		List<SouvenirOrderDetailVO> list = new ArrayList<SouvenirOrderDetailVO>();
+		SouvenirOrderDetailVO sodVO = null;
+	
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			String finalSQL = "select * from SOUVENIR_ORDER_DETAIL "
+		          + jdbcUtil_CompositeQuery_SouvenirOrderDetail.get_WhereCondition(map)
+		          + "order by sou_order_id";
+			pstmt = con.prepareStatement(finalSQL);
+			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			rs = pstmt.executeQuery();
+	
+			while (rs.next()) {
+				sodVO = new SouvenirOrderDetailVO();
+				sodVO.setSou_order_id(rs.getString("sou_order_id"));
+				sodVO.setSou_id(rs.getString("sou_id"));
+				sodVO.setSou_order_amount(rs.getInt("sou_order_amount"));
+				sodVO.setSou_price(rs.getInt("sou_price"));
+				list.add(sodVO); // Store the row in the list
+			}
+	
+			// Handle any SQL errors
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} 
+		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
