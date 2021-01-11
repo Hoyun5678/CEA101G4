@@ -131,10 +131,13 @@ text-align:left;
 </style>
 <body align="center">
 	<%@ include file="/front-mem-end/bar.jsp"%>
-<div class="dropdown2">
+	
+
+<c:if test="${not empty sessionScope.memVO}">
+	<div class="dropdown2">
 
 		<div id="account2" onclick="myFunction2()" class="dropbtn2">
-			<li><i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i></li>
+			<i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i>
 
 
 		</div>
@@ -145,7 +148,7 @@ text-align:left;
 
 		</div>
 	</div>
-
+</c:if>
 
 	<div class="container">
 		<div class="row">

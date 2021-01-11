@@ -26,8 +26,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>backend-index</title>
 <link href="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js">
-<link
-	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<!-- icon圖示  https://ionicons.com/ -->
+<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 </head>
 <style>
 /* 改 */
@@ -284,9 +284,9 @@ figcaption {
 #shoppingcar {
 	color: black;
 }
+
+
 </style>
-<!-- icon圖示  https://ionicons.com/ -->
-<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 
 <body>
 
@@ -294,11 +294,11 @@ figcaption {
 	<!-- 這邊是你原本sidebar的位置 -->
 	<%-- 	 <jsp:include page="/front-mem-end/souvenir/souvenircart.jsp" flush="true" /> --%>
 
-
+<c:if test="${not empty sessionScope.memVO}">
 	<div class="dropdown2">
 
 		<div id="account2" onclick="myFunction2()" class="dropbtn2">
-			<li><i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i></li>
+			<i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i>
 
 
 		</div>
@@ -309,7 +309,7 @@ figcaption {
 
 		</div>
 	</div>
-
+</c:if>
 	<div id="photowall" class="row">
 
 		<c:forEach var="soupVO" items="${list}">
@@ -331,24 +331,11 @@ figcaption {
 								href="<%=request.getContextPath()%>/souvenir_product/SouvenirProductServlet?sou_id=${soupVO.sou_id}&action=checkSouvenirDetail">
 								<i><ion-icon name="reader-outline"></ion-icon></i>
 							</a>
-							<!-- 							改 -->
-
-
-
-
-
-
-							<!-- 						 </i> -->
-							<!-- 						 </FORM> -->
 						</div>
-						</form>
-						<!-- 						改 -->
-						<a
+						<a id="btn1"
 							href="<%=request.getContextPath()%>/shopping/shopping.do?sou_name=${soupVO.sou_name}&sou_price=${soupVO.sou_price}&sou_id=${soupVO.sou_id}&quantity=1&action=ADD"
-							class="add-to-cart">Add to Cart</a>
+							id="addToCart" class="add-to-cart">Add to Cart</a>
 					</div>
-
-
 					<figcaption>
 						<h2 class="productname">${soupVO.sou_name}</h2>
 
@@ -376,12 +363,15 @@ figcaption {
 
 	</div>
 
-
+	
 	<script>
 		/* Demo purposes only */
 		$(".hover").mouseleave(function() {
 			$(this).removeClass("hover");
 		});
+		
+		
+// 		click shoppingcar
 
 		function myFunction2() {
 			document.getElementById("myDropdown2").classList.toggle("show2");
@@ -402,7 +392,7 @@ figcaption {
 				}
 			}
 		}
-	</script>
-
+		
+		 </script>  
 </body>
 </html>
