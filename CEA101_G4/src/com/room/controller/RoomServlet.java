@@ -192,6 +192,17 @@ public class RoomServlet extends HttpServlet {
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				RoomService roomSvc = new RoomService();
+
+				
+				// datefilter checkin&checkout 
+				String datefilter = req.getParameter("datefilter");
+			
+					String[] dateList = datefilter.split(" ~ ");
+					String checkInDate = dateList[0];    
+					String checkOutDate = dateList[1]; 
+				
+				
 				String roomId = req.getParameter("roomId");
 				String roomIdReg = "^ROOM\\d{3}$";
 				if (roomId == null || roomId.trim().length() == 0) {
@@ -209,7 +220,6 @@ public class RoomServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始查詢資料*****************************************/
-				RoomService roomSvc = new RoomService();
 				RoomVO roomVO = roomSvc.getOneRoom(roomId);
 				if (roomVO == null) {
 					errorMsgs.add("查無資料");
@@ -224,9 +234,12 @@ public class RoomServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("roomVO", roomVO); // 資料庫取出的roomVO物件,存入req
+				req.setAttribute("checkInDate", checkInDate);
+				req.setAttribute("checkOutDate", checkOutDate);
 				String url = "/front-mem-end/room/listOneRoom.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneRoom.jsp
 				successView.forward(req, res);
+
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {

@@ -129,8 +129,8 @@
             line-height: 24px;
             padding-top: 10px;
         }
-        .headleft, .headright {
-            width: 75%;
+        .headleft, .headright,.headcenter {
+            
             text-align: left;
             background-color: #eeeeee;
             font-family: sans-serif;
@@ -139,12 +139,9 @@
             line-height: 24px;
             padding: 10px;
         }
-        .headright {
-            width: 25%;
-
-        }
-        .contentleft, .contentright {
-            width: 75%;
+        
+        
+        .contentleft, .contentcenter, .contentright {           
             text-align: left;
             font-family: sans-serif;
             font-size: 16px;
@@ -152,10 +149,16 @@
             line-height: 24px;
             padding: 0px 10px 5px 10px;
         }
-        .contentright {
-            width: 25%;
-
+       
+        .contentleft,.headleft{
+        	width: 50%!important;
         }
+         
+        .headcenter.contentcenter,.contentright,.headright,.bottomright{
+         	width: 25%!important;
+        }
+        
+        
         .bottomleft, .bottomright {
             width: 75%;
             text-align: left;
@@ -167,9 +170,7 @@
             border-top: 3px solid #eeeeee;
             border-bottom: 3px solid #eeeeee;
         }
-        .bottomright {
-            width: 25%;
-        }
+      
         #td3 {
             text-align: center;
             height: 100%;

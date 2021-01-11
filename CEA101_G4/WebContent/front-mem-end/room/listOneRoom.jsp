@@ -4,7 +4,10 @@
 <%@ page import="com.room.model.*"%>   
 <%@ page import="com.member.model.*"%>   
 <%@ page import="com.foodspot.model.*"%> 
-<% MemberVO memVO=(MemberVO)session.getAttribute("memVO"); %>
+<% MemberVO memVO=(MemberVO)session.getAttribute("memVO");
+String checkInDate =(String) request.getAttribute("checkInDate");
+String checkOutDate =(String) request.getAttribute("checkOutDate");
+%>
 
 <jsp:useBean id="roomVO" scope="request" class="com.room.model.RoomVO" />
 <jsp:useBean id="sellVO" scope="request" class="com.sell.model.SellVO" />
@@ -163,13 +166,13 @@ color:black;
                 <div class="row" id="emptyarea">
                     <div class="col-lg-4" id="checkin">
                         <div class="datetitle">入住日期</div> 
-                        <input type="text" name="checkInDate" value="2021-02-03" /> 
+                        <input type="text" name="checkInDate" value="${checkInDate}" /> 
                         
               
                     </div>
                     <div class="col-lg-4" id="checkout">
                         <div class="datetitle">退房日期</div>
-                        <input type="text" name="checkOutDate" value="2021-02-05" />
+                        <input type="text" name="checkOutDate" value="${checkOutDate}" />
                     </div>
                     <div class="col-lg-4" id="change">
                         <div id="day">共選了一晚</div>

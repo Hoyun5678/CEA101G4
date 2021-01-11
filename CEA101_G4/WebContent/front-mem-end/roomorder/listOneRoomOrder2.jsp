@@ -45,7 +45,7 @@
                                 </tr>
                                 <tr>
                                     <td id="word">
-                                    	<div> <img id="orderimg" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomOrderDetail.room_id}&action=getOnePhotoByRoomId">  </div>
+                                    	<div> <img id="orderimg" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomOrderDetailVO.room_id}&action=getOnePhotoByRoomId" style="width:200px;">  </div>
                                         <div>入住日期${roomOrderVO.checkInDate}</div>
                                         <div>退房日期${roomOrderVO.checkOutDate}</div>
                                         <div>預計抵達時間${roomOrderVO.expectArrTime}</div>
@@ -60,13 +60,13 @@
                                             </tr>
                                              <tr>
                                                 <td class="headleft"> 房間名稱 </td>
-                                                <td class="headcenter"> 共住天數 </td>
+                                                <td class="headcenter">共住天數 </td>
                                                 <td class="headright"> 每晚價格 </td>
                                             </tr>
                                             <tr>
-                                                <td class="contentleft"> ${roomSvc.getOneRoom(roomOrderDetail.room_id).roomName}</td>
+                                                <td class="contentleft"> ${roomSvc.getOneRoom(roomOrderDetailVO.room_id).roomName}</td>
                                                 <td class="contentcenter">${countday}</td>
-                                                <td class="contentright"> ${roomSvc.getOneRoom(roomOrderDetail.room_id).roomPrice} </td>
+                                                <td class="contentright"> ${roomSvc.getOneRoom(roomOrderDetailVO.room_id).roomPrice} </td>
                                             </tr>
                                         </table>
                                     </td>

@@ -71,6 +71,7 @@
 			<div class="col">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do">
 				     <input type="hidden" name="roomId"  value="${roomVO.roomId}">
+				     <input type="hidden" name="datefilter"  value="${datefilter}">
 				     <input type="hidden" name="action"	value="checkRoomDetail">
 				     <button type="submit" class="btn btn-secondary detailBtn">查看</button>
 				</FORM>
