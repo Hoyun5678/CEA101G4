@@ -6,6 +6,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.member.model.MemberVO;
 import com.room.model.RoomService;
 import com.roomorder.model.*;
 import com.roomorderdetail.model.RoomOrderDetailVO;
@@ -373,38 +374,18 @@ public class RoomOrderServlet extends HttpServlet {
 
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-								
-				String sellMemId = req.getParameter("sellMemId").trim();
-				
-				String sellMemIdReg = "^[(a-zA-Z0-9)]{2,100}$";
-				if (sellMemId == null || sellMemId.trim().length() == 0) {
-					errorMsgs.add("民宿會員編號請勿空白");
-				} else if (!sellMemId.trim().matches(sellMemIdReg)) {
-					errorMsgs.add("民宿會員編號: 只能是英文字母、數字 , 且長度必需在2到10之間");
-				}
-				
-				String memId = req.getParameter("memId").trim();
-				String memIdReg = "^[(a-zA-Z0-9)]{2,100}$";
-				if (memId == null || memId.trim().length() == 0) {
-					errorMsgs.add("會員編號請勿空白");
-				} else if (!memId.trim().matches(memIdReg)) {
-					errorMsgs.add("會員編號: 只能是英文字母、數字 , 且長度必需在2到10之間");
-				}
-				
-				
+				//確認一般會員登入狀態
+				HttpSession session = req.getSession();
+				MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+				if(memVO==null) {   //確認是否登入 為登入導置登入頁面
+					RequestDispatcher plsLogin = req.getRequestDispatcher("/front-mem-end/mem/memLogin.jsp");
+					plsLogin.forward(req, res);
+					return;
+				}					
+				String sellMemId = req.getParameter("sellMemId");
+				String memId = req.getParameter("memId");
 				java.sql.Date checkInDate = null;
-				try {
-					checkInDate = java.sql.Date.valueOf(req.getParameter("checkInDate"));
-				} catch (IllegalArgumentException e) {
-					errorMsgs.add("check in 日期格式有誤");					
-				}
-				
-				java.sql.Date checkOutDate = null;
-				try {
-					checkOutDate = java.sql.Date.valueOf(req.getParameter("checkOutDate"));
-				} catch (IllegalArgumentException e) {
-					errorMsgs.add("check out 日期格式有誤");					
-				}
+				java.sql.Date checkOutDate = null;				
 								
 //				java.sql.Timestamp expectArrTime = null;
 //				try {
@@ -416,12 +397,8 @@ public class RoomOrderServlet extends HttpServlet {
 //				String roomOrderRemarks = req.getParameter("roomOrderRemarks");
 				
 				Integer roomOrderSum = null;
-				try {
-					roomOrderSum =new Integer(req.getParameter("roomOrderSum").trim());
-				} catch (NumberFormatException e) {
-					roomOrderSum = new Integer(0);
-					errorMsgs.add("請輸入數字.");
-				}
+				roomOrderSum =new Integer(req.getParameter("roomOrderSum"));
+				
 				
 
 				
