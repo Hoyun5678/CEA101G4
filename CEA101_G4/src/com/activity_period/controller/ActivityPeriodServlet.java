@@ -110,6 +110,49 @@ public class ActivityPeriodServlet extends HttpServlet {
 			}
 		}
 
+	
+		 if("getActPeriodByKeyDate".equals(action)) { // 來自listAllEmp.jsp的請求
+			
+						List<String> errorMsgs = new LinkedList<String>();
+						// Store this set in the request scope, in case we need to
+						// send the ErrorPage view.
+						req.setAttribute("errorMsgs", errorMsgs);
+						ActivityPeriodService actperSvc=new ActivityPeriodService();
+						List<ActivityPeriodVO>datefilter1List=null;
+			
+						try {
+							/*************************** 1.接收請求參數 ****************************************/
+							String key_word=req.getParameter("key_word");
+							if(key_word.isEmpty()) {
+								System.out.println("使用者未輸入key_word");
+							}
+							
+							
+							String datefilter1 = req.getParameter("datefilter1");
+							System.out.println(datefilter1);
+							if(datefilter1 == null || datefilter1.trim().length() < 1) {
+								System.out.println("使用者未輸入時間 送他全部");
+								datefilter1List=actperSvc.getAll();
+							} else {
+								datefilter1List=actperSvc.getListByActPeriodStart(datefilter1);
+								System.out.println(datefilter1List.get(0));
+							}
+							
+						
+//							req.setAttribute(, ); // 資料庫取出的empVO物件,存入req
+							String url = "/front-mem-end/activity_period/listActivityPeriod.jsp";
+							req.setAttribute("datefilter1List", datefilter1List);
+							RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+							successView.forward(req, res);
+			
+							/*************************** 其他可能的錯誤處理 **********************************/
+						} catch (Exception e) {
+							errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+							RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/front-index.jsp");
+							failureView.forward(req, res);
+						}
+					}
+		
 //		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 //
 //			List<String> errorMsgs = new LinkedList<String>();

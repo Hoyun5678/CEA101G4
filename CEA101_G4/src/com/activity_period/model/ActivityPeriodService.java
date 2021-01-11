@@ -50,6 +50,9 @@ public class ActivityPeriodService {
 		dao.upDateActPerStatus(act_period_id, act_period_status);
 		
 	}
+	public List<ActivityPeriodVO> getListByActPeriodStart(String act_period_start_on_date){
+		return dao.getListByActPeriodStart(act_period_start_on_date);
+	}
 	
 
 //	public void deleteActType(String act_type_id) {

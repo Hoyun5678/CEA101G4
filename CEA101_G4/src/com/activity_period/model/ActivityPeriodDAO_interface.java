@@ -16,6 +16,7 @@ public interface ActivityPeriodDAO_interface {
     public List<ActivityPeriodVO> getAll();
     public List<ActivityPeriodVO> getAll(Map<String, String[]> map);
     public List<ActivityPeriodVO> getAllActPerByActId(String act_id);
+    public List<ActivityPeriodVO> getListByActPeriodStart(String act_period_start_on_date);
 //    public Set<ActivityPeriodVO> getEmpsByDeptno(ActivityPeriodVO actperVO);
 
 }

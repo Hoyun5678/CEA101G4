@@ -1,6 +1,7 @@
 package com.activity_period.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +32,11 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 	private static final String GET_ALL_BY_ACT_ID = "SELECT ACT_PERIOD_ID, ACT_ID, ACT_SIGN_START, ACT_SIGN_END," 
 			+ "ACT_PERIOD_START, ACT_PERIOD_END, ACT_UP_LIMIT, ACT_LOW_LIMIT, ACT_CUR_PRICE,ACT_PERIOD_STATUS, ACT_SIGN_SUM FROM ACTIVITY_PERIOD where ACT_ID = ?";
 //	private static final String GET_Mem_ByDeptno_STMT = "SELECT empno,ename,job,to_char(hiredate,'yyyy-mm-dd') hiredate,sal,comm,deptno FROM emp2 where deptno = ? order by empno";
-//	
+	private static final String GET_LIST_BY_ACT_PERIOD_START = "SELECT ACT_PERIOD_ID, ACT_ID, ACT_SIGN_START, ACT_SIGN_END," 
+			+ "ACT_PERIOD_START, ACT_PERIOD_END, ACT_UP_LIMIT,"
+			+"ACT_LOW_LIMIT, ACT_CUR_PRICE,ACT_PERIOD_STATUS, ACT_SIGN_SUM FROM ACTIVITY_PERIOD"+
+			" WHERE ACT_PERIOD_START>to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
+					+ " and ACT_PERIOD_START<to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
 //	private static final String DELETE_ACTIVITY_TYPE = "DELETE FROM ACTIVITY_TYPE where deptno = ?";
 //	private static final String DELETE = "DELETE FROM MEMBER1 where MEM_ID = ?";	
 
@@ -86,6 +91,76 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 			}
 		}
 
+	}
+	
+	public List<ActivityPeriodVO> getListByActPeriodStart(String act_period_start_on_date) {
+		List<ActivityPeriodVO>list=new ArrayList<ActivityPeriodVO>();
+		ActivityPeriodVO actperVO=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;                                                        
+//		:00.0
+//		
+//		new java.sql.Timestamp(	java.sql.Date.valueOf(req.getParameter("act_sign_start")).getTime());
+//		java.sql.Timestamp act_period_start = java.sql.Timestamp.valueOf(req.getParameter("act_period_start") + "00:00:00.0");
+//		
+		long fromToLong = java.sql.Timestamp.valueOf(act_period_start_on_date+" 00:00:00.0").getTime();
+		long fromToLong2 = java.sql.Timestamp.valueOf(act_period_start_on_date+" 23:59:59.0").getTime();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_LIST_BY_ACT_PERIOD_START);
+			String dayStart=new Timestamp(fromToLong).toString().replace(".0", "");
+			String dayEnd=new Timestamp(fromToLong2).toString().replace(".0", "");
+			pstmt.setString(1, dayStart);
+			pstmt.setString(2, dayEnd);
+			
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				actperVO=new ActivityPeriodVO();
+				actperVO.setAct_period_id(rs.getString("act_period_id"));
+				actperVO.setAct_id(rs.getString("act_id"));
+				actperVO.setAct_sign_start(rs.getTimestamp("act_sign_start"));
+				actperVO.setAct_sign_end(rs.getTimestamp("act_sign_end"));
+				actperVO.setAct_period_start(rs.getTimestamp("act_period_end"));
+				actperVO.setAct_period_end(rs.getTimestamp("act_period_end"));
+				actperVO.setAct_up_limit(rs.getInt("act_up_limit"));
+				actperVO.setAct_low_limit(rs.getInt("act_low_limit"));
+				actperVO.setAct_cur_price(rs.getDouble("act_cur_price"));
+				actperVO.setAct_period_status(rs.getInt("act_period_status"));
+				actperVO.setAct_sign_sum(rs.getInt("act_sign_sum"));
+				list.add(actperVO);
+			}
+			
+			
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 	
 	@Override
@@ -510,6 +585,24 @@ public class ActivityPeriodJDBCDAO implements ActivityPeriodDAO_interface {
 //			System.out.println(aActPer.getAct_sign_sum());
 //			System.out.println("=============================");
 //		}
+		
+		List<ActivityPeriodVO>list=dao.getListByActPeriodStart("2020-06-01");
+		for(ActivityPeriodVO aActPer:list) {
+			
+			System.out.println(aActPer.getAct_id());
+			System.out.println(aActPer.getAct_sign_start());
+			System.out.println(aActPer.getAct_sign_end());
+			System.out.println(aActPer.getAct_period_start());
+			System.out.println(aActPer.getAct_period_end());
+			System.out.println(aActPer.getAct_up_limit());
+			System.out.println(aActPer.getAct_low_limit());
+			System.out.println(aActPer.getAct_cur_price());
+			System.out.println(aActPer.getAct_period_status());
+			System.out.println(aActPer.getAct_sign_sum());
+			System.out.println("=============================");
+		}
+		
+		
 		
 		
 		
