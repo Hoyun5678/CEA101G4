@@ -8,21 +8,24 @@
  <title></title>
 </head>
 <style>
-		@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,700);
-        @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-        
+#centertable{
+            margin-left: 50%;
+            transform: translateX(-50%);
+}
+
+*{
+text-align: center;
+}
 </style>
-<body bgcolor="#FFFFFF">
+<body>
 	<%@ include file="/front-mem-end/bar.jsp"%>
+<br>
 
-<hr><p><center>
-
-<table border="1" width="720">
-	<tr bgcolor="#999999">
+<table id="centertable" class="table-sm table-hover" border="1" width="720">
+	<tr>
 		<th width="200">產品名稱</th>
 		<th width="100">價格</th>
 		<th width="100">數量</th>
-		<th width="120"></th>
 	</tr>
 	
 	<%
@@ -46,12 +49,13 @@
 	<tr>
 		<td></td>
 		<td><div align="center"><font color="red"><b>總金額：</b></font></div></td>
-		<td></td>
 		<td> <font color="red"><b>$<%=amount%></b></font> </td>
 	</tr>
 </table>
-<p><a href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenir.jsp">繼續購物</a>
-<a href="<%=request.getContextPath()%>/front-mem-end/souvenir_order/addSouvenirOrder.jsp">確認購買</a>
-</center>
+<br>
+<p>
+<a href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenir.jsp"><button class="btn btn-success">繼續購物</button></a>
+<a href="<%=request.getContextPath()%>/front-mem-end/souvenir_order/addSouvenirOrder.jsp"><button class="btn btn-success">確認購買</button></a>
+
 </body>
 </html>

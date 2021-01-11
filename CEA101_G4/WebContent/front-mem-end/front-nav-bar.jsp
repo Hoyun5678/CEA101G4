@@ -58,7 +58,7 @@
 						<h4>體驗活動</h4>
 					</div>
 					<div class="align-self-center underline" id="sou_act">
-						<h4>特產</h4>
+						<a href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenir.jsp"><h4>特產</h4></a>
 					</div>
 					<div class="align-self-center underline" style="width: 120px;">
 						<c:if test="${not empty sessionScope.memVO}">
