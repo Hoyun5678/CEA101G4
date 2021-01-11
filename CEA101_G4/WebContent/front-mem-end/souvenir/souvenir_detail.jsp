@@ -18,6 +18,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link
+	href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
 </head>
 <style>
 img {
@@ -40,9 +42,109 @@ img {
 .h3, h3 {
 text-align:left;
 }
+
+#myDropdown2 .far, .fas, .fab {
+	padding-right: 10px;
+}
+
+.dropbtn2 {
+	color: white !important;
+	font-size: 16px !important;
+	cursor: pointer !important;
+}
+
+.dropbtn2:hover, .dropbtn2:focus {
+	/* 	background-color: #5c867b; */
+	/* 	! */
+	/* 	important; */
+	
+}
+
+.dropdown2 {
+	position: relative !important;
+	display: inline-block !important;
+	color: black;
+}
+
+/* 點取範圍擴大 */
+#account2 {
+	/* 	position: relative; */
+	size: 10em;
+	position: fixed;
+	top: 100px;
+	right: 0 !important;
+}
+
+#account2::before {
+	content: '';
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	bottom: -5px;
+	left: -5px;
+}
+
+.dropdown-content2 {
+	display: none !important;
+	position: absolute !important;
+	background-color: #f9f9f9 !important;
+	min-width: 160px !important;
+	overflow: auto !important;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dropdown-content2 a {
+	color: black !important;
+	padding: 12px 16px !important;
+	text-decoration: none !important;
+	display: block !important;
+}
+
+.dropdown2 a:hover {
+	background-color: #77a599 !important;
+}
+
+.show2 {
+	z-index: 99;
+	display: block !important;
+	position: fixed !important;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#account2 {
+	/* 	padding: 8px 10px 8px 15px; */
+	/* 	border: 1px solid #cbd8d0; */
+	/* 	border-radius: 30px; */
+	/* 	margin-left: 20px; */
+	
+}
+
+#shoppingcar {
+	color: black;
+}
+
+
+#title {
+	margin-top:0 !important;
+}
 </style>
 <body align="center">
 	<%@ include file="/front-mem-end/bar.jsp"%>
+<div class="dropdown2">
+
+		<div id="account2" onclick="myFunction2()" class="dropbtn2">
+			<li><i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i></li>
+
+
+		</div>
+
+		<div id="myDropdown2" class="dropdown-content2">
+			<jsp:include page="/front-mem-end/souvenir/souvenircart.jsp"
+				flush="true" />
+
+		</div>
+	</div>
 
 
 	<div class="container">
@@ -108,6 +210,32 @@ text-align:left;
 <script>
 	baguetteBox.run('.photogallery');
 </script>
+<script>
+		/* Demo purposes only */
+		$(".hover").mouseleave(function() {
+			$(this).removeClass("hover");
+		});
+
+		function myFunction2() {
+			document.getElementById("myDropdown2").classList.toggle("show2");
+		}
+
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+			if (!event.target.matches('.dropbtn2')) {
+
+				var dropdowns = document
+						.getElementsByClassName("dropdown-content2");
+				var i;
+				for (i = 0; i < dropdowns.length; i++) {
+					var openDropdown = dropdowns[i];
+					if (openDropdown.classList.contains('show2')) {
+						openDropdown.classList.remove('show2');
+					}
+				}
+			}
+		}
+	</script>
 
 </html>
 
