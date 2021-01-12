@@ -383,7 +383,7 @@ public class MemberServlet extends HttpServlet {
 //						mem_mail, mem_id_number, mem_acc_status, mem_gender, mem_jointime);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				session.setAttribute("memVO", memVO); // 資料庫update成功後,正確的的empVO物件,存入req
 				String url = "/front-mem-end/mem/listOneMem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
@@ -523,7 +523,9 @@ public class MemberServlet extends HttpServlet {
 				MailService send_mail=new MailService(); //大吳的寄信JAVA
 				MailCertification cer = new MailCertification();
 				String mem_id=memSvc.getOneMemByAccount(mem_account).getMem_id();
-				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。http://localhost:8081/"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
+//				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。 https://34.80.93.191"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
+//						+ cer.insertCode(mem_id) + "&mem_id=" + mem_id; //雲端機用
+				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。 http://localhost:8081"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
 						+ cer.insertCode(mem_id) + "&mem_id=" + mem_id;
 				send_mail.sendMail(mem_mail, "宿購易你最愛的旅遊平台", mailMsg);
 
@@ -631,12 +633,10 @@ public class MemberServlet extends HttpServlet {
 			String mem_pwd_re = req.getParameter("mem_pwd_re");
 			String mem_account=req.getParameter("mem_account");
 			if(!mem_pwd.equals(mem_pwd_re))
-				res.sendRedirect("http://localhost:8081/CEA101G4/front-mem-end/mem/mem_center_page.jsp");
+				res.sendRedirect(req.getContextPath() +"/front-mem-end/mem/listOneMem.jsp");
 			MemberService memSvc=new MemberService();
 			memSvc.upDateMemPwd(mem_account, mem_pwd);
-			String url = "/front-mem-end/front-index.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, res);
+			res.sendRedirect(req.getContextPath() + "/front-mem-end/front-index.jsp");
 			return;
 		}
 		

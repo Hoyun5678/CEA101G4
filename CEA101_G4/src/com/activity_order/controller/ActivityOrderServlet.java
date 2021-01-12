@@ -104,7 +104,10 @@ public class ActivityOrderServlet extends HttpServlet {
 					ActivityOrderService actOrdSvc = new ActivityOrderService();
 					ActivityOrderVO actordVO = actOrdSvc.getOneOrder(act_order_id);
 					actordVO.setAct_order_status(2);//設定 訂單為 已取消狀態
-					actordVO.setAct_payment_status(3);//設定付款狀態為 退款中
+					if(actordVO.getAct_payment_status()==2) {//若已付款才更改
+						actordVO.setAct_payment_status(3);//設定付款狀態為 退款中
+						
+					}
 					actOrdSvc.changeActOrderStatus(actordVO);
 					/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 					String url = "/front-mem-end/activity_order/listOneActivityOrder.jsp";
@@ -318,7 +321,7 @@ public class ActivityOrderServlet extends HttpServlet {
 //				}
 //			}
 //
-			if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+			if ("insert".equals(action)) { 
 
 				List<String> errorMsgs = new LinkedList<String>();
 				// Store this set in the request scope, in case we need to
@@ -362,6 +365,46 @@ public class ActivityOrderServlet extends HttpServlet {
 					actordSvc.insertActivityOrder(actordVO);
 
 					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+					String url =req.getContextPath() + "/front-mem-end/activity_order/listOneActivityOrder.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+					res.sendRedirect(url);
+					
+
+					/*************************** 其他可能的錯誤處理 **********************************/
+				} catch (Exception e) {
+					errorMsgs.add(e.getMessage());
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
+					failureView.forward(req, res);
+				}
+			}
+//			會員付款=============================================================================
+			
+			if ("memPayTheBill".equals(action)) { 
+
+				List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+				req.setAttribute("errorMsgs", errorMsgs);
+
+				try {
+					/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+					//確認一般會員登入狀態
+					HttpSession session = req.getSession();
+					MemberVO memVO = (MemberVO) session.getAttribute("memVO");
+					
+					String mem_id = memVO.getMem_id();
+					String act_order_id=req.getParameter("act_order_id");
+					ActivityOrderService actordSvc=new ActivityOrderService();
+					ActivityOrderVO actordVO=actordSvc.getOneOrder(act_order_id);
+
+					actordVO.setAct_payment_status(2);//更改狀態為已付款
+			
+
+					/*************************** 2.開始新增資料 ***************************************/
+					
+					actordSvc.changeActOrderStatus(actordVO);
+
+					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 					String url = "/front-mem-end/activity_order/listOneActivityOrder.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 					successView.forward(req, res);
@@ -373,6 +416,10 @@ public class ActivityOrderServlet extends HttpServlet {
 					failureView.forward(req, res);
 				}
 			}
+			
+			
+			
+			
 //
 //			if ("delete".equals(action)) { // 來自listAllSouvenir_Order.jsp
 //

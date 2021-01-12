@@ -78,7 +78,7 @@
 					<div class="container" id="room">
 						<div class="justify-content-md-center">
 							<div class="align-self-center cc ">
-								地點： <input type="text" name="sel" value='${ not empty sel ? sel : "" }'>
+								地點： <input type="text" name="sel" value='${ not empty sel ? sel : "" }' autocomplete="off">
 							</div>
 							<div class="align-self-center cc ">
 								入住與退房日期：<input type="text" name="datefilter" readonly autocomplete="off" value='${ not empty datefilter ? datefilter : "" }' />
