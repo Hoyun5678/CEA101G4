@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.member.model.MemberVO;
 import com.room.model.RoomService;
 import com.roomorder.model.*;
+import com.roomorderdetail.model.RoomOrderDetailService;
 import com.roomorderdetail.model.RoomOrderDetailVO;
 import com.roomphoto.model.RoomPhotoService;
 import com.roomproductcollect.model.RoomProductCollectService;
@@ -91,6 +92,7 @@ public class RoomOrderServlet extends HttpServlet {
 			try {
 				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 				String mem_id = req.getParameter("mem_id");
+				String room_order_id = req.getParameter("room_order_id");
 				
 				/*************************** 2.開始查詢資料 *****************************************/
 				RoomOrderService roSvc = new RoomOrderService();
@@ -106,12 +108,18 @@ public class RoomOrderServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
+				RoomOrderDetailService rodSvc=new RoomOrderDetailService();
+				RoomOrderDetailVO rodVO = rodSvc.getOneRoomOrderDetail(room_order_id);
+	System.out.println(rodVO);
+				
+				
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("memRoomOrderList", memRoomOrderList); // 資料庫取出roomOrderList
+				req.setAttribute("rodVO", rodVO);
 				String url = "/front-mem-end/roomorder/listAllRoomOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneRoomProductCollect.jsp
-	System.out.println(JSON.toJSONString(memRoomOrderList.get(7)));
+	System.out.println(JSON.toJSONString(memRoomOrderList));
 				successView.forward(req, res);
 
 
