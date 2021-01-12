@@ -7,7 +7,7 @@
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
 <html>
 <head>
-
+	
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,15 +16,48 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
     <style type="text/css">
     img {
-     height: auto !important; 
-}</style>
+     height: auto;
+     } 
+     div.carousel-inner img {
+        height:650px !important;
+        }
+</style>
     
 <title>房間搜尋</title>
 
 </head>
 <body style="background-color: #40444e;">
 	<%@include file="/front-mem-end/front-nav-bar.jsp" %>
+	
+	
+	
 	<div class="container" style="margin-top: 200px;">
+	<div id="carouselExampleFade" class="carousel slide carousel-fade"
+			data-interval="3000" data-ride="carousel" data-pause="false">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="<%=request.getContextPath()%>/image/room_list/1.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/2.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/3.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/4.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/5.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				
+			</div>
+	</div>
 		<c:set var="noResult" scope="page" value="${param.noResult}" />
 		<c:if test="${not empty noResult}">
 			<div class="container">
