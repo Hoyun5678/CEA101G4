@@ -18,11 +18,17 @@
         *{
             box-sizing: border-box;
         }
+        
         body{
             margin: 0;
             padding: 0;
-            background-color: #1b4e6f !important;
+            background-image:url("<%=request.getContextPath()%>/image/activity_list/back.jfif");
+               background-attachment: fixed;
+   			 background-size: cover;
+   			 background-repeat: no-repeat;
+   			 background-position: bottom;
         }
+        
 
         /* table_list樣式開始 */
         .listTable{
@@ -32,7 +38,7 @@
             padding: 10px;
             border-radius: 5px;
             width: 95%;
-            background-color: #fff;
+            background-color: #ffffffab;;
             box-shadow: 0px 5px 40px -22px #8b8b8b;
         }
         .listTable td{
@@ -253,7 +259,7 @@
 						class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/8.jpg"
+					<img src="<%=request.getContextPath()%>/image/activity_list/8.jfif"
 						class="d-block w-100" alt="...">
 				</div>
 				
@@ -261,7 +267,7 @@
 	</div>
 
 	<div>
-	  <c:forEach var="actperVO" items="${not empty datefilter1List&&datefilter1List.size()!=0? datefilter1List :actperSvc.all}">
+	  <c:forEach var="actperVO" items="${not empty queryFinalList&&queryFinalList.size()!=0? queryFinalList :actperSvc.all}">
 	    <table class="listTable">
 	    	<tr>
 	    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>

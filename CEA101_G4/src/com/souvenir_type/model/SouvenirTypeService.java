@@ -2,7 +2,7 @@ package com.souvenir_type.model;
 
 import java.util.List;
 
-
+ 
 
 public class SouvenirTypeService {
 	private SouvenirTypeDAO_interface dao;

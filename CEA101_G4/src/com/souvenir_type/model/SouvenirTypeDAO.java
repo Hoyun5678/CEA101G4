@@ -1,6 +1,7 @@
 package com.souvenir_type.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,29 +27,32 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 
 
 
-	private static final String INSERT_STMT = "INSERT INTO SOUVENIR_TYPE(SOU_TYPE_ID, SOU_TYPE_NAME)" + " VALUES (SOUVENIR_TYPE_seq.NEXTVAL,?)";
+	private static final String INSERT_STMT = "INSERT INTO SOUVENIR_TYPE(SOU_TYPE_ID, SOU_TYPE_NAME)" + " VALUES ('ST' || LPAD(ST_SEQ.NEXTVAL,3,0),?)";
 	private static final String UPDATE = "UPDATE SOUVENIR_TYPE set SOU_TYPE_NAME=? where SOU_TYPE_ID=?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_TYPE where SOU_TYPE_ID = ?";
 	private static final String GET_ONE_STMT = "SELECT SOU_TYPE_ID, SOU_TYPE_NAME FROM SOUVENIR_TYPE where SOU_TYPE_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT  SOU_TYPE_ID, SOU_TYPE_NAME FROM SOUVENIR_TYPE order by SOU_TYPE_ID";
-
 	@Override
 	public void insert(SouvenirTypeVO soutVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		
 		try {
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			
+//			pstmt.setString(1, soutVO.getSou_type_id());
 			pstmt.setString(1, soutVO.getSou_type_name());
+		
+			
 
 			pstmt.executeUpdate();
 
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Handle any driver errors
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -85,9 +89,10 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Handle any driver errors
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -120,12 +125,12 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, sou_type_id);
-
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}  catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -164,15 +169,17 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+			
 				soutVO = new SouvenirTypeVO();
 				soutVO.setSou_type_id(rs.getString("sou_type_id"));
 				soutVO.setSou_type_name(rs.getString("sou_type_name"));
+							
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -197,7 +204,6 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 				}
 			}
 		}
-
 		return soutVO;
 	}
 
@@ -215,16 +221,19 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-			while (rs.next()) {
 
+			while (rs.next()) {
+			
 				soutVO = new SouvenirTypeVO();
 				soutVO.setSou_type_id(rs.getString("sou_type_id"));
 				soutVO.setSou_type_name(rs.getString("sou_type_name"));
+				list.add(soutVO);
 			}
 
 			// Handle any driver errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {

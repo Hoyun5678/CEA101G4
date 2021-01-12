@@ -41,14 +41,18 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 
 
 	@Override
-	public void insert(SouvenirProductVO soupVO) {
+	public String insert(SouvenirProductVO soupVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String next_id = null;
 
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String[] col = { "sou_id" };
+			
+			pstmt = con.prepareStatement(INSERT_STMT, col);
 
 			pstmt.setString(1, soupVO.getSou_type_id());
 			pstmt.setString(2, soupVO.getSou_name());
@@ -60,6 +64,13 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			pstmt.setInt(8, soupVO.getSou_status());
 
 			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_id = rs.getString(1);
+			} else {
+				System.out.println("No result");
+			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -81,6 +92,8 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 				}
 			}
 		}
+		
+		return next_id;
 
 	}
 
@@ -146,7 +159,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -201,7 +214,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -262,7 +275,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			}
 
 			// Handle any driver errors
-		} catch (SQLException se) {
+		}  catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
@@ -290,4 +303,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 		}
 		return list;
 	}
+
+	
+	
 }

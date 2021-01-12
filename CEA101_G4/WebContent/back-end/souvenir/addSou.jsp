@@ -275,15 +275,13 @@ select#soflow-color {
 								
 									<jsp:useBean id="souphSvc" scope="page"
 									class="com.souvenir_photo.model.SouvenirPhotoService" />
-								<p>
-									<label for="typelabel">特產照片:</label> <SELECT size="1"
-										name=sou_id id="soflow">
-										<c:forEach var="souphVO" items="${souphSvc.all}">
-											<option value="${souphVO.sou_id}"
-												${(soupVO.sou_id==souphVO.sou_id)? 'selected':'' }>${souphVO.sou_photo}
-										</c:forEach>
-									</SELECT>
+						<p>
+									<label for="filelabel">特產照片:</label> 
+									<INPUT type="file" id="file" name="sou_photo" accept="image/*" size="45"
+										 onchange="loadImageFile(event)" />
+
 								</p>
+								<img style="width:0px" id="preview" src="#">
 								
 
 						</div>
@@ -293,7 +291,7 @@ select#soflow-color {
 					<input class="press" type="submit" value="送出新增">
 				</FORM>
 
-
+<!-- sou_id?? -->
 			</div>
 		</div>
 	</div>
@@ -427,34 +425,21 @@ select#soflow-color {
 
 <!-- 前端預覽圖片 -->
 <script>
-	function init() {
-		let photo = document.getElementsByName('photo')[0];
-		photo.addEventListener('change', function(e) {
-			let files = e.target.files; // 檔案的基本資訊，包括：檔案的名稱、大小與文件型態
-			console.log(files[0])
-			if (files && files[0]) {
-				let file = files[0];
-				if (file.type.indexOf('image') > -1) {
-					let reader = new FileReader(); // new a FileReader
-					reader.onload = function(e) { // 註冊FileReader檔案讀取load的事件 (3)
-						let img = document.createElement("img");
-						img.setAttribute("src", e.target.result);
-						img.style.height = '200px';
-						let node = document.getElementById("preview"); // remove all children
-						while (node.lastChild) {
-							node.removeChild(node.lastChild);
-						}
-						node.appendChild(img);
-					}
-					reader.readAsDataURL(file); // trigger onload event
-				} else {
-					alert('Please upload an image file. ');
-				}
-			}
-		});
-
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#preview').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
 	}
+}
 
-	window.onload = init;
+$("#file").change(
+		function() {
+			readURL(this);
+			$("#preview").css("width", "200px").css("height", "150px").css(
+					"margin-bottom", "20px");
+		});
 </script>
 </html>

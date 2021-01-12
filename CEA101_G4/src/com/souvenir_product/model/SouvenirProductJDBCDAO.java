@@ -26,15 +26,19 @@ public class SouvenirProductJDBCDAO implements SouvenirProductDAO_interface {
 
 
 	@Override
-	public void insert(SouvenirProductVO soupVO) {
+	public String insert(SouvenirProductVO soupVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		String next_id = null;
 
 		try {
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String[] col = { "sou_id" };
+			
+			pstmt = con.prepareStatement(INSERT_STMT, col);
 
 			pstmt.setString(1, soupVO.getSou_type_id());
 			pstmt.setString(2, soupVO.getSou_name());
@@ -46,6 +50,13 @@ public class SouvenirProductJDBCDAO implements SouvenirProductDAO_interface {
 			pstmt.setInt(8, soupVO.getSou_status());
 
 			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				next_id = rs.getString(1);
+			} else {
+				System.out.println("No result");
+			}
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
@@ -70,6 +81,8 @@ public class SouvenirProductJDBCDAO implements SouvenirProductDAO_interface {
 				}
 			}
 		}
+		
+		return next_id;
 
 	}
 

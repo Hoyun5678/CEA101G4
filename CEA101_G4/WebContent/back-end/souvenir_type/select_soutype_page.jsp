@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/souvenir_type/listAllSouType.jsp'>List</a> all SouvenirType.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/souvenir_type/listAllSouType.jsp'>List</a> all SouvenirType.  <br><br></li>
   
   
   <li>
@@ -93,7 +93,7 @@
 <h3>特產管理</h3>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/souvenir_type/addSouType.jsp'>Add</a> a new SouvenirType.</li>
+  <li><a href='<%=request.getContextPath()%>/back-end/souvenir_type/addSouType.jsp'>Add</a> a new SouvenirType.</li>
 </ul>
 
 </body>

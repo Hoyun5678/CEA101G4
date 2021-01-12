@@ -241,19 +241,11 @@ public class SouvenirPhotoServlet extends HttpServlet {
 				in.read(sou_photo);
 				in.close();
 
-				String sou_photo_content = req.getParameter("sou_photo_content");
 
-				String sou_photo_content_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,300}$";
-				if (sou_photo_content != null || sou_photo_content.trim().length() != 0) { // 以下練習正則(規)表示式(regular-expression)
-					 if(!sou_photo_content.trim().matches(sou_photo_content_Reg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("照片敘述只能是中、英文字母、數字和_ , 且長度必需在2到300之間");
-					 }
-				}
 				
 				SouvenirPhotoVO souphVO = new SouvenirPhotoVO();
 				souphVO.setSou_id(sou_id);
 				souphVO.setSou_photo(sou_photo);
-				souphVO.setSou_photo_content(sou_photo_content);
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("souphVO", souphVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -264,7 +256,7 @@ public class SouvenirPhotoServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				SouvenirPhotoService souphSvc = new SouvenirPhotoService();
-				souphVO = souphSvc.addSouPhoto( sou_id, sou_photo, sou_photo_content);
+				souphVO = souphSvc.addSouPhoto( sou_id, sou_photo);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/back-end/souvenir_photo/listAllSouPhoto.jsp";

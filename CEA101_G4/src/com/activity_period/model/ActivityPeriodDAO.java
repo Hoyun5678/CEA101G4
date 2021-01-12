@@ -443,9 +443,14 @@ public class ActivityPeriodDAO implements ActivityPeriodDAO_interface {
 			try {
 				
 				con = ds.getConnection();
-				String finalSQL = "SELECT * FROM ACTIVITY_PERIOD "
-			          + jdbcUtil_CompositeQuery_Activity_Period.get_WhereCondition(map)
-			          + "order by act_period_id";
+				String finalSQL = "SELECT ACT_PERIOD_ID,PE.ACT_ID,ACT_SIGN_START,ACT_SIGN_END,ACT_PERIOD_START,"
+						+ "ACT_PERIOD_END,ACT_UP_LIMIT,ACT_LOW_LIMIT,ACT_CUR_PRICE,ACT_PERIOD_STATUS,"
+						+ "ACT_SIGN_SUM,ACT_NAME,ACT_DES,ACT_ADD,TY.ACT_TYPE_ID,ACT_NAME" + 
+						" FROM ACTIVITY_PERIOD PE" + 
+						" JOIN ACTIVITY_PRODUCT PR ON (PE.ACT_ID=PR.ACT_ID)" + 
+						" JOIN ACTIVITY_TYPE TY ON (TY.ACT_TYPE_ID=PR.ACT_TYPE_ID)" + 
+			           jdbcUtil_CompositeQuery_Activity_Period.get_WhereCondition(map)
+			          + "ORDER BY ACT_PERIOD_ID";
 				pstmt = con.prepareStatement(finalSQL);
 				System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 				rs = pstmt.executeQuery();

@@ -76,6 +76,8 @@ figcaption {
 	text-align: center;
 	background-color: #ffffff;
 	line-height: 1.6em;
+	margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 .snip1268 * {

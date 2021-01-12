@@ -22,8 +22,9 @@ public class SouvenirProductService {
 		soupVO.setSou_like_count(sou_like_count);
 		soupVO.setSou_des(sou_des);
 		soupVO.setSou_status(sou_status);
-
-		dao.insert(soupVO);
+		
+		String next_id = dao.insert(soupVO);
+		soupVO.setSou_id(next_id);
 		return soupVO;
 
 	}

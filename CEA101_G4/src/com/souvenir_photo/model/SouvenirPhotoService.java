@@ -11,11 +11,11 @@ public class SouvenirPhotoService {
 		dao = new SouvenirPhotoDAO();
 	}
 
-	public SouvenirPhotoVO addSouPhoto(String sou_id, byte[] sou_photo ,String sou_photo_content) {
+	public SouvenirPhotoVO addSouPhoto(String sou_id, byte[] sou_photo) {
 		SouvenirPhotoVO souphVO = new SouvenirPhotoVO();
 		souphVO.setSou_id(sou_id);
 		souphVO.setSou_photo(sou_photo);
-		souphVO.setSou_photo_content(sou_photo_content);
+//		souphVO.setSou_photo_content(sou_photo_content);
 		
 
 		dao.insert(souphVO);
@@ -28,7 +28,7 @@ public class SouvenirPhotoService {
 		souphVO.setSou_photo_id(sou_photo_id);
 		souphVO.setSou_id(sou_id);
 		souphVO.setSou_photo(sou_photo);
-		souphVO.setSou_photo_content(sou_photo_content);
+//		souphVO.setSou_photo_content(sou_photo_content);
 		
 		dao.update(souphVO);
 		return souphVO;

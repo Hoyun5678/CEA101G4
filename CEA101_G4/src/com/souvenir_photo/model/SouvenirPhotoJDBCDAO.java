@@ -25,9 +25,9 @@ public class SouvenirPhotoJDBCDAO implements SouvenirPhotoDAO_interface{
 	String userid = Util.USER;
 	String passwd = Util.PASSWORD;
 
-	private static final String INSERT_STMT =
-			"INSERT INTO SOUVENIR_PHOTO(SOU_PHOTO_ID, SOU_ID, SOU_PHOTO,SOU_PHOTO_CONTENT)"
-			+ " VALUES ('SOUPH' || LPAD(SPHO_SEQ.NEXTVAL, 3, '0'),?,?,?)";
+//	private static final String INSERT_STMT =
+//			"INSERT INTO SOUVENIR_PHOTO(SOU_PHOTO_ID, SOU_ID, SOU_PHOTO,SOU_PHOTO_CONTENT)"
+//			+ " VALUES ('SOUPH' || LPAD(SPHO_SEQ.NEXTVAL, 3, '0'),?,?,?)";
 	private static final String UPDATE = 
  	"UPDATE SOUVENIR_PHOTO set SOU_ID=?, SOU_PHOTO=?, SOU_PHOTO_CONTENT=? where SOU_PHOTO_ID=?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_PHOTO where SOU_PHOTO_ID = ?";
@@ -37,6 +37,10 @@ public class SouvenirPhotoJDBCDAO implements SouvenirPhotoDAO_interface{
 			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO, SOU_PHOTO_CONTENT FROM SOUVENIR_PHOTO order by SOU_PHOTO_ID";
 	private static final String GET_BYSOUID = 
 			"SELECT * FROM SOUVENIR_PHOTO WHERE SOU_ID = ?";
+	
+	private static final String INSERT_STMT2 =
+			"INSERT INTO SOUVENIR_PHOTO(SOU_PHOTO_ID, SOU_ID,SOU_PHOTO)"
+			+ " VALUES ('SOUPH' || LPAD(SPHO_SEQ.NEXTVAL, 3, '0'),?,?)";
 
 	@Override
 	public void insert(SouvenirPhotoVO souphVO) {
@@ -47,11 +51,11 @@ public class SouvenirPhotoJDBCDAO implements SouvenirPhotoDAO_interface{
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt = con.prepareStatement(INSERT_STMT2);
 
-			pstmt.setString(1, souphVO.getSou_id());
 			pstmt.setBytes(2, souphVO.getSou_photo());
-			pstmt.setString(3, souphVO.getSou_photo_content());
+			pstmt.setString(1, souphVO.getSou_id());
+
 
 			pstmt.executeUpdate();
 
