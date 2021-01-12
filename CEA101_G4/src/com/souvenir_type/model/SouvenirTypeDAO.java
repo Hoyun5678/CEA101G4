@@ -26,12 +26,11 @@ public class SouvenirTypeDAO implements SouvenirTypeDAO_interface {
 
 
 
-	private static final String INSERT_STMT = "INSERT INTO SOUVENIR_TYPE(SOU_TYPE_ID, SOU_TYPE_NAME)" + " VALUES (SOUVENIR_TYPE_seq.NEXTVAL,?)";
+	private static final String INSERT_STMT = "INSERT INTO SOUVENIR_TYPE(SOU_TYPE_ID, SOU_TYPE_NAME)" + " VALUES ('ST' || LPAD(ST_SEQ.NEXTVAL,3,0),?)";
 	private static final String UPDATE = "UPDATE SOUVENIR_TYPE set SOU_TYPE_NAME=? where SOU_TYPE_ID=?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_TYPE where SOU_TYPE_ID = ?";
 	private static final String GET_ONE_STMT = "SELECT SOU_TYPE_ID, SOU_TYPE_NAME FROM SOUVENIR_TYPE where SOU_TYPE_ID = ?";
 	private static final String GET_ALL_STMT = "SELECT  SOU_TYPE_ID, SOU_TYPE_NAME FROM SOUVENIR_TYPE order by SOU_TYPE_ID";
-
 	@Override
 	public void insert(SouvenirTypeVO soutVO) {
 		Connection con = null;
