@@ -9,7 +9,7 @@ public class SouvenirTypeService {
 
 
 	public SouvenirTypeService() {
-		dao = new SouvenirTypeJDBCDAO();
+		dao = new SouvenirTypeDAO();
 	}
 
 	public SouvenirTypeVO addSouType(String sou_type_name) {
