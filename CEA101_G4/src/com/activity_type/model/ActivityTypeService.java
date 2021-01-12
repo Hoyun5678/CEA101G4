@@ -11,7 +11,7 @@ public class ActivityTypeService {
 	private ActivityTypeDAO_interface dao;
 
 	public ActivityTypeService() {
-		dao = new ActivityTypeJDBCDAO();
+		dao = new ActivityTypeDAO();
 	}
 
 	public List<ActivityTypeVO> getAll() {

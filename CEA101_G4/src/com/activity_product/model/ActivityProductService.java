@@ -10,7 +10,7 @@ public class ActivityProductService {
 
 	public ActivityProductService() {
 		
-		dao = new ActivityProductJDBCDAO();
+		dao = new ActivityProductDAO();
 	}
 		
 		public List<ActivityProductVO> getAll() {

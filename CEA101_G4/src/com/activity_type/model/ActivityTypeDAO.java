@@ -31,16 +31,16 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 	
 	private static final String INSERT_STMT = "INSERT INTO ACTIVITY_TYPE (ACT_TYPE_ID,ACT_TYPE_NAME) VALUES "
 			+ "('AT' || LPAD(AT_SEQ.NEXTVAL, 3, '0'), ?)";
-	private static final String GET_ALL_STMT = "SELECT ACT_TYPE_NAME FROM ACTIVITY_TYPE";
-	private static final String GET_ONE_STMT = "SELECT ACT_TYPE_NAME FROM ACTIVITY_TYPE where ACT_TYPE_ID = ?";
+	private static final String GET_ALL_STMT = "SELECT ACT_TYPE_ID,ACT_TYPE_NAME FROM ACTIVITY_TYPE";
+	private static final String GET_ONE_STMT = "SELECT ACT_TYPE_ID,ACT_TYPE_NAME FROM ACTIVITY_TYPE where ACT_TYPE_ID = ?";
 	private static final String GET_Act_ByActivityType_STMT = "SELECT ACT_ID, SELL_MEM_ID, ACT_TYPE_ID, ACT_NAME, ACT_PRICE,ACT_DES,"
 			+ "ACT_ADD FROM ACTIVITY_PRODUCT where ACT_TYPE_ID = ? order by ACT_ID";
-//		private static final String GET_Emps_ByDeptno_STMT = "SELECT empno,ename,job,to_char(hiredate,'yyyy-mm-dd') hiredate,sal,comm,deptno FROM emp2 where deptno = ? order by empno";
-	//
-//		private static final String DELETE_ACTIVITY_TYPE = "DELETE FROM ACTIVITY_TYPE where deptno = ?";
-//		private static final String DELETE_DEPT = "DELETE FROM dept2 where deptno = ?";	
+
+//	private static final String DELETE_ACTIVITY_TYPE = "DELETE FROM ACTIVITY_TYPE where deptno = ?";
+//	private static final String DELETE_DEPT = "DELETE FROM dept2 where deptno = ?";	
 
 	private static final String UPDATE = "UPDATE ACTIVITY_TYPE set ACT_TYPE_NAME=? where ACT_TYPE_ID = ?";
+
 
 	@Override
 	public void insert(ActivityTypeVO activitytypeVO) {
@@ -48,7 +48,7 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
+			con=ds.getConnection();
 
 			pstmt.setString(1, activitytypeVO.getAct_type_name());
 
@@ -84,7 +84,7 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 		ResultSet rs = null;
 		try {
 			
-			
+			con=ds.getConnection();
 			pstmt = con.prepareStatement(GET_Act_ByActivityType_STMT);
 			pstmt.setString(1, act_type_id);
 			rs = pstmt.executeQuery();
@@ -138,7 +138,7 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-
+			con=ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, activitytypeVO.getAct_type_name());
@@ -177,7 +177,7 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 		ResultSet rs = null;
 
 		try {
-
+			con=ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, activity_type_id);
@@ -237,7 +237,7 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 		ResultSet rs = null;
 
 		try {
-
+			con=ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 
