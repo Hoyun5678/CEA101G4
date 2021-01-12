@@ -55,7 +55,7 @@ AuthorizationService authorizationSvc = new AuthorizationService();
 <table id="table-1">
 	<tr><td>
 		 <h3>所有權限資料 - listAllAuthorization.jsp</h3>
-		 <h4><a href=""<%=request.getContextPath()%>/back-end/authorization/select_page.jsp">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/authorization/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 

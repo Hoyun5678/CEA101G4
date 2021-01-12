@@ -7,7 +7,7 @@ public class AuthorizationService {
 	private AuthorizationDAO_interface dao;
 
 	public AuthorizationService() {
-		dao = new AuthorizationJDBCDAO();
+		dao = new AuthorizationDAO();
 	}
 
 	public AuthorizationVO addAuthorization(String func_name) {

@@ -20,7 +20,7 @@ public class SouvenirOrderDetailDAO implements SouvenirOrderDetailDAO_interface 
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G4DB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -29,7 +29,8 @@ public class SouvenirOrderDetailDAO implements SouvenirOrderDetailDAO_interface 
 	private static final String GET_ALL_STMT = "SELECT * FROM SOUVENIR_ORDER_DETAIL ORDER BY SOU_ORDER_ID";
 	private static final String GET_ONE_STMT = "SELECT * FROM SOUVENIR_ORDER_DETAIL WHERE SOU_ORDER_ID = ?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_ORDER_DETAIL WHERE SOU_ORDER_ID = ? AND SOU_ID = ?";
-	private static final String UPDATE = "UPDATE SOUVENIR_ORDER_DETAIL SET  SOU_ID = ?, SOU_ORDER_AMOUNT = ?,  SOU_PRICE = ? WHERE SOU_ORDER_ID = ?";
+	private static final String UPDATE = "UPDATE SOUVENIR_ORDER_DETAIL SET SOU_ORDER_AMOUNT = ?,  SOU_PRICE = ? WHERE SOU_ORDER_ID = ? AND SOU_ID = ?";
+	private static final String INSERT_STMT2 = "INSERT INTO SOUVENIR_ORDER_DETAIL(SOU_ID, SOU_ORDER_AMOUNT, SOU_PRICE,SOU_ORDER_ID) VALUES(?, ?, ?, ?)";
 	@Override
 	public void insert(SouvenirOrderDetailVO sodVO) {
 		// TODO Auto-generated method stub

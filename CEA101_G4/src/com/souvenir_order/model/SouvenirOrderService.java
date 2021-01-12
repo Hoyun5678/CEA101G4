@@ -11,7 +11,7 @@ public class SouvenirOrderService {
 	private SouvenirOrderDAO_interface dao;
 
 	public SouvenirOrderService() {
-		dao = new SouvenirOrderJDBCDAO();
+		dao = new SouvenirOrderDAO();
 	}
 
 	public SouvenirOrderVO addSouvenirOrder(String emp_id, String mem_id,

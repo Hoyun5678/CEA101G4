@@ -15,6 +15,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.souvenir_order.model.SouvenirOrderVO;
+import com.souvenir_order_detail.model.SouvenirOrderDetailDAO;
 import com.souvenir_order_detail.model.SouvenirOrderDetailJDBCDAO;
 import com.souvenir_order_detail.model.SouvenirOrderDetailVO;
 
@@ -26,7 +27,7 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G4DB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -382,13 +383,14 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 
 		try {
 
+			
 			con = ds.getConnection();
 			
 			// 1●設定於 pstm.executeUpdate()之前
     		con.setAutoCommit(false);
 			
-    		// 先新增部門
-			String cols[] = {"sou_id"};
+    		// 先新增訂單編號
+			String cols[] = {"SOU_ORDER_ID"};
 			pstmt = con.prepareStatement(INSERT_STMT , cols);			
 			pstmt.setString(1, soVO.getEmp_id());
 			pstmt.setString(2, soVO.getMem_id());
@@ -405,20 +407,20 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 
 			pstmt.executeUpdate();
 			//掘取對應的自增主鍵值
-			String next_sou_id = null;
+			String next_sou_order_id = null;
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
-				next_sou_id = rs.getString(1);
-				System.out.println("自增主鍵值= " + next_sou_id +"(剛新增成功的特產編號)");
+				next_sou_order_id = rs.getString(1);
+				System.out.println("自增主鍵值= " + next_sou_order_id +"(剛新增成功的特產編號)");
 			} else {
 				System.out.println("未取得自增主鍵值");
 			}
 			rs.close();
-			// 再同時新增員工
+			// 再同時新增訂單明細
 			SouvenirOrderDetailJDBCDAO dao = new SouvenirOrderDetailJDBCDAO();
 			System.out.println("list.size()-A="+list.size());
 			for (SouvenirOrderDetailVO aSOD : list) {
-				aSOD.setSou_id(new String(next_sou_id)) ;
+				aSOD.setSou_order_id(new String(next_sou_order_id)) ;
 				dao.insert2(aSOD,con);
 			}
 
@@ -426,8 +428,8 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 			con.commit();
 			con.setAutoCommit(true);
 			System.out.println("list.size()-B="+list.size());
-			System.out.println("新增訂單編號" + next_sou_id + "時,共有" + list.size()
-					+ "產品同時被新增");
+			System.out.println("新增訂單編號" + next_sou_order_id + "時,共有" + list.size()
+					+ "產品明細同時被新增");
 			
 			// Handle any driver errors
 		}  catch (SQLException se) {
@@ -435,7 +437,7 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 				try {
 					// 3●設定於當有exception發生時之catch區塊內
 					System.err.print("Transaction is being ");
-					System.err.println("rolled back-由-SO");
+					System.err.println("rolled back-由-SOUVENIRORDER");
 					con.rollback();
 				} catch (SQLException excep) {
 					throw new RuntimeException("rollback error occured. "
@@ -462,6 +464,7 @@ public class SouvenirOrderDAO implements SouvenirOrderDAO_interface {
 			}
 		}
 	}
+
 	public static void main(String[] args) {
 		SouvenirOrderDAO dao = new SouvenirOrderDAO();
 		// 新增

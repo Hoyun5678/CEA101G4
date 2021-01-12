@@ -48,7 +48,7 @@
 </c:if>
 
 <ul>
-  <li><a href='"<%=request.getContextPath()%>/back-end/news/listAllNews.jsp'>List</a> all news.  <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/back-end/news/listAllNews.jsp'>List</a> all news.  <br><br></li>
   
   
   <li>
@@ -81,7 +81,7 @@
 <h3>會員管理</h3>
 
 <ul>
-  <li><a href='"<%=request.getContextPath()%>/back-end/news/addNews.jsp'>Add</a> a new emp.</li>
+  <li><a href='<%=request.getContextPath()%>/back-end/news/addNews.jsp'>Add</a> a new emp.</li>
 </ul>
 
 </body>

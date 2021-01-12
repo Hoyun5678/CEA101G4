@@ -49,7 +49,7 @@ AuthorizationVO authorizationVO = (AuthorizationVO) request.getAttribute("author
 <table id="table-1">
 	<tr><td>
 		 <h3>員工資料新增 - addAuthorization.jsp</h3></td><td>
-		 <h4><a href=""<%=request.getContextPath()%>/back-end/authorization/select_page.jsp"><img src="images/pikachu.jpg" width="100" height="100" border="0">回首頁</a></h4>
+		 <h4><a href="<%=request.getContextPath()%>/back-end/authorization/select_page.jsp"><img src="images/pikachu.jpg" width="100" height="100" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 

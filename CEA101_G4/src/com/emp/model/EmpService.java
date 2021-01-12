@@ -6,7 +6,7 @@ import java.util.List;
 public class EmpService {
 	private EmpDAO_interface dao;
 	public EmpService() {
-		dao = new EmpJDBCDAO();
+		dao = new EmpDAO();
 	}
 
 	public EmpVO addEmp(String emp_account, String emp_pwd, String emp_name, Integer emp_acc_status, Integer emp_gender) {

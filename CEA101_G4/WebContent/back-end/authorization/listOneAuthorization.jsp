@@ -56,7 +56,7 @@ th, td {
 			<td>
 				<h3>員工資料 - ListOneAuthorization.jsp</h3>
 				<h4>
-					<a href=""<%=request.getContextPath()%>/back-end/authorization/select_page.jsp"><img
+					<a href="<%=request.getContextPath()%>/back-end/authorization/select_page.jsp"><img
 						src="images/back1.gif" width="100" height="32" border="0">回首頁</a>
 				</h4>
 			</td>

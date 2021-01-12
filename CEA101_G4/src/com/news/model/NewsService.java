@@ -7,7 +7,7 @@ import java.util.List;
 public class NewsService {
 	private NewsDAO_interface dao;
 	public NewsService() {
-		dao = new NewsJDBCDAO();
+		dao = new NewsDAO();
 	}
 
 	public NewsVO addNews(String news_content, Timestamp news_date) {

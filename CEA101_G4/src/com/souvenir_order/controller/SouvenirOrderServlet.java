@@ -261,7 +261,7 @@ public class SouvenirOrderServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try {
+//			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String emp_id = req.getParameter("emp_id").trim();
 				String empIdReg = "^[(a-zA-Z0-9)]{2,100}$";
@@ -370,11 +370,11 @@ public class SouvenirOrderServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 
 		if ("delete".equals(action)) { // 來自listAllSouvenir_Order.jsp

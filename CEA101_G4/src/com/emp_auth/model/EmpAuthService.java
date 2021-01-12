@@ -7,7 +7,7 @@ import java.util.List;
 public class EmpAuthService {
 	private EmpAuthDAO_interface dao;
 	public EmpAuthService() {
-		dao = new EmpAuthJDBCDAO();
+		dao = new EmpAuthDAO();
 	}
 
 	public EmpAuthVO addEmpAuth(String emp_id, String func_id) {

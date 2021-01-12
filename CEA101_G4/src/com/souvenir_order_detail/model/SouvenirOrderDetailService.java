@@ -8,7 +8,7 @@ import java.util.Map;
 public class SouvenirOrderDetailService {
 	private  SouvenirOrderDetailDAO_interface dao;
 	public  SouvenirOrderDetailService() {
-		dao = new  SouvenirOrderDetailJDBCDAO();
+		dao = new  SouvenirOrderDetailDAO();
 	}
 
 	public SouvenirOrderDetailVO addSouvenirOrderDetail(String sou_order_id, String sou_id, Integer sou_order_amount, Integer sou_price) {

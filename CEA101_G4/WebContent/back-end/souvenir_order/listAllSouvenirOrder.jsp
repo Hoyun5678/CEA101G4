@@ -142,7 +142,7 @@ h4 {
                                                     </c:when>
                                                 </c:choose></td>
 					<td><c:choose>
-                                                    <c:when test="${soVO.sou_shipment_status==0}">
+                                                    <c:when test="${soVO.sou_payment_status==0}">
                                                         	未付款
                                                     </c:when>
                                                     <c:when test="${soVO.sou_payment_status==1}">

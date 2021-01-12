@@ -93,7 +93,7 @@
 <h3>會員管理</h3>
 
 <ul>
-  <li><a href='/CEA101G4/back-end/emp/addEmp.jsp'>Add</a> a new emp.</li>
+  <li><a href='<%=request.getContextPath()%>/back-end/emp/addEmp.jsp'>Add</a> a new emp.</li>
 </ul>
 
 </body>
