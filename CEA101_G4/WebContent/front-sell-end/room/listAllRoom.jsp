@@ -32,7 +32,7 @@
 						<tr>
 							<th>房間名稱</th>
 							<th>住宿價格/天</th>
-							<th>房間容納人數</th>
+							<th>容納人數</th>
 							<th class="des">房間敘述</th>
 							<th>房間狀態</th>
 							<th>資料修改</th>
@@ -47,7 +47,7 @@
 							<td>${roomVO.roomPrice}</td>
 							<td>${roomVO.roomCapacity}</td>
 							<td class="des">${roomVO.roomDes}</td>
-							<td>${(roomVO.roomStatus==0) ? "下架中": "已上架"}</td>
+							<td>${(roomVO.roomStatus==0) ? "已下架": "上架中"}</td>
 							<td>
 							  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do" style="margin-bottom: 0px;">
 							     <input type="hidden" name="roomId"  value="${roomVO.roomId}">

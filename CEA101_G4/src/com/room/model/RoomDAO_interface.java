@@ -17,6 +17,7 @@ public interface RoomDAO_interface {
     
     public List<RoomVO> getByMemId(String sellMemId);
 	List<RoomVO> getByDateRange(Date from, Date to);
+	public RoomVO updateRoomBySell(RoomVO roomVO);
 	
 	
 }

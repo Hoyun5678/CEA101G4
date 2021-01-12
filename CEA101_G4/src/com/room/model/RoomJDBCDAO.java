@@ -25,6 +25,8 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 			"DELETE FROM ROOM_PRODUCT WHERE ROOM_ID = ?";
 		private static final String UPDATE = 
 			"UPDATE ROOM_PRODUCT SET SELL_MEM_ID=?, ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_COLLECT=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
+		private static final String UPDATE_BY_SELLMEM = 
+				"UPDATE ROOM_PRODUCT SET ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
 		private static final String GET_BYMEMID_STMT = 
 			"SELECT * FROM ROOM_PRODUCT WHERE SELL_MEM_ID = ? ORDER BY ROOM_STATUS DESC, ROOM_ID DESC";
 		private static final String GET_BYDATERANGE_STMT = 
@@ -142,6 +144,58 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 			}
 		}
 	}
+	
+	@Override
+	public RoomVO updateRoomBySell(RoomVO roomVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		RoomService roomSvc = new RoomService();
+
+		try {
+
+			Class.forName(Util.DRIVER);
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_BY_SELLMEM);
+			
+			pstmt.setString(1, roomVO.getRoomName());
+			pstmt.setInt(2, roomVO.getRoomPrice());
+			pstmt.setInt(3, roomVO.getRoomCapacity());
+			pstmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(5, roomVO.getRoomDes());
+			pstmt.setInt(6, roomVO.getRoomStatus());
+			pstmt.setString(7, roomVO.getRoomId());
+
+			pstmt.executeUpdate();
+			return roomSvc.getOneRoom(roomVO.getRoomId());
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
 
 	@Override
 	public void delete(String roomId) {
@@ -334,7 +388,7 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 					+ jdbcUtil_CompositeQuery_Room.get_WhereCondition(map);
 			
 			pstmt = con.prepareStatement(finalSQL);
-			System.out.println("finalSQL = " + finalSQL);
+//			System.out.println("finalSQL = " + finalSQL);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
