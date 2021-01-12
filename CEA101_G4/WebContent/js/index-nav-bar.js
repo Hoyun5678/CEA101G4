@@ -72,6 +72,13 @@
                     $('.bigbig').css("margin-top", "0px");
                 }
             });
+            
+        
+            
+            $(document).on('click', '#roomSearchBtn', function() {
+
+            	$('#formRoom').submit();
+            })
 
 
 
