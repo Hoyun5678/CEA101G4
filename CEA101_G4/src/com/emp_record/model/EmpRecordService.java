@@ -9,7 +9,7 @@ public class EmpRecordService {
 	private EmpRecordDAO_interface dao;
 
 	public EmpRecordService() {
-		dao=new EmpRecordJDBCDAO();
+		dao=new EmpRecordDAO();
 	}
 
 	public EmpRecordVO addEmpRe(String emp_id,java.sql.Timestamp emp_record_time,String emp_record_content,Integer emp_record_read) {
