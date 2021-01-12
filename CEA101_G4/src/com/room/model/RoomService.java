@@ -10,7 +10,7 @@ public class RoomService {
 	private RoomDAO_interface dao;
 	
 	public RoomService() {
-		dao = new RoomJDBCDAO();
+		dao = new RoomDAO();
 	}
 
 	public RoomVO addRoom(/*String roomId,*/ String sellMemId, String roomName,
