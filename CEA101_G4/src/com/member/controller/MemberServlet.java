@@ -211,9 +211,13 @@ public class MemberServlet extends HttpServlet {
 				errorMsgs.add("密碼錯誤唷");
 			} else if (memVO.getMem_account().equals(mem_account) && (memVO.getMem_pwd().equals(mem_pwd))) {
 				session.setAttribute("memVO", memVO);
-				String url = "/front-mem-end/front-index.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-				successView.forward(req, res);
+				Object locationObj=session.getAttribute("location");
+				if(locationObj==null) {
+					res.sendRedirect(req.getContextPath()+"/front-mem-end/front-index.jsp");
+				}else {
+					session.removeAttribute("location");
+					res.sendRedirect(locationObj.toString());
+				}
 			}
 
 			if (!errorMsgs.isEmpty()) {
