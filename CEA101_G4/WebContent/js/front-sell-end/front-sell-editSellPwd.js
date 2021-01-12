@@ -51,30 +51,32 @@
 			})
 			
 			// valid form data again before submit
-			$("button").click(function(e) {
-				if($("#pwdForm").data('bootstrapValidator').isValid()) {
-					// submit
-					$.ajax({
-						url: urlTarget,
-						type: "POST",
-						data: $("#pwdForm").serialize(),
-						success: function(data) {
-							if(data.trim()) {
-								console.log("t" + data);
-								$('#errorMsgs').html(data);
-								 
-							} else {
-								console.log("f" + data);
-			                    swal({
-			  						title: "Good job!",
-			  						text: "修改密碼成功!",
-			  						icon: "success",
-								});
-			                    e.preventDefault();
-							}
-						}
-					});
-					
-				}
-			})
+//			$("button").click(function(e) {
+//				e.preventDefault();
+//				if($("#pwdForm").data('bootstrapValidator').isValid()) {
+//					// submit
+//					
+//					$.ajax({
+//						url: urlTarget,
+//						type: "POST",
+//						data: $("#pwdForm").serialize(),
+//						success: function(data) {
+//							if(data.trim()) {
+//								console.log("t" + data);
+//								$('#errorMsgs').html(data);
+//								 
+//							} else {
+//								console.log("f" + data);
+//			                    swal({
+//			  						title: "Good job!",
+//			  						text: "修改密碼成功!",
+//			  						icon: "success",
+//								});
+//			                    e.preventDefault();
+//							}
+//						}
+//					});
+//					
+//				}
+//			})
 		})

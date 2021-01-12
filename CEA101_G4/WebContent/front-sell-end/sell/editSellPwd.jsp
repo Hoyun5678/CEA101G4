@@ -70,10 +70,10 @@
 		                    </div>
 		                </div>
 		            </form>
-<!-- 				    <div class="row"> -->
+					<div class="row">
 						<c:if test="${not empty errorMsgs}">
 							<%-- 錯誤表列 from Servlet --%>
-							<div class="alert alert-danger col-6" role="alert" id="titleAndError">
+							<div class="alert alert-danger col-6 offset-3" role="alert" id="titleAndError">
 								<font style="color:red">請修正以下錯誤:</font>
 								<ul>
 									<c:forEach var="message" items="${errorMsgs}">
@@ -82,10 +82,12 @@
 								</ul>
 							</div>
 						</c:if>
-<!-- 					</div> -->
+					</div>
 				</div>
 			</div>
 		</div>
+			
+		
 	</div>
 
     <!-- Optional JavaScript -->

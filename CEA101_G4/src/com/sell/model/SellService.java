@@ -11,7 +11,7 @@ public class SellService {
 	private SellDAO_interface dao;
 	
 	public SellService() {
-		dao = new SellJDBCDAO();
+		dao = new SellDAO();
 	}
 	
 	public SellVO addSell(String sellMemAccount, String sellMemPwd, String sellMemName, Date sellMemBirth

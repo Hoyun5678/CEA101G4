@@ -552,6 +552,8 @@ public class SellServlet extends HttpServlet {
 				String oriSellMemPwd = req.getParameter("oriSellMemPwd").trim();
 				if(!oriSellMemPwd.equals(oriSellVO.getSellMemPwd())) {
 					errorMsgs.add("原始密碼輸入錯誤，更新失敗");
+					System.out.println("原本資料庫密碼: " + oriSellVO.getSellMemPwd());
+					System.out.println("使用者輸入原始密碼: " + oriSellMemPwd);
 				}
 				
 				// SELL_MEM_PWD
@@ -571,6 +573,7 @@ public class SellServlet extends HttpServlet {
 				}
 				
 				
+				
 				SellVO sellVO = new SellVO();
 				sellVO.setSellMemId(sellMemId);
 				sellVO.setSellMemPwd(sellMemPwd);
@@ -588,9 +591,12 @@ public class SellServlet extends HttpServlet {
 				/***************************2.開始修改資料*****************************************/
 				sellSvc = new SellService();
 				sellVO = sellSvc.updateSell(sellMemId, sellMemPwd);
+				sellVO = sellSvc.getOneSell(sellMemId);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("sellVO", sellVO); // 資料庫update成功後,正確的的sellVO物件,存入req
+				HttpSession session = req.getSession();
+				session.setAttribute("sellVO", sellVO);
+				req.setAttribute("sellVO", sellVO);
 				String url = "/front-sell-end/sell/listOneSell.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneRoom.jsp
 				successView.forward(req, res);
