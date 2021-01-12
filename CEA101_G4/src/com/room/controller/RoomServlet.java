@@ -289,6 +289,7 @@ public class RoomServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			RoomService roomSvc = new RoomService();
 			RoomVO oriRoomVO = new RoomVO();
+			RoomVO roomVO = null;
 		
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
@@ -369,7 +370,7 @@ public class RoomServlet extends HttpServlet {
 
 				// String sellMemId =req.getParameter("sellMemId").trim();
 
-				RoomVO roomVO = new RoomVO();
+				roomVO = new RoomVO();
 				roomVO.setRoomId(roomId);
 				roomVO.setSellMemId(sellMemId);
 				roomVO.setRoomName(roomName);
@@ -402,6 +403,7 @@ public class RoomServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗: "+e.getMessage());
+				req.setAttribute("roomVO", roomVO);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-sell-end/room/update_room_input.jsp");
 				failureView.forward(req, res);

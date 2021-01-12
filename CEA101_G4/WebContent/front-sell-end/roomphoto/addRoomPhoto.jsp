@@ -37,7 +37,6 @@
         
         #preview {
         	position: absolute;
-        	border: 1px solid blue;
 		    left: 10%;
 		    top: 15%;
 		    width: 80%;
@@ -50,6 +49,7 @@
 	    <%@ include file="/front-sell-end/sellMemSideBar.jsp"%>
 	    <div id="content">
 	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
+	        <c:set var="roomVO" value="${param.roomVO}" scope="page" />
 			<div class="container-fluid" style="padding: 0;">
 				<div class="container">
 					<form METHOD="post" ACTION="<%=request.getContextPath()%>/roomphoto/roomphoto.do" enctype="multipart/form-data">
@@ -64,7 +64,7 @@
 						</div>
 
 						<div class="uploadBtn">
-							<input type="hidden" name=roomId value="${param.roomId}">
+							<input type="hidden" name=roomId value="${roomVO.roomId}">
 							<input type="hidden" name="action" value="insert">
 							<button type="submit" class="btn btn-secondary">確認上傳</button>
 						</div>

@@ -41,9 +41,6 @@
 			        <h3>房間資料修改</h3>
 			        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do" name="form1">
 			            <table class="table align-middle">
-							<% 
-								String sellMemId = roomVO.getSellMemId();
-							%>
 			                <tr>
 			                    <td>房間名稱:</td>
 			                    <td><input type="TEXT" name="roomName" size="45" value="<%=roomVO.getRoomName()%>" /></td>
@@ -79,7 +76,7 @@
 			                </tr>
 			                <tr>
 			                    <td><br>
-			                        <input type="hidden" name="sellMemId" value="<%=sellMemId%>">
+			                        <input type="hidden" name="sellMemId" value="${sellVO.sellMemId}">
 			                        <input type="hidden" name="action" value="update"></td>
 			                    <td>
 			                        <button type="submit" class="btn btn-primary">確認更新</button></td>
