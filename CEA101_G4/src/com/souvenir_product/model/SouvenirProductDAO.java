@@ -1,6 +1,7 @@
 package com.souvenir_product.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G4DB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -38,6 +39,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT SOU_ID, SOU_TYPE_ID, SOU_NAME, SOU_PRICE, SOU_ON_DATE, SOU_OFF_DATE,  SOU_LIKE_COUNT, SOU_DES, SOU_STATUS FROM SOUVENIR_PRODUCT order by SOU_ID";
 
 
+
 	@Override
 	public void insert(SouvenirProductVO soupVO) {
 		Connection con = null;
@@ -48,8 +50,6 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-
-			
 			pstmt.setString(1, soupVO.getSou_type_id());
 			pstmt.setString(2, soupVO.getSou_name());
 			pstmt.setInt(3, soupVO.getSou_price());
@@ -61,6 +61,7 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 
 			pstmt.executeUpdate();
 
+			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -103,10 +104,11 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			pstmt.setString(7, soupVO.getSou_des());
 			pstmt.setInt(8, soupVO.getSou_status());
 			pstmt.setString(9, soupVO.getSou_id());
+			
 
 			pstmt.executeUpdate();
 
-			// Handle any SQL errors
+			// Handle any driver errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
@@ -141,7 +143,6 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, sou_id);
-
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -187,7 +188,6 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			while (rs.next()) {
 
 				soupVO = new SouvenirProductVO();
-				
 				soupVO.setSou_id(rs.getString("sou_id"));
 				soupVO.setSou_type_id(rs.getString("sou_type_id"));
 				soupVO.setSou_name(rs.getString("sou_name"));
@@ -196,7 +196,8 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 				soupVO.setSou_off_date(rs.getTimestamp("sou_off_date"));
 				soupVO.setSou_like_count(rs.getInt("sou_like_count"));
 				soupVO.setSou_des(rs.getString("sou_des"));
-				soupVO.setSou_status(rs.getInt("sou_statu"));
+				soupVO.setSou_status(rs.getInt("sou_status"));
+
 			}
 
 			// Handle any driver errors
@@ -226,7 +227,6 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 				}
 			}
 		}
-
 		return soupVO;
 	}
 
@@ -244,10 +244,11 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
+
 			while (rs.next()) {
 
 				soupVO = new SouvenirProductVO();
-			
+
 				soupVO.setSou_id(rs.getString("sou_id"));
 				soupVO.setSou_type_id(rs.getString("sou_type_id"));
 				soupVO.setSou_name(rs.getString("sou_name"));
@@ -256,7 +257,8 @@ public class SouvenirProductDAO implements SouvenirProductDAO_interface {
 				soupVO.setSou_off_date(rs.getTimestamp("sou_off_date"));
 				soupVO.setSou_like_count(rs.getInt("sou_like_count"));
 				soupVO.setSou_des(rs.getString("sou_des"));
-				soupVO.setSou_status(rs.getInt("sou_statu"));
+				soupVO.setSou_status(rs.getInt("sou_status"));
+				list.add(soupVO);
 			}
 
 			// Handle any driver errors

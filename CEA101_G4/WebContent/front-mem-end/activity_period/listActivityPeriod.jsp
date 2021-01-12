@@ -199,6 +199,16 @@
         .splide--fade>.splide__track>.splide__list>.splide__slide{
             height: 350px;
         }
+        table.itemTable td{
+        margin-top:5px;
+        display: grid;
+        }
+        table.itemTable input{
+        border-style: solid;
+        }
+        div.carousel-inner img {
+        height:650px;
+        }
        
         /* 燈箱樣式結束 */
     </style>
@@ -210,8 +220,47 @@
 	<jsp:useBean id="actperSvc" scope="page" class="com.activity_period.model.ActivityPeriodService" />
 	 <jsp:useBean id="actproSvc" scope="page" class="com.activity_product.model.ActivityProductService" />
 	 <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" />
+	 
+	 	<div id="carouselExampleFade" class="carousel slide carousel-fade"
+			data-interval="3000" data-ride="carousel" data-pause="false">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="<%=request.getContextPath()%>/image/activity_list/1.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/2.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/3.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/4.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/5.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/6.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/7.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/activity_list/8.jpg"
+						class="d-block w-100" alt="...">
+				</div>
+				
+			</div>
+	</div>
 
-	<div style="margin-top: 200px;">
+	<div>
 	  <c:forEach var="actperVO" items="${not empty datefilter1List&&datefilter1List.size()!=0? datefilter1List :actperSvc.all}">
 	    <table class="listTable">
 	    	<tr>

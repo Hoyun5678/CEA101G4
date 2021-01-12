@@ -52,7 +52,7 @@
 						src="<%=request.getContextPath()%>/image/LOGO/logo.png" alt=""
 						id="navlogo"></a>
 					<div class="align-self-center underline" id="room_act">
-						<a href="<%=request.getContextPath()%>/front-mem-end/room/listAllRoom.jsp"><h4>住宿</h4></a>
+						<h4>住宿</h4>
 					</div>
 					<div class="align-self-center underline" id="act_act">
 						<h4>體驗活動</h4>

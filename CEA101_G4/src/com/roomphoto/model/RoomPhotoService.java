@@ -7,7 +7,7 @@ import com.room.model.RoomVO;
 public class RoomPhotoService {
 	private RoomPhotoDAO_interface dao;
 	public RoomPhotoService() {
-		dao = new RoomPhotoJDBCDAO();
+		dao = new RoomPhotoDAO();
 	}
 	
 	public RoomPhotoVO addRoomPhoto(String roomId, byte[] roomPhoto, String roomPhotoContent) {

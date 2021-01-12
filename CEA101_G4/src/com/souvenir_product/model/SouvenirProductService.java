@@ -7,7 +7,7 @@ public class SouvenirProductService {
 	private SouvenirProductDAO_interface dao;
 
 	public SouvenirProductService() {
-		dao = new SouvenirProductJDBCDAO();
+		dao = new SouvenirProductDAO();
 	}
 
 	public SouvenirProductVO addSou(String sou_type_id, String sou_name, Integer sou_price,

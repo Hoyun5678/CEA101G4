@@ -7,7 +7,7 @@
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
 <html>
 <head>
-
+	
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,15 +16,50 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
     <style type="text/css">
     img {
-     height: auto !important; 
-}</style>
+     	weight: 100%;
+     }
+     .container-fluid .carousel-inner img {
+        height:650px !important;
+     }
+</style>
     
 <title>房間搜尋</title>
 
 </head>
 <body style="background-color: #40444e;">
 	<%@include file="/front-mem-end/front-nav-bar.jsp" %>
-	<div class="container" style="margin-top: 200px;">
+	<div class="container-fluid p-0" >
+		<div id="carouselExampleFade" class="carousel slide carousel-fade"
+			data-interval="3000" data-ride="carousel" data-pause="false">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="<%=request.getContextPath()%>/image/room_list/1.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/2.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/3.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/4.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="<%=request.getContextPath()%>/image/room_list/5.jfif"
+						class="d-block w-100" alt="...">
+				</div>
+				
+			</div>
+	</div>
+	</div>
+	
+	
+	<div class="container">
+
 		<c:set var="noResult" scope="page" value="${param.noResult}" />
 		<c:if test="${not empty noResult}">
 			<div class="container">
@@ -47,7 +82,7 @@
 				<div class="carousel-inner">
 					<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}">
 					<div class="carousel-item">
-						<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto" class="d-block">
+						<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto&scaleSize=500" class="d-block">
 					</div>
 					</c:forEach>
 	
@@ -89,34 +124,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script>
     	$(document).ready(function() {
-			$(".carousel-indicators li:first-child").addClass("active");
+    		$(".carousel-indicators li:first-child").addClass("active");
 			$(".carousel-inner .carousel-item:first-child").addClass("active");
-			
-		    $(window).scroll(function () {
-		        if ($(window).scrollTop() >= 300) {
-		            $('.header').addClass('upup');
-		            $('.cc').hide();
-		            $('.justify-content-md-center').addClass('shsh');
-		            $('.header').removeClass('open');
-		            $('.shsh').click(function () {
-		                $('.header').removeClass('upup');
-		                $('.header').addClass('open');
-		                $('.cc').show();
-		                $('.justify-content-md-center').removeClass('shsh');
-		            });
-		        } else {
-		            $('.header').removeClass('upup');
-		            $('.header').removeClass('open');
-		            $('.cc').show();
-		            $('.justify-content-md-center').removeClass('shsh');
-		        }
-		    });
-		    
-		    $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-		        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' ~ ' + picker.endDate.format('YYYY-MM-DD'));
-		    });
-			
-		});
+    	});
 	</script>
     
 </body>

@@ -1,9 +1,6 @@
-package com.souvenir_photo.model;
+package com.roomphoto.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +9,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.room.model.RoomJDBCDAO;
+import com.room.model.RoomVO;
 
-public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
+import util.Util;
+
+public class RoomPhotoDAO implements RoomPhotoDAO_interface{
 	private static DataSource ds = null;
 	static {
 		try {
@@ -23,42 +24,39 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 			e.printStackTrace();
 		}
 	}
-
-
-
-	private static final String INSERT_STMT =
-			"INSERT INTO SOUVENIR_PHOTO(SOU_PHOTO_ID, SOU_ID, SOU_PHOTO,SOU_PHOTO_CONTENT)"
-			+ " VALUES ('SOUPH' || LPAD(SPHO_SEQ.NEXTVAL, 3, '0'),?,?,?)";
-	private static final String UPDATE = 
- 	"UPDATE SOUVENIR_PHOTO set SOU_ID=?, SOU_PHOTO=?, SOU_PHOTO_CONTENT=? where SOU_PHOTO_ID=?";
-	private static final String DELETE = "DELETE FROM SOUVENIR_PHOTO where SOU_PHOTO_ID = ?";
-	private static final String GET_ONE_STMT =
-			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO, SOU_PHOTO_CONTENT FROM SOUVENIR_PHOTO where SOU_PHOTO_ID = ?";
+	private static final String INSERT_STMT = 
+		"INSERT INTO ROOM_PHOTO(ROOM_PHOTO_ID, ROOM_ID, ROOM_PHOTO, ROOM_PHOTO_CONTENT) "
+			+ "VALUES('ROOMPH' || LPAD(ROOMPHO_SEQ.NEXTVAL, 3, '0'), ?, ?, ?) ";
 	private static final String GET_ALL_STMT = 
-			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO, SOU_PHOTO_CONTENT FROM SOUVENIR_PHOTO order by SOU_PHOTO_ID";
-	private static final String GET_BYSOUID = 
-			"SELECT * FROM SOUVENIR_PHOTO WHERE SOU_ID = ?";
+		"SELECT * FROM ROOM_PHOTO ORDER BY ROOM_PHOTO_ID";
+	private static final String GET_ONE_STMT = 
+		"SELECT * FROM ROOM_PHOTO WHERE ROOM_PHOTO_ID = ?";
+	private static final String DELETE = 
+		"DELETE FROM ROOM_PHOTO WHERE ROOM_PHOTO_ID = ?";
+	private static final String UPDATE = 
+		"UPDATE ROOM_PHOTO SET ROOM_ID=?, ROOM_PHOTO=?, ROOM_PHOTO_CONTENT=? WHERE ROOM_PHOTO_ID = ?";
+	private static final String GET_BYROOMID = 
+		"SELECT * FROM ROOM_PHOTO WHERE ROOM_ID = ?";
 	
-	
-	@Override
-	public void insert(SouvenirPhotoVO souphVO) {
+	public void insert(RoomPhotoVO roomPhotoVO) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, souphVO.getSou_id());
-			pstmt.setBytes(2, souphVO.getSou_photo());
-			pstmt.setString(3, souphVO.getSou_photo_content());
+			pstmt.setString(1, roomPhotoVO.getRoomId());
+			pstmt.setBytes(2, roomPhotoVO.getRoomPhoto());
+			pstmt.setString(3, roomPhotoVO.getRoomPhotoContent());
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
+			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -76,32 +74,30 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				}
 			}
 		}
-
 	}
 
+
 	@Override
-	public void update(SouvenirPhotoVO souphVO) {
+	public void update(RoomPhotoVO roomPhotoVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, souphVO.getSou_id());
-			pstmt.setBytes(2, souphVO.getSou_photo());
-			pstmt.setString(3, souphVO.getSou_photo_content());
-			pstmt.setString(4, souphVO.getSou_photo_id());
-
-			
+			pstmt.setString(1, roomPhotoVO.getRoomId());
+			pstmt.setBytes(2, roomPhotoVO.getRoomPhoto());
+			pstmt.setString(3, roomPhotoVO.getRoomPhotoContent());
+			pstmt.setString(4, roomPhotoVO.getRoomPhotoId());
 
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		}  catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -119,25 +115,26 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				}
 			}
 		}
-
 	}
 
 	@Override
-	public void delete(String getSou_photo_id) {
+	public void delete(String roomPhotoId) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
-			pstmt.setString(1, getSou_photo_id);
+
+			pstmt.setString(1, roomPhotoId);
+
 			pstmt.executeUpdate();
 
-			// Handle any driver errors
-		}  catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -155,39 +152,39 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				}
 			}
 		}
-
+		
 	}
 
-	@Override
-	public SouvenirPhotoVO findByPrimaryKey(String getSou_photo_id) {
 
-		SouvenirPhotoVO souphVO = null;
+	@Override
+	public RoomPhotoVO findByPrimaryKey(String roomPhotoId) {
+		
+		RoomPhotoVO roomPhotoVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setString(1, getSou_photo_id);
+			pstmt.setString(1, roomPhotoId);
 
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-
-				souphVO = new SouvenirPhotoVO();
-				
-				souphVO.setSou_photo_id(rs.getString("sou_photo_id"));
-				souphVO.setSou_id(rs.getString("sou_id"));
-				souphVO.setSou_photo(rs.getBytes("sou_photo"));
-				souphVO.setSou_photo_content(rs.getString("sou_photo_content"));
+			
+			while(rs.next()) {
+				roomPhotoVO = new RoomPhotoVO();
+				roomPhotoVO.setRoomPhotoId(rs.getString("ROOM_PHOTO_ID"));
+				roomPhotoVO.setRoomId(rs.getString("ROOM_ID"));
+				roomPhotoVO.setRoomPhoto(rs.getBytes("ROOM_PHOTO"));
+				roomPhotoVO.setRoomPhotoContent(rs.getString("ROOM_PHOTO_CONTENT"));
 			}
 
-			// Handle any driver errors
+
+			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -212,39 +209,38 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				}
 			}
 		}
-		return souphVO;
+		
+		return roomPhotoVO;
 	}
 
-	@Override
-	public List<SouvenirPhotoVO> getAll() {
-		List<SouvenirPhotoVO> list = new ArrayList<SouvenirPhotoVO>();
-		SouvenirPhotoVO souphVO = null;
 
+	@Override
+	public List<RoomPhotoVO> getAll() {
+		List<RoomPhotoVO> list = new ArrayList<RoomPhotoVO>();
+		RoomPhotoVO roomPhotoVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-
-				souphVO = new SouvenirPhotoVO();
-				
-				souphVO.setSou_photo_id(rs.getString("sou_photo_id"));
-				souphVO.setSou_id(rs.getString("sou_id"));
-				souphVO.setSou_photo(rs.getBytes("sou_photo"));
-				souphVO.setSou_photo_content(rs.getString("sou_photo_content"));
 			
-				list.add(souphVO);
+			while(rs.next()) {
+				roomPhotoVO = new RoomPhotoVO();
+				roomPhotoVO.setRoomPhotoId(rs.getString("ROOM_PHOTO_ID"));
+				roomPhotoVO.setRoomId(rs.getString("ROOM_ID"));
+//				roomPhotoVO.setRoomPhoto(rs.getBytes("ROOM_PHOTO"));
+				roomPhotoVO.setRoomPhotoContent(rs.getString("ROOM_PHOTO_CONTENT"));
+				list.add(roomPhotoVO);
 			}
 
-			// Handle any driver errors
-		}catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -272,36 +268,35 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 		return list;
 	}
 	
-	public List<SouvenirPhotoVO> getBySouId(String sou_id){
-		List<SouvenirPhotoVO> list = new ArrayList<SouvenirPhotoVO>();
-
-		SouvenirPhotoVO souphVO = null;
+	
+	@Override
+	public List<RoomPhotoVO> getByRoomId(String roomId) {
+		List<RoomPhotoVO> list = new ArrayList<RoomPhotoVO>();
+		RoomPhotoVO roomPhotoVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
-
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_BYSOUID);
-			pstmt.setString(1,sou_id);
-
+			pstmt = con.prepareStatement(GET_BYROOMID);
+			pstmt.setString(1, roomId);
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-
-				souphVO = new SouvenirPhotoVO();
-				
-				souphVO.setSou_photo_id(rs.getString("sou_photo_id"));
-				souphVO.setSou_id(rs.getString("sou_id"));
-				souphVO.setSou_photo(rs.getBytes("sou_photo"));
-				souphVO.setSou_photo_content(rs.getString("sou_photo_content"));
-				list.add(souphVO);
+			
+			while(rs.next()) {
+				roomPhotoVO = new RoomPhotoVO();
+				roomPhotoVO.setRoomPhotoId(rs.getString("ROOM_PHOTO_ID"));
+				roomPhotoVO.setRoomId(rs.getString("ROOM_ID"));
+				roomPhotoVO.setRoomPhoto(rs.getBytes("ROOM_PHOTO"));
+				roomPhotoVO.setRoomPhotoContent(rs.getString("ROOM_PHOTO_CONTENT"));
+				list.add(roomPhotoVO);
 			}
 
-			// Handle any driver errors
-		}catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -328,6 +323,5 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 		}
 		return list;
 	}
+
 }
-	
-	
