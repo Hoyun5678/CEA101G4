@@ -8,7 +8,7 @@ public class RoomOrderedDateService {
 	
 	private RoomOrderedDateDAO_interface dao;
 	public RoomOrderedDateService() {
-		dao = new RoomOrderedDateJDBCDAO();
+		dao = new RoomOrderedDateDAO();
 	}
 	
 	public RoomOrderedDateVO addRoomOrderedDate(String roomOrderedDateId, 

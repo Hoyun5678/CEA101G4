@@ -11,7 +11,7 @@ public class RoomOrderService {
 	private RoomOrderDAO_interface dao;
 	
 	public RoomOrderService( ) {
-		dao = new RoomOrderJDBCDAO();
+		dao = new RoomOrderDAO();
 	}
 	
 	public RoomOrderVO addRoomOrder(String sellMemId, String memId/*, Timestamp roomOrderTime*/, Date checkInDate,
