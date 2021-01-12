@@ -13,7 +13,7 @@ public class ActivityPeriodService {
 	private ActivityPeriodDAO_interface dao;
 
 	public ActivityPeriodService() {
-		dao = new ActivityPeriodJDBCDAO();
+		dao = new ActivityPeriodDAO();
 	}
 
 	public List<ActivityPeriodVO> getAll() {

@@ -9,7 +9,7 @@ public class ActivityPhotoService {
 	private ActivityPhotoDAO_interface dao;
 
 	public ActivityPhotoService() {
-		dao = new ActivityPhotoJDBCDAO();
+		dao = new ActivityPhotoDAO();
 	}
 
 	public List<ActivityPhotoVO> getAll() {

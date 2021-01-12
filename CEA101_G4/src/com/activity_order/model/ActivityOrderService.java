@@ -11,7 +11,7 @@ public class ActivityOrderService {
 	private ActivityOrderDAO_interface dao;
 
 	public ActivityOrderService() {
-		dao = new ActivityOrderJDBCDAO();
+		dao = new ActivityOrderDAO();
 	}
 
 	public List<ActivityOrderVO> getAll() {
