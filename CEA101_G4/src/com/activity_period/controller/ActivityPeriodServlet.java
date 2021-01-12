@@ -3,10 +3,13 @@ package com.activity_period.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.activity_period.model.*;
+import com.room.model.RoomService;
+import com.room.model.RoomVO;
+
+import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Activity_Period;
 
 public class ActivityPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -119,12 +126,22 @@ public class ActivityPeriodServlet extends HttpServlet {
 						req.setAttribute("errorMsgs", errorMsgs);
 						ActivityPeriodService actperSvc=new ActivityPeriodService();
 						List<ActivityPeriodVO>datefilter1List=null;
+						Map<String, String[]> comQueMap=new TreeMap<String,String[]>();
 			
 						try {
 							/*************************** 1.接收請求參數 ****************************************/
-							String key_word=req.getParameter("key_word");
+							String key_word=req.getParameter("key_word").trim();
 							if(key_word.isEmpty()) {
 								System.out.println("使用者未輸入key_word");
+							}
+							
+							String checkString = "^[(\u4e00-\u9fa5)]{1,}$";
+							String checkNum="^[(0-9)]{1,}$";
+							
+							if(key_word.matches(checkNum)) {
+								comQueMap.put("price", new String[]{key_word});
+							}else if(key_word.matches(checkString)) {
+								comQueMap.put("word", new String[]{key_word});
 							}
 							
 							
@@ -132,16 +149,21 @@ public class ActivityPeriodServlet extends HttpServlet {
 							System.out.println(datefilter1);
 							if(datefilter1 == null || datefilter1.trim().length() < 1) {
 								System.out.println("使用者未輸入時間 送他全部");
-								datefilter1List=actperSvc.getAll();
 							} else {
-								datefilter1List=actperSvc.getListByActPeriodStart(datefilter1);
-								System.out.println(datefilter1List.get(0));
+								comQueMap.put("datefilter1",new String[]{datefilter1});
+								
 							}
 							
-						
+							List<ActivityPeriodVO>  queryFinalList=actperSvc.getAll(comQueMap);
+							
+							
+							
+							
+							
+							
 //							req.setAttribute(, ); // 資料庫取出的empVO物件,存入req
 							String url = "/front-mem-end/activity_period/listActivityPeriod.jsp";
-							req.setAttribute("datefilter1List", datefilter1List);
+							req.setAttribute("queryFinalList", queryFinalList);
 							RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 							successView.forward(req, res);
 			
