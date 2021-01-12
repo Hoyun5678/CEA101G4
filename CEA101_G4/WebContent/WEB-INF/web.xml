@@ -67,15 +67,16 @@
     <servlet-name>ActivityTypeServlet</servlet-name>
     <url-pattern>/ActivityType/ActivityType.do</url-pattern>
   </servlet-mapping>
-  
+<!--   會員登入濾器 -->
   <filter>
 		<filter-name>memLoginFilter</filter-name>
 		<filter-class>filter.mem_Login_filter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>memLoginFilter</filter-name>
-		<url-pattern>/front-mem-end/mem/mem_center_page.jsp</url-pattern>
+		<url-pattern>/front-mem-end/activity_order/listOneActivityOrder.jsp</url-pattern>
 		<url-pattern>/front-mem-end/mem/listOneMem.jsp</url-pattern>
+		<url-pattern>/front-mem-end/mem/update_mem_pwd.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
@@ -130,6 +131,9 @@
 	<filter-mapping>
 		<filter-name>sellMemLoginFilter</filter-name>
 		<url-pattern>/front-sell-end/sell/*</url-pattern>
+		<url-pattern>/front-sell-end/activity_order/*</url-pattern>
+		<url-pattern>/front-sell-end/activity_period/*</url-pattern>
+		<url-pattern>/front-sell-end/activity_product/*</url-pattern>
 		
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
