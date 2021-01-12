@@ -57,7 +57,7 @@
         .listTable > td:nth-last-child(1), td:nth-last-child(2){
             width: 100px;
         }
-        .btn{
+        .btn3{
             font-weight: 600;
             padding: 10px;
             outline: none;
@@ -70,7 +70,7 @@
             color: #332926;
             transition: all 0.2s ease-in-out;
         }
-        .btn:hover{
+        .btn3:hover{
             border: 3px solid #fce40d !important;
             background-color: #fff !important;
         }
@@ -153,9 +153,10 @@
             top: 5px;
             right: 20px;
             font-family: monospace;
-            font-size: 28px;
-            color: #797979;
-            cursor: pointer;
+            font-size: 28px !important;
+            color: #797979 !important;
+            cursor: pointer !important;
+            background:none !important;
         }
         .itemContainer{
             /* border: 1px solid blue; */
@@ -211,7 +212,7 @@
 	 <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" />
 
 	<div style="margin-top: 200px;">
-	  <c:forEach var="actperVO" items="${not empty datefilter1List? datefilter1List :actperSvc.all}">
+	  <c:forEach var="actperVO" items="${not empty datefilter1List&&datefilter1List.size()!=0? datefilter1List :actperSvc.all}">
 	    <table class="listTable">
 	    	<tr>
 	    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>
@@ -230,7 +231,7 @@
 	            <td>${actperVO.act_period_start}</td>
 	            <td>${actperVO.act_cur_price}</td>
 	            <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
-	            <td><button class="btn" type="button">查看商品</button></td>
+	            <td><button class="btn3" type="button">查看商品</button></td>
 	            <td><button class="btn1">瀏覽評論</button></td>
 	            
 	        </tr>
@@ -297,7 +298,7 @@
 		</c:forEach>
 	</div>
 <script>
-        let viewBtn = document.getElementsByClassName('btn');
+        let viewBtn = document.getElementsByClassName('btn3');
      document.addEventListener('DOMContentLoaded', function() {
     	 for(let i=0;i<viewBtn.length;i++){
     		 
