@@ -523,7 +523,9 @@ public class MemberServlet extends HttpServlet {
 				MailService send_mail=new MailService(); //大吳的寄信JAVA
 				MailCertification cer = new MailCertification();
 				String mem_id=memSvc.getOneMemByAccount(mem_account).getMem_id();
-				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。http://localhost:8081/"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
+//				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。 https://34.80.93.191"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
+//						+ cer.insertCode(mem_id) + "&mem_id=" + mem_id; //雲端機用
+				String mailMsg = "宿購易 SuperGoing驗證信：請點擊網址。 http://localhost:8081"+req.getContextPath()+"/member/member.do?action=certification&rand_num="
 						+ cer.insertCode(mem_id) + "&mem_id=" + mem_id;
 				send_mail.sendMail(mem_mail, "宿購易你最愛的旅遊平台", mailMsg);
 
