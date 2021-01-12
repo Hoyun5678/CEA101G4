@@ -33,7 +33,7 @@ public class mem_Login_filter implements Filter {
 		
 		//判斷是否登入
 		MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-		
+		System.out.println(req.getRequestURI());
 		if (memVO == null) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/front-mem-end/mem/memLogin.jsp");
