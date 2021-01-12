@@ -22,12 +22,15 @@
 		}
 		.photoBox { 
   			margin: 10px 0;
+
  		} 
  		.photoBox div { 
   			max-width: 100%;  
   			height: 160px;
 			position: relative;
- 			overflow: hidden; 
+ 			overflow: hidden;
+  			box-shadow: 3px 3px 5px #ccc;
+			border-radius: 10px; 			
  		} 
  		.photoBox div:active { 
   			top: 2px;
@@ -170,7 +173,7 @@
     			let toDelete = $('.toDelete');
     			while (toDelete.length > 0) {
     				var par = toDelete[0].parentNode.parentNode;
-    				console.log(par)
+//     				console.log(par)
     				$.ajax({
     					url: urlTarget, 
     					type: "POST",
@@ -186,6 +189,7 @@
     				
     				toDelete = $('.toDelete');
     				}
+    			$('.deleteBtn').addClass('d-none');
     		})
     		
     		
