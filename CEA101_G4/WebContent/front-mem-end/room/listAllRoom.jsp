@@ -16,11 +16,11 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
     <style type="text/css">
     img {
-     height: auto;
-     } 
-     div.carousel-inner img {
+     	weight: 100%;
+     }
+     .container-fluid .carousel-inner img {
         height:650px !important;
-        }
+     }
 </style>
     
 <title>房間搜尋</title>
@@ -28,11 +28,8 @@
 </head>
 <body style="background-color: #40444e;">
 	<%@include file="/front-mem-end/front-nav-bar.jsp" %>
-	
-	
-	
-	<div class="container" style="margin-top: 200px;">
-	<div id="carouselExampleFade" class="carousel slide carousel-fade"
+	<div class="container-fluid p-0" >
+		<div id="carouselExampleFade" class="carousel slide carousel-fade"
 			data-interval="3000" data-ride="carousel" data-pause="false">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
@@ -58,6 +55,11 @@
 				
 			</div>
 	</div>
+	</div>
+	
+	
+	<div class="container">
+
 		<c:set var="noResult" scope="page" value="${param.noResult}" />
 		<c:if test="${not empty noResult}">
 			<div class="container">
@@ -122,34 +124,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script>
     	$(document).ready(function() {
-			$(".carousel-indicators li:first-child").addClass("active");
+    		$(".carousel-indicators li:first-child").addClass("active");
 			$(".carousel-inner .carousel-item:first-child").addClass("active");
-			
-		    $(window).scroll(function () {
-		        if ($(window).scrollTop() >= 300) {
-		            $('.header').addClass('upup');
-		            $('.cc').hide();
-		            $('.justify-content-md-center').addClass('shsh');
-		            $('.header').removeClass('open');
-		            $('.shsh').click(function () {
-		                $('.header').removeClass('upup');
-		                $('.header').addClass('open');
-		                $('.cc').show();
-		                $('.justify-content-md-center').removeClass('shsh');
-		            });
-		        } else {
-		            $('.header').removeClass('upup');
-		            $('.header').removeClass('open');
-		            $('.cc').show();
-		            $('.justify-content-md-center').removeClass('shsh');
-		        }
-		    });
-		    
-		    $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-		        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' ~ ' + picker.endDate.format('YYYY-MM-DD'));
-		    });
-			
-		});
+    	});
 	</script>
     
 </body>
