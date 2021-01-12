@@ -3,13 +3,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.souvenir_product.model.*"%>
 <%@ page import="com.souvenir_order.model.*"%>
+<%@ page import="com.souvenir_order_detail.model.*"%>
 <%@ page import="com.member.model.*"%>
-<%
-	SouvenirOrderVO soVO = (SouvenirOrderVO) request.getAttribute("soVO");
-%>
-<%
-	MemberVO memVO = (MemberVO) session.getAttribute("memVO");
-%>
+<%SouvenirOrderVO soVO = (SouvenirOrderVO) request.getAttribute("soVO");%>
+<%SouvenirProductVO soupVO = (SouvenirProductVO) request.getAttribute("soupVO");%>
+<%SouvenirOrderDetailVO sodVO = (SouvenirOrderDetailVO) request.getAttribute("sodVO");%>
+<%MemberVO memVO = (MemberVO) session.getAttribute("memVO"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,6 +176,7 @@ button:hover {
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/souvenir_order/souvenir_order.do"
 				name="form2">
+				<tr>		 
 				<label> <span class="fname">收件人姓名 <span
 						class="required">*</span></span> <input
 					value="<%=(memVO == null) ? "" : memVO.getMem_name()%>" type="text"
@@ -190,14 +190,43 @@ button:hover {
 					<input
 					value="<%=(soVO == null) ? "0978666889" : soVO.getSou_receiver_phone()%>"
 					type="TEXT" name="sou_receiver_phone">
-
-				</label> <br> <label> <span>信箱 <span class="required">*</span></span>
-					<input type="email" name="city">
-				</label> <br> <label> <span>訂單運送方式 <span
+				</label><br> <label> <span>訂單運送方式 <span
 						class="required">*</span></span> <input
 					value="<%=(soVO == null) ? "0" : soVO.getSou_shipping_method()%>"
 					type="TEXT" name="sou_shipping_method">
-				</label> <br>
+				</label> <br><label> <span>特產訂單備註 <span class="required">*</span></span><input type="TEXT" name="sou_order_remarks"
+			 value="<%= (soVO==null)? "請仔細包裝" : soVO.getSou_order_remarks()%>" /></td>
+	</tr>
+	
+				<tr>
+<!-- 		<td>員工編號:</td> -->
+		<td><input type="hidden" name="emp_id"
+			 value="<%= (soVO==null)? "EMP003" : soVO.getEmp_id()%>" /></td>
+	</tr>
+	<tr>
+<!-- 		<td>會員編號:</td> -->
+		<td><input type="hidden" name="mem_id"
+			 value="<%=memVO.getMem_id()%>" /></td>
+<!-- 		<td>特產運費:</td> -->
+		<input type="hidden" name="sou_shipment_fee"
+			 value="<%= (soVO==null)? "10" : soVO.getSou_shipment_fee()%>" />
+	</tr>
+
+<!-- 				<td>特產訂單狀態:</td>  -->
+		<td><input type="hidden" name="sou_order_status"
+			 value="<%= (soVO==null)? "0" : soVO.getSou_order_status()%>" /></td>
+	</tr>
+	<tr>
+<!-- 		<td>特產訂單付款狀態:</td> -->
+		<td><input type="hidden" name="sou_payment_status"
+			 value="<%= (soVO==null)? "0" : soVO.getSou_payment_status()%>" /></td>
+	</tr>
+	<tr>
+<!-- 		<td>特產訂單出貨狀態:</td> -->
+		<td><input type="hidden" name="sou_shipment_status"
+			 value="<%= (soVO==null)? "0" : soVO.getSou_shipment_status()%>" /></td>
+	</tr>
+	
 			</form>
 			<div class="Yorder">
 				<table>
@@ -214,7 +243,7 @@ button:hover {
 
 					<%
 						Vector<SouvenirProductVO> buylist = (Vector<SouvenirProductVO>) session.getAttribute("soupVO");
-						String amount = (String) request.getAttribute("amount");
+						Integer amount = (Integer) request.getAttribute("amount");
 					%>
 					<%
 						for (int i = 0; i < buylist.size(); i++) {
@@ -222,6 +251,7 @@ button:hover {
 							String sou_name = order.getSou_name();
 							int sou_price = order.getSou_price();
 							int quantity = order.getQuantity();
+							String sou_id = order.getSou_id();
 					%>
 					<tr>
 						<td width="200">
@@ -240,6 +270,14 @@ button:hover {
 							</div>
 						</td>
 					</tr>
+					<tr>
+<%-- 		<td width="200"><div align="center"><b><%=sou_name%></b></div></td> --%>
+		<input type="hidden" name="sou_id" value="<%= sou_id%>">
+<%-- 		<td width="100"><div align="center"><b><%=sou_price%></b></div></td> --%>
+		<input type="hidden" name="sou_price" value="<%=sou_price%>">
+<%-- 		<td width="100"><div align="center"><b><%=quantity%></b></div></td> --%>
+		<input type="hidden" name="sou_order_amount" value="<%=quantity%>">
+	</tr>
 					<%
 						}
 					%>
@@ -247,7 +285,9 @@ button:hover {
 					<tr>
 						<td>總金額</td>
 						<td></td>
-						<td><b>$<%=amount%></b></td>
+						<td><b>${amount}</b></td>
+						<input type="hidden" name="sou_order_sum_price"value="${amount}"/>
+	</tr>
 					</tr>
 				</table>
 				<br>
@@ -261,7 +301,8 @@ button:hover {
 						alt="" width="50">
 					</span>
 				</div>
-				<button type="button">下訂單</button>
+				<input type="hidden" name="action" value="insert">
+				<button type="submit">下訂單</button>
 			</div>
 			<!-- Yorder -->
 		</div>

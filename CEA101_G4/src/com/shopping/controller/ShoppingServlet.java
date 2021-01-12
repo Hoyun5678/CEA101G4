@@ -74,8 +74,8 @@ public class ShoppingServlet extends HttpServlet {
 			rd.forward(req, res);
 		}
 		// ���b�A�p���ʪ������y�����`��
-			else if ("CHECKOUT".equals(action)) {
-			float total = 0;
+		else if ("CHECKOUT".equals(action)) {
+			Integer total = 0;
 			for (int i = 0; i < buylist.size(); i++) {
 				SouvenirProductVO order = buylist.get(i);
 				Integer price = order.getSou_price();
@@ -83,8 +83,7 @@ public class ShoppingServlet extends HttpServlet {
 				total += (price * quantity);
 			}
 
-			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
+			req.setAttribute("amount", total);
 			String url = "/front-mem-end/souvenir/souvenir_checkout.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
