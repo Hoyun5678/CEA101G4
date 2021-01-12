@@ -95,7 +95,7 @@
 						</div>
 					</div>
 				</form>
-				<form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do" name="form1">
+				<form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityPeriod/ActivityPeriod.do" name="form1" id="foract">
 				<c:set var="key_word" scope="page" value="${param.key_word}" />
 				<c:set var="datefilter1" scope="page" value="${param.datefilter1}" />
 					<div class="container" id="act">
@@ -107,7 +107,7 @@
 								體驗日期：<input type="text" name="datefilter1" value="" onkeydown="return false" autocomplete="off" />
 							</div>
 							<div class="bigbig">
-								<input type="submit" id="checkyes2"> <label
+								<label id="actSearchBtn"
 									for="checkyes2"><span class="fas fa-search"></span>
 								</label>
 							</div>

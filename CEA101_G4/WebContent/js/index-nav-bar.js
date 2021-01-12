@@ -78,6 +78,11 @@
             $(document).on('click', '#roomSearchBtn', function() {
 
             	$('#formRoom').submit();
+            });
+            
+            $(document).on('click', '#actSearchBtn', function() {
+
+            	$('#foract').submit();
             })
 
 
