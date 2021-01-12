@@ -82,7 +82,7 @@
 				<div class="carousel-inner">
 					<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}">
 					<div class="carousel-item">
-						<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto" class="d-block">
+						<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto&scaleSize=500" class="d-block">
 					</div>
 					</c:forEach>
 	

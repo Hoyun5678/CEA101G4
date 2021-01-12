@@ -10,6 +10,8 @@ import javax.servlet.http.*;
 import com.room.model.RoomService;
 import com.roomphoto.model.*;
 
+import util.pic.ImageUtil;
+
 @MultipartConfig
 public class RoomPhotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -296,10 +298,17 @@ public class RoomPhotoServlet extends HttpServlet {
 			res.setContentType("image/jpeg");
 			ServletOutputStream out = res.getOutputStream();
 			String roomPhotoId = req.getParameter("roomPhotoId");
+			Integer scaleSize = null;
 			try {
 				RoomPhotoService roomPhotoServiceSvc = new RoomPhotoService();
 				byte[] buffer = roomPhotoServiceSvc.getOneRoomPhoto(roomPhotoId).getRoomPhoto();
-				out.write(buffer);
+				try {
+					scaleSize = Integer.parseInt(req.getParameter("scaleSize").trim());
+					out.write(ImageUtil.shrink(buffer, scaleSize));
+				} catch (Exception e) {
+					out.write(buffer);
+				}
+				
 			} catch (Exception e) {
 				InputStream in = getServletContext().getResourceAsStream("/image/nophoto/none2.jpg");//回傳inputStream;/斜線代表該專案路徑
 				byte[] b= new byte[in.available()];
