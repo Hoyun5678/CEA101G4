@@ -253,7 +253,7 @@
 						class="d-block w-100" alt="...">
 				</div>
 				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/8.jpg"
+					<img src="<%=request.getContextPath()%>/image/activity_list/8.jfif"
 						class="d-block w-100" alt="...">
 				</div>
 				
@@ -261,7 +261,7 @@
 	</div>
 
 	<div>
-	  <c:forEach var="actperVO" items="${not empty datefilter1List&&datefilter1List.size()!=0? datefilter1List :actperSvc.all}">
+	  <c:forEach var="actperVO" items="${not empty queryFinalList&&queryFinalList.size()!=0? queryFinalList :actperSvc.all}">
 	    <table class="listTable">
 	    	<tr>
 	    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>
