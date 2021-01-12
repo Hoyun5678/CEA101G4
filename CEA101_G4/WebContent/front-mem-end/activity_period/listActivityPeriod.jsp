@@ -21,6 +21,7 @@
         body{
             margin: 0;
             padding: 0;
+            background-color: #1b4e6f !important;
         }
 
         /* table_list樣式開始 */
@@ -58,11 +59,10 @@
         }
         .btn{
             font-weight: 600;
-            letter-spacing: 2px;
             padding: 10px;
             outline: none;
             cursor: pointer;
-            width: 95px;
+            width: 100px;
             background-color: #fce40d !important;
             border: 3px solid #fce40d !important;
             padding:10px !important;
@@ -74,13 +74,11 @@
             border: 3px solid #fce40d !important;
             background-color: #fff !important;
         }
-        .btn1{
-        
-            letter-spacing: 2px;
+        .btn1{;
             padding: 10px;
             outline: none;
             cursor: pointer;
-            width: 95px;
+            width: 100px;
             background-color: #fce40d !important;
             border: 3px solid #fce40d !important;
             padding:10px !important;
@@ -90,11 +88,9 @@
         }
         .btn1:hover{
         font-weight: 600;
-            letter-spacing: 2px;
             padding: 10px;
             outline: none;
             cursor: pointer;
-            width: 95px;
             background-color: #fce40d !important;
             border: 3px solid #fce40d !important;
             padding:10px !important;
@@ -127,7 +123,7 @@
             height: 100vh;
             width: 100%;
             position: fixed;
-            z-index: 0;
+            z-index: 99;
             top: 0;
             left: 0;
             display:none;
@@ -149,7 +145,7 @@
             background-color: #fff;
             /* box-shadow: 0px 5px 40px -22px #8b8b8b; */
             box-shadow: 0px 5px 34px -19px #000000;
-            z-index: 1;
+            z-index: 100;
             display:none;
         }
         .close{
@@ -161,7 +157,7 @@
             color: #797979;
             cursor: pointer;
         }
-        .container{
+        .itemContainer{
             /* border: 1px solid blue; */
             width: 97%;
             height: 400px;
@@ -208,95 +204,98 @@
 </head>
 <body>
     <!-- 表格開始 -->
-    <%@include file="/front-mem-end/bar.jsp"%>
+    <%@include file="/front-mem-end/front-nav-bar.jsp"%>
     <%int i=0; %>
 	<jsp:useBean id="actperSvc" scope="page" class="com.activity_period.model.ActivityPeriodService" />
 	 <jsp:useBean id="actproSvc" scope="page" class="com.activity_product.model.ActivityProductService" />
 	 <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" />
-	  <c:forEach var="actperVO" items="${actperSvc.all}">
-    <table class="listTable">
-    	<tr>
-    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>
-											/ActivityPhoto/ActivityPhoto.do?act_id=
-											${actperVO.act_id}&action=getListActPhoByActId"></td>
-    	<td>活動名稱</td>
-    	<td>活動時間</td>
-    	<td>活動價格</td>
-    	<td>活動地點</td>
-    	
-    	
-    	</tr>
-        <tr>
-            
-            <td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
-            <td>${actperVO.act_period_start}</td>
-            <td>${actperVO.act_cur_price}</td>
-            <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
-            <td><button class="btn" type="button">查看商品</button></td>
-            <td><button class="btn1">瀏覽評論</button></td>
-            
-        </tr>
-        
-    </table>
-    <!-- 表格結束 -->
-    <!-- 燈箱開始 -->
-    <div class="itemLightbox">
-        <span class="close">x</span>
-        <div class="container">
-            <!-- 輪播開始 -->
-            <div class="caro">
-                <div class="splide<%=i++ %>">
-                    <div class="splide__track">
-                        <ul class="splide__list">
-                            <c:forEach var="actphoVO" items="${actphoSvc.getActPhoByActId(actperVO.act_id)}">
-                            <li class="splide__slide">
-                                <img src="<%=request.getContextPath()%>
-											/ActivityPhoto/ActivityPhoto.do?act_photo_id=
-											${actphoVO.act_photo_id}&action=getOneActPho">
-                            </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                    <div class="splide__progress">
-                        <div class="splide__progress__bar">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 輪播結束 -->
-            <!-- 這是商品資料 -->
-            <div class="itemData">
-                
-                    <table class="itemTable">
-                     <form method="post" action="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
-                        <tr>
-                            <td>活動介紹</td>
-                        </tr>
-                        <tr>
-                            <td>${actproSvc.getOneActPro(actperVO.act_id).act_des}</td>
-                        </tr>
-                        <tr><td>活動參與人數</td><td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td></tr>
-                        <tr><td>備註: <input type="textarea" name="act_order_remarks"></td></tr>
-                        
-                        
-                  
-            <input type="hidden" name="action" value="insert">
-            <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
-            <input type="submit" class="submitBtn" value="參加">
-            </form>
-            
-                       
-                    </table>
-                    <!-- button先放這 -->
-                   
-                
-            </div>
-        </div>
-    </div>
-    <!-- 燈箱結束 -->
-    <!-- 這是燈箱背景 -->
-    <div class="itemLightboxBg"></div>
-</c:forEach>
+
+	<div style="margin-top: 200px;">
+	  <c:forEach var="actperVO" items="${not empty datefilter1List? datefilter1List :actperSvc.all}">
+	    <table class="listTable">
+	    	<tr>
+	    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>
+												/ActivityPhoto/ActivityPhoto.do?act_id=
+												${actperVO.act_id}&action=getListActPhoByActId"></td>
+	    	<td>活動名稱</td>
+	    	<td>活動時間</td>
+	    	<td>活動價格</td>
+	    	<td>活動地點</td>
+	    	
+	    	
+	    	</tr>
+	        <tr>
+	            
+	            <td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
+	            <td>${actperVO.act_period_start}</td>
+	            <td>${actperVO.act_cur_price}</td>
+	            <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
+	            <td><button class="btn" type="button">查看商品</button></td>
+	            <td><button class="btn1">瀏覽評論</button></td>
+	            
+	        </tr>
+	        
+	    </table>
+	    <!-- 表格結束 -->
+	    <!-- 燈箱開始 -->
+	    <div class="itemLightbox">
+	        <span class="close">x</span>
+	        <div class="itemContainer">
+	            <!-- 輪播開始 -->
+	            <div class="caro">
+	                <div class="splide<%=i++ %>">
+	                    <div class="splide__track">
+	                        <ul class="splide__list">
+	                            <c:forEach var="actphoVO" items="${actphoSvc.getActPhoByActId(actperVO.act_id)}">
+	                            <li class="splide__slide">
+	                                <img src="<%=request.getContextPath()%>
+												/ActivityPhoto/ActivityPhoto.do?act_photo_id=
+												${actphoVO.act_photo_id}&action=getOneActPho">
+	                            </li>
+	                            </c:forEach>
+	                        </ul>
+	                    </div>
+	                    <div class="splide__progress">
+	                        <div class="splide__progress__bar">
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <!-- 輪播結束 -->
+	            <!-- 這是商品資料 -->
+	            <div class="itemData">
+	                
+	                    <table class="itemTable">
+	                     <form method="post" action="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
+	                        <tr>
+	                            <td>活動介紹</td>
+	                        </tr>
+	                        <tr>
+	                            <td>${actproSvc.getOneActPro(actperVO.act_id).act_des}</td>
+	                        </tr>
+	                        <tr><td>活動參與人數</td><td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td></tr>
+	                        <tr><td>備註: <input type="textarea" name="act_order_remarks"></td></tr>
+	                        
+	                        
+	                  
+	            <input type="hidden" name="action" value="insert">
+	            <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
+	            <input type="submit" class="submitBtn" value="參加">
+	            </form>
+	            
+	                       
+	                    </table>
+	                    <!-- button先放這 -->
+	                   
+	                
+	            </div>
+	        </div>
+	    </div>
+	    <!-- 燈箱結束 -->
+	    <!-- 這是燈箱背景 -->
+	    <div class="itemLightboxBg"></div>
+		</c:forEach>
+	</div>
 <script>
         let viewBtn = document.getElementsByClassName('btn');
      document.addEventListener('DOMContentLoaded', function() {
