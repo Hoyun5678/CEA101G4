@@ -79,7 +79,7 @@ public class RoomServlet extends HttpServlet {
 		}
 		
 		if("getByMultiCondition".equals(action)) {
-			System.out.println("test getByMulti");
+//			System.out.println("test getByMulti");
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -282,7 +282,6 @@ public class RoomServlet extends HttpServlet {
 		
 		
 		if ("update".equals(action)) { // 來自update_room_input.jsp的請求
-			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -334,24 +333,14 @@ public class RoomServlet extends HttpServlet {
 					roomCapacity = oriRoomVO.getRoomCapacity();
 					errorMsgs.add("房間容納人數請填入數字");					
 				}				
-				
-				java.sql.Timestamp roomOnTime = null;
-				try {
-					roomOnTime = java.sql.Timestamp.valueOf(req.getParameter("roomOnTime").trim());
-				} catch (IllegalArgumentException e) {
-					roomOnTime=new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsgs.add("請輸入正確日期時間!");
-				}
 
-				String roomDes = req.getParameter("roomDes").trim();
-				
-				Integer roomCollect = null;
-				try {
-					roomCollect = new Integer(req.getParameter("roomCollect").trim());
-				} catch (NumberFormatException e) {
-					roomCollect = 0;
-					errorMsgs.add("按讚次數請填數字.");
+				String roomDes = req.getParameter("roomDes");
+				if(req.getParameter("roomDes")==null || req.getParameter("roomDes").length()<1) {
+					roomDes = oriRoomVO.getRoomDes();
 				}
+				
+//				Integer roomCollect = null;
+//				roomCollect = oriRoomVO.getRoomCollect();
 				
 				Integer roomStatus = null;
 				String roomStatusStr = null;
@@ -364,8 +353,7 @@ public class RoomServlet extends HttpServlet {
 		            	roomStatus = new Integer(roomStatusStr);
 		            }
 				} catch (NumberFormatException e) {
-					roomStatus = 0;
-					errorMsgs.add("房間狀態只能為0或1");
+					roomStatus = oriRoomVO.getRoomStatus();
 				}
 
 				// String sellMemId =req.getParameter("sellMemId").trim();
@@ -376,9 +364,7 @@ public class RoomServlet extends HttpServlet {
 				roomVO.setRoomName(roomName);
 				roomVO.setRoomPrice(roomPrice);
 				roomVO.setRoomCapacity(roomCapacity);
-				roomVO.setRoomOnTime(roomOnTime);
 				roomVO.setRoomDes(roomDes);
-				roomVO.setRoomCollect(roomCollect);
 				roomVO.setRoomStatus(roomStatus);
 
 
@@ -392,7 +378,7 @@ public class RoomServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始修改資料*****************************************/
-				roomVO = roomSvc.updateRoom(roomId, sellMemId, roomName, roomPrice, roomCapacity, roomOnTime, roomDes, roomCollect, roomStatus);
+				roomVO = roomSvc.updateRoom(roomId, sellMemId, roomName, roomPrice, roomCapacity, roomDes, roomStatus);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("roomVO", roomVO); // 資料庫update成功後,正確的的roomVO物件,存入req

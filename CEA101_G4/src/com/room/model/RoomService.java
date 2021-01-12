@@ -52,6 +52,23 @@ public class RoomService {
 
 		return roomVO;
 	}
+	
+	public RoomVO updateRoom(String roomId, String sellMemId, String roomName,
+			Integer roomPrice, Integer roomCapacity,
+			String roomDes, Integer roomStatus) {
+
+		RoomVO roomVO = new RoomVO();
+
+		roomVO.setRoomId(roomId);
+		roomVO.setRoomName(roomName);
+		roomVO.setRoomPrice(roomPrice);
+		roomVO.setRoomCapacity(roomCapacity);
+		roomVO.setRoomDes(roomDes);
+		roomVO.setRoomStatus(roomStatus);
+		dao.updateRoomBySell(roomVO);
+
+		return roomVO;
+	}
 
 	public void deleteRoom(String roomId) {
 		dao.delete(roomId);
