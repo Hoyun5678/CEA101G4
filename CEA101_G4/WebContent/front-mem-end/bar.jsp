@@ -52,7 +52,7 @@
                    		
                     		<div id="myDropdown" class="dropdown-content">
                      			<a href="<%=request.getContextPath()%>/front-mem-end/mem/listOneMem.jsp"><i class="far fa-user"style="padding-right: 13px;"></i>管理帳戶</a>
-                     			<a href="#"><i class="fas fa-hotel"></i>房間訂單</a><a href="<%=request.getContextPath()%>/roomorder/roomorder.do?mem_id=${memVO.mem_id}&action=listRoomOrder">
+                     			<a href="<%=request.getContextPath()%>/roomorder/roomorder.do?mem_id=${memVO.mem_id}&action=listRoomOrder">"><i class="fas fa-hotel"></i>房間訂單</a>
                     			<a href="<%=request.getContextPath()%>/front-mem-end/activity_order/listOneActivityOrder.jsp"><i class="fas fa-umbrella-beach"style="padding-right: 8px;"></i>活動訂單</a>
                     			<a href="#"><i class="fas fa-gifts" style="padding-right: 8px;"></i>伴手禮訂單</a>
                     			<a href="<%=request.getContextPath()%>/roomproductcollect/roomproductcollect.do?mem_id=${memVO.mem_id}&action=showCollect"><i class="fab fa-gratipay"style="padding-right: 12px;"></i>我的收藏</a>
