@@ -199,6 +199,7 @@ button:hover {
 	</tr>
 	
 				<tr>
+
 <!-- 		<td>員工編號:</td> -->
 		<td><input type="hidden" name="emp_id"
 			 value="<%= (soVO==null)? "EMP003" : soVO.getEmp_id()%>" /></td>

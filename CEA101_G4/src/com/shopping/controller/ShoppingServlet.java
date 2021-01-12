@@ -82,7 +82,6 @@ public class ShoppingServlet extends HttpServlet {
 				int quantity = order.getQuantity();
 				total += (price * quantity);
 			}
-
 			req.setAttribute("amount", total);
 			String url = "/front-mem-end/souvenir/souvenir_checkout.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
