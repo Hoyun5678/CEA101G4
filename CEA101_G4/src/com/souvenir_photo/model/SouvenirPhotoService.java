@@ -8,7 +8,7 @@ public class SouvenirPhotoService {
 	private SouvenirPhotoDAO_interface dao;
 
 	public SouvenirPhotoService() {
-		dao = new SouvenirPhotoJDBCDAO();
+		dao = new SouvenirPhotoDAO();
 	}
 
 	public SouvenirPhotoVO addSouPhoto(String sou_id, byte[] sou_photo ,String sou_photo_content) {
