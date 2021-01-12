@@ -1,6 +1,7 @@
 package com.room.controller;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -194,15 +195,6 @@ public class RoomServlet extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				RoomService roomSvc = new RoomService();
 
-				
-				// datefilter checkin&checkout 
-				String datefilter = req.getParameter("datefilter");
-			
-					String[] dateList = datefilter.split(" ~ ");
-					String checkInDate = dateList[0];    
-					String checkOutDate = dateList[1]; 
-				
-				
 				String roomId = req.getParameter("roomId");
 				String roomIdReg = "^ROOM\\d{3}$";
 				if (roomId == null || roomId.trim().length() == 0) {
@@ -210,6 +202,28 @@ public class RoomServlet extends HttpServlet {
 				} else if(!roomId.trim().matches(roomIdReg)) { //以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("房間編號格式為: 前綴ROOM+數字三碼 ex.ROOM999");
 	            }
+				// datefilter checkin&checkout 
+				String datefilter = req.getParameter("datefilter");
+				System.out.println(datefilter);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");					
+				String checkInDate=null;
+				String checkOutDate=null;
+				if (datefilter == null || datefilter.trim().length() == 0) {//根本沒按
+					Date date= new Date();
+					checkInDate=sdf.format(date);//預設入住時間為今日
+				
+					Date tomorrow = new Date(date.getTime() + (1000 * 60 * 60 * 24));
+					checkOutDate=sdf.format(tomorrow);//預設退房時間為明天
+				}
+
+				else{//若搜尋日期不為空值處理方式如下
+					String[] dateList = datefilter.split(" ~ ");
+					checkInDate = dateList[0];    
+					checkOutDate = dateList[1]; 				
+				}
+				System.out.println(checkInDate);
+				System.out.println(checkOutDate);
+
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -224,25 +238,28 @@ public class RoomServlet extends HttpServlet {
 				if (roomVO == null) {
 					errorMsgs.add("查無資料");
 				}
+				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/front-mem-end/room/listAllRoom.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
-				}
+				}				
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+			
+			
 				req.setAttribute("roomVO", roomVO); // 資料庫取出的roomVO物件,存入req
 				req.setAttribute("checkInDate", checkInDate);
 				req.setAttribute("checkOutDate", checkOutDate);
 				String url = "/front-mem-end/room/listOneRoom.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneRoom.jsp
 				successView.forward(req, res);
-
+				
 
 				/***************************其他可能的錯誤處理*************************************/
-			} catch (Exception e) {
+				} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-mem-end/room/listAllRoom.jsp");

@@ -31,13 +31,13 @@ public class FoodSpotDAO implements FoodSpotDAO_interface {
 	private static final String UPDATE = 
 			"UPDATE FOOD_SPOT set SELL_MEM_ID=?,FAS_SPOT_NAME=?,FAS_ADD=?,FAS_DES=?, FAS_PHOTO=?, FAS_LATITUDE=?,FAS_LONGITUD=? where FAS_ID=?";
 	private static final String DELETE = 
-			"DELETE FROM FOOD_SPOT where FAS_ID = ?";
-	private static final String GET_ONE_STMT =
-			"SELECT FAS_ID, SELL_MEM_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM Food_Spot where FAS_ID = ?";
+			"DELETE FROM FOOD_SPOT WHERE FAS_ID = ?";
 	private static final String GET_BY_SELL =
-			"SELECT FAS_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM Food_Spot where SELL_MEM_ID = ?";
+			"SELECT * FROM FOOD_SPOT WHERE SELL_MEM_ID = ?";
+	private static final String GET_ONE_STMT =
+			"SELECT FAS_ID, SELL_MEM_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM FOOD_SPOT where FAS_ID = ?";
 	private static final String GET_ALL_STMT =
-			"SELECT FAS_ID, SELL_MEM_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM Food_Spot order by FAS_ID";
+			"SELECT FAS_ID, SELL_MEM_ID, FAS_SPOT_NAME, FAS_ADD, FAS_DES, FAS_PHOTO, FAS_LATITUDE, FAS_LONGITUD FROM FOOD_SPOT order by FAS_ID";
 //	private static final String GET_ONE_FAS_PHOTO =
 //			"SELECT FAS_PHOTO FROM Food_Spot where FAS_ID=?";
 	@Override
@@ -295,9 +295,6 @@ public class FoodSpotDAO implements FoodSpotDAO_interface {
 					return list;
 	}
 
-
-
-	@SuppressWarnings("null")
 	@Override
 	public List<FoodSpotVO> getAll() {
 		List<FoodSpotVO> list = new ArrayList<FoodSpotVO>();
