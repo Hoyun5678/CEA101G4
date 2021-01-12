@@ -6,11 +6,13 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.alibaba.fastjson.JSON;
 import com.member.model.MemberVO;
 import com.room.model.RoomService;
 import com.roomorder.model.*;
 import com.roomorderdetail.model.RoomOrderDetailVO;
 import com.roomphoto.model.RoomPhotoService;
+import com.roomproductcollect.model.RoomProductCollectService;
 
 
 public class RoomOrderServlet extends HttpServlet {
@@ -75,6 +77,49 @@ public class RoomOrderServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/select_page.jsp.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("listRoomOrder".equals(action)) { //一般會員可以查看他的所有訂單
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String mem_id = req.getParameter("mem_id");
+				
+				/*************************** 2.開始查詢資料 *****************************************/
+				RoomOrderService roSvc = new RoomOrderService();
+				List<RoomOrderVO> memRoomOrderList = roSvc.getByMemId(mem_id);
+	System.out.println(memRoomOrderList);
+	System.out.println("111");
+				if (memRoomOrderList == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/bar.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("memRoomOrderList", memRoomOrderList); // 資料庫取出roomOrderList
+				String url = "/front-mem-end/roomorder/listAllRoomOrder.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneRoomProductCollect.jsp
+	System.out.println(JSON.toJSONString(memRoomOrderList.get(7)));
+				successView.forward(req, res);
+
+
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/front-nav-bar.jsp");
 				failureView.forward(req, res);
 			}
 		}

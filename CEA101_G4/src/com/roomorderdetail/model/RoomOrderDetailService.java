@@ -6,7 +6,7 @@ import java.util.List;
 public class RoomOrderDetailService {
 	private RoomOrderDetailDAO_interface dao;
 	public RoomOrderDetailService() {
-		dao = new RoomOrderDetailJDBCDAO();
+		dao = new RoomOrderDetailDAO();
 	}
 	public RoomOrderDetailVO addRoomOrderDetail(String room_order_id, String room_id,Integer room_cur_price,String room_guest_name,String room_guest_mail,String room_guest_tel) {
 		

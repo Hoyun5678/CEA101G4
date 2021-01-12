@@ -129,17 +129,16 @@ body {
 	</div>
 	<div class="container">
 	<div class="row">
-	
 		<div class="col-md-4">
 		<c:forEach var="rpcListMem" items="${rpcListMem}">         
-    <div class="profile-card-2">
+    	<div class="profile-card-2">
     	<a href="<%=request.getContextPath()%>/room/room.do?roomId=${rpcListMem}&action=checkRoomDetail">
     	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${rpcListMem}&action=getOnePhotoByRoomId" class="img img-responsive">
         <div class="profile-name">${sellSvc.getOneSell(roomSvc.getOneRoom(rpcListMem).sellMemId).sellRoomName}</div>
         <div class="profile-username">${roomSvc.getOneRoom(rpcListMem).roomName} $ ${roomSvc.getOneRoom(rpcListMem).roomPrice}</div>
         <div class="profile-icons"><i class="far fa-heart"></i>${collectSvc.getCountCollect(rpcListMem)}</div>
-    </a>
-    </div>
+    	</a>
+   	</div>
 	</c:forEach>
 	</div>
 	</div>

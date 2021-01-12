@@ -7,7 +7,7 @@ import com.foodspot.model.FoodSpotVO;
 public class FAQService {
 	private FAQDAO_interface dao;
 	public FAQService() {
-		dao = new FAQJDBCDAO();
+		dao = new FAQDAO();
 	}
 	public FAQVO addFAQ(String faq_question, String faq_answer) {
 

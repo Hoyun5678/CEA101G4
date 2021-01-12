@@ -15,6 +15,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.roomordereddate.model.RoomOrderedDateDAO;
+import com.roomordereddate.model.RoomOrderedDateJDBCDAO;
 import com.roomordereddate.model.RoomOrderedDateVO;
 
 public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
@@ -28,10 +29,6 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "CEA101G4";
-	String passwd = "CEA101G4";
 	
 	private static final String INSERT_STMT =
 			"INSERT INTO ROOM_ORDER_DETAIL(ROOM_ORDER_ID, ROOM_ID, ROOM_CUR_PRICE, ROOM_GUEST_NAME, ROOM_GUEST_MAIL, ROOM_GUEST_TEL)"
@@ -41,9 +38,10 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 	private static final String DELETE = 
 			"DELETE FROM ROOM_ORDER_DETAIL where ROOM_ORDER_ID = ? AND ROOM_ID=?";
 	private static final String GET_ONE_STMT =
-			"SELECT * FROM ROOM_ORDER_DETAIL where ROOM_ORDER_ID = ?";
+			"SELECT ROOM_ORDER_ID, ROOM_ID, ROOM_CUR_PRICE, ROOM_GUEST_NAME, ROOM_GUEST_MAIL, ROOM_GUEST_TEL FROM ROOM_ORDER_DETAIL where ROOM_ORDER_ID = ?";
 	private static final String GET_ALL_STMT =
-			"SELECT * FROM ROOM_ORDER_DETAIL order by ROOM_ORDER_ID";
+			"SELECT ROOM_ORDER_ID, ROOM_ID, ROOM_CUR_PRICE, ROOM_GUEST_NAME, ROOM_GUEST_MAIL, ROOM_GUEST_TEL FROM ROOM_ORDER_DETAIL order by ROOM_ORDER_ID";
+	
 	
 	@Override
 	public void insert(RoomOrderDetailVO rodVO) {
