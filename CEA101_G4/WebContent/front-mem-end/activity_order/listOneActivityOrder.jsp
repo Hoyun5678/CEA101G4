@@ -187,7 +187,7 @@
                                         <td class="btn_group" style="width: 100%;">
                                         
                                             <c:choose>
-                                                <c:when test="${actordVO.act_payment_status==0}">
+                                                <c:when test="${actordVO.act_payment_status==0&&actordVO.act_order_status!=3&&actordVO.act_order_status!=2}">
                                                     <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
                                                         <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">付款</button>
                                                         <input type="hidden" name="act_order_id" value="${actordVO.act_order_id}">
