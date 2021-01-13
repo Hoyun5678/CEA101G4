@@ -23,7 +23,7 @@ public class SouvenirOrderDetailService {
 		return sodVO;
 	}
 
-	public SouvenirOrderDetailVO updateSouvenirOrderDetail(String sou_id,Integer sou_order_amount,Integer sou_price, String sou_order_id) {
+	public SouvenirOrderDetailVO updateSouvenirOrderDetail(String sou_id, Integer sou_order_amount,Integer sou_price, String sou_order_id) {
 
 		SouvenirOrderDetailVO sodVO = new SouvenirOrderDetailVO();
 

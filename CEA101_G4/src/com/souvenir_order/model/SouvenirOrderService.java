@@ -69,12 +69,18 @@ public class SouvenirOrderService {
 	public SouvenirOrderVO getOneSouvenirOrder(String sou_order_id) {
 		return dao.findByPrimaryKey(sou_order_id);
 	}
-
+	
 	public List<SouvenirOrderVO> getAll() {
 		return dao.getAll();
 	}
 	public List<SouvenirOrderVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
+	}
+	public List<SouvenirOrderVO> getSouOrderByMemId(String mem_id) {
+		return dao.getSouvenirOrderByMemid(mem_id);
+	}
+	public void changeSouOrderStatus(SouvenirOrderVO soVO) {
+		dao.update(soVO);
 	}
 	public void insertWithSouvenirOrderDetail(SouvenirOrderVO soVO,List<SouvenirOrderDetailVO> list) {
 		 dao.insertWithDetail(soVO, list);

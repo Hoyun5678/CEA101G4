@@ -25,7 +25,7 @@ public class SouvenirOrderJDBCDAO implements SouvenirOrderDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT SOU_ORDER_ID, EMP_ID, MEM_ID, SOU_ORDER_DATE, SOU_RECEIVER_NAME, SOU_RECEIVER_ADDRESS, SOU_RECEIVER_PHONE, SOU_SHIPMENT_FEE, SOU_ORDER_SUM_PRICE, SOU_ORDER_REMARKS, SOU_SHIPPING_METHOD, SOU_ORDER_STATUS, SOU_PAYMENT_STATUS, SOU_SHIPMENT_STATUS FROM SOUVENIR_ORDER WHERE SOU_ORDER_ID = ?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_ORDER WHERE SOU_ORDER_ID = ?";
 	private static final String UPDATE = "UPDATE SOUVENIR_ORDER SET SOU_RECEIVER_NAME = ?, SOU_RECEIVER_ADDRESS = ?, SOU_RECEIVER_PHONE = ?, SOU_SHIPMENT_FEE = ?, SOU_ORDER_SUM_PRICE = ?, SOU_ORDER_REMARKS= ? , SOU_SHIPPING_METHOD = ?, SOU_ORDER_STATUS = ?, SOU_PAYMENT_STATUS = ?, SOU_SHIPMENT_STATUS = ? WHERE SOU_ORDER_ID = ?";
-
+	private static final String GET_BY_MEM_ID_STMT ="SELECT SOU_ORDER_ID, EMP_ID, MEM_ID, SOU_ORDER_DATE, SOU_RECEIVER_NAME, SOU_RECEIVER_ADDRESS, SOU_RECEIVER_PHONE, SOU_SHIPMENT_FEE, SOU_ORDER_SUM_PRICE, SOU_ORDER_REMARKS, SOU_SHIPPING_METHOD, SOU_ORDER_STATUS, SOU_PAYMENT_STATUS, SOU_SHIPMENT_STATUS FROM SOUVENIR_ORDER WHERE MEM_ID = ?";
 	@Override
 	public void insert(SouvenirOrderVO soVO) {
 		// TODO Auto-generated method stub
@@ -371,6 +371,74 @@ public class SouvenirOrderJDBCDAO implements SouvenirOrderDAO_interface {
 			// Handle any SQL errors
 		} 
 		catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	@Override
+	 public List<SouvenirOrderVO> getSouvenirOrderByMemid(String mem_id){
+		List<SouvenirOrderVO> list = new ArrayList<SouvenirOrderVO>();
+		SouvenirOrderVO soVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_BY_MEM_ID_STMT);
+			pstmt.setString(1, mem_id);
+			rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					soVO = new SouvenirOrderVO();
+					soVO.setSou_order_id(rs.getString("sou_order_id"));
+					soVO.setEmp_id(rs.getString("emp_id"));
+					soVO.setMem_id(rs.getString("mem_id"));
+					soVO.setSou_order_date(rs.getTimestamp("sou_order_date"));
+					soVO.setSou_receiver_name(rs.getString("sou_receiver_name"));
+					soVO.setSou_receiver_address(rs.getString("sou_receiver_address"));
+					soVO.setSou_receiver_phone(rs.getString("sou_receiver_phone"));
+					soVO.setSou_shipment_fee(rs.getInt("sou_shipment_fee"));
+					soVO.setSou_order_sum_price(rs.getInt("sou_order_sum_price"));
+					soVO.setSou_order_remarks(rs.getString("sou_order_remarks"));
+					soVO.setSou_shipping_method(rs.getInt("sou_shipping_method"));
+					soVO.setSou_order_status(rs.getInt("sou_order_status"));
+					soVO.setSou_payment_status(rs.getInt("sou_payment_status"));
+					soVO.setSou_shipment_status(rs.getInt("sou_shipment_status"));
+					list.add(soVO); // Store the row in the list
+				}
+				
+			}catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+				// Handle any SQL errors
+			// Handle any driver errors
+		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 		} finally {

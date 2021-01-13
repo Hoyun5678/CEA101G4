@@ -177,9 +177,9 @@ public class SouvenirOrderDetailDAO implements SouvenirOrderDetailDAO_interface 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, sodVO.getSou_id());
-			pstmt.setInt(2, sodVO.getSou_order_amount());
-			pstmt.setInt(3, sodVO.getSou_price());
+			pstmt.setInt(1, sodVO.getSou_order_amount());
+			pstmt.setInt(2, sodVO.getSou_price());
+			pstmt.setString(3, sodVO.getSou_id());
 			pstmt.setString(4, sodVO.getSou_order_id());
 			
 

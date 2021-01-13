@@ -2,6 +2,7 @@ package com.souvenir_order.model;
 
 import java.util.List;
 import java.util.Map;
+
 import com.souvenir_order_detail.model.SouvenirOrderDetailVO;
 
 public interface SouvenirOrderDAO_interface {
@@ -11,5 +12,6 @@ public interface SouvenirOrderDAO_interface {
     public void update(SouvenirOrderVO soVO);
     public List<SouvenirOrderVO> getAll();
     public List<SouvenirOrderVO> getAll(Map<String, String[]> map);
+    public List<SouvenirOrderVO> getSouvenirOrderByMemid(String mem_id);
     public void insertWithDetail( SouvenirOrderVO soVO , List<SouvenirOrderDetailVO> list);
 }
