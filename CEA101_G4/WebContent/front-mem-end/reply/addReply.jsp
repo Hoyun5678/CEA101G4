@@ -35,9 +35,7 @@ h4 {
 	color: blue;
 	display: inline;
 }
-</style>
 
-<style>
 table {
 	text-align: center;
 	width: 80%;
@@ -113,10 +111,10 @@ form {
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
+		<font style="color: blue">請完成填寫:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
+				<li style="color: blue">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
@@ -126,10 +124,10 @@ form {
 
 		<div id=actrow>
 			<tr>
-				<td><b>活動期別編號:</td>
+				<td><b>活動編號:</td>
 				<td><input type="TEXT" class="input-group-text"
-					name="actPeriodId"
-					value="<%=(replyVO == null) ? "AP00" : replyVO.getActPeriodId()%>" /></td>
+					name="actId"
+					value="<%=(replyVO == null) ? "AP00" : replyVO.getActId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>

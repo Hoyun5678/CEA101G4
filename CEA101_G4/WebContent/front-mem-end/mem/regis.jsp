@@ -215,7 +215,7 @@
 								註冊 <span class="glyphicon glyphicon-send"></span>
 							</button>
 							<button type="button" class="btn btn-secondary testBtn">
-								神奇小ㄐㄐ <span class="glyphicon glyphicon-eye-open"></span>
+								神奇小按鈕 <span class="glyphicon glyphicon-eye-open"></span>
 							</button>
 						</div>
 					</div>

@@ -100,15 +100,15 @@ form {
 </head>
 <body bgcolor='white'>
 
-
+	<%@include file="/front-mem-end/bar.jsp"%>
 	<h3>評論檢舉資料新增:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
+		<font style="color: blue">請完成填寫:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
+				<li style="color: blue">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
@@ -119,7 +119,7 @@ form {
 
 		<div id=actrow>
 			<tr>
-				<td><b>活動期別編號:</td>
+				<td><b>員工編號:</td>
 				<td><input type="TEXT" name="empId" class="input-group-text"
 					value="<%=(replyReportVO == null) ? "EMP00" : replyReportVO.getEmpId()%>" /></td>
 			</tr>
@@ -134,9 +134,8 @@ form {
 		<div id=actrow>
 
 			<tr>
-				<td>檢舉評論編號:</td>
+				<td>評論編號:</td>
 				<td><input type="TEXT" name="replyId" class="input-group-text"
-					
 					value="<%=(replyReportVO == null) ? "RPL00" : replyReportVO.getReplyId()%>" />
 				</td>
 			</tr>
@@ -161,8 +160,8 @@ form {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"
-						class="btn btn-dark">回上頁</a>
+						href="<%=request.getContextPath()%>/front-mem-end/activity_period/listActivityPeriod.jsp"
+						class="btn btn-dark">回瀏覽頁</a>
 				</h3>
 			</td>
 		</tr>

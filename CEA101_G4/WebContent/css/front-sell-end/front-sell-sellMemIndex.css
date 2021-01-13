@@ -2,19 +2,21 @@
 	    margin-left: 2em;
     	margin-right: auto;
 	}
-
-	.calendarDiv form {
-		margin-block-start: 1em;
-		margin-block-end: 0.5em;
-		text-align: center;
-	}
+	
 	.calendarDiv {
+		background-color: #f8f9fa;
 	    border-radius: 10px;
 	    box-shadow: 3px -3px 5px #ccc;
 	    padding: 7px 12px;
 	    margin-top: 1em;
 	}
 	
+	.calendarDiv form {
+		margin-block-start: 1em;
+		margin-block-end: 0.5em;
+		text-align: center;
+	}
+
 	.calendarBody thead tr td {
 	    font-weight: bold;
 	    color: DodgerBlue;
@@ -61,5 +63,7 @@
 	.material-icons:hover {
 /* 		background-color: grey; */
 		transform: scale(1.2);
+		user-select: none;
+		cursor: pointer;
 	}
 

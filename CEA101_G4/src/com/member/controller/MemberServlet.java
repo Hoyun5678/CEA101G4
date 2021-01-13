@@ -322,10 +322,13 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("手機號碼請勿空白");
 				}
 				String mem_address = null;
+				String madderssReg = "^[(\u4e00-\u9fa5)]{2,}[0-9]{1,}$";
 				try {
 					mem_address = req.getParameter("mem_address").trim();
 					if(mem_address.isEmpty()) {
 						errorMsgs.add("請輸入地址");
+					}else if(!mem_address.matches(madderssReg)) {
+						errorMsgs.add("地址格式不正確");
 					}
 				} catch (NullPointerException e) {
 					mem_address = "";
