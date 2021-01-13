@@ -13,7 +13,7 @@
 }
 header{
 background-image:
-		url("../../image/mem_center/mem_back.jpg");
+		url("<%= request.getContextPath()%>/image/mem_center/mem_back.jpg");
 background-size:cover;
 background-repeat:no-repeat;
 opacity: 0.4;
