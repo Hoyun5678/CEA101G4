@@ -134,16 +134,16 @@
 							     <button type="button" class="btn ${orderBtnCls} editBtn">${orderBtnDisplay}</button>
 							  </FORM>
 							</td>
-							<td><button type="submit" class="btn btn-primary">修改</button></td>
+							<td>
+								<form method="POST" action='<%=request.getContextPath()%>/'>
+									<input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
+									<button type="button" class="btn btn-primary editOrderBtn">修改</button>
+								</form>
+							</td>
 						</tr>
 					</c:forEach>
 					</tbody>
 				</table>
-				<div class="row" style="margin: 15px;">
-					<div class="col-md col-md-offset-10">
-						<button class="btn btn-primary" id="addRoom">新增房間</button>
-					</div>
-				</div>
 				<div class="row">
 					<c:if test="${not empty errorMsgs}">
 						<%-- 錯誤表列 from Servlet --%>

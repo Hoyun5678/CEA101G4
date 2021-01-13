@@ -9,7 +9,7 @@
 #header-img{
     width: 116px;
     height: 55px;
-    
+    user-select: none;
 }
 header{
 background-image:
@@ -23,7 +23,7 @@ opacity: 0.4;
 <body>
 <div id="sidebar">
     <header>
-        <img src="<%=request.getContextPath()%>/image/LOGO/tiger2.png" id="header-img">
+        <img src="<%=request.getContextPath()%>/image/LOGO/tiger2.png"　 id="header-img">
     </header>
     <ul class="nav">
         <li>

@@ -81,7 +81,7 @@
 								地點： <input type="text" name="sel" value='${ not empty sel ? sel : "" }' autocomplete="off">
 							</div>
 							<div class="align-self-center cc ">
-								入住與退房日期：<input type="text" name="datefilter" readonly autocomplete="off" value='${ not empty datefilter ? datefilter : "" }' />
+								入住與退房日期：<input type="text" name="datefilter" size="23" readonly autocomplete="off" value='${ not empty datefilter ? datefilter : "" }' />
 							</div>
 							<div class="align-self-center cc ">
 								人數：<input type="number" value="2" min="1" max="20" autocomplete="off" step="1" name="roomCapacity" value='${ not empty roomCapacity ? roomCapacity : "" }'>
