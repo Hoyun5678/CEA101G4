@@ -55,7 +55,7 @@
 	<main>
 		<section class="s0">
 			<div class="provide">
-				<h2 class="provide_title">龍潭的老鄉你最愛的民宿</h2>
+				<h2 class="provide_title">選擇不同的民宿</h2>
 				<div class="provide_item_all">
 					<div class="item">
 						<div class="crown_container"></div>
@@ -152,38 +152,38 @@
 		</section>
 		<section class="s0">
 			<div class="provide">
-				<h2 class="provide_title">龍潭的老鄉你最愛的活動</h2>
+				<h2 class="provide_title">體驗不同類型的活動</h2>
 				<div class="provide_item_all">
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">整套房源</h3>
+						<h3 class="item_title">水上</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=9" alt="">
-							<figcaption>三天兩夜 NT50000起</figcaption>
+							<figcaption>兩人同行一人免費</figcaption>
 						</figure>
 					</div>
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">小木屋</h3>
+						<h3 class="item_title">路上</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=10" alt="">
-							<figcaption>兩天一夜 NT35000起</figcaption>
+							<figcaption>需確認天氣情況</figcaption>
 						</figure>
 					</div>
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">獨特房源</h3>
+						<h3 class="item_title">手作</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=11" alt="">
-							<figcaption>熱門促銷</figcaption>
+							<figcaption>體驗DIY課程</figcaption>
 						</figure>
 					</div>
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">寵物友善</h3>
+						<h3 class="item_title">文化體驗</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=12" alt="">
-							<figcaption>我最不會</figcaption>
+							<figcaption>NT199起</figcaption>
 						</figure>
 					</div>
 				</div>
@@ -248,38 +248,38 @@
 		</div>
 		<section class="s0">
 			<div class="provide">
-				<h2 class="provide_title">龍潭的老鄉你最愛的特產</h2>
+				<h2 class="provide_title">品嘗不同特產</h2>
 				<div class="provide_item_all">
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">整套房源</h3>
+						<h3 class="item_title">甜品</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=13" alt="">
-							<figcaption>三天兩夜 NT50000起</figcaption>
+							<figcaption>低溫直送</figcaption>
 						</figure>
 					</div>
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">小木屋</h3>
+						<h3 class="item_title">酒類</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=14" alt="">
-							<figcaption>兩天一夜 NT35000起</figcaption>
+							<figcaption>NT1200起</figcaption>
 						</figure>
 					</div>
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">獨特房源</h3>
+						<h3 class="item_title">文創商品</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=15" alt="">
-							<figcaption>熱門促銷</figcaption>
+							<figcaption>紀念品最低NT39起</figcaption>
 						</figure>
 					</div>
 					<div class="item">
 						<div class="crown_container"></div>
-						<h3 class="item_title">寵物友善</h3>
+						<h3 class="item_title">禮盒</h3>
 						<figure>
 							<img src="https://picsum.photos/350/400?random=16" alt="">
-							<figcaption>我最不會</figcaption>
+							<figcaption>拿去送人啦</figcaption>
 						</figure>
 					</div>
 				</div>
@@ -357,7 +357,7 @@
 		</section>
 	</main>
 	<footer>
-		<div class="foo conta">
+		<div class="foo conta" style="text-align: center;">
 			<div class="fooco">SuperGoing</div>
 			<div>E-mail：你最愛的民宿平台@gmail.com</div>
 			<div>Tele：2933-3939</div>
@@ -366,11 +366,6 @@
 		<div class="foo logo">
 			<div class="copy"></div>
 		</div>
-		<!-- <div class="foo icon">
-            <a href="https://twitter.com/?lang=zh-tw" target="_blank"><img class="fooicon" src="./image/footer/twi.png" alt="Twitter"></a>
-            <a href="https://www.facebook.com/" target="_blank"><img class="fooicon" src="./image/footer/fac.png" alt="Facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="fooicon" src="./image/footer/ins.png" alt="Instagram"></a>
-        </div> -->
 	</footer>
 </body>
 </body>
