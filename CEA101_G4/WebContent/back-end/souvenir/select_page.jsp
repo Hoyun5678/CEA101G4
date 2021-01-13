@@ -207,7 +207,7 @@ buttom {
 						</select> <input type="hidden" name="action" value="getOne_For_Display">
 						<input class="btn btn-outline-secondary" type="submit" value="送出">
 					</FORM>
-				</div>
+				</div> 
 			</div>
 			<%-- 錯誤表列 --%>
 			<div id="error">
