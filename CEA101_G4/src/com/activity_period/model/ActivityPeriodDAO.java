@@ -450,7 +450,7 @@ public class ActivityPeriodDAO implements ActivityPeriodDAO_interface {
 						" JOIN ACTIVITY_PRODUCT PR ON (PE.ACT_ID=PR.ACT_ID)" + 
 						" JOIN ACTIVITY_TYPE TY ON (TY.ACT_TYPE_ID=PR.ACT_TYPE_ID)" + 
 			           jdbcUtil_CompositeQuery_Activity_Period.get_WhereCondition(map)
-			          + "ORDER BY ACT_PERIOD_ID";
+			          + " ORDER BY ACT_PERIOD_ID";
 				pstmt = con.prepareStatement(finalSQL);
 				System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 				rs = pstmt.executeQuery();

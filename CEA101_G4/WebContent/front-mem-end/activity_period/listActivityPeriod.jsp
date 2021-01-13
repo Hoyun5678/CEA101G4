@@ -265,6 +265,7 @@
 				
 			</div>
 	</div>
+	
 
 	<div>
 	  <c:forEach var="actperVO" items="${not empty queryFinalList&&queryFinalList.size()!=0? queryFinalList :actperSvc.all}">
