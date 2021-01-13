@@ -186,17 +186,20 @@ button:hover {
 					name="sou_receiver_name">
 				</label> <br> <label> <span>收件人地址 <span class="required">*</span></span>
 					<input
-					value="<%=(soVO == null) ? "新北市板橋區" : soVO.getSou_receiver_address()%>"
+					value="<%=(memVO == null) ? "新北市板橋區" : memVO.getMem_address()%>"
 					type="text" name="sou_receiver_address"
 					placeholder="House number and street name" required>
 				</label> <br> <label> <span>電話 <span class="required">*</span></span>
 					<input
-					value="<%=(soVO == null) ? "0978666889" : soVO.getSou_receiver_phone()%>"
+					value="<%=(memVO == null) ? "0978666889" : memVO.getMem_tel()%>"
 					type="TEXT" name="sou_receiver_phone">
 				</label><br> <label> <span>訂單運送方式 <span
 						class="required">*</span></span> <input
 					value="<%=(soVO == null) ? "0" : soVO.getSou_shipping_method()%>"
-					type="TEXT" name="sou_shipping_method">
+					type="radio" name="sou_shipping_method">宅配
+					<input
+					value="<%=(soVO == null) ? "1" : soVO.getSou_shipping_method()%>"
+					type="radio" name="sou_shipping_method">超商取貨
 				</label> <br><label> <span>特產訂單備註 <span class="required">*</span></span><input type="TEXT" name="sou_order_remarks"
 			 value="<%= (soVO==null)? "請仔細包裝" : soVO.getSou_order_remarks()%>" /></td>
 	</tr>

@@ -109,23 +109,36 @@ SouvenirOrderVO soVO = (SouvenirOrderVO) request.getAttribute("soVO"); //Suvenir
 	</tr>
 	<tr>
 		<td>特產訂單運送方式:</td>
-		<td><input type="TEXT" name="sou_shipping_method" size="45"
-			 value="<%=soVO.getSou_shipping_method()%>" /></td>
+		<td><input value= "0"
+					type="radio" name="sou_shipping_method">宅配
+					<input value="1"
+					type="radio" name="sou_shipping_method">超商取貨</td>
 	</tr>
 	<tr>
 		<td>特產訂單狀態:</td>
-		<td><input type="TEXT" name="sou_order_status" size="45"
-			 value="<%=soVO.getSou_order_status()%>" /></td>
+		<td><input value= "0" type="radio" name="sou_order_status">處理中
+			<input value= "1" type="radio" name="sou_order_status">已確認
+			<input value= "2" type="radio" name="sou_order_status">已完成
+			<input value= "3" type="radio" name="sou_order_status">已取消
+			<input value= "4" type="radio" name="sou_order_status">已關閉</td>
 	</tr>
 	<tr>
 		<td>特產訂單付款狀態:</td>
-		<td><input type="TEXT" name="sou_payment_status" size="45"
-			 value="<%=soVO.getSou_payment_status()%>" /></td>
+		<td>
+			<input value= "0" type="radio" name="sou_payment_status">未付款
+			<input value= "1" type="radio" name="sou_payment_status">付款失敗
+			<input value= "2" type="radio" name="sou_payment_status">超過付款時間
+			<input value= "3" type="radio" name="sou_payment_status">已付款
+			<input value= "4" type="radio" name="sou_payment_status">退款中
+			<input value= "5" type="radio" name="sou_payment_status">已退款</td>
 	</tr>
 	<tr>
 		<td>特產訂單出貨狀態:</td>
-		<td><input type="TEXT" name="sou_shipment_status" size="45"
-			 value="<%=soVO.getSou_shipment_status()%>" /></td>
+		<td>
+			<input value= "0" type="radio" name="sou_shipment_status">訂單處理中
+			<input value= "1" type="radio" name="sou_shipment_status">準備出貨
+			<input value= "2" type="radio" name="sou_shipment_status">已出貨
+			<input value= "3" type="radio" name="sou_shipment_status">已退貨</td>
 	</tr>
 
 	<tr>

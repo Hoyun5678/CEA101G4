@@ -189,9 +189,9 @@ public class SouvenirOrderDetailJDBCDAO implements SouvenirOrderDetailDAO_interf
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, sodVO.getSou_order_amount());
-			pstmt.setInt(2, sodVO.getSou_price());
-			pstmt.setString(3, sodVO.getSou_id());
+			pstmt.setString(1, sodVO.getSou_id());
+			pstmt.setInt(2, sodVO.getSou_order_amount());
+			pstmt.setInt(3, sodVO.getSou_price());
 			pstmt.setString(4, sodVO.getSou_order_id());
 			
 

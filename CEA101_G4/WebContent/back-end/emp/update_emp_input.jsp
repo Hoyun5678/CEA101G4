@@ -93,7 +93,7 @@
 	<tr>
 		<td>員工性別:</td>
 		
-		<td><input type="radio"  name="emp_gender" value="0" <%=(empVO.getEmp_gender()==0) ? "checked" :""%> >
+		<td><input type="radio" id="emp_gender0" name="emp_gender" value="0" <%=(empVO.getEmp_gender()==0) ? "checked" :""%> >
 			<label for="emp_gender0">男   </label>
 			<input type="radio" id="emp_gender1" name="emp_gender" value="1" <%=(empVO.getEmp_gender()==1) ? "checked" :""%> >
 			<label for="emp_gender1">女</label></td>

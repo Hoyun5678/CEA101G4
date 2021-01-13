@@ -79,7 +79,16 @@ h4 {
 			</c:forEach>
 		</ul>
 	</c:if>
-
+	<ul>  
+  <li>   
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/souvenir_order/souvenir_order.do" name="form1">          
+       <b>輸入訂單編號:</b>
+       <input type="text" name="sou_order_id" value="SO001">
+        <input type="hidden" name="action" value="listSouvenirOrders_ByCompositeQuery">
+       <input type="submit" value="送出">
+     </FORM>
+  </li>
+</ul>
 	<table class="table table-striped table-hover align-middle"
 		id="souvenirOrderList">
 		<thead class=".thead-dark">

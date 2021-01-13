@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.souvenir_order_detail.model.SouvenirOrderDetailVO;
+import com.activity_order.model.ActivityOrderService;
+import com.activity_order.model.ActivityOrderVO;
 import com.souvenir_order.model.SouvenirOrderService;
 import com.souvenir_order.model.SouvenirOrderVO;
 
@@ -261,7 +263,7 @@ public class SouvenirOrderServlet extends HttpServlet {
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try {
+			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 				String emp_id = req.getParameter("emp_id").trim();
 				String empIdReg = "^[(a-zA-Z0-9)]{2,100}$";
@@ -315,7 +317,7 @@ public class SouvenirOrderServlet extends HttpServlet {
 					sou_shipping_method =new Integer(req.getParameter("sou_shipping_method").trim());
 				} catch (NumberFormatException e) {
 					sou_shipping_method = new Integer(0);
-					errorMsgs.add("請輸入數字.");
+					errorMsgs.add("請選擇運送方式.");
 				}
 				Integer sou_order_status = null;
 				try {
@@ -363,18 +365,20 @@ public class SouvenirOrderServlet extends HttpServlet {
 					list.add(sodVO);
 				}
 				soSvc.insertWithSouvenirOrderDetail(soVO, list);
-				
+//				清購物車
+				HttpSession session = req.getSession();
+				session.removeAttribute("soupVO");
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/souvenir/souvenir.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
-				successView.forward(req, res);
-
+//				String url = "/front-mem-end/souvenir_order/listOneSouvenirOrder.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+//				successView.forward(req, res);
+				res.sendRedirect(req.getContextPath()+"/front-mem-end/souvenir_order/listOneSouvenirOrder.jsp");
 				/*************************** 其他可能的錯誤處理 **********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir/souvenir_checkout.jsp");
+				failureView.forward(req, res);
+			}
 		}
 
 		if ("delete".equals(action)) { // 來自listAllSouvenir_Order.jsp
@@ -435,5 +439,39 @@ public class SouvenirOrderServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}	
+		if ("memCancelSouOrder".equals(action)) { // 來自listAllEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				String sou_order_id = req.getParameter("sou_order_id");
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				SouvenirOrderService soSvc = new SouvenirOrderService();
+				SouvenirOrderVO soVO = soSvc.getOneSouvenirOrder(sou_order_id);
+				if(soVO.getSou_shipment_status()==0) {
+					soVO.setSou_order_status(3);//設定 訂單為 已取消狀態
+				}
+				if(soVO.getSou_payment_status()==3) {//若已付款才更改
+					soVO.setSou_payment_status(4);//設定付款狀態為 退款中
+					
+				}
+				soSvc.changeSouOrderStatus(soVO);
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				String url = "/front-mem-end/souvenir_order/listOneSouvenirOrder.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/souvenir_order/listOneSouvenirOrder.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	}
 }
