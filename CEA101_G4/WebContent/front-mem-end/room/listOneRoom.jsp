@@ -234,16 +234,19 @@ color:black;
                         </div>
                     </div>
                     <div class="map">
-                        <button class="active first"></button>
-                        <button class="second"></button>
-                        <button class="third"></button>
+                        <button type="button" class="active first"></button>
+                        <button type="button" class="second"></button>
+                        <button type="button" class="third"></button>
                     </div>
                 </div>
             </div>
             
            </FORM> 
         <script>
+        //房間照片
         baguetteBox.run('.photogallery');
+        
+        //美食景點
         const buttonsWrapper = document.querySelector(".map");
         const slides = document.querySelector(".inner");
 
@@ -350,6 +353,7 @@ color:black;
 <script>
 $.datetimepicker.setLocale('zh'); 
 $(function(){
+	//入住日期
 	 $('#start_date').datetimepicker({
 	  format:'Y-m-d',
 	  onShow:function(){
@@ -359,7 +363,7 @@ $(function(){
 	  },
 	  timepicker:false
 	 });
-	 
+	 //退房日期
 	 $('#end_date').datetimepicker({
 	  format:'Y-m-d',
 	  onShow:function(){
