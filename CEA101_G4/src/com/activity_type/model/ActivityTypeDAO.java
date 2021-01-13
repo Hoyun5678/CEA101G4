@@ -244,6 +244,7 @@ public class ActivityTypeDAO implements ActivityTypeDAO_interface {
 			while (rs.next()) {
 
 				atVO = new ActivityTypeVO();
+				atVO.setAct_type_id(rs.getString("ACT_TYPE_ID"));
 				atVO.setAct_type_name(rs.getString("ACT_TYPE_NAME"));
 				list.add(atVO); // Store the row in the list
 			}
