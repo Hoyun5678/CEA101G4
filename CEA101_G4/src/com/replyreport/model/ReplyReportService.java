@@ -4,13 +4,23 @@ import java.util.List;
 
 public class ReplyReportService {
 	private ReplyReportDAO_interface dao;
-	
+
 	public ReplyReportService() {
-		dao = new ReplyReportJDBCDAO();
+		dao = new ReplyReportDAO();
 	}
-	
-	public ReplyReportVO addReplyReport(String empId, String memId, 
-			String replyId, Integer reportResult) {
+
+	public ReplyReportVO addReplyReportByMem(String memId, String replyId) {
+
+		ReplyReportVO replyReportVO = new ReplyReportVO();
+
+		replyReportVO.setMemId(memId);
+		replyReportVO.setReplyId(replyId);
+		dao.insert(replyReportVO);
+
+		return replyReportVO;
+	}
+
+	public ReplyReportVO addReplyReport(String empId, String memId, String replyId, Integer reportResult) {
 
 		ReplyReportVO replyReportVO = new ReplyReportVO();
 
@@ -23,9 +33,9 @@ public class ReplyReportService {
 		return replyReportVO;
 	}
 
-	public ReplyReportVO updateReplyReport(String reportId, String empId, String memId, 
-			String replyId, Integer reportResult) {
-		
+	public ReplyReportVO updateReplyReport(String reportId, String empId, String memId, String replyId,
+			Integer reportResult) {
+
 		ReplyReportVO replyReportVO = new ReplyReportVO();
 
 		replyReportVO.setReportId(reportId);

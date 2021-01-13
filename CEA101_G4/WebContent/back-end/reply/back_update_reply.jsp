@@ -9,31 +9,25 @@
 <script src="https://kit.fontawesome.com/0316f9a1d0.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/front-mem-end/front-reply.css">
+	href="${pageContext.request.contextPath}/css/back-end/back-reply.css">
 
-
-</head>
 <style>
-body {
-	margin: 0px;
-}
-
-.nav {
-	float: right;
-}
-
 .nav-logo-image img {
 	width: 50%;
 	float: left;
 	margin-left: 60px;
 }
 
+.nav-profile {
+	height: 60px;
+}
+
 .nav-item {
 	height: 60px;
 }
 
-.nav-profile {
-	height: 60px;
+.nav {
+	float: right;
 }
 
 #topbar {
@@ -45,28 +39,19 @@ a.nav-link {
 	font-size: 16px;
 }
 </style>
-<body id=body>
-	<%@include file="/front-mem-end/bar.jsp"%>
-	<section id="sidebar">
-		<div id="sidebar-nav">
-			<ul>
-				<li class="active">
-				<li><a
-					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>我的評論區</a></li>
-				<li><a
-					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
-						class="fa"></i>評論檢舉查詢</a></li>
+</head>
 
-			</ul>
-		</div>
+<body id=body>
+
+	<section id="sidebar">
+		<%@include file="/back-end/back-index-sidebar.jsp"%>
 	</section>
 	<section id="content">
 		<div class="content">
 			<div class="content-header">
-				<h1>評論檢舉資料</h1>
+				<h1>評論資料查詢</h1>
 			</div>
-			<%@ include file="/front-mem-end/replyreport/addReplyReport2.jsp"%>
+			<%@ include file="/back-end/reply/update_reply_input.jsp"%>
 
 		</div>
 	</section>

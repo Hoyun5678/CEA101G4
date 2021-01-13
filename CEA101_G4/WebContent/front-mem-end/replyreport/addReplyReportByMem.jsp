@@ -4,7 +4,13 @@
 
 <%
 	ReplyReportVO replyReportVO = (ReplyReportVO) request.getAttribute("replyReportVO");
+	String memId = request.getParameter("memId");
+	String replyId = request.getParameter("replyId");
+	String replyContent = request.getParameter("replyContent");
+	// 	ReplyReportVO replyReportVO1 = (ReplyReportVO) request.getAttribute("memId");
+	// 	ReplyReportVO replyReportVO2 = (ReplyReportVO) request.getAttribute("replyId");
 %>
+
 <%-- <%= replyReportVO==null %>--${replyReportVO.deptno}-- --%>
 
 <html>
@@ -105,10 +111,10 @@ form {
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: blue">請完成填寫:</font>
+		<font style="color: black"></font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: blue">${message}</li>
+				<li style="color: black">${message}</li>
 			</c:forEach>
 		</ul>
 	</c:if>
@@ -117,18 +123,12 @@ form {
 		ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
 		name="form1">
 
-		<div id=actrow>
-			<tr>
-				<td><b>員工編號:</td>
-				<td><input type="TEXT" name="empId" class="input-group-text"
-					value="<%=(replyReportVO == null) ? "EMP00" : replyReportVO.getEmpId()%>" /></td>
-			</tr>
-		</div>
+		<div id=actrow></div>
 		<div id=actrow>
 			<tr>
 				<td>會員編號:</td>
 				<td><input type="TEXT" name="memId" class="input-group-text"
-					value="<%=(replyReportVO == null) ? "MEM00" : replyReportVO.getMemId()%>" /></td>
+					value="<%=memId%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
@@ -136,22 +136,20 @@ form {
 			<tr>
 				<td>評論編號:</td>
 				<td><input type="TEXT" name="replyId" class="input-group-text"
-					value="<%=(replyReportVO == null) ? "RPL00" : replyReportVO.getReplyId()%>" />
-				</td>
+					value="<%=replyId%>" /></td>
 			</tr>
-		</div>
-		<div id=actrow>
 			<tr>
-				<td>檢舉結果狀態:</td>
-				<td><input type="radio" name="reportResult" size="45" value="0" />待處理
-					<input type="radio" name="reportResult" size="45" value="1" />已處理同意
-					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</b></td>
+				<td>評論內容:</td>
+				<td><input type="TEXT" name="replyContent" class="input-group-text"
+					value="<%=replyContent%>" /></td>
 			</tr>
 		</div>
+
 		<div id=submit>
 
-			<br> <input type="hidden" name="action" value="insert">
-			<input type="submit" class="btn btn-success" value="送出新增">
+			<br> <input type="hidden" name="action" value="memInsert">
+			<input type="submit" onclick="myFunction()" class="btn btn-success"
+				value="送出新增">
 		</div>
 	</FORM>
 
@@ -166,6 +164,11 @@ form {
 			</td>
 		</tr>
 	</div>
+	<script>
+		function myFunction() {
+			alert("確認送出檢舉");
+		}
+	</script>
 </body>
 
 

@@ -1,12 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.reply.model.*"%>
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
 	ReplyVO replyVO = (ReplyVO) request.getAttribute("replyVO");
-
-	//EmpServlet.java(Concroller), 存入req的replyVO物件
 %>
 
 <html>
@@ -62,6 +59,21 @@ th, td {
 	margin-top: 40px;
 	text-align: center;
 }
+
+.table .thead-dark th {
+	font-size: 12px;
+}
+
+.table td, .table th {
+	font-size: 12px;
+}
+
+.content {
+	height: 90%;
+}
+#content {
+	height: 90%;
+}
 </style>
 
 </head>
@@ -84,7 +96,7 @@ th, td {
 
 
 				<td>${replyVO.replyId}</td>
-				<td>${replyVO.actPeriodId}</td>
+				<td>${replyVO.actId}</td>
 				<td>${replyVO.memId}</td>
 				<td>${replyVO.replyContent}</td>
 				<td><fmt:formatDate value="${replyVO.replyTime}" type="both" /></td>
@@ -97,7 +109,8 @@ th, td {
 		<tr>
 			<td>
 				<h3>
-					<a href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
+					<a
+						href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
 						class="btn btn-dark">回上頁</a>
 				</h3>
 			</td>

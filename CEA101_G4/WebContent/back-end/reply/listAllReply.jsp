@@ -97,9 +97,9 @@ h2 {
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th>會員編號</th>
 				<th>評論編號</th>
 				<th>活動期別編號</th>
+				<th>會員編號</th>
 				<th>活動評論內容</th>
 				<th>活動評論時間</th>
 				<th>活動評論狀態</th>
@@ -108,14 +108,14 @@ h2 {
 				<th></th>
 			</tr>
 			<%@ include file="page1.file"%>
-			<c:forEach var="replyVO" items="${listReplyVO2}" begin="<%=pageIndex%>"
+			<c:forEach var="replyVO" items="${list}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
 		</thead>
 		<tbody id=tbody>
 			<tr>
-				<td>${replyVO.memId}</td>
 				<td>${replyVO.replyId}</td>
 				<td>${replyVO.actId}</td>
+				<td>${replyVO.memId}</td>
 				<td>${replyVO.replyContent}</td>
 				<td><fmt:formatDate value="${replyVO.replyTime}" type="both" /></td>
 				<td>${replyVO.replyVisible}</td>
@@ -125,7 +125,8 @@ h2 {
 						style="margin-bottom: 0px;">
 						<input type="submit" value="修改" class="btn btn-info"> <input
 							type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="action" value="getOne_For_Update">
+						<input type="hidden" name="forEmp" value="forEmp"> <input
+							type="hidden" name="action" value="getOne_For_Update">
 					</FORM>
 				<td>
 					<FORM METHOD="post"
@@ -136,15 +137,15 @@ h2 {
 						<input type="hidden" name="action" value="delete">
 					</FORM>
 				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="檢舉" class="btn btn-warning"> <input
-							type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="action" value="insert">
-					</FORM>
-				</td>
+				<!-- 				<td> -->
+				<!-- 					<FORM METHOD="post" -->
+				<%-- 						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do" --%>
+				<!-- 						style="margin-bottom: 0px;"> -->
+				<!-- 						<input type="submit" value="檢舉" class="btn btn-warning"> <input -->
+				<%-- 							type="hidden" name="replyId" value="${replyVO.replyId}"> --%>
+				<!-- 						<input type="hidden" name="action" value="insert"> -->
+				<!-- 					</FORM> -->
+				<!-- 				</td> -->
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -154,7 +155,7 @@ h2 {
 
 		<h2>
 			<a
-				href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
+				href="<%=request.getContextPath()%>/back-end/reply/back_select.jsp"
 				class="btn btn-dark">回上頁</a>
 		</h2>
 

@@ -204,7 +204,7 @@ form {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
+						href="<%=request.getContextPath()%>/back-end/reply/back_select.jsp"
 						class="btn btn-dark">¦^¤W­¶</a>
 				</h3>
 			</td>

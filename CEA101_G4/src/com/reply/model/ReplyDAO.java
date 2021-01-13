@@ -1,17 +1,18 @@
 package com.reply.model;
+
 import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 import java.util.*;
 import com.reply.model.ReplyVO;
 
-public class ReplyDAO implements ReplyDAO_interface{
+public class ReplyDAO implements ReplyDAO_interface {
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/CEA101G4");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -20,24 +21,24 @@ public class ReplyDAO implements ReplyDAO_interface{
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "CEA101G4";
 	String passwd = "CEA101G4";
-	
-	private static final String INSERT_STMT = 
-			"INSERT INTO reply(reply_id, act_period_id, mem_id, reply_content, reply_visible) "
+
+	private static final String INSERT_STMT = "INSERT INTO reply(reply_id, act_id, mem_id, reply_content, reply_visible) "
 			+ "VALUES ('RPL' || LPAD(RPL_SEQ.NEXTVAL, 3, '0'), ?, ?, ?, ?)";
 	private static final String DELETE = "DELETE FROM reply where reply_id = ?";
-	private static final String UPDATE = 
-			"UPDATE reply set act_period_id=?, mem_id=?, reply_content=?, reply_visible=?"
+	private static final String UPDATE = "UPDATE reply set act_id=?, mem_id=?, reply_content=?, reply_visible=?"
 			+ " where reply_id = ?";
-	private static final String GET_ONE_STMT = 
-			"SELECT act_period_id, mem_id,reply_content, reply_time, reply_visible "
+	private static final String GET_ONE_STMT = "SELECT act_id, mem_id,reply_content, reply_time, reply_visible "
 			+ "FROM reply where reply_id = ?";
-	private static final String GET_ALL_STMT = 
-			"SELECT reply_id, act_period_id, mem_id,reply_content, reply_time, reply_visible "
-					+ "FROM reply order by reply_id";
+	private static final String GET_ALL_STMT = "SELECT reply_id, act_id, mem_id,reply_content, reply_time, reply_visible "
+			+ "FROM reply order by reply_id";
+	private static final String GET_STMT_BY_ACTID = "SELECT reply_id, act_id, mem_id, reply_content, reply_time, reply_visible "
+			+ "FROM reply where act_id=?";
+	private static final String GET_STMT_BY_MEMID = "SELECT reply_id, act_id, mem_id, reply_content, reply_time, reply_visible "
+			+ "FROM reply where mem_id=?";
 
 	@Override
 	public void insert(ReplyVO replyVO) {
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -45,36 +46,35 @@ public class ReplyDAO implements ReplyDAO_interface{
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, replyVO.getActPeriodId());
+			pstmt.setString(1, replyVO.getActId());
 			pstmt.setString(2, replyVO.getMemId());
 			pstmt.setString(3, replyVO.getReplyContent());
 			pstmt.setInt(4, replyVO.getReplyVisible());
-			
+
 			pstmt.executeUpdate();
 
-		// Handle any SQL errors
-	} catch (SQLException se) {
-		throw new RuntimeException("A database error occured. "
-				+ se.getMessage());
-		// Clean up JDBC resources
-	} finally {
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
 			}
 		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace(System.err);
-			}
-		}
-	}
 
-}
+	}
 
 	@Override
 	public void update(ReplyVO replyVO) {
@@ -86,7 +86,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, replyVO.getActPeriodId());
+			pstmt.setString(1, replyVO.getActId());
 			pstmt.setString(2, replyVO.getMemId());
 			pstmt.setString(3, replyVO.getReplyContent());
 //			pstmt.setDate(4, replyVO.getReplyTime());
@@ -96,8 +96,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -116,14 +115,13 @@ public class ReplyDAO implements ReplyDAO_interface{
 			}
 		}
 
-		
 	}
 
 	@Override
 	public void delete(String replyId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 
 			con = ds.getConnection();
@@ -134,8 +132,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -154,7 +151,6 @@ public class ReplyDAO implements ReplyDAO_interface{
 			}
 		}
 
-		
 	}
 
 	@Override
@@ -163,7 +159,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			con = ds.getConnection();
@@ -176,7 +172,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 				// empVo 也稱為 Domain objects
 				replyVO = new ReplyVO();
 				replyVO.setReplyId(replyId);
-				replyVO.setActPeriodId(rs.getString("act_period_id"));
+				replyVO.setActId(rs.getString("act_id"));
 				replyVO.setMemId(rs.getString("mem_id"));
 				replyVO.setReplyContent(rs.getString("reply_content"));
 				replyVO.setReplyTime(rs.getTimestamp("reply_time"));
@@ -185,8 +181,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -212,8 +207,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 			}
 		}
 		return replyVO;
-		
-		
+
 	}
 
 	@Override
@@ -235,7 +229,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 				// empVO 也稱為 Domain objects
 				replyVO = new ReplyVO();
 				replyVO.setReplyId(rs.getString("reply_id"));
-				replyVO.setActPeriodId(rs.getString("act_period_id"));
+				replyVO.setActId(rs.getString("act_id"));
 				replyVO.setMemId(rs.getString("mem_id"));
 				replyVO.setReplyContent(rs.getString("reply_content"));
 				replyVO.setReplyTime(rs.getTimestamp("reply_time"));
@@ -246,8 +240,7 @@ public class ReplyDAO implements ReplyDAO_interface{
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -274,6 +267,123 @@ public class ReplyDAO implements ReplyDAO_interface{
 		}
 		return list;
 	}
-	
+
+	@Override
+	public List<ReplyVO> findByActId(String actId) {
+		List<ReplyVO> list1 = new ArrayList<ReplyVO>();
+		ReplyVO replyVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_STMT_BY_ACTID);
+			pstmt.setString(1, actId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				replyVO = new ReplyVO();
+				replyVO.setReplyId(rs.getString("reply_id"));
+				replyVO.setActId(actId);
+				replyVO.setMemId(rs.getString("mem_id"));
+				replyVO.setReplyContent(rs.getString("reply_content"));
+				replyVO.setReplyTime(rs.getTimestamp("reply_time"));
+				replyVO.setReplyVisible(rs.getInt("reply_visible"));
+				list1.add(replyVO);
+				// Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list1;
+	}
+
+	@Override
+	public List<ReplyVO> findByMemId(String memId) {
+		List<ReplyVO> list2 = new ArrayList<ReplyVO>();
+		ReplyVO replyVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_STMT_BY_MEMID);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				replyVO = new ReplyVO();
+				replyVO.setReplyId(rs.getString("reply_id"));
+				replyVO.setActId(rs.getString("act_id"));
+				replyVO.setMemId(memId);
+				replyVO.setReplyContent(rs.getString("reply_content"));
+				replyVO.setReplyTime(rs.getTimestamp("reply_time"));
+				replyVO.setReplyVisible(rs.getInt("reply_visible"));
+				list2.add(replyVO);
+				// Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list2;
+	}
 
 }

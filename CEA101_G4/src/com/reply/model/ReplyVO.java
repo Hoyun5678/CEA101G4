@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ReplyVO implements java.io.Serializable {
 	private String replyId;
-	private String actPeriodId;
+	private String actId;
 	private String memId;
 	private String replyContent;
 	private Timestamp replyTime;
@@ -18,12 +18,12 @@ public class ReplyVO implements java.io.Serializable {
 		this.replyId = replyId;
 	}
 
-	public String getActPeriodId() {
-		return actPeriodId;
+	public String getActId() {
+		return actId;
 	}
 
-	public void setActPeriodId(String actPeriodId) {
-		this.actPeriodId = actPeriodId;
+	public void setActId(String actId) {
+		this.actId = actId;
 	}
 
 	public String getMemId() {

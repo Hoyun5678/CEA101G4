@@ -99,8 +99,6 @@ form {
 
 </head>
 <body bgcolor='white'>
-
-	<%@include file="/front-mem-end/bar.jsp"%>
 	<h3>評論檢舉資料新增:</h3>
 
 	<%-- 錯誤表列 --%>
@@ -160,8 +158,8 @@ form {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/front-mem-end/activity_period/listActivityPeriod.jsp"
-						class="btn btn-dark">回瀏覽頁</a>
+						href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"
+						class="btn btn-dark">回首頁</a>
 				</h3>
 			</td>
 		</tr>
