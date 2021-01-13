@@ -41,6 +41,8 @@ public class RoomOrderDAO implements RoomOrderDAO_interface{
 			"UPDATE ROOM_ORDER SET ROOM_ORDER_STATUS=?, ROOM_PAYMENT_STATUS=? WHERE ROOM_ORDER_ID=?";
 	private static final String GET_BYSELLMEMID_STMT = 
 			"SELECT * FROM ROOM_ORDER WHERE SELL_MEM_ID = ? ORDER BY ROOM_ORDER_STATUS DESC, CHECK_IN_DATE";
+	private static final String GET_BYMEMID_ROOMID_STMT = 
+			"SELECT * FROM ROOM_ORDER WHERE MEM_ID = ? AND ROOM_ORDER_ID=?";
 	private static final String GET_BYSELLMEMID_DATE_STMT = 
 			"SELECT * FROM ROOM_ORDER WHERE SELL_MEM_ID = ? AND CHECK_IN_DATE = to_date(?, 'YYYY-MM-DD') ORDER BY ROOM_ORDER_STATUS DESC";
 	private static final String GET_BYMEMID_STMT = 
@@ -380,6 +382,65 @@ public class RoomOrderDAO implements RoomOrderDAO_interface{
 		
 		return list;
 	}
+	
+	
+	@Override
+	public List<RoomOrderVO> getByMemIdAndRoomOrderId(String memId, String roomOrderId) {
+		List<RoomOrderVO> list = new ArrayList<RoomOrderVO>();
+		RoomOrderVO roomOrderVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BYMEMID_ROOMID_STMT);
+			
+			pstmt.setString(1, memId);
+			pstmt.setString(2, roomOrderId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				roomOrderVO = new RoomOrderVO();
+				roomOrderVO.setRoomOrderId(rs.getString("ROOM_ORDER_ID"));
+				roomOrderVO.setSellMemId(rs.getString("SELL_MEM_ID"));
+				roomOrderVO.setMemId(rs.getString("MEM_ID"));
+				roomOrderVO.setRoomOrderTime(rs.getTimestamp("ROOM_ORDER_TIME"));
+				roomOrderVO.setCheckInDate(rs.getDate("CHECK_IN_DATE"));
+				roomOrderVO.setCheckOutDate(rs.getDate("CHECK_OUT_DATE"));
+				roomOrderVO.setExpectArrTime(rs.getTimestamp("EXPECT_ARR_TIME"));
+				roomOrderVO.setRoomOrderRemarks(rs.getString("ROOM_ORDER_REMARKS"));
+				roomOrderVO.setRoomOrderSum(rs.getInt("ROOM_ORDER_SUM"));
+				roomOrderVO.setRoomOrderStatus(rs.getInt("ROOM_ORDER_STATUS"));
+				roomOrderVO.setRoomPaymentStatus(rs.getInt("ROOM_PAYMENT_STATUS"));
+				list.add(roomOrderVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
+	
+	}
+
 	@Override
 	public List<RoomOrderVO> getBySellMemIdAndDate(String sellMemId, String selectedDate) {
 		List<RoomOrderVO> list = new ArrayList<RoomOrderVO>();

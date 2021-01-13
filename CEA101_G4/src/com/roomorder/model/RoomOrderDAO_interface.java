@@ -14,6 +14,7 @@ public interface RoomOrderDAO_interface {
     // public List<RoomOrderVO> getAll(Map<String, String[]> map); 
 	public List<RoomOrderVO> getByMemId(String memId);
 	public List<RoomOrderVO> getBySellMemId(String sellMemId);
+	public List<RoomOrderVO> getByMemIdAndRoomOrderId(String memId, String roomOrderId);
 	public List<RoomOrderVO> getBySellMemIdAndDate(String sellMemId, String selectedDate);
 	
 	public RoomOrderVO insertWithDetail (RoomOrderVO roomOrderVO , List<RoomOrderDetailVO> list);

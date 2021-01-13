@@ -36,6 +36,8 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 			"SELECT * FROM ROOM_ORDER WHERE SELL_MEM_ID = ? AND CHECK_IN_DATE = to_date(?, 'YYYY-MM-DD') ORDER BY ROOM_ORDER_STATUS DESC";
 	private static final String GET_BYMEMID_STMT = 
 			"SELECT * FROM ROOM_ORDER WHERE MEM_ID = ? ORDER BY ROOM_ORDER_STATUS DESC, CHECK_IN_DATE DESC";
+	private static final String GET_BYMEMID_ROOMID_STMT = 
+			"SELECT * FROM ROOM_ORDER WHERE MEM_ID = ? AND ROOM_ORDER_ID=?";
 	
 	
 
@@ -176,6 +178,12 @@ public class RoomOrderJDBCDAO implements RoomOrderDAO_interface{
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<RoomOrderVO> getByMemIdAndRoomOrderId(String memId, String roomOrderId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

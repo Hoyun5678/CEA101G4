@@ -125,6 +125,59 @@ public class RoomOrderServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		
+		if ("checkRoomOrderDetail".equals(action)) { //一般會員可以查看他的某份訂單
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+				String mem_id = req.getParameter("mem_id");
+				String room_order_id = req.getParameter("room_order_id");
+				/*************************** 2.開始查詢資料 *****************************************/
+				RoomOrderService roSvc = new RoomOrderService();
+				List<RoomOrderVO> oneRoomOrderList = roSvc.getByMemIdAndRoomOrderId(mem_id, room_order_id);
+				RoomOrderVO roomOrderVO=oneRoomOrderList.get(0);
+				Date checkIn=roomOrderVO.getCheckInDate();
+				
+				Date checkOut=roomOrderVO.getCheckOutDate();
+				int countday=(int) ((checkOut.getTime()-checkIn.getTime())/(1000*60*60*24));	
+				
+				if (oneRoomOrderList == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/listAllRoomOrder.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				req.setAttribute("oneRoomOrderList", oneRoomOrderList);
+				req.setAttribute("countday", countday);
+				
+				String url = "/front-mem-end/roomorderdetail/listOneRoomOrderDetail.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneRoomProductCollect.jsp
+	System.out.println(JSON.toJSONString(oneRoomOrderList));
+	System.out.println(countday);
+
+				successView.forward(req, res);
+
+
+
+				/*************************** 其他可能的錯誤處理 *************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/roomorder/listAllRoomOrder.jsp");
+				failureView.forward(req, res);
+			}
+		}
 
 		if ("getOne_For_Update".equals(action)) { // 來自listAllRoomOrder.jsp的請求
 
@@ -720,7 +773,7 @@ public class RoomOrderServlet extends HttpServlet {
 						expectArrTime, roomOrderRemarks, roomOrderSum, roomOrderStatus, roomPaymentStatus, list);
 				roomOrderVO = roomOrderService.getOneRoomOrder(roomOrderVO.getRoomOrderId());
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/roomorder/listOneRoomOrder2.jsp";
+				String url = "/front-mem-end/roomorder/listOneRoomOrder.jsp";
 				req.setAttribute("roomOrderVO", roomOrderVO);
 				req.setAttribute("countday", countday+"");
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
