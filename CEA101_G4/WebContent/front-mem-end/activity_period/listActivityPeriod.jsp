@@ -3,17 +3,15 @@
 <%@ page import="com.activity_period.model.*"%>
 <%@ page import="com.activity_product.model.*"%>
 <%@ page import="com.activity_photo.model.*"%>
-
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>活動商品</title>
-
     <!-- splidejs 輪播的css跟js -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
-
     <style>
         *{
             box-sizing: border-box;
@@ -24,13 +22,13 @@
             padding: 0;
             background-image:url("<%=request.getContextPath()%>/image/activity_list/back.jfif");
                background-attachment: fixed;
-   			 background-size: cover;
-   			 background-repeat: no-repeat;
-   			 background-position: bottom;
+             background-size: cover;
+             background-repeat: no-repeat;
+             background-position: bottom;
         }
         
 
-        /* table_list樣式開始 */
+/*         table_list樣式開始  */
         .listTable{
             /* border: 1px solid red; */
             text-align:center;
@@ -217,175 +215,199 @@
         }
        
         /* 燈箱樣式結束 */
+        
+		/*查無資料文字 */
+		div.noQuery{
+		margin-top: 45px;
+    	text-align: center;
+    	background-color: #c5aa33c4;
+     	 animation: changeColor 1s infinite linear alternate; 
+		}
+		
+		@keyframes changeColor {
+            from {
+                background-color: : #c5aa33c4;
+            }
+            to {
+                background-color: #000000a6;
+            }
+          }
+		
+		
+		div.noQuery h3{
+		font-weight:bold;
+		color: #fff;
+		}
+		#room{
+		display:none;
+		}
+
+		
+		
     </style>
 </head>
+
 <body>
     <!-- 表格開始 -->
     <%@include file="/front-mem-end/front-nav-bar.jsp"%>
     <%int i=0; %>
-	<jsp:useBean id="actperSvc" scope="page" class="com.activity_period.model.ActivityPeriodService" />
-	 <jsp:useBean id="actproSvc" scope="page" class="com.activity_product.model.ActivityProductService" />
-	 <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" />
-	 
-	 	<div id="carouselExampleFade" class="carousel slide carousel-fade"
-			data-interval="3000" data-ride="carousel" data-pause="false">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img src="<%=request.getContextPath()%>/image/activity_list/1.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/2.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/3.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/4.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/5.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/6.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/7.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				<div class="carousel-item">
-					<img src="<%=request.getContextPath()%>/image/activity_list/8.jfif"
-						class="d-block w-100" alt="...">
-				</div>
-				
-			</div>
-	</div>
-	
-
-	<div>
-	  <c:forEach var="actperVO" items="${not empty queryFinalList&&queryFinalList.size()!=0? queryFinalList :actperSvc.all}">
-	    <table class="listTable">
-	    	<tr>
-	    	<td rowspan="2"><img class="list-photo"src="<%=request.getContextPath()%>
-												/ActivityPhoto/ActivityPhoto.do?act_id=
-												${actperVO.act_id}&action=getListActPhoByActId"></td>
-	    	<td>活動名稱</td>
-	    	<td>活動時間</td>
-	    	<td>活動價格</td>
-	    	<td>活動地點</td>
-	    	
-	    	
-	    	</tr>
-	        <tr>
-	            
-	            <td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
-	            <td>${actperVO.act_period_start}</td>
-	            <td>${actperVO.act_cur_price}</td>
-	            <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
-	            <td><button class="btn3" type="button">查看商品</button></td>
-	            <td><button class="btn1">瀏覽評論</button></td>
-	            
-	        </tr>
-	        
-	    </table>
-	    <!-- 表格結束 -->
-	    <!-- 燈箱開始 -->
-	    <div class="itemLightbox">
-	        <span class="close">x</span>
-	        <div class="itemContainer">
-	            <!-- 輪播開始 -->
-	            <div class="caro">
-	                <div class="splide<%=i++ %>">
-	                    <div class="splide__track">
-	                        <ul class="splide__list">
-	                            <c:forEach var="actphoVO" items="${actphoSvc.getActPhoByActId(actperVO.act_id)}">
-	                            <li class="splide__slide">
-	                                <img src="<%=request.getContextPath()%>
-												/ActivityPhoto/ActivityPhoto.do?act_photo_id=
-												${actphoVO.act_photo_id}&action=getOneActPho">
-	                            </li>
-	                            </c:forEach>
-	                        </ul>
-	                    </div>
-	                    <div class="splide__progress">
-	                        <div class="splide__progress__bar">
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            <!-- 輪播結束 -->
-	            <!-- 這是商品資料 -->
-	            <div class="itemData">
-	                
-	                    <table class="itemTable">
-	                     <form method="post" action="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
-	                        <tr>
-	                            <td>活動介紹</td>
-	                        </tr>
-	                        <tr>
-	                            <td>${actproSvc.getOneActPro(actperVO.act_id).act_des}</td>
-	                        </tr>
-	                        <tr><td>活動參與人數</td><td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td></tr>
-	                        <tr><td>備註: <input type="textarea" name="act_order_remarks"></td></tr>
-	                        
-	                        
-	                  
-	            <input type="hidden" name="action" value="insert">
-	            <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
-	            <input type="submit" class="submitBtn" value="參加">
-	            </form>
-	            
-	                       
-	                    </table>
-	                    <!-- button先放這 -->
-	                   
-	                
-	            </div>
-	        </div>
-	    </div>
-	    <!-- 燈箱結束 -->
-	    <!-- 這是燈箱背景 -->
-	    <div class="itemLightboxBg"></div>
-		</c:forEach>
-	</div>
-<script>
+    <jsp:useBean id="actperSvc" scope="page" class="com.activity_period.model.ActivityPeriodService" />
+    <jsp:useBean id="actproSvc" scope="page" class="com.activity_product.model.ActivityProductService" />
+    <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" />
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-interval="3000" data-ride="carousel" data-pause="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="<%=request.getContextPath()%>/image/activity_list/1.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/2.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/3.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/4.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/5.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/6.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/7.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="<%=request.getContextPath()%>/image/activity_list/8.jfif" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+    <div>
+        <c:choose>
+            <c:when test="${empty queryFinalList||queryFinalList.size()==0}">
+                <div class="noQuery"><h3>無匹配的活動 為您推薦以下活動</h3></div>
+            </c:when>
+        </c:choose>
+        <c:forEach var="actperVO" items="${not empty queryFinalList&&queryFinalList.size()!=0? queryFinalList :actperSvc.all}">
+            <table class="listTable">
+                <tr>
+                    <td rowspan="2"><img class="list-photo" src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_id=${actperVO.act_id}&action=getListActPhoByActId"></td>
+                    <td>活動名稱</td>
+                    <td>活動時間</td>
+                    <td>活動價格</td>
+                    <td>活動地點</td>
+                </tr>
+                <tr>
+                    <td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
+                    <td>${actperVO.act_period_start}</td>
+                    <td>${actperVO.act_cur_price}</td>
+                    <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
+                    <td><button class="btn3" type="button">查看商品</button></td>
+                    <td><button class="btn1">瀏覽評論</button></td>
+                </tr>
+            </table>
+            <!-- 表格結束 -->
+            <!-- 燈箱開始 -->
+            <div class="itemLightbox">
+                <span class="close">x</span>
+                <div class="itemContainer">
+                    <!-- 輪播開始 -->
+                    <div class="caro">
+                        <div class="splide<%=i++ %>">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <c:forEach var="actphoVO" items="${actphoSvc.getActPhoByActId(actperVO.act_id)}">
+                                        <li class="splide__slide">
+                                            <img src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_photo_id=${actphoVO.act_photo_id}&action=getOneActPho">
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                            <div class="splide__progress">
+                                <div class="splide__progress__bar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 輪播結束 -->
+                    <!-- 這是商品資料 -->
+                    <div class="itemData">
+                        <table class="itemTable">
+                            <form method="post" action="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
+                                <tr>
+                                    <td>活動介紹</td>
+                                </tr>
+                                <tr>
+                                    <td>${actproSvc.getOneActPro(actperVO.act_id).act_des}</td>
+                                </tr>
+                                <tr>
+                                    <td>活動參與人數</td>
+                                    <td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td>
+                                </tr>
+                                <tr>
+                                    <td>備註: <input type="textarea" name="act_order_remarks"></td>
+                                </tr>
+                                <input type="hidden" name="action" value="insert">
+                                <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
+                                <input type="submit" class="submitBtn" value="參加">
+                            </form>
+                        </table>
+                        <!-- button先放這 -->
+                    </div>
+                </div>
+            </div>
+            <!-- 燈箱結束 -->
+            <!-- 這是燈箱背景 -->
+            <div class="itemLightboxBg"></div>
+        </c:forEach>
+    </div>
+    <script>
+    
+    $('#act').show();
+        
+        
+   
         let viewBtn = document.getElementsByClassName('btn3');
-     document.addEventListener('DOMContentLoaded', function() {
-    	 for(let i=0;i<viewBtn.length;i++){
-    		 
-            let splide = new Splide('.splide'+i, {
-                'cover': true,
-                'fixedHeight': '70%',
-                'width': '100%',
-                'rewind': true,
-                'type': 'fade',
-                'speed': 1600, // 切換時的秒數
-                'autoplay': true, // 自動播放
-                'interval': 3500, // 間格秒數(ms)
-                'arrows': false,
-                'pagination': false,
-            })
-            splide.on('autoplay:playing', function(rate) {
-                // console.log( rate ); // 0-1
-            });
-            splide.mount();
-    	 }
+        document.addEventListener('DOMContentLoaded', function() {
+            for (let i = 0; i < viewBtn.length; i++) {
+
+                let splide = new Splide('.splide' + i, {
+                    'cover': true,
+                    'fixedHeight': '70%',
+                    'width': '100%',
+                    'rewind': true,
+                    'type': 'fade',
+                    'speed': 1600, // 切換時的秒數
+                    'autoplay': true, // 自動播放
+                    'interval': 3500, // 間格秒數(ms)
+                    'arrows': false,
+                    'pagination': false,
+                })
+                splide.on('autoplay:playing', function(rate) {
+                    // console.log( rate ); // 0-1
+                });
+                splide.mount();
+            }
         });
         // 燈箱開關
         let closeBtn = document.getElementsByClassName('close');
         let lightbox = document.getElementsByClassName('itemLightbox');
         let bg = document.getElementsByClassName('itemLightboxBg');
-        for (let i = 0; i < viewBtn.length; i++) { lightbox[i].style.display = 'none';
+        for (let i = 0; i < viewBtn.length; i++) {
+            lightbox[i].style.display = 'none';
             bg[i].style.display = 'none';
-            window.addEventListener('load', function() { viewBtn[i].addEventListener('click', function() { lightbox[i].style.display = 'block';
-                    bg[i].style.display = 'block'; });
-                closeBtn[i].addEventListener('click', function() { lightbox[i].style.display = 'none';
-                    bg[i].style.display = 'none'; }); }); }
+            window.addEventListener('load', function() {
+                viewBtn[i].addEventListener('click', function() {
+                    lightbox[i].style.display = 'block';
+                    bg[i].style.display = 'block';
+                });
+                closeBtn[i].addEventListener('click', function() {
+                    lightbox[i].style.display = 'none';
+                    bg[i].style.display = 'none';
+                });
+            });
+        }
     </script>
 </body>
+
 </html>
