@@ -126,7 +126,7 @@
                 	this.setOptions({
                maxDate:$("[name='act_sign_end']").val()?$("[name='act_sign_end']").val():false
                })
-                },
+              },
 
 
             });
