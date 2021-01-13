@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean id="roomSvc" scope="page" class="com.room.model.RoomService" />
 
 <html>
 <head>
@@ -49,7 +50,8 @@
 	    <%@ include file="/front-sell-end/sellMemSideBar.jsp"%>
 	    <div id="content">
 	        <%@ include file="/front-sell-end/sellNavBar.jsp"%>
-	        <c:set var="roomVO" value="${param.roomVO}" scope="page" />
+	        <c:set var="roomId" value="${param.roomId}" scope="page" />
+	        <c:set var="roomVO" value="${roomSvc.getOneRoom(roomId)}" scope="page" />
 			<div class="container-fluid" style="padding: 0;">
 				<div class="container">
 					<form METHOD="post" ACTION="<%=request.getContextPath()%>/roomphoto/roomphoto.do" enctype="multipart/form-data">

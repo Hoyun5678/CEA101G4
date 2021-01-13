@@ -104,7 +104,7 @@
 							<c:forEach var="roomPhotoVO" items="${list}" >
 								<div class="col-12 col-sm-6 col-lg-4 photoBox">
 									<div>
-										<img class="roomPhotoImg" name="${roomPhotoVO.roomPhotoId}" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+										<img class="roomPhotoImg" name="${roomPhotoVO.roomPhotoId}" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto&scaleSize=500">
 										<input type="hidden" name="roomPhotoId" value="${roomPhotoVO.roomPhotoId}" class="roomPId">
 									</div>
 								</div>
