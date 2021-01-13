@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import com.reply.model.ReplyService;
+import com.reply.model.ReplyVO;
 import com.replyreport.model.*;
 
 public class ReplyReportServlet extends HttpServlet {
@@ -245,12 +248,16 @@ public class ReplyReportServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				ReplyReportService replyReportSvc = new ReplyReportService();
 				replyReportVO = replyReportSvc.addReplyReportByMem(memId, replyId);
-
+				
+				ReplyService replySvc =  new ReplyService();
+				ReplyVO replyVO = replySvc.getOneReply(replyId);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				req.setAttribute("memId", memId);
 				req.setAttribute("replyId", replyId);
-				req.setAttribute("replyContent", replyContent);
-				String url = "/front-mem-end/reply/listOneActP.jsp";
+				req.setAttribute("replyContent", replyVO.getReplyContent());
+				
+				System.out.println(replyVO.getReplyContent());
+				String url = "/front-mem-end/replyreport/addReplyReportByMem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllReplyReport.jsp
 				successView.forward(req, res);
 
@@ -258,7 +265,7 @@ public class ReplyReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-mem-end/replyreport/addReplyReportByMem.jsp");
+						.getRequestDispatcher("/front-mem-end/reply/listOneActP.jsp");
 				failureView.forward(req, res);
 			}
 		}

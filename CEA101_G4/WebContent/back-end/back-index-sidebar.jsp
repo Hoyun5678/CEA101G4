@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="BIG5">
-<title>Insert title here</title>
+
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  
@@ -61,8 +61,8 @@
                     <a href="#">
                      	   聊聊管理
                     </a>
-                    <a href="#">
-                    	    通知歷史
+                    <a href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp">
+                    	    評論管理
                     </a>
                 </span>
             </ul>

@@ -181,6 +181,7 @@ public class ReplyServlet extends HttpServlet {
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+				System.out.println(memId);
 				req.setAttribute("listReplyVO2", listReplyVO2); // 資料庫取出的replyVO物件,存入req
 				req.setAttribute("memId", memId);
 				String url = "/front-mem-end/reply/listOneActP.jsp";

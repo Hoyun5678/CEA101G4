@@ -15,6 +15,7 @@ public class ReplyReportService {
 
 		replyReportVO.setMemId(memId);
 		replyReportVO.setReplyId(replyId);
+		replyReportVO.setReportResult(0);
 		dao.insert(replyReportVO);
 
 		return replyReportVO;
