@@ -344,7 +344,7 @@
 		</div>
 
 		<section class="s1">
-			<h2 class="provide_title">加入我們 成為民宿達人</h2>
+			<h2 class="provide_title">你也是民宿業者嗎？馬上<a href='<%=request.getContextPath()%>/front-sell-end/sellMemLogin.jsp'>加入</a>我們的平台！</h2>
 			<div class="intro">
 				<img src="https://picsum.photos/1400/500?random=204" alt="">
 				<div class="intro_text">
@@ -354,6 +354,7 @@
 					<p class="intro_t"></p>
 				</div>
 			</div>
+		</section>
 	</main>
 	<footer>
 		<div class="foo conta">
