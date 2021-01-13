@@ -119,16 +119,6 @@ img {
 
 					</tr>
 					
-					
-
-
-					<tr>
-						<td>特產照片敘述:</td>
-						<td><input type="TEXT" name="sou_photo_content" size="45"
-							value="<%=souphVO.getSou_photo_content()%>" /></td>
-					</tr>
-
-
 
 				</table>
 				<br> <input type="hidden" name="action" value="update">

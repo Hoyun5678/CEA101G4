@@ -23,7 +23,7 @@ public class SouvenirPhotoService {
 
 	}
 
-	public SouvenirPhotoVO updateSouPhoto(String sou_photo_id, String sou_id, byte[] sou_photo ,String sou_photo_content) {
+	public SouvenirPhotoVO updateSouPhoto(String sou_photo_id, String sou_id, byte[] sou_photo) {
 		SouvenirPhotoVO souphVO = new SouvenirPhotoVO();
 		souphVO.setSou_photo_id(sou_photo_id);
 		souphVO.setSou_id(sou_id);
@@ -43,6 +43,10 @@ public class SouvenirPhotoService {
 		dao.delete(sou_photo_id);
 	}
 
+	
+	public void deleteSouPhotobysouid(String sou_id) {
+		dao.delete(sou_id);
+	}
 	public List<SouvenirPhotoVO> getAll() {
 		List<SouvenirPhotoVO> list = new ArrayList<>();
 		list = dao.getAll();
