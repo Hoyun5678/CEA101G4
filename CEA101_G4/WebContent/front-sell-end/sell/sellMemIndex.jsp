@@ -17,9 +17,9 @@
 	<title>所有房間資料 - listAllRoom.jsp</title>
 	<style>
 		
-		.lastMonth, .nextMonth {
-			border: #ccc
-			border-style: inset;
+		.lastMonth:active, .nextMonth:active {
+			left: 2px;
+			top: 2px;
 		}
 	</style>
 </head>

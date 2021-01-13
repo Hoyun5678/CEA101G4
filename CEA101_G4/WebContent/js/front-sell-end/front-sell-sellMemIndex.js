@@ -135,7 +135,7 @@
 
 
             $(document).on('click', '.calendarBody tbody td', function() {
-                console.log($(this).attr('value'));
+//                console.log($(this).attr('value'));
                 var sel = $(this);
                 $('.calendarBody td').removeClass('onSelect');
                 //                  sel.stop(true, true).addClass('onSelect', 3000);
@@ -161,25 +161,28 @@
             })
 
             $(document).on('click', '.lastMonth span', function() {
-                let y = parseInt($('#yearList').val()) - 1;
-                let m = parseInt($('#monthList').val()) - 1;
+            	let y = parseInt($('#yearList').val());
+            	let m = parseInt($('#monthList').val());
                 if (m === 0) {
-                    $('#monthList').val('11').change();
-                    $('#yearList').val(y).change();
+                    $('#monthList').val('11');
+                    $('#yearList').val(y-1).change();
                 } else {
-                    $('#monthList').val(m).change();
+                	$('#monthList').val(m-1).change();
                 }
+                delCal(new Date($('#yearList').val(), $('#monthList').val(), 1), drawCal)
             })
 
             $(document).on('click', '.nextMonth span', function() {
-                let y = parseInt($('#yearList').val()) + 1;
-                let m = parseInt($('#monthList').val()) + 1;
+                let y = parseInt($('#yearList').val());
+                let m = parseInt($('#monthList').val());
                 if (m === 11) {
-                    $('#monthList').val('0').change();
-                    $('#yearList').val(y).change();
+                    $('#monthList').val('0');
+                    $('#yearList').val(y+1).change();
                 } else {
-                    $('#monthList').val(m).change();
+                	$('#monthList').val(m+1).change();
                 }
+                delCal(new Date($('#yearList').val(), $('#monthList').val(), 1), drawCal)
+                
             })
             
             
