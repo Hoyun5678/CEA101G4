@@ -25,6 +25,22 @@ pageContext.setAttribute("memRoomOrderList", memRoomOrderList);
 	 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.1/tailwind.min.css'>   
     
 	<title>房間訂單 </title>
+	<style>
+	
+	#order:before{
+		content: "";
+	    display: block;
+	    position: absolute;
+	    left: 300px;
+	   
+	    height: 310px;
+	    border-left: 2px solid #e6e6e6;
+	    z-index: -1;
+	}
+	
+	
+	
+	</style>
 </head>
 
 <body>
@@ -33,7 +49,7 @@ pageContext.setAttribute("memRoomOrderList", memRoomOrderList);
     <!-- partial:index.partial.html -->
 <!--     <div class="flex items-center justify-center min-h-screen"> -->
     <c:forEach var="memRoomOrderList" items="${memRoomOrderList}"> 
-        <div class="max-w-md md:max-w-4xl px-2 mt-10 ml-40">
+        <div class="max-w-md md:max-w-4xl px-2 mt-10 ml-40" id="order">
             <div class="bg-white shadow-xl rounded-lg overflow-hidden md:flex">
                 <div class="bg-cover bg-bottom h-56 md:h-auto md:w-64"><img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomOrderDetailSvc.getOneRoomOrderDetail(memRoomOrderList.roomOrderId).room_id}&action=getOnePhotoByRoomId") style="object-fit:cover;height:270px;">
                 </div>

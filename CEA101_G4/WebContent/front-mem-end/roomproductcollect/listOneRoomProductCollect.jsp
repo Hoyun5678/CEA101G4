@@ -23,7 +23,6 @@ pageContext.setAttribute("rpcListMem", rpcListMem);
 <head>
 
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
 <title>我的收藏</title>
@@ -41,7 +40,9 @@ a:focus {
 body {
     background-color: #F1F2F3;
 }
-
+.container{
+height:100%;
+}
 
 .card-container {
     padding: 100px 0px;
@@ -118,6 +119,12 @@ body {
 .profile-card-2:hover .profile-icons {
     right: 40px;
 }
+#none{
+margin-left:100px;
+}
+.heading{
+margin-left:100px;
+}
 
 
 </style>
@@ -127,21 +134,29 @@ body {
  	<div class="heading">
 		<h2>收藏清單</h2>
 	</div>
+	<c:choose>
+	<c:when test="${rpcListMem==null || rpcListMem.size() == 0}">
+	<div id="none">您尚未收藏房間喔!</div>
+	</c:when>
+	<c:otherwise>
 	<div class="container">
-	<div class="row">
-		<div class="col-md-4">
+	<div class="row" style="display:inline;">
+		<div class="col-md-4" style="display:inline";>
 		<c:forEach var="rpcListMem" items="${rpcListMem}">         
-    	<div class="profile-card-2">
-    	<a href="<%=request.getContextPath()%>/room/room.do?roomId=${rpcListMem}&action=checkRoomDetail">
-    	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${rpcListMem}&action=getOnePhotoByRoomId" class="img img-responsive">
-        <div class="profile-name">${sellSvc.getOneSell(roomSvc.getOneRoom(rpcListMem).sellMemId).sellRoomName}</div>
-        <div class="profile-username">${roomSvc.getOneRoom(rpcListMem).roomName} $ ${roomSvc.getOneRoom(rpcListMem).roomPrice}</div>
-        <div class="profile-icons"><i class="far fa-heart"></i>${collectSvc.getCountCollect(rpcListMem)}</div>
-    	</a>
-   	</div>
-	</c:forEach>
+    		<div class="profile-card-2">
+    			<a href="<%=request.getContextPath()%>/room/room.do?roomId=${rpcListMem}&action=checkRoomDetail">
+    			<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${rpcListMem}&action=getOnePhotoByRoomId" class="img img-responsive">
+        		<div class="profile-name">${sellSvc.getOneSell(roomSvc.getOneRoom(rpcListMem).sellMemId).sellRoomName}</div>
+        		<div class="profile-username">${roomSvc.getOneRoom(rpcListMem).roomName} $ ${roomSvc.getOneRoom(rpcListMem).roomPrice}</div>
+        		<div class="profile-icons"><i class="far fa-heart"></i>${collectSvc.getCountCollect(rpcListMem)}</div>
+    			</a>
+   			</div>
+		</c:forEach>
+		</div>
 	</div>
 	</div>
+	</c:otherwise>
+	</c:choose>
       
 </body>
 </html>
