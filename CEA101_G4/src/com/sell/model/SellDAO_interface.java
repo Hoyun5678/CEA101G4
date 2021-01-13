@@ -6,7 +6,7 @@ import java.util.Map;
 import com.sell.model.SellVO;
 
 public interface SellDAO_interface {
-    public void insert(SellVO sellVO);
+    public SellVO insert(SellVO sellVO);
     public void update(SellVO sellVO);
     public void updateInfo(SellVO sellVO);
     public void updatePwd(SellVO sellVO);

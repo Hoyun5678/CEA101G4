@@ -46,13 +46,17 @@ public class SellDAO implements SellDAO_interface{
 		}
 
 	@Override
-	public void insert(SellVO sellVO) {
+	public SellVO insert(SellVO sellVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String[] cols = new String[] {"SELL_MEM_ID"};
+			con.setAutoCommit(false);
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
 
 			pstmt.setString(1, sellVO.getSellMemAccount());
 			pstmt.setString(2, sellVO.getSellMemPwd());
@@ -69,6 +73,18 @@ public class SellDAO implements SellDAO_interface{
 			pstmt.setInt(13, sellVO.getSellGender());
 
 			pstmt.executeUpdate();
+			
+			String nextSellMemId = null;
+			rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				nextSellMemId = rs.getString(1);
+			}
+			sellVO.setSellMemId(nextSellMemId);
+			rs.close();
+			con.commit();
+			con.setAutoCommit(true);
+			
+			return sellVO;
 
 			// Handle any driver errors
 		} catch (SQLException se) {

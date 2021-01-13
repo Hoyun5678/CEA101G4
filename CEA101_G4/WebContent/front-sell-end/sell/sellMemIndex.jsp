@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sellMemIndex.css">
     
 	<title>所有房間資料 - listAllRoom.jsp</title>
+	<style>
+		
+		.lastMonth, .nextMonth {
+			border: #ccc
+			border-style: inset;
+		}
+	</style>
 </head>
 <body>
 	<div id="viewport">
