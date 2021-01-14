@@ -82,8 +82,38 @@ body {
 .navbar-default .navbar-nav>li>a {
     color: #777;
 }
+
+.sellMemNav {
+	color: #777;
+	margin-right: 25px;
+}
+
+.sellMemNav:hover {
+	cursor: pointer;
+}
+
+.sellMemNav li a {
+	color: #777;
+	text-decoration: none;
+}
+
+.sellMemNav li a:hover {
+	font-weight: bold;
+}
+
+ul.dropdown-menu {
+	min-width: 8rem;
+}
+
+ul.dropdown-menu>li {
+    text-align: right;
+    padding-right: 10px;
+}
+
+
 .navbar-nav>li>a {
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 20px;
+    text-decoration: none;
 }
