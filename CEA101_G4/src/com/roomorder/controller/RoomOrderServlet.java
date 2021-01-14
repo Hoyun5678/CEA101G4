@@ -179,7 +179,7 @@ public class RoomOrderServlet extends HttpServlet {
 			}
 		}
 
-		if ("getOne_For_Update".equals(action)) { // 來自listAllRoomOrder.jsp的請求
+		if ("getOne_For_Update".equals(action)) { // 來自listOneRoomOrderDetail.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -188,15 +188,21 @@ public class RoomOrderServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
-				String roomOrderId = req.getParameter("roomOrderId");
+				String room_order_id = req.getParameter("room_order_id");
 
 				/*************************** 2.開始查詢資料 ****************************************/
 				RoomOrderService roSvc = new RoomOrderService();
-				RoomOrderVO roomOrderVO = roSvc.getOneRoomOrder(roomOrderId);
+				RoomOrderVO roomOrderVO = roSvc.getOneRoomOrder(room_order_id);
+				roomOrderVO.setRoomOrderStatus(4);;//設定 訂單為 已取消狀態
+				if(roomOrderVO.getRoomPaymentStatus()==2) {//若已付款才更改
+					roomOrderVO.setRoomPaymentStatus(3);//設定付款狀態為 退款中
+					
+				}
+				roSvc.updateRoomOrder(room_order_id, roomOrderVO.getRoomOrderStatus());
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("roomOrderVO", roomOrderVO); // 資料庫取出的empVO物件,存入req
-				String url = "/front-mem-end/roomorder/update_roomorder_input.jsp";
+				String url = "/front-mem-end/roomorderdetail/listOneRoomOrderDetail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
 

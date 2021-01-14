@@ -73,7 +73,7 @@
 <div>
 <div class="main">
 <div class="right">
-<button type="button" class="btn" id="add" onclick="window.location.href='/CEA101G4/back-end/faq/addFAQ.jsp'"><i class="fa fa-plus" style="padding-right:5px"></i>新增</button>
+<button type="button" class="btn" id="add" onclick="window.location.href='<%=request.getContextPath()%>/back-end/faq/addFAQ.jsp'"><i class="fa fa-plus" style="padding-right:5px"></i>新增</button>
 
 </div>
 <table class="table table-striped align-middle" id="tb" >

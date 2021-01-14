@@ -66,6 +66,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 <script src="${pageContext.request.contextPath}/js/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
   
@@ -131,7 +132,7 @@
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodspot/foodspot.do" style="margin-bottom: 0px;">
-			     <input class="btn_del" type="submit" value="刪除" >
+			     <input class="btn_del" type="submit" value="刪除" id="btn_del">
 			     <input type="hidden" name="fas_id"  value="${fsVO.fas_id}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
@@ -142,25 +143,7 @@
 
 <%-- <%@ include file="page2.file" %> --%>
 </div>
-</div>
 
-<!--      <script type="text/javascript">
-//     	 $('input#btn_mod').on('click',function(){
-    		
-//     		 event.preventDefault();
-//     		 console.log("進來了"); 
-//  		  alert("byebye");
-//      	 	 swal({
-//      	    	title: "Are you sure?",
-//      	    	text:"??",
-//      	    	icon: "warning",
-//      	    	buttons: true,
-//      	    	dangerMode: false
-//      	 	 })
-//      	 	 });
-//     	 //id不得重複(尚未解決)
-   	 </script> -->
-    
     	 
       
 <script>
