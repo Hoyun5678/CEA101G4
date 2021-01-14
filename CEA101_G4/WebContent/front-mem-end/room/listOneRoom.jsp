@@ -256,11 +256,13 @@ color:black;
                         <div class="roomheader">心動不如馬上行動</div>
                     </div>                    
                     <div class="room_product"> 
-                    <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1">                  
-                        <div>
-                        	<div class="roomGrid roompic">${roomVO.roomName}</div>
-						 	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto" style="width:160px;height:120px;"> 
-                        </div>
+                                  
+                        <div class="roomGrid roompic">
+                        	<div> ${roomVO.roomName}</div>
+                        	<c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1">    
+						 		<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto" style="width:160px;height:120px;"> 
+                       		</c:forEach>
+                        </div>                  
                         <div class="roomGrid roominfo">${roomVO.roomDes}</div>
                         <div class="roomGrid roompeo">${roomVO.roomCapacity}位</div>
                         <div class="roomGrid roompri">$ ${roomVO.roomPrice}</div>                                     
@@ -270,7 +272,6 @@ color:black;
 			     		<div class="roomGrid bookbtn">
                         	<button type="submit" id="bookbtn">現在就預訂</button>  
                         </div> 
-                        </c:forEach>
                     </div> 
                 </div>                   
            </div>            
