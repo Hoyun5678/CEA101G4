@@ -169,6 +169,7 @@ figcaption {
 	margin-bottom: 10px;
 	font-weight: 700;
 	text-align: center;
+	    font-size: 1.4em;
 }
 
 .snip1268 p {
