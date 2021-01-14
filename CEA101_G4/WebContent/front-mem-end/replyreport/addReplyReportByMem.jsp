@@ -4,14 +4,11 @@
 
 <%
 	ReplyReportVO replyReportVO = (ReplyReportVO) request.getAttribute("replyReportVO");
-	String memId = request.getParameter("memId");
-	String replyId = request.getParameter("replyId");
-	String replyContent = request.getParameter("replyContent");
-	// 	ReplyReportVO replyReportVO1 = (ReplyReportVO) request.getAttribute("memId");
-	// 	ReplyReportVO replyReportVO2 = (ReplyReportVO) request.getAttribute("replyId");
-%>
+// 	String memId = request.getParameter("memId");
+// 	String replyId = request.getParameter("replyId");
+// 	String replyContent = request.getParameter("replyContent");
 
-<%-- <%= replyReportVO==null %>--${replyReportVO.deptno}-- --%>
+%>
 
 <html>
 <head>
@@ -128,7 +125,7 @@ form {
 			<tr>
 				<td>會員編號:</td>
 				<td><input type="TEXT" name="memId" class="input-group-text"
-					value="<%=memId%>" /></td>
+					value="${memId}" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
@@ -136,19 +133,19 @@ form {
 			<tr>
 				<td>評論編號:</td>
 				<td><input type="TEXT" name="replyId" class="input-group-text"
-					value="<%=replyId%>" /></td>
+					value="${replyId}" /></td>
 			</tr>
 			<tr>
 				<td>評論內容:</td>
 				<td><input type="TEXT" name="replyContent" class="input-group-text"
-					value="<%=replyContent%>" /></td>
+					value="${replyContent}" /></td>
 			</tr>
 		</div>
 
 		<div id=submit>
 
 			<br> <input type="hidden" name="action" value="memInsert">
-			<input type="submit" onclick="myFunction()" class="btn btn-success"
+			<input type="submit" onclick="myFunction1()" class="btn btn-success"
 				value="送出新增">
 		</div>
 	</FORM>
@@ -165,7 +162,7 @@ form {
 		</tr>
 	</div>
 	<script>
-		function myFunction() {
+		function myFunction1() {
 			alert("確認送出檢舉");
 		}
 	</script>

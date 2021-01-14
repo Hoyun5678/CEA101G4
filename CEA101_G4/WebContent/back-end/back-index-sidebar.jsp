@@ -61,8 +61,8 @@
                     <a href="#">
                      	   聊聊管理
                     </a>
-                    <a href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp">
-                    	    評論管理
+                    <a href="<%=request.getContextPath()%>/back-end/replyreport/back_select.jsp">
+                    	    審核評論檢舉
                     </a>
                 </span>
             </ul>

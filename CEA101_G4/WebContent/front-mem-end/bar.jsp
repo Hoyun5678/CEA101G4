@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>FontTopBar</title>
+
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0316f9a1d0.js" crossorigin="anonymous"></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
@@ -56,7 +56,7 @@
                     			<a href="<%=request.getContextPath()%>/front-mem-end/activity_order/listOneActivityOrder.jsp"><i class="fas fa-umbrella-beach"style="padding-right: 8px;"></i>活動訂單</a>
                     			<a href="<%=request.getContextPath()%>/front-mem-end/souvenir_order/listOneSouvenirOrder.jsp"><i class="fas fa-gifts" style="padding-right: 8px;"></i>伴手禮訂單</a>
                     			<a href="<%=request.getContextPath()%>/roomproductcollect/roomproductcollect.do?mem_id=${memVO.mem_id}&action=showCollect"><i class="fab fa-gratipay"style="padding-right: 12px;"></i>我的收藏</a>
-                   				<a href="#"><i class="far fa-comments" style="padding-right:12px;"></i>評語</a>
+                   				<a href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i class="far fa-comments" style="padding-right:12px;"></i>評論管理</a>
                     			<a href="<%=request.getContextPath()%>/member/member.do?action=log_out"><i class="fas fa-sign-out-alt"style="padding-right: 12px;"></i>登出</a>
                     		</div>
                     	</div>                  
