@@ -167,7 +167,7 @@ public class SouvenirOrderServlet extends HttpServlet {
 					sou_shipment_fee =new Integer(req.getParameter("sou_shipment_fee").trim());
 				} catch (NumberFormatException e) {
 					sou_shipment_fee = new Integer(0);
-					errorMsgs.add("請輸入數字.");
+					errorMsgs.add("請輸入數字");
 				}
 				Integer sou_order_sum_price = null;
 				try {
@@ -291,9 +291,9 @@ public class SouvenirOrderServlet extends HttpServlet {
 				String sou_receiver_phone = req.getParameter("sou_receiver_phone").trim();
 				String sRPReg = "09\\d{8}";
 				if (sou_receiver_phone == null || sou_receiver_phone.trim().length() == 0) {
-					errorMsgs.add("收穫人電話請勿空白");
+					errorMsgs.add("電話請勿空白");
 				} else if (!sou_receiver_phone.trim().matches(sRPReg)) {
-					errorMsgs.add("收穫人電話: 只能是數字 ,開頭為09 且長度必需是10喔");
+					errorMsgs.add("電話: 只能是數字 ,開頭為09 且長度必需是10喔");
 				}
 				
 				

@@ -1,10 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.souvenir_product.model.*"%>
+<%@ page import="com.souvenir_photo.model.*"%>
+
 
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	SouvenirProductVO soupVO = (SouvenirProductVO) request.getAttribute("soupVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+	SouvenirProductVO soupVO = (SouvenirProductVO) request.getAttribute("soupVO");
+%>
+
+<%
+	SouvenirPhotoVO souphVO = (SouvenirPhotoVO) request.getAttribute("souphVO"); 
 %>
 
 <html>
@@ -158,9 +164,11 @@ table.table.table-dark.table-striped {
 			<td>特產編號</td>
 			<td><%=soupVO.getSou_id()%></td>
 		</tr>
+			<jsp:useBean id="soutSvc" scope="page"
+	class="com.souvenir_type.model.SouvenirTypeService" />
 		<tr>
 			<td>特產類型</td>
-			<td><%=soupVO.getSou_type_id()%></td>
+						<td>${soutSvc.getOneSouType(soupVO.sou_type_id).sou_type_name}</td>
 
 		</tr>
 
@@ -176,23 +184,23 @@ table.table.table-dark.table-striped {
 
 		</tr>
 
-		<tr>
-			<td>特產上架日期</td>
-			<td><%=soupVO.getSou_on_date()%></td>
+<!-- 		<tr> -->
+<!-- 			<td>特產上架日期</td> -->
+<%-- 			<td><%=soupVO.getSou_on_date()%></td> --%>
 
-		</tr>
+<!-- 		</tr> -->
 
-		<tr>
-			<td>特產下架日期</td>
-			<td><%=soupVO.getSou_off_date()%></td>
+<!-- 		<tr> -->
+<!-- 			<td>特產下架日期</td> -->
+<%-- 			<td><%=soupVO.getSou_off_date()%></td> --%>
 
-		</tr>
+<!-- 		</tr> -->
 
-		<tr>
-			<td>特產累積按讚次數</td>
-			<td><%=soupVO.getSou_like_count()%></td>
+<!-- 		<tr> -->
+<!-- 			<td>特產累積按讚次數</td> -->
+<%-- 			<td><%=soupVO.getSou_like_count()%></td> --%>
 
-		</tr>
+<!-- 		</tr> -->
 
 		<tr>
 			<td>特產敘述</td>
@@ -202,9 +210,16 @@ table.table.table-dark.table-striped {
 
 		<tr>
 			<td>特產商品狀態</td>
-			<td><%=soupVO.getSou_status()%></td>
+			<td>${(soupVO.sou_status==0)? "下架中": "已上架"}</td>
 
-		</tr>
+<!-- 		</tr> -->
+		
+<!-- 			<tr> -->
+<!-- 			<td>特產照片</td> -->
+<%-- 			<td><img src="${pageContext.request.contextPath}/souvenir_photo/SouvenirPhotoServlet?sou_photo_id=${souphVO.sou_photo_id}&action=getSouPhoto"> --%>
+<!-- 			</td> -->
+
+<!-- 		<tr> -->
 	</table>
 
 <!-- 		<tr> -->

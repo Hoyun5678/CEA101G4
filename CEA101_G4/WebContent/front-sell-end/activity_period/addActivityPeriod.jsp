@@ -111,19 +111,6 @@
 
 
 
-            $('.testBtn').click(function() {
-                //              $("[name='sellMemAccount']").val("testAccount001");
-                //              $("[name='sellMemPwd']").val("asdfasdf");
-                //              $("[name='sellMemPwdRe']").val("asdfasdf");
-                $("[name='sellMemName']").val("何昀");
-                $("[name='sellMemBirth']").val("1999-11-11");
-                $("[name='sellMemTel']").val("0911234567");
-                $("[name='sellRoomName']").val("民宿的名字很重要嗎?");
-                $("[name='sellMemAddress']").val("桃園市龍潭區梅龍一街22巷10號");
-                $("[name='sellMemMail']").val("test@gmail.com");
-                $("[name='sellMemIdNumber']").val("u109888222");
-                $("[name='sellGender'][value='0']").prop("checked", true);
-            });
 
             $.datetimepicker.setLocale('zh');
             $("[name='act_sign_start']").datetimepicker({
@@ -134,8 +121,12 @@
                 hideIfNoPrevNext: true,
                 value: new Date(),
                 //maxDate: "+3d", // 去除今日(不含)之後
-                minDate: new Date()
-
+                minDate: new Date(),
+                onShow:function(ct ){
+                	this.setOptions({
+               maxDate:$("[name='act_sign_end']").val()?$("[name='act_sign_end']").val():false
+               })
+              },
 
 
             });
@@ -147,10 +138,11 @@
                 value: $("[name='act_sign_start']").change(function(e) {
                     $("[name='act_sign_end']").val($("[name='act_sign_start']").val());
                 }),
-
-                minDate: $("[name='act_sign_start']").change(function(e) {
-                    $("[name='act_sign_end']").val($("[name='act_sign_start']").val());
-                }), // 去除今日(不含)之後
+                onShow:function( ct ){
+                	   this.setOptions({
+                	    minDate:$("[name='act_sign_start']").val()?$("[name='act_sign_start']").val():false
+                	   })
+                	  },
             });
             $("[name='act_period_start']").datetimepicker({
                 theme: '', //theme: 'dark',
@@ -160,7 +152,11 @@
                 value: $("[name='act_sign_end']").change(function(e) {
                     $("[name='act_period_start']").val($("[name='act_sign_end']").val());
                 }),
-                minDate: '+0' // 去除今日(不含)之後
+                onShow:function( ct ){
+             	   this.setOptions({
+             	    minDate:$("[name='act_sign_end']").val()?$("[name='act_sign_end']").val():false
+             	   })
+             	  },
             });
             $("[name='act_period_end']").datetimepicker({
                 theme: '', //theme: 'dark',
@@ -170,7 +166,11 @@
                 value: $("[name='act_period_start']").change(function(e) {
                     $("[name='act_period_end']").val($("[name='act_period_start']").val());
                 }),
-                minDate: '+0' // 去除今日(不含)之後
+                onShow:function( ct ){
+              	   this.setOptions({
+              	    minDate: $("[name='act_period_start']").val()? $("[name='act_period_start']").val():false
+              	   })
+              	  },
             });
 
 

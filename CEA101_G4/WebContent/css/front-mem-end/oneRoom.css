@@ -431,17 +431,12 @@
         }
         #checkin :after {
             content: "";
-            /*�����征��������蝙�銝撠�郊撽�*/
             position: absolute;
-            /* �����閮剖������蔭�� */
             border-left: 1px solid #96A9C4;
             height: 30px;
-
-            /* 銝�摰���� top, bottom ���潘�������漲 */
             top: 50px;
             bottom: 0px;
-            /* 閮剖�� top 0px, bottom 0px 撠望��末��遛��� ul ���漲 */
-            left: 250px;
+            left: 230px!important;
         }
 
         #changebtn {

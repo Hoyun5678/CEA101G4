@@ -200,21 +200,28 @@ public class ActivityProductServlet extends HttpServlet {
 					act_price = 0.0;
 					errorMsgs.add("活動價格請填數字.");
 				}
+				
 				String act_des = req.getParameter("act_des").trim();
+				if (act_des == null || act_des.trim().length() == 0) {
+					errorMsgs.add("活動敘述請勿空白");
+				}	
 				
 				String act_add = req.getParameter("act_add").trim();
+				if (act_add == null || act_add.trim().length() == 0) {
+					errorMsgs.add("活動地點請勿空白");
+				}	
 				
 
 				
 
 				ActivityProductVO actproVO = new ActivityProductVO();
 				actproVO.setAct_id(act_id);
-				actproVO.setSell_mem_id(sell_mem_id);;
-				actproVO.setAct_type_id(act_type_id);;
+				actproVO.setSell_mem_id(sell_mem_id);
+				actproVO.setAct_type_id(act_type_id);
 				actproVO.setAct_name(act_name);
-				actproVO.setAct_price(act_price);;
-				actproVO.setAct_des(act_des);;
-				actproVO.setAct_add(act_add);;
+				actproVO.setAct_price(act_price);
+				actproVO.setAct_des(act_des);
+				actproVO.setAct_add(act_add);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -275,8 +282,14 @@ public class ActivityProductServlet extends HttpServlet {
 					errorMsgs.add("活動價格請填數字.");
 				}
 				String act_des = req.getParameter("act_des").trim();
+				if (act_des == null || act_des.trim().length() == 0) {
+					errorMsgs.add("活動敘述請勿空白");
+				}	
 				
 				String act_add = req.getParameter("act_add").trim();
+				if (act_add == null || act_add.trim().length() == 0) {
+					errorMsgs.add("活動地點請勿空白");
+				}	
 				
 
 				

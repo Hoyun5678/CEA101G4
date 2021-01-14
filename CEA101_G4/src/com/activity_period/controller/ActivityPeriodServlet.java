@@ -384,32 +384,65 @@ public class ActivityPeriodServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				String act_id = req.getParameter("act_id").trim();
-				String mpwdReg = "^[(a-zA-Z0-9)]{2,100}$";
-				if (act_id == null || act_id.trim().length() == 0) {
-					errorMsgs.add("密碼請勿空白");
-				} else if (!act_id.trim().matches(mpwdReg)) {
-					errorMsgs.add("會員密碼錯誤");
-				}
+				
+				
 				java.sql.Timestamp act_sign_start = new java.sql.Timestamp(
 						java.sql.Date.valueOf(req.getParameter("act_sign_start")).getTime());
 				java.sql.Timestamp act_sign_end = new java.sql.Timestamp(
 						java.sql.Date.valueOf(req.getParameter("act_sign_end")).getTime());
+				if(act_sign_start.after(act_sign_end)) {
+					errorMsgs.add("報名結束時間不得早於報名開始時間");
+				}
 				java.sql.Timestamp act_period_start = java.sql.Timestamp
 						.valueOf(req.getParameter("act_period_start") + ":00.0");
+				if(act_sign_end.after(act_period_start)) {
+					errorMsgs.add("活動開始時間不得早於報名結束時間");
+				}
 				java.sql.Timestamp act_period_end = java.sql.Timestamp
 						.valueOf(req.getParameter("act_period_end") + ":00.0");
-				Integer act_up_limit = Integer.parseInt(req.getParameter("act_up_limit"));
-				Integer act_low_limit = Integer.parseInt(req.getParameter("act_low_limit"));
-				Double act_cur_price = Double.parseDouble(req.getParameter("act_cur_price"));
+				if(act_period_end.before(act_period_start)) {
+					errorMsgs.add("活動結束時間不得早於活動開始時間");
+				}
+				Integer act_up_limit=null;
+				Integer act_low_limit =null;
+				Double act_cur_price =null;
+				
+				String checkNum="^[(0-9)]{1,}$";
+				
+				
+				String str=req.getParameter("act_up_limit");
+				if(str.matches(checkNum)) {
+					act_up_limit = Integer.parseInt(req.getParameter("act_up_limit"));
+				}else {
+					errorMsgs.add("人數上限請輸入數字");
+				}
+				
+				
+				str=req.getParameter("act_low_limit");
+				if(str.matches(checkNum)) {
+					act_low_limit = Integer.parseInt(req.getParameter("act_low_limit"));
+				}else {
+					errorMsgs.add("人數下限請輸入數字");
+				}
+				
+				
+				str=req.getParameter("act_cur_price");
+				if(str.matches(checkNum)) {
+					act_cur_price = Double.parseDouble(req.getParameter("act_cur_price"));
+					if(act_cur_price <=0) errorMsgs.add("價格不得<=0");
+				}else {
+					errorMsgs.add("價錢請輸入數字");
+				}
+				
 				Integer act_period_status, act_sign_sum;
 				if (req.getParameter("act_period_status") == null) {
 					act_period_status = 1;
 				} else {
-
 					act_period_status = Integer.parseInt(req.getParameter("act_period_status"));
 				}
+				
 				if (req.getParameter("act_sign_sum") == null) {
-					act_sign_sum = 5;
+					act_sign_sum = 0;
 				} else {
 
 					act_sign_sum = Integer.parseInt(req.getParameter("act_sign_sum"));

@@ -85,7 +85,18 @@
 			<td>${empVO.emp_account}</td>
 			<td>${empVO.emp_pwd}</td>
 			<td>${empVO.emp_name}</td>
-			<td>${empVO.emp_acc_status}</td>
+			<td><c:choose>
+                                                    <c:when test="${empVO.emp_acc_status==0}">
+                                                       	帳號未啟用
+                                                    </c:when>
+                                                    <c:when test="${empVO.emp_acc_status==1}">
+                                                       	 帳號已啟用
+                                                    </c:when>
+                                                    <c:when test="${empVO.emp_acc_status==2}">
+                                                       	 帳號已失效
+                                                    </c:when>
+                                                    
+                                                </c:choose></td>
 			<td>${empVO.emp_gender eq 0?"男":"女"}</td> 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">

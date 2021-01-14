@@ -69,9 +69,10 @@ public class ShoppingServlet extends HttpServlet {
 			}
 
 			session.setAttribute("soupVO", buylist);
-			String url = "/front-mem-end/souvenir/souvenir.jsp";
-			RequestDispatcher rd = req.getRequestDispatcher(url);
-			rd.forward(req, res);
+//			String url = "/front-mem-end/souvenir/souvenir.jsp";
+//			RequestDispatcher rd = req.getRequestDispatcher(url);
+//			rd.forward(req, res);
+			res.sendRedirect(req.getContextPath()+"/front-mem-end/souvenir/souvenir.jsp");
 		}
 		// ���b�A�p���ʪ������y�����`��
 		else if ("CHECKOUT".equals(action)) {

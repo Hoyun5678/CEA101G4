@@ -16,7 +16,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<title>特產訂單資料 - listOneSouvenir_Order.jsp</title>
+<title>特產訂單資料</title>
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -132,7 +132,7 @@ table.table.table-dark.table-striped {
 							<th>特產收貨人姓名</th>
 							<th>特產收貨人地址</th>
 							<th>特產收貨人聯絡電話</th>
-							<th>特產運費</th>
+<!-- 							<th>特產運費</th> -->
 							<th>特產訂單總價</th>
 							<th>特產訂單備註</th>
 							<th>特產訂單運送方式</th>
@@ -140,19 +140,21 @@ table.table.table-dark.table-striped {
 							<th>特產訂單付款狀態</th>
 							<th>特產訂單出貨狀態</th>
 							<th>特產訂購日期</th>
+							<th></th>
 						</tr>
 						<jsp:useBean id="soSvc" scope="page"
 							class="com.souvenir_order.model.SouvenirOrderService" />
 						<c:forEach var="soVO"
 							items="${soSvc.getSouOrderByMemId(memVO.mem_id)}">
 							<tr>
-								<td>${soVO.sou_order_id}</td>
+								<td>		
+     				<a href="<%=request.getContextPath()%>/souvenir_order_detail/souvenir_order_detail.do?sou_order_id=${soVO.sou_order_id}&action=listSouvenirOrderDetails_ByCompositeQuery2">${soVO.sou_order_id}</a></td>
 								<%-- 			<td>${soVO.emp_id}</td> --%>
 								<td>${soVO.mem_id}</td>
 								<td>${soVO.sou_receiver_name}</td>
 								<td>${soVO.sou_receiver_address}</td>
 								<td>${soVO.sou_receiver_phone}</td>
-								<td>${soVO.sou_shipment_fee}</td>
+<%-- 								<td>${soVO.sou_shipment_fee}</td> --%>
 								<td>${soVO.sou_order_sum_price}</td>
 								<td>${soVO.sou_order_remarks}</td>
 								<td><c:choose>

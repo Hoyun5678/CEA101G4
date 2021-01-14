@@ -20,6 +20,19 @@
 	crossorigin="anonymous">
 <title>Document</title>
 <style>
+#sidebar {
+	height: 110%;
+}
+
+#content {
+	height: 95%;
+}
+
+.content {
+	width: 98%;
+	height: 90%;
+}
+
 h4 {
 	color: blue;
 	display: inline;
@@ -45,11 +58,22 @@ th, td {
 }
 
 #page {
+	padding: 1px;
+	height: 40px;
 	text-align: center;
+	height: 40px;
 }
 
 h2 {
 	text-align: center;
+}
+
+.table .thead-dark th {
+	font-size: 12px;
+}
+
+.table td, .table th {
+	font-size: 12px;
 }
 </style>
 
@@ -73,24 +97,25 @@ h2 {
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
+				<th>會員編號</th>
 				<th>評論編號</th>
 				<th>活動期別編號</th>
-				<th>會員編號</th>
 				<th>活動評論內容</th>
 				<th>活動評論時間</th>
 				<th>活動評論狀態</th>
 				<th></th>
 				<th></th>
+				<th></th>
 			</tr>
 			<%@ include file="page1.file"%>
-			<c:forEach var="replyVO" items="${list}" begin="<%=pageIndex%>"
+			<c:forEach var="replyVO" items="${listReplyVO2}" begin="<%=pageIndex%>"
 				end="<%=pageIndex+rowsPerPage-1%>">
 		</thead>
 		<tbody id=tbody>
 			<tr>
-				<td>${replyVO.replyId}</td>
-				<td>${replyVO.actPeriodId}</td>
 				<td>${replyVO.memId}</td>
+				<td>${replyVO.replyId}</td>
+				<td>${replyVO.actId}</td>
 				<td>${replyVO.replyContent}</td>
 				<td><fmt:formatDate value="${replyVO.replyTime}" type="both" /></td>
 				<td>${replyVO.replyVisible}</td>
@@ -111,22 +136,21 @@ h2 {
 						<input type="hidden" name="action" value="delete">
 					</FORM>
 				</td>
-<!-- 				<td> -->
-<!-- 					<FORM METHOD="post" -->
-<%-- 						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do" --%>
-<!-- 						style="margin-bottom: 0px;"> -->
-<!-- 						<input type="submit" value="檢舉" class="btn btn-warning"> <input -->
-<%-- 							type="hidden" name="replyId" value="${replyVO.replyId}"> --%>
-<!-- 						<input type="hidden" name="action" value="insert"> -->
-<!-- 					</FORM> -->
-<!-- 				</td> -->
+				<td>
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+						style="margin-bottom: 0px;">
+						<input type="submit" value="檢舉" class="btn btn-warning"> <input
+							type="hidden" name="replyId" value="${replyVO.replyId}">
+						<input type="hidden" name="action" value="insert">
+					</FORM>
+				</td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<section id=page>
 		<%@ include file="page2.file"%>
-		<br>
 
 		<h2>
 			<a

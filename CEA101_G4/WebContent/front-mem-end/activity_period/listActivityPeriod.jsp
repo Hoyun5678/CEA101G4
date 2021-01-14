@@ -303,9 +303,15 @@
                     <td>${actperVO.act_cur_price}</td>
                     <td>${actproSvc.getOneActPro(actperVO.act_id).act_add}</td>
                     <td><button class="btn3" type="button">查看商品</button></td>
-                    <td><button class="btn1">瀏覽評論</button></td>
+                    <td><FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/reply/reply.do">
+						<input type="hidden" name="actId" value="${actperVO.act_id}">
+						<input type="hidden" name="action" value="getOne_By_ActId">
+						<button class="btn1" type="submit" style="margin-top: 15px;">瀏覽評論</button>
+					</FORM></td>
                 </tr>
             </table>
+            
             <!-- 表格結束 -->
             <!-- 燈箱開始 -->
             <div class="itemLightbox">

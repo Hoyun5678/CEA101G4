@@ -44,7 +44,7 @@
             background-color: #648ca6;
         }
 
-        .sidebar-menu {}
+       
 
         .treeview {
             border-bottom: 1px solid;
@@ -102,9 +102,19 @@
         }
 
         .list-photo {
-            height: 200px;
-            width: 300px;
+        	border-radius: 20px;
+            height: 250px;
+            width: 250px;
         }
+        .upLoadbtn{ 
+      		 border-radius: 10px; 
+   			 width: 100px; 
+   			 height: 30px;
+   		} 
+   		#preview img{
+   			margin-right: 20px;
+   		}
+   		
     </style>
     <script type="text/javascript">
         function init() {
@@ -124,8 +134,8 @@
 
                                 let label = document.createElement("label");
                                 let img = document.createElement("img");
-                                img.setAttribute("height", "200px");
-                                img.setAttribute("weight", "150px");
+                                img.setAttribute("height", "150px");
+                                img.setAttribute("width", "150px");
                                 img.src = e.target.result;
                                 preview.append(label);
                                 label.append(img);
@@ -188,20 +198,26 @@
                                                 </c:forEach>
                                             </c:otherwise>
                                         </c:choose>
+                                        
+                                        
                                         <FORM action="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do" method="post" enctype="multipart/form-data">
                                             <div class="container">
                                                 <div class="row">
-                                                    <label>請上傳圖片檔案</label>
-                                                    <!-- 這裡一定要有一個<input type="file">的元素，當上傳點 -->
-                                                    <input type="file" name="upfile1" id="myFile" multiple>
-                                                </div>
-                                                <div class="row"></div>
+	                                                <div class="col-12 align-self-center" style="text-align: center;">
+	                                                    <label>請上傳圖片檔案</label>
+	                                                    <!-- 這裡一定要有一個<input type="file">的元素，當上傳點 -->
+	                                                    <input type="file" name="upfile1" id="myFile" multiple>
+	                                                    
+	                                                </div>
+	                                              </div>
+                                                
                                                 <div class="row">
-                                                    <label>檔案內容: </label><br>
-                                                    <input type="hidden" name="act_id" value=${act_id }><br>
-                                                    <input type="hidden" name="action" value="upDate_By_Act_id"><br>
-                                                    <button type="submit" id="upLoadImg" disabled="true">上傳圖片</button>
-                                                    <div id="preview"></div><br>
+                                                	<div class="col-12 align-self-center" style="text-align: center;">
+		                                                    <input type="hidden" name="act_id" value="${act_id}"><br>
+		                                                    <input type="hidden" name="action" value="upDate_By_Act_id"><br>
+		                                                    <button type="submit" id="upLoadImg" disabled="true" class="upLoadbtn">上傳圖片</button>
+                                                    <div id="preview"></div>
+                                                 </div>
                                                 </div>
                                             </div>
                                         </FORM>

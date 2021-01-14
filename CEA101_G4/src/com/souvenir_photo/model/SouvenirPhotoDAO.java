@@ -30,12 +30,12 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 //			"INSERT INTO SOUVENIR_PHOTO(SOU_PHOTO_ID, SOU_ID, SOU_PHOTO,SOU_PHOTO_CONTENT)"
 //			+ " VALUES ('SOUPH' || LPAD(SPHO_SEQ.NEXTVAL, 3, '0'),?,?,?)";
 	private static final String UPDATE = 
- 	"UPDATE SOUVENIR_PHOTO set SOU_ID=?, SOU_PHOTO=?, SOU_PHOTO_CONTENT=? where SOU_PHOTO_ID=?";
+ 	"UPDATE SOUVENIR_PHOTO set SOU_ID=?, SOU_PHOTO=? where SOU_PHOTO_ID=?";
 	private static final String DELETE = "DELETE FROM SOUVENIR_PHOTO where SOU_PHOTO_ID = ?";
 	private static final String GET_ONE_STMT =
-			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO, SOU_PHOTO_CONTENT FROM SOUVENIR_PHOTO where SOU_PHOTO_ID = ?";
+			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO FROM SOUVENIR_PHOTO where SOU_PHOTO_ID = ?";
 	private static final String GET_ALL_STMT = 
-			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO, SOU_PHOTO_CONTENT FROM SOUVENIR_PHOTO order by SOU_PHOTO_ID";
+			"SELECT SOU_PHOTO_ID, SOU_ID, SOU_PHOTO FROM SOUVENIR_PHOTO order by SOU_PHOTO_ID";
 	private static final String GET_BYSOUID = 
 			"SELECT * FROM SOUVENIR_PHOTO WHERE SOU_ID = ?";
 	private static final String INSERT_STMT2 =
@@ -92,8 +92,7 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 
 			pstmt.setString(1, souphVO.getSou_id());
 			pstmt.setBytes(2, souphVO.getSou_photo());
-			pstmt.setString(3, souphVO.getSou_photo_content());
-			pstmt.setString(4, souphVO.getSou_photo_id());
+			pstmt.setString(3, souphVO.getSou_photo_id());
 
 			
 
@@ -182,7 +181,6 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				souphVO.setSou_photo_id(rs.getString("sou_photo_id"));
 				souphVO.setSou_id(rs.getString("sou_id"));
 				souphVO.setSou_photo(rs.getBytes("sou_photo"));
-				souphVO.setSou_photo_content(rs.getString("sou_photo_content"));
 			}
 
 			// Handle any driver errors
@@ -237,7 +235,6 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				souphVO.setSou_photo_id(rs.getString("sou_photo_id"));
 				souphVO.setSou_id(rs.getString("sou_id"));
 				souphVO.setSou_photo(rs.getBytes("sou_photo"));
-				souphVO.setSou_photo_content(rs.getString("sou_photo_content"));
 			
 				list.add(souphVO);
 			}
@@ -295,7 +292,6 @@ public class SouvenirPhotoDAO implements SouvenirPhotoDAO_interface {
 				souphVO.setSou_photo_id(rs.getString("sou_photo_id"));
 				souphVO.setSou_id(rs.getString("sou_id"));
 				souphVO.setSou_photo(rs.getBytes("sou_photo"));
-				souphVO.setSou_photo_content(rs.getString("sou_photo_content"));
 				list.add(souphVO);
 			}
 

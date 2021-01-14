@@ -314,7 +314,7 @@ public class MemberServlet extends HttpServlet {
 				String mem_tel = null;
 				try {
 					mem_tel = req.getParameter("mem_tel").trim();
-					if (!mem_tel.matches("^09[]0-9]{8}$")) {
+					if (!mem_tel.matches("^09[0-9]{8}$")) {
 						errorMsgs.add("手機輸入格式不正確");
 					}
 				} catch (NullPointerException e) {
@@ -322,10 +322,13 @@ public class MemberServlet extends HttpServlet {
 					errorMsgs.add("手機號碼請勿空白");
 				}
 				String mem_address = null;
+				String madderssReg = "^[(\u4e00-\u9fa5)0-9]{0,}$";
 				try {
 					mem_address = req.getParameter("mem_address").trim();
 					if(mem_address.isEmpty()) {
 						errorMsgs.add("請輸入地址");
+					}else if(!mem_address.matches(madderssReg)) {
+						errorMsgs.add("地址格式不正確");
 					}
 				} catch (NullPointerException e) {
 					mem_address = "";

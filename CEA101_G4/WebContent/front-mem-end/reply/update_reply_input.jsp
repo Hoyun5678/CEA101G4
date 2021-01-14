@@ -91,6 +91,7 @@ form {
 	float: left;
 	background: #E9EEF4;
 	width: 90%;
+	height: 80%;
 }
 
 #backhome {
@@ -116,7 +117,7 @@ form {
 
 
 
-	<h3>評論資料修改:</h3>
+	<h4>評論資料修改:</h4>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -156,30 +157,29 @@ form {
  %></td>
 			</tr>
 		</div>
+
 		<div id=actrow>
-			<tr>
-				<td>活動期別編號:</td>
-				<td><input type="TEXT" class="input-group-text"
-					name="actPeriodId" size="20" value="<%=replyVO.getActPeriodId()%>" /></td>
-			</tr>
+
+			<td>活動期別編號:</td>
+			<td><input type="TEXT" class="input-group-text" name="actIdId"
+				size="20" value="<%=replyVO.getActId()%>" /></td>
+
 		</div>
 
 		<div id=actrow>
-			<tr>
-				<td>活動評論內容:</td>
-				<td><textarea name="replyContent" class="form-control"
-						aria-label="With textarea"><%=replyVO.getReplyContent()%></Textarea>
-			</tr>
+
+			<td>活動評論內容:<textarea name="replyContent" class="form-control"
+					aria-label="With textarea"><%=replyVO.getReplyContent()%></Textarea>
 		</div>
 
 		<div id=actrow>
-			<tr>
-				<td>活動評論狀態:</td>
-				<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示
-					<input type="radio" name="replyVisible" size="45" value="1" />顯示</td>
-				</b>
-			</tr>
+
+			<td>活動評論狀態:</td>
+			<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示
+				<input type="radio" name="replyVisible" size="45" value="1" />顯示</td> </b>
+
 		</div>
+
 
 		<!-- 	<JSP:USEBEAN ID="REPLYSVC" SCOPE="PAGE" CLASS="COM.REPLY.MODEL.REPLYSERVICE" /> -->
 		<!-- 	<tr> -->
@@ -191,14 +191,14 @@ form {
 		<!-- 		</select></td> -->
 		<!-- 	</tr> -->
 
-		</table>
+
 		<div id=submit>
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>">
 			<input type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>
-	<br>
+
 	<div id=backhome>
 		<tr>
 			<td>

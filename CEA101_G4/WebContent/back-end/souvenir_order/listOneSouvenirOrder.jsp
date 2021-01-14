@@ -203,7 +203,7 @@ table.table.table-dark.table-striped {
 		<th>特產收貨人姓名</th>
 		<th>特產收貨人地址</th>
 		<th>特產收貨人聯絡電話</th>
-		<th>特產運費</th>
+<!-- 		<th>特產運費</th> -->
 		<th>特產訂單總價</th>
 		<th>特產訂單備註</th>
 		<th>特產訂單運送方式</th>
@@ -219,7 +219,7 @@ table.table.table-dark.table-striped {
 			<td>${soVO.sou_receiver_name}</td>
 			<td>${soVO.sou_receiver_address}</td>
 			<td>${soVO.sou_receiver_phone}</td>
-			<td>${soVO.sou_shipment_fee}</td>
+<%-- 			<td>${soVO.sou_shipment_fee}</td> --%>
 			<td>${soVO.sou_order_sum_price}</td>
 			<td>${soVO.sou_order_remarks}</td>
 			<td><c:choose>
