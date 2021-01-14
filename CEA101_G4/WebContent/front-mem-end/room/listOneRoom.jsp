@@ -13,9 +13,11 @@ String checkOutDate =(String) request.getAttribute("checkOutDate");
 <jsp:useBean id="sellVO" scope="request" class="com.sell.model.SellVO" />
 <%-- <jsp:useBean id="rpVO" scope="request" class="com.roomphoto.model.RoomPhotoVO" /> --%>
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
+<jsp:useBean id="roomOrderedDateSvc" scope="page" class="com.roomordereddate.model.RoomOrderedDateService" />
 <jsp:useBean id="sellSvc" scope="page" class="com.sell.model.SellService" />
 <jsp:useBean id="rpcSvc" scope="page" class="com.roomproductcollect.model.RoomProductCollectService" />
 <jsp:useBean id="fsSvc" scope="page" class="com.foodspot.model.FoodSpotService" />
+<c:set var="roomPhotoList" scope="page" value="${roomphotoSvc.getByRoomId(roomVO.roomId)}"  />
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +34,10 @@ String checkOutDate =(String) request.getAttribute("checkOutDate");
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/front-mem-end/oneRoom.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/front-mem-end/front-mem-listOneRoom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 <title>Insert title here</title>
 
@@ -82,69 +87,52 @@ color:black;
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="upside">
-            <div class="row">
-                
+	<div class="container">
+		<div class="upside">
+			<div class="row">
                     <div class="photogallery">
-                   <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="6" step="1" varStatus="status">
-                        <c:if test="${status.count % 6 == 1}" >
-                        <div class="row">
+                    <div class="row">
                             <div class="col-lg-8">
-                                <a class="lightbox" id="bigpic" >
-                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
-                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+                                <a class="lightbox" id="bigpic" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
+                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
-                          </c:if>   
-                            <c:if test="${status.count % 6 == 2}" >
                             <div class="col-lg-4">
                                 <div class="col-lg up">
-                                    <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
-                                        <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+                                    <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[1].roomPhotoId}&action=getOnePhoto">
+                                        <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[1].roomPhotoId}&action=getOnePhoto">
                                     </a>
                                 </div>
-                                </c:if> 
-                                 <c:if test="${status.count % 6 == 3}" >
                                 <div class="col-lg down">
-                                    <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
-                                        <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+                                    <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[2].roomPhotoId}&action=getOnePhoto">
+                                        <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[2].roomPhotoId}&action=getOnePhoto">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        </c:if> 
-                       
-                      
-                        <c:if test="${status.count % 6 == 4}" >
                         <div class="row">
                             <div class="col-lg-4">
-                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
-                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[3].roomPhotoId}&action=getOnePhoto">
+                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[3].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
-                         </c:if>
-                          <c:if test="${status.count % 6 == 5}" >
                             <div class="col-lg-4">
-                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
-                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[4].roomPhotoId}&action=getOnePhoto">
+                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[4].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
-                          </c:if>
-                           <c:if test="${status.count % 6 == 0}" >
                             <div class="col-lg-4">
-                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
-                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto">
+                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[5].roomPhotoId}&action=getOnePhoto">
+                                    <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[5].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
                         </div>
-                        </c:if>
-                        
                        
-                    </c:forEach>
+                    </div>
+                    <div class="col-lg-3" id="rightside">
                     </div>
                 
-
+		</div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -163,16 +151,89 @@ color:black;
                     </div>
                 </div>
                 <h5 id="emptitle">空房情形</h5>
+                
+                <c:set var='roomOrderedDateList' scope='page' value='${roomOrderedDateSvc.getOrderedDateByRoomId(roomVO.roomId)}' />
+                <input type="hidden" name='roomOrderedDateList' value='${roomOrderedDateList}' />
+                <input type="hidden" name='roomId' value='${roomVO.roomId}' />
+                <input type="hidden" name='contextPath' value='<%=request.getContextPath()%>' />
+				<div class="row calendarRow justify-content-center">
+					<div class="calendarDiv currentCalendar" style="margin-right: 15px">
+						<div class="d-flex align-content-center">
+							<div class="mr-auto align-content-center lastMonth align-items-center d-flex">
+								<span class="material-icons">
+                        			keyboard_arrow_left
+                        		</span>
+                        	</div>
+                       		<div class="d-inline-block yearMonth align-items-center d-flex">
+								<h3><span class="mon">JAN</span> 
+                                <span class="year">2021</span></h3>
+							</div>
+							<div class="d-inline-block ml-auto invisible">
+								<span class="material-icons">
+									keyboard_arrow_right
+								</span>
+							</div>
+                               
+
+						</div>
+						<table class="calendarBody">
+							<thead>
+	                            <tr>
+	                                <td>SUN</td>
+	                                <td>MON</td>
+	                                <td>TUE</td>
+	                                <td>WED</td>
+	                                <td>THU</td>
+	                                <td>FRI</td>
+	                                <td>SAT</td>
+	                            </tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="calendarDiv nextCalendar">
+						<div class="d-flex align-content-center">
+							<div class="mr-auto d-inline-block invisible">
+		                 		<span class="material-icons">
+		                 			keyboard_arrow_left
+		                 		</span>
+                 			</div>
+						<div class="d-inline-block align-content-center yearMonth align-items-center d-flex">
+							<h3><span class="mon">FEB</span> 
+							<span class="year">2021</span></h3>
+						</div>
+						<div class="d-inline-block ml-auto nextMonth align-content-center align-items-center d-flex">
+                         	<span class="material-icons">
+                 				keyboard_arrow_right
+                 			</span>
+						</div>
+					</div>
+					<table class="calendarBody">
+					    <thead>
+					        <tr>
+					            <td>SUN</td>
+					            <td>MON</td>
+					            <td>TUE</td>
+					            <td>WED</td>
+					            <td>THU</td>
+					            <td>FRI</td>
+					            <td>SAT</td>
+					        </tr>
+					    </thead>
+					    <tbody></tbody>
+					</table>
+				</div>
+			</div>
                 <div class="row" id="emptyarea">
                     <div class="col-lg-4" id="checkin">
                         <div class="datetitle">入住日期</div> 
-                        <input type="text" name="checkInDate" value="${checkInDate}" /> 
+                        <input readonly type="text" name="checkInDate" value="${checkInDate}" /> 
                         
               
                     </div>
                     <div class="col-lg-4" id="checkout">
                         <div class="datetitle">退房日期</div>
-                        <input type="text" name="checkOutDate" value="${checkOutDate}" />
+                        <input readonly type="text" name="checkOutDate" value="${checkOutDate}" />
                     </div>
                     <div class="col-lg-4" id="change">
                         <div id="day">共選了一晚</div>
@@ -239,6 +300,8 @@ color:black;
                         <button class="third"></button>
                     </div>
                 </div>
+            </div>
+            </div>
             </div>
             
            </FORM> 
@@ -337,6 +400,8 @@ color:black;
  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.css" />
     <script src="${pageContext.request.contextPath}/datetimepicker/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/datetimepicker/jquery.datetimepicker.full.js"></script>
+	<script src="${pageContext.request.contextPath}/js/front-mem-end/listOneRoom.js"></script>
+	
 
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -370,6 +435,11 @@ $(function(){
 	  timepicker:false
 	 });
 });
+
+
+
+
+
 </script>
 
 </html>

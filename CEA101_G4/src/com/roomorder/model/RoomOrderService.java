@@ -115,6 +115,10 @@ public class RoomOrderService {
 	public List<RoomOrderVO> getBySellMemId(String sellMemId) {
 		return dao.getBySellMemId(sellMemId);
 	}
+	public List<RoomOrderVO> getByMemIdAndRoomOrderId(String memId, String roomOrderId){
+		return dao.getByMemIdAndRoomOrderId(memId, roomOrderId);
+	}
+		
 	
 	public List<RoomOrderVO> getBySellMemIdAndDate(String sellMemId, String selectedDate) {
 		return dao.getBySellMemIdAndDate(sellMemId, selectedDate);

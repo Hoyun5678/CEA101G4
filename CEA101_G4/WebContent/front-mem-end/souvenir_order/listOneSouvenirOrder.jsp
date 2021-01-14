@@ -16,7 +16,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<title>特產訂單資料 - listOneSouvenir_Order.jsp</title>
+<title>特產訂單資料</title>
 <style>
 table#table-1 {
 	background-color: #CCCCFF;
@@ -114,120 +114,138 @@ table.table.table-dark.table-striped {
 	transform: translateX(-50%);
 	color: #fffde5;
 }
+
+.table-bordered td, .table-bordered th {
+	font-size: 10;
+}
+
+.btn:not(:disabled):not(.disabled) {
+	font-size: 10;
+}
 </style>
 
 </head>
 <body bgcolor='white'>
 	<%@include file="/front-mem-end/bar.jsp"%>
+	<div align="center">
+		<h3>特產訂單</h3>
+	</div>
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
 				<div class="col calendarCol">
 					<main class="main">
-					<table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%" style="text-align: center;">
-						<tr>
-							<th>特產訂單編號</th>
-							<!-- 		<th>員工編號</th> -->
-							<th>會員編號</th>
-							<th>特產收貨人姓名</th>
-							<th>特產收貨人地址</th>
-							<th>特產收貨人聯絡電話</th>
-							<th>特產運費</th>
-							<th>特產訂單總價</th>
-							<th>特產訂單備註</th>
-							<th>特產訂單運送方式</th>
-							<th>特產訂單狀態</th>
-							<th>特產訂單付款狀態</th>
-							<th>特產訂單出貨狀態</th>
-							<th>特產訂購日期</th>
-						</tr>
-						<jsp:useBean id="soSvc" scope="page"
-							class="com.souvenir_order.model.SouvenirOrderService" />
-						<c:forEach var="soVO"
-							items="${soSvc.getSouOrderByMemId(memVO.mem_id)}">
+						<table id="example"
+							class="table table-striped table-bordered table-hover"
+							cellspacing="0" width="100%" style="text-align: center;">
 							<tr>
-								<td>${soVO.sou_order_id}</td>
-								<%-- 			<td>${soVO.emp_id}</td> --%>
-								<td>${soVO.mem_id}</td>
-								<td>${soVO.sou_receiver_name}</td>
-								<td>${soVO.sou_receiver_address}</td>
-								<td>${soVO.sou_receiver_phone}</td>
-								<td>${soVO.sou_shipment_fee}</td>
-								<td>${soVO.sou_order_sum_price}</td>
-								<td>${soVO.sou_order_remarks}</td>
-								<td><c:choose>
-										<c:when test="${soVO.sou_shipping_method==0}">
+								<th>訂單編號</th>
+								<!-- 		<th>員工編號</th> -->
+								<!-- 							<th>會員編號</th> -->
+								<th>收貨人</th>
+								<th>收貨地址</th>
+								<th>聯絡電話</th>
+<!-- 								<th>特產運費</th> -->
+								<th>訂單總價</th>
+								<!-- 							<th>訂單備註</th> -->
+								<th>運送方式</th>
+								<th>訂單狀態</th>
+								<th>付款狀態</th>
+								<th>出貨狀態</th>
+								<th>訂購日期</th>
+								<th></th>
+							</tr>
+							<jsp:useBean id="soSvc" scope="page"
+								class="com.souvenir_order.model.SouvenirOrderService" />
+							<c:forEach var="soVO"
+								items="${soSvc.getSouOrderByMemId(memVO.mem_id)}">
+								<tr>
+									<td><a
+										href="<%=request.getContextPath()%>/souvenir_order_detail/souvenir_order_detail.do?sou_order_id=${soVO.sou_order_id}&action=listSouvenirOrderDetails_ByCompositeQuery2">${soVO.sou_order_id}</a></td>
+									<%-- 			<td>${soVO.emp_id}</td> --%>
+									<%-- 								<td>${soVO.mem_id}</td> --%>
+									<td>${soVO.sou_receiver_name}</td>
+									<td>${soVO.sou_receiver_address}</td>
+									<td>${soVO.sou_receiver_phone}</td>
+									<%-- 								<td>${soVO.sou_shipment_fee}</td> --%>
+									<td>${soVO.sou_order_sum_price}</td>
+									<%-- 								<td>${soVO.sou_order_remarks}</td> --%>
+									<td><c:choose>
+											<c:when test="${soVO.sou_shipping_method==0}">
                                                         	宅配
                                                     </c:when>
-										<c:when test="${soVO.sou_shipping_method==1}">
+											<c:when test="${soVO.sou_shipping_method==1}">
                                                        	 	超商取貨
                                                     </c:when>
-									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${soVO.sou_order_status==0}">
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${soVO.sou_order_status==0}">
                                                         	處理中
                                                     </c:when>
-										<c:when test="${soVO.sou_order_status==1}">
+											<c:when test="${soVO.sou_order_status==1}">
                                                        	 已確認
                                                     </c:when>
-										<c:when test="${soVO.sou_order_status==2}">
+											<c:when test="${soVO.sou_order_status==2}">
                                                        	 已完成
                                                     </c:when>
-										<c:when test="${soVO.sou_order_status==3}">
+											<c:when test="${soVO.sou_order_status==3}">
                                                     	 已取消
                                                     </c:when>
-										<c:when test="${soVO.sou_order_status==4}">
+											<c:when test="${soVO.sou_order_status==4}">
                                                     	  已關閉
                                                     </c:when>
-									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${soVO.sou_payment_status==0}">
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${soVO.sou_payment_status==0}">
                                                         	未付款
                                                     </c:when>
-										<c:when test="${soVO.sou_payment_status==1}">
+											<c:when test="${soVO.sou_payment_status==1}">
                                                        	 付款失敗
                                                     </c:when>
-										<c:when test="${soVO.sou_payment_status==2}">
+											<c:when test="${soVO.sou_payment_status==2}">
                                                        	 超過付款時間
                                                     </c:when>
-										<c:when test="${soVO.sou_payment_status==3}">
+											<c:when test="${soVO.sou_payment_status==3}">
                                                     	    已付款
                                                     </c:when>
-										<c:when test="${soVO.sou_payment_status==4}">
+											<c:when test="${soVO.sou_payment_status==4}">
                                                     	  退款中
                                                     </c:when>
-										<c:otherwise>
+											<c:otherwise>
                                                       	  已退款
                                                     </c:otherwise>
-									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${soVO.sou_shipment_status==0}">
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${soVO.sou_shipment_status==0}">
                                                        	訂單處理中
                                                     </c:when>
-										<c:when test="${soVO.sou_shipment_status==1}">
+											<c:when test="${soVO.sou_shipment_status==1}">
                                                        	 準備出貨
                                                     </c:when>
-										<c:when test="${soVO.sou_shipment_status==2}">
+											<c:when test="${soVO.sou_shipment_status==2}">
                                                        	已出貨
                                                     </c:when>
-										<c:when test="${soVO.sou_shipment_status==3}">
+											<c:when test="${soVO.sou_shipment_status==3}">
                                                     	    已到貨
                                                     </c:when>
-									</c:choose></td>
-								<td><fmt:formatDate value="${soVO.sou_order_date}"
-										pattern="yyyy-MM-dd HH:mm:ss" /></td>
-								<td> <c:choose>
-                                                <c:when test="${(soVO.sou_order_status!=2)&&(soVO.sou_order_status!=3) }">
-                                                    <form METHOD="post" ACTION="<%=request.getContextPath()%>/souvenir_order/souvenir_order.do">
-                                                        <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">取消訂單</button>
-                                                        <input type="hidden" name="sou_order_id" value="${soVO.sou_order_id}">
-                                                        <input type="hidden" name="action" value="memCancelSouOrder">
-                                                    </form>
-                                                </c:when>
-                                            </c:choose>
-                                            </td>
-							</tr>
-						</c:forEach>
+										</c:choose></td>
+									<td><fmt:formatDate value="${soVO.sou_order_date}"
+											pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td><c:choose>
+											<c:when
+												test="${(soVO.sou_order_status!=2)&&(soVO.sou_order_status!=3) }">
+												<form METHOD="post"
+													ACTION="<%=request.getContextPath()%>/souvenir_order/souvenir_order.do">
+													<button type="submit" class="btn btn-light btn-xs dt-edit"
+														style="margin-right: 16px;">取消訂單</button>
+													<input type="hidden" name="sou_order_id"
+														value="${soVO.sou_order_id}"> <input type="hidden"
+														name="action" value="memCancelSouOrder">
+												</form>
+											</c:when>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
 						</table>
 					</main>
 				</div>

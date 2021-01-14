@@ -315,7 +315,12 @@ figcaption {
 	<div id="photowall" class="row">
 
 		<c:forEach var="soupVO" items="${list}">
-			<div class="col">
+			<!-- 	商品狀態 0的話不顯示 1顯示	 -->
+	
+		<div class="col"
+		<c:if test="${soupVO.sou_status == 0}">style="display: none"</c:if>
+		<c:if test="${soupVO.sou_status == 1}"></c:if>
+		>
 				<figure class="snip1268">
 					<div class="image">
 

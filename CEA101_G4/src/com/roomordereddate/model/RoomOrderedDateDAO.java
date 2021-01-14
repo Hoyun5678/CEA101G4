@@ -1,10 +1,13 @@
 package com.roomordereddate.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class RoomOrderedDateDAO implements RoomOrderedDateDAO_interface {
 		private static final String GET_ALL_STMT = 
 				"SELECT * FROM ROOM_ORDERED_DATE_RECORD";
 		private static final String GET_BYROOMID_STMT = 
-				"SELECT * FROM ROOM_ORDERED_DATE_RECORD WHERE ROOM_ID=?";
+				"SELECT ROOM_ORDERED_DATE FROM ROOM_ORDERED_DATE_RECORD WHERE ROOM_ID=? ORDER BY ROOM_ORDERED_DATE";
 		private static final String DELETE = 
 				"DELETE FROM ROOM_ORDERED_DATE_RECORD WHERE ROOM_ORDERED_DATE_ID = ?";
 		
@@ -203,9 +206,8 @@ public class RoomOrderedDateDAO implements RoomOrderedDateDAO_interface {
 		}
 
 		@Override
-		public List<RoomOrderedDateVO> getByRoomId(String roomId) {
-			List<RoomOrderedDateVO> list = new ArrayList<RoomOrderedDateVO>();
-			RoomOrderedDateVO roomOrderedDateVO = null;
+		public List<String> getByRoomId(String roomId) {
+			List<String> list = new ArrayList<String>();
 
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -216,16 +218,12 @@ public class RoomOrderedDateDAO implements RoomOrderedDateDAO_interface {
 				pstmt = con.prepareStatement(GET_BYROOMID_STMT);
 				pstmt.setString(1, roomId);
 				rs = pstmt.executeQuery();
+				Format sfm = new SimpleDateFormat("yyyy-MM-dd");
 
 				while (rs.next()) {
-					roomOrderedDateVO = new RoomOrderedDateVO();
-					roomOrderedDateVO.setRoomOrderedDateId(rs.getString("ROOM_ORDERED_DATE_ID"));
-					roomOrderedDateVO.setRoomId(rs.getString("ROOM_ID"));
-					roomOrderedDateVO.setRoomOrderId(rs.getString("ROOM_ORDER_ID"));
-					roomOrderedDateVO.setRoomOrderDate(rs.getDate("ROOM_ORDERED_DATE"));
-					list.add(roomOrderedDateVO);
+					
+					list.add(sfm.format(new java.util.Date(rs.getDate(1).getTime())));
 				}
-
 				// Handle any SQL errors
 			} catch (SQLException se) {
 				throw new RuntimeException("A database error occured. "

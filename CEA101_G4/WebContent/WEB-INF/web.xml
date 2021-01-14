@@ -134,6 +134,7 @@
 		<url-pattern>/front-sell-end/activity_order/*</url-pattern>
 		<url-pattern>/front-sell-end/activity_period/*</url-pattern>
 		<url-pattern>/front-sell-end/activity_product/*</url-pattern>
+		<url-pattern>/front-sell-end/foodspot/*</url-pattern>
 		
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

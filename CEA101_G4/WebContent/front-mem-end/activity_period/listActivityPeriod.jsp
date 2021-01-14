@@ -307,10 +307,11 @@
 						ACTION="<%=request.getContextPath()%>/reply/reply.do">
 						<input type="hidden" name="actId" value="${actperVO.act_id}">
 						<input type="hidden" name="action" value="getOne_By_ActId">
-						<button class="btn1" type="submit">瀏覽評論
-					</FORM></button></td>
+						<button class="btn1" type="submit" style="margin-top: 15px;">瀏覽評論</button>
+					</FORM></td>
                 </tr>
             </table>
+            
             <!-- 表格結束 -->
             <!-- 燈箱開始 -->
             <div class="itemLightbox">

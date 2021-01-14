@@ -48,6 +48,7 @@ pageContext.setAttribute("memRoomOrderList", memRoomOrderList);
 <div class="font-bold text-xl md:text-3xl ml-20">我的旅程 </div>
     <!-- partial:index.partial.html -->
 <!--     <div class="flex items-center justify-center min-h-screen"> -->
+<form id="regForm" action="<%=request.getContextPath() %>/roomorder/roomorder.do" method="POST">
     <c:forEach var="memRoomOrderList" items="${memRoomOrderList}"> 
         <div class="max-w-md md:max-w-4xl px-2 mt-10 ml-40" id="order">
             <div class="bg-white shadow-xl rounded-lg overflow-hidden md:flex">
@@ -105,7 +106,10 @@ pageContext.setAttribute("memRoomOrderList", memRoomOrderList);
 								    </div>
                                 </div>
                             </div>
-                            <button class="mt-3 sm:mt-0 py-2 px-5 ml-20 md:py-3 md:px-6 bg-gray-600 hover:bg-gray-400 font-bold text-white md:text-lg rounded-lg shadow-md">查看訂單明細</button>
+                            <input type="hidden" name="room_order_id" value="${memRoomOrderList.roomOrderId}">
+                            <input type="hidden" name="mem_id" value="${memRoomOrderList.memId}">
+                            <input type="hidden" name="action" value="checkRoomOrderDetail" />
+                            <button class="mt-3 sm:mt-0 py-2 px-5 ml-20 md:py-3 md:px-6 bg-gray-600 hover:bg-gray-400 font-bold text-white md:text-lg rounded-lg shadow-md">查看詳情</button>
                         </div>
                     </div>
                 </div>

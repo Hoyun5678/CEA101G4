@@ -41,7 +41,7 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
     </div>
     <div class="col-8"style=" padding-top: 14px;padding-left: 10px;">   
     		${sellVO.sellMemId}
-           <input type="hidden" name="sell_mem_id" value="${sellVO.getSellMemName()}" />
+           <input type="hidden" name="sell_mem_id" value="${sellVO.sellMemId}" />
     </div>
     </div>
 

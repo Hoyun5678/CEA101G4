@@ -1,6 +1,7 @@
 package com.roomordereddate.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 
@@ -11,7 +12,7 @@ public interface RoomOrderedDateDAO_interface {
 	
     public void delete(String roomOrderedDateId);
     public List<RoomOrderedDateVO> getAll();
-    public List<RoomOrderedDateVO> getByRoomId(String roomId);
+    public List<String> getByRoomId(String roomId);
 	
 
 }

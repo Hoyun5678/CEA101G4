@@ -177,20 +177,11 @@ public class SouvenirPhotoServlet extends HttpServlet {
 					in.close();
 				}
 
-				String sou_photo_content = req.getParameter("sou_photo_content");
-
-				String sou_photo_content_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,300}$";
-				if (sou_photo_content != null || sou_photo_content.trim().length() != 0) { // 以下練習正則(規)表示式(regular-expression)
-					 if(!sou_photo_content.trim().matches(sou_photo_content_Reg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("照片敘述只能是中、英文字母、數字和_ , 且長度必需在2到300之間");
-					 }
-				}
 				
 				
 				souphVO.setSou_photo_id(sou_photo_id);
 				souphVO.setSou_id(sou_id);
 				souphVO.setSou_photo(sou_photo);
-				souphVO.setSou_photo_content(sou_photo_content);
 			
 
 				
@@ -198,14 +189,14 @@ public class SouvenirPhotoServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("souphVO", souphVO); // 含有輸入格式錯誤的empVO物件,也存入req
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_photo/update_souphoto_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_photo/listAllSouPhoto.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 				}
 			
 				/*************************** 2.開始修改資料 *****************************************/
 				SouvenirPhotoService souphSvc = new SouvenirPhotoService();
-				souphVO = souphSvc.updateSouPhoto(sou_photo_id, sou_id, sou_photo, sou_photo_content);
+				souphVO = souphSvc.updateSouPhoto(sou_photo_id, sou_id, sou_photo);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("souphVO", souphVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -259,7 +250,7 @@ public class SouvenirPhotoServlet extends HttpServlet {
 				souphVO = souphSvc.addSouPhoto( sou_id, sou_photo);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/souvenir_photo/listAllSouPhoto.jsp";
+				String url = "/back-end/souvenir/listAllSou.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 
@@ -287,7 +278,7 @@ public class SouvenirPhotoServlet extends HttpServlet {
 				souphSvc.deleteSouPhoto(sou_photo_id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/souvenir_photo/listAllSouPhoto.jsp";
+				String url = "/back-end/souvenir/listAllSou.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 

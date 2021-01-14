@@ -1,8 +1,3 @@
-	.leftContainer {
-	    margin-left: 2em;
-    	margin-right: auto;
-	}
-	
 	.calendarDiv {
 		background-color: #f8f9fa;
 	    border-radius: 10px;
@@ -16,32 +11,51 @@
 		margin-block-end: 0.5em;
 		text-align: center;
 	}
+	.yearMonth {
+		color: DodgerBlue;
+	}
 
 	.calendarBody thead tr td {
 	    font-weight: bold;
 	    color: DodgerBlue;
 	    font-size: 16px;
 	}
+	
 	.calendarBody td {
+/* 		border: 2px solid transparent; */
 	    text-align: center;
 	    width: 50px;
 	    height: 35px;
 	    font-size: 14px;
 	    box-sizing: border-box;
+	    user-select: none;
 	}
+	
 	.calendarBody .passedDate {
-	    background-color: #ccc;
+	    color: #ADADAD;
+	    text-decoration: line-through;
+	}
+	
+	.calendarBody .orderedDate:not(.passedDate) {
+	    color: #ADADAD;
+	    border-style: dashed;
 	}
 	
 	.calendarBody .currentDate a {
-	    color: #CE0000;
+	    color: #CE0000 !important;
 	    font-weight: bold;
 	}
 	
 	.calendarBody td.onSelect {
 		border: 2px solid red;
 		background-color: #FFFFB9;
-/* 		.animate */
+	}
+	.orderedRange {
+		background-color: #FFFFB9;
+	}
+	
+	.calendarBody td:not(.passedDate):not(.orderedDate), .material-icons {
+		cursor: pointer;
 	}
 	
 	.calendarBody a {
@@ -51,16 +65,3 @@
 	.calendarBody a:hover, .calendar a:focus {
 	    text-decoration: none;
 	}
-
-	.displaySelectedDate {
-		text-align: center;
-		margin-top: 1em;
-	}
-	
-	.material-icons:hover {
-/* 		background-color: grey; */
-		transform: scale(1.2);
-		user-select: none;
-		cursor: pointer;
-	}
-

@@ -9,7 +9,6 @@ public class SouvenirPhotoVO implements Serializable{
 	private String sou_photo_id;
 	private String sou_id;
 	private byte[] sou_photo;
-	private String sou_photo_content;
 	
 	
 	public String getSou_photo_id() {
@@ -29,12 +28,6 @@ public class SouvenirPhotoVO implements Serializable{
 	}
 	public void setSou_photo(byte[] sou_photo) {
 		this.sou_photo = sou_photo;
-	}
-	public String getSou_photo_content() {
-		return sou_photo_content;
-	}
-	public void setSou_photo_content(String sou_photo_content) {
-		this.sou_photo_content = sou_photo_content;
 	}
 	
 	

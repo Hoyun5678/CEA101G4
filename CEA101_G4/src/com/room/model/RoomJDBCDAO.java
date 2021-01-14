@@ -641,6 +641,12 @@ public class RoomJDBCDAO implements RoomDAO_interface {
 		}
 	}
 
+	@Override
+	public List<RoomVO> getByRoomIdAndDateRange(String roomId, Date from, Date to) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

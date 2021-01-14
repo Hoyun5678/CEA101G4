@@ -188,6 +188,10 @@ select#soflow-color {
 .my-icon {
 	vertical-align: middle;
 }
+
+#songlaho {
+	margin-left:-201px;
+}
 </style>
 
 </head>
@@ -254,28 +258,34 @@ select#soflow-color {
 										name="sou_off_date" size="45"
 										value="<%=(soupVO == null) ? "2020-12-5 12:30:00 " : soupVO.getSou_off_date()%>">
 								</p>
-								<p>
-									<label for="designerlabel">特產按讚次數:</label><input
-										name="sou_like_count" type="TEXT"
-										value="<%=(soupVO == null) ? "3" : soupVO.getSou_like_count()%>">
-								</p>
-
+<!-- 								<p> -->
+<!-- 									<label for="designerlabel">特產按讚次數:</label><input -->
+<!-- 										name="sou_like_count" type="TEXT" -->
+<%-- 										value="<%=(soupVO == null) ? "3" : soupVO.getSou_like_count()%>"> --%>
+<!-- 								</p> -->
+<!-- 按讚次數hidden -->
+<input type="hidden" name="sou_like_count"
+			 value="<%= (soupVO==null)? "0" : soupVO.getSou_like_count()%>" />
+			 
 								<p>
 									<label for="longdescriptionlabel" style="vertical-align: top;">特產描述</label>
 									<TEXTAREA class="textareastyle" cols=60 rows=10 name="sou_des"><%=(soupVO == null) ? "好吃啦" : soupVO.getSou_des()%>
 							
         				</TEXTAREA>
 								</p>
-
+								
 								<p>
-									<label>特產狀態:</label><input type="text" name="sou_status"
-										size="45"
-										value="<%=(soupVO == null) ? "0" : soupVO.getSou_status()%>">
+									<label id="songlaho">特產狀態:</label>
+									
+					<input value="<%=(soupVO == null) ? "0" : soupVO.getSou_status()%>" type="radio" name="sou_status">下架
+					<input value="<%=(soupVO == null) ? "1" : soupVO.getSou_status()%>" type="radio" name="sou_status">上架
+									
+									
 								</p>
 								
 									<jsp:useBean id="souphSvc" scope="page"
 									class="com.souvenir_photo.model.SouvenirPhotoService" />
-						<p>
+							<p>
 									<label for="filelabel">特產照片:</label> 
 									<INPUT type="file" id="file" name="sou_photo" accept="image/*" size="45"
 										 onchange="loadImageFile(event)" />
