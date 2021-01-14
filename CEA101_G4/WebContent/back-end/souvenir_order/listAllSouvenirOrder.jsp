@@ -99,7 +99,7 @@ h4 {
 				<th>特產收貨人姓名</th>
 				<th>特產收貨人地址</th>
 				<th>特產收貨人聯絡電話</th>
-				<th>特產運費</th>
+<!-- 				<th>特產運費</th> -->
 				<th>特產訂單總價</th>
 				<th >特產訂單備註</th>
 				<th>特產訂單運送方式</th>
@@ -115,14 +115,14 @@ h4 {
 			<%-- 	<%@ include file="page1.file" %>  --%>
 			<%-- 	<c:forEach var="soVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 			<c:forEach var="soVO" items="${list}">
-				<tr>
-					<td>${soVO.sou_order_id}</td>
+				<tr><td>		
+     				<a href="<%=request.getContextPath()%>/souvenir_order_detail/souvenir_order_detail.do?sou_order_id=${soVO.sou_order_id}&action=listSouvenirOrderDetails_ByCompositeQuery">${soVO.sou_order_id}</a></td>
 					<td>${soVO.emp_id}</td>
 					<td>${soVO.mem_id}</td>
 					<td>${soVO.sou_receiver_name}</td>
 					<td>${soVO.sou_receiver_address}</td>
 					<td>${soVO.sou_receiver_phone}</td>
-					<td>${soVO.sou_shipment_fee}</td>
+<%-- 					<td>${soVO.sou_shipment_fee}</td> --%>
 					<td>${soVO.sou_order_sum_price}</td>
 					<td>${soVO.sou_order_remarks}</td>
 					<td><c:choose>

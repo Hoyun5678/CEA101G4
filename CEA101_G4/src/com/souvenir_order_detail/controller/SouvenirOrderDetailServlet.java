@@ -261,7 +261,7 @@ public class SouvenirOrderDetailServlet extends HttpServlet {
 				sodSvc.deleteSouvenirOrderDetail(sou_order_id, sou_id);
 				
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/back-end/souvenir_order_detail/listAllSouvenirOrderDetail.jsp";
+				String url = "/back-end/souvenir_order/listAllSouvenirOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
@@ -269,7 +269,7 @@ public class SouvenirOrderDetailServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
 				RequestDispatcher failureView;
-				failureView = req.getRequestDispatcher("/back-end/souvenir_order_detail/listAllSouvenirOrderDetail.jsp");
+				failureView = req.getRequestDispatcher("/back-end/souvenir_order_detail/listSouvenirOrderDetails_ByCompositeQuery.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -300,6 +300,36 @@ public class SouvenirOrderDetailServlet extends HttpServlet {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/back-end/souvenir_order_detail/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		if ("listSouvenirOrderDetails_ByCompositeQuery2".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				Map<String, String[]> map = req.getParameterMap();
+				
+				/***************************2.開始複合查詢***************************************/
+				SouvenirOrderDetailService sodSvc = new SouvenirOrderDetailService();
+				List<SouvenirOrderDetailVO> list  = sodSvc.getAll(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("listSouvenirOrderDetails_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/front-mem-end/souvenir_order/listSouvenirOrderDetail.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-mem-end/souvenir_order/listOneSouvenirOrder.jsp");
 				failureView.forward(req, res);
 			}
 		}	

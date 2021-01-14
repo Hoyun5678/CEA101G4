@@ -7,7 +7,7 @@
 <%-- 此頁只作為複合查詢時之結果練習，可視需要再增加分頁、送出修改、刪除之功能--%>
 
 <jsp:useBean id="listSouvenirOrderDetails_ByCompositeQuery" scope="request" type="java.util.List<SouvenirOrderDetailVO>" />
-
+<jsp:useBean id="soupSvc" scope="page" class="com.souvenir_product.model.SouvenirProductService" />
 
 
 <html>
@@ -137,9 +137,16 @@ table.table.table-dark.table-striped {
 		
 		<tr>
 			<td>${sodVO.sou_order_id}</td>
-			<td>${sodVO.sou_id}</td>
+			<td>${soupSvc.getOneSou(sodVO.sou_id).sou_name}</td>
 			<td>${sodVO.sou_order_amount}</td>
 			<td>${sodVO.sou_price}</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/souvenir_order_detail/souvenir_order_detail.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="sou_order_id"  value="${sodVO.sou_order_id}">
+			     <input type="hidden" name="sou_id"  value="${sodVO.sou_id}">
+			     <input type="hidden" name="action" value="delete"></FORM>
+			</td>
 		</tr>
 	</c:forEach>
 </table>

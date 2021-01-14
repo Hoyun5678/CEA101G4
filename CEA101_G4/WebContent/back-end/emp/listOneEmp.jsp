@@ -65,12 +65,23 @@
 		<th>員工性別</th>
 	</tr>
 	<tr>
-		<td><%=empVO.getEmp_id()%></td>
-		<td><%=empVO.getEmp_account()%></td>
-		<td><%=empVO.getEmp_pwd()%></td>
-		<td><%=empVO.getEmp_name()%></td>
-		<td><%=empVO.getEmp_acc_status()%></td>
-		<td><%=empVO.getEmp_gender()%></td>
+		<td>${empVO.emp_id}</td>
+			<td>${empVO.emp_account}</td>
+			<td>${empVO.emp_pwd}</td>
+			<td>${empVO.emp_name}</td>
+			<td><c:choose>
+                                                    <c:when test="${empVO.emp_acc_status==0}">
+                                                       	帳號未啟用
+                                                    </c:when>
+                                                    <c:when test="${empVO.emp_acc_status==1}">
+                                                       	 帳號已啟用
+                                                    </c:when>
+                                                    <c:when test="${empVO.emp_acc_status==2}">
+                                                       	 帳號已失效
+                                                    </c:when>
+                                                    
+                                                </c:choose></td>
+			<td>${empVO.emp_gender eq 0?"男":"女"}</td> 
 	</tr>
 </table>
 </div>
