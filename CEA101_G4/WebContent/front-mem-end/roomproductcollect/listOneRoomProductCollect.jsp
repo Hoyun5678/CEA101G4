@@ -40,12 +40,13 @@ a:focus {
 body {
     background-color: #F1F2F3;
 }
-.container{
-height:100%;
+.favcontainer{
+height:85%;
+width:90%;
 }
 
 .card-container {
-    padding: 100px 0px;
+/*     padding: 100px 0px; */
     -webkit-perspective: 1000;
     perspective: 1000;
 }
@@ -67,8 +68,8 @@ height:100%;
 
 .profile-card-2 img {
     transition: all linear 0.25s;
-    width:100%;
-    height:100%;
+    width:300px;
+    height:400px;
      object-fit:cover;
 }
 
@@ -139,10 +140,10 @@ margin-left:100px;
 	<div id="none">您尚未收藏房間喔!</div>
 	</c:when>
 	<c:otherwise>
-	<div class="container">
-	<div class="row" style="display:inline;">
-		<div class="col-md-4" style="display:inline";>
-		<c:forEach var="rpcListMem" items="${rpcListMem}">         
+	<div class="favcontainer">
+	<div class="row" style="display:flex;">
+	<c:forEach var="rpcListMem" items="${rpcListMem}">  
+		<div class="col-lg-4" style="display:inline";>  
     		<div class="profile-card-2">
     			<a href="<%=request.getContextPath()%>/room/room.do?roomId=${rpcListMem}&action=checkRoomDetail">
     			<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${rpcListMem}&action=getOnePhotoByRoomId" class="img img-responsive">
@@ -150,9 +151,9 @@ margin-left:100px;
         		<div class="profile-username">${roomSvc.getOneRoom(rpcListMem).roomName} $ ${roomSvc.getOneRoom(rpcListMem).roomPrice}</div>
         		<div class="profile-icons"><i class="far fa-heart"></i>${collectSvc.getCountCollect(rpcListMem)}</div>
     			</a>
-   			</div>
-		</c:forEach>
+   			</div>	
 		</div>
+	</c:forEach>
 	</div>
 	</div>
 	</c:otherwise>
