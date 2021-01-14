@@ -10,7 +10,6 @@
 
 <c:set var='sellMemId' scope="page" value='${param.sellMemId}' />
 <c:set var='checkInDate' scope="page" value='${param.checkInDate}' />
-<%! int i=0; %>
 <!-- 小何的東西 -->
 <c:set var='actordList' scope='page' value='${actordSvc.getActOrdrBySellMemIdAndDate(sellMemId, checkInDate)}' />
 <c:set var='roomOrderList' scope='page' value='${roomOrderSvc.getBySellMemIdAndDate(sellMemId, checkInDate)}' />
@@ -38,22 +37,20 @@
 				</div>
 			</div>
 		</div>
-		<%i++; %>
 	</c:forEach>
-	<%request.setAttribute("i", i); %>
 	
-	<c:forEach var="actordVO" items="${actordList}" varStatus="userStatus">
+	<c:forEach var="actordVO" items="${actordList}" varStatus="actStatus">
 		<div class="card">
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
-					<button class="btn btn-link" data-toggle="collapse" data-target="#collapse${userStatus.count+i}" aria-expanded="true" aria-controls="collapse${userStatus.count}" style="text-decoration: none;" >
+					<button class="btn btn-link" data-toggle="collapse" data-target="#CollapseAct${actStatus.count}" aria-expanded="true" aria-controls="CollapseAct${actStatus.count}" style="text-decoration: none;" >
 						訂購者: ${memSvc.getOneMem(actordVO.mem_id).mem_name}
 						
 					</button>
 				</h5>
 			</div>
 	
-			<div id="collapse${userStatus.count+i}" class="collapse" aria-labelledby="headingOne">
+			<div id="CollapseAct${actStatus.count}" class="collapse" aria-labelledby="headingOne">
 				<div class="card-body">
 					<div>報名人數: ${actordVO.act_order_amount}</div>
 					<div>訂單金額: ${actordVO.act_sum_price}</div>
