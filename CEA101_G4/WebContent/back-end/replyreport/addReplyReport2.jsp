@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.replyreport.model.*"%>
 
@@ -14,7 +14,7 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>ÀËÁ|¯d¨¥·s¼W - addReplyReport.jsp</title>
+<title>æª¢èˆ‰ç•™è¨€æ–°å¢ž - addReplyReport.jsp</title>
 
 <style>
 table#table-1 {
@@ -99,11 +99,11 @@ form {
 
 </head>
 <body bgcolor='white'>
-	<h3>µû½×ÀËÁ|¸ê®Æ·s¼W:</h3>
+	<h3>è©•è«–æª¢èˆ‰è³‡æ–™æ–°å¢ž:</h3>
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: blue">½Ð§¹¦¨¶ñ¼g:</font>
+		<font style="color: blue">è«‹å®Œæˆå¡«å¯«:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: blue">${message}</li>
@@ -117,14 +117,14 @@ form {
 
 		<div id=actrow>
 			<tr>
-				<td><b>­û¤u½s¸¹:</td>
+				<td><b>å“¡å·¥ç·¨è™Ÿ:</td>
 				<td><input type="TEXT" name="empId" class="input-group-text"
 					value="<%=(replyReportVO == null) ? "EMP00" : replyReportVO.getEmpId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
-				<td>·|­û½s¸¹:</td>
+				<td>æœƒå“¡ç·¨è™Ÿ:</td>
 				<td><input type="TEXT" name="memId" class="input-group-text"
 					value="<%=(replyReportVO == null) ? "MEM00" : replyReportVO.getMemId()%>" /></td>
 			</tr>
@@ -132,7 +132,7 @@ form {
 		<div id=actrow>
 
 			<tr>
-				<td>µû½×½s¸¹:</td>
+				<td>è©•è«–ç·¨è™Ÿ:</td>
 				<td><input type="TEXT" name="replyId" class="input-group-text"
 					value="<%=(replyReportVO == null) ? "RPL00" : replyReportVO.getReplyId()%>" />
 				</td>
@@ -140,16 +140,16 @@ form {
 		</div>
 		<div id=actrow>
 			<tr>
-				<td>ÀËÁ|µ²ªGª¬ºA:</td>
-				<td><input type="radio" name="reportResult" size="45" value="0" />«Ý³B²z
-					<input type="radio" name="reportResult" size="45" value="1" />¤w³B²z¦P·N
-					<input type="radio" name="reportResult" size="45" value="2" />¤w³B²z¤£¦P·N</b></td>
+				<td>æª¢èˆ‰çµæžœç‹€æ…‹:</td>
+				<td><input type="radio" name="reportResult" size="45" value="0" />å¾…è™•ç†
+					<input type="radio" name="reportResult" size="45" value="1" />å·²è™•ç†åŒæ„
+					<input type="radio" name="reportResult" size="45" value="2" />å·²è™•ç†ä¸åŒæ„</b></td>
 			</tr>
 		</div>
 		<div id=submit>
 
 			<br> <input type="hidden" name="action" value="insert">
-			<input type="submit" class="btn btn-success" value="°e¥X·s¼W">
+			<input type="submit" class="btn btn-success" value="é€å‡ºæ–°å¢ž">
 		</div>
 	</FORM>
 
@@ -159,7 +159,7 @@ form {
 				<h3>
 					<a
 						href="<%=request.getContextPath()%>/back-end/replyreport/back_select.jsp"
-						class="btn btn-dark">¦^­º­¶</a>
+						class="btn btn-dark">å›žé¦–é </a>
 				</h3>
 			</td>
 		</tr>

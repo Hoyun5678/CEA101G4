@@ -1,18 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.reply.model.*"%>
 
-<%
-	ReplyService replySvc = new ReplyService();
-	List<ReplyVO> list = replySvc.getAll();
-	pageContext.setAttribute("list", list);
-%>
 
 <html>
 <head>
-<title>©Ò¦³µû½×¸ê®Æ</title>
+<title>æ‰€æœ‰è©•è«–è³‡æ–™</title>
 </head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -25,12 +20,12 @@
 }
 
 #content {
-	height: 95%;
+	height: 100%;
 }
 
 .content {
 	width: 98%;
-	height: 90%;
+	height: 100%;
 }
 
 h4 {
@@ -79,14 +74,14 @@ h2 {
 
 <body bgcolor='white'>
 
-	<!-- 	<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4> -->
+	<!-- 	<h4>æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼:</h4> -->
 
 
 
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -97,65 +92,66 @@ h2 {
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th>·|­û½s¸¹</th>
-				<th>µû½×½s¸¹</th>
-				<th>¬¡°Ê´Á§O½s¸¹</th>
-				<th>¬¡°Êµû½×¤º®e</th>
-				<th>¬¡°Êµû½×®É¶¡</th>
-				<th>¬¡°Êµû½×ª¬ºA</th>
+				<th>æœƒå“¡ç·¨è™Ÿ</th>
+				<th>è©•è«–ç·¨è™Ÿ</th>
+				<th>æ´»å‹•æœŸåˆ¥ç·¨è™Ÿ</th>
+				<th>æ´»å‹•è©•è«–å…§å®¹</th>
+				<th>æ´»å‹•è©•è«–æ™‚é–“</th>
+				<th>æ´»å‹•è©•è«–ç‹€æ…‹</th>
 				<th></th>
 				<th></th>
-				<th></th>
+
 			</tr>
-			<%@ include file="page1.file"%>
-			<c:forEach var="replyVO" items="${listReplyVO2}" begin="<%=pageIndex%>"
-				end="<%=pageIndex+rowsPerPage-1%>">
+			<jsp:useBean id="replySvc" scope="page"
+				class="com.reply.model.ReplyService" />
 		</thead>
-		<tbody id=tbody>
-			<tr>
-				<td>${replyVO.memId}</td>
-				<td>${replyVO.replyId}</td>
-				<td>${replyVO.actId}</td>
-				<td>${replyVO.replyContent}</td>
-				<td><fmt:formatDate value="${replyVO.replyTime}" type="both" /></td>
-				<td>${replyVO.replyVisible}</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/reply/reply.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="­×§ï" class="btn btn-info"> <input
-							type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/reply/reply.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="§R°£" class="btn btn-danger"> <input
-							type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="ÀËÁ|" class="btn btn-warning"> <input
-							type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="action" value="insert">
-					</FORM>
-				</td>
-			</tr>
-			</c:forEach>
+		<c:forEach var="replyVOlist"
+			items="${replySvc.getReplyByMemId(sessionScope.memVO.mem_id)}">
+			<tbody id=tbody>
+				<tr>
+					<td>${replyVOlist.memId}</td>
+					<td>${replyVOlist.replyId}</td>
+					<td>${replyVOlist.actId}</td>
+					<td>${replyVOlist.replyContent}</td>
+					<td><fmt:formatDate value="${replyVOlist.replyTime}"
+							type="both" /></td>
+					<td>${replyVOlist.replyVisible}</td>
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/reply/reply.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="ä¿®æ”¹" class="btn btn-info"> <input
+								type="hidden" name="replyId" value="${replyVOlist.replyId}">
+							<input type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/reply/reply.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="åˆªé™¤" class="btn btn-danger"> <input
+								type="hidden" name="replyId" value="${replyVOlist.replyId}">
+							<input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
+					<!-- 				<td> -->
+					<!-- 					<FORM METHOD="post" -->
+					<%-- 						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do" --%>
+					<!-- 						style="margin-bottom: 0px;"> -->
+					<!-- 						<input type="submit" value="æª¢èˆ‰" class="btn btn-warning"> <input -->
+					<%-- 							type="hidden" name="replyId" value="${replyVO.replyId}"> --%>
+					<!-- 						<input type="hidden" name="action" value="insert"> -->
+					<!-- 					</FORM> -->
+					<!-- 				</td> -->
+				</tr>
+		</c:forEach>
 		</tbody>
 	</table>
 	<section id=page>
-		<%@ include file="page2.file"%>
 
 		<h2>
 			<a
 				href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
-				class="btn btn-dark">¦^¤W­¶</a>
+				class="btn btn-dark">å›ä¸Šé </a>
 		</h2>
 
 	</section>

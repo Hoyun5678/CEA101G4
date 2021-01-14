@@ -5,6 +5,8 @@ import java.util.*;
 import javax.naming.*;
 import javax.sql.*;
 
+import com.reply.model.ReplyVO;
+
 public class ReplyReportDAO implements ReplyReportDAO_interface {
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
@@ -29,6 +31,8 @@ public class ReplyReportDAO implements ReplyReportDAO_interface {
 	private static final String GET_ONE_STMT = "SELECT emp_id, reply_id, mem_id, report_result FROM reply_report where report_id = ?";
 	private static final String GET_ALL_STMT = "SELECT report_id, emp_id, reply_id, mem_id, report_result FROM reply_report "
 			+ "order by report_id";
+	private static final String GET_STMT_BY_MEMID = "SELECT report_id, emp_id, reply_id, mem_id, report_result "
+			+ "FROM reply_report where mem_id=?";
 
 	@Override
 	public void insert(ReplyReportVO replyReportVO) {
@@ -43,9 +47,8 @@ public class ReplyReportDAO implements ReplyReportDAO_interface {
 			pstmt.setString(3, replyReportVO.getMemId());
 			pstmt.setInt(4, replyReportVO.getReportResult());
 
-
 			pstmt.executeUpdate();
-			
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -248,6 +251,65 @@ public class ReplyReportDAO implements ReplyReportDAO_interface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<ReplyReportVO> findByMemId(String memId) {
+		List<ReplyReportVO> list2 = new ArrayList<ReplyReportVO>();
+		ReplyReportVO replyReportVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_STMT_BY_MEMID);
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				replyReportVO = new ReplyReportVO();
+				replyReportVO.setReportId(rs.getString("report_id"));
+				replyReportVO.setEmpId(rs.getString("emp_id"));
+				replyReportVO.setReplyId(rs.getString("reply_id"));
+				replyReportVO.setMemId(rs.getString("mem_id"));
+				replyReportVO.setReportResult(rs.getInt("report_result"));
+				list2.add(replyReportVO);
+				// Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list2;
+
 	}
 
 }

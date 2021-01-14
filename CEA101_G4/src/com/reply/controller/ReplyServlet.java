@@ -117,28 +117,48 @@ public class ReplyServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/reply/front_select_reply.jsp");
-					failureView.forward(req, res);
-					return;// 程式中斷
+					if ("forEmp".equals(forEmp)) {
+						RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reply/listOneActP.jsp");// 成功轉交
+						// front_update_replyreport.jsp
+						failureView.forward(req, res);
+					} else {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front-mem-end/reply/front_select_reply.jsp");
+						failureView.forward(req, res);
+						return;// 程式中斷
+					}
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("listReplyVO", listReplyVO); // 資料庫取出的replyVO物件,存入req
 				req.setAttribute("act_id", actId);
-				String url = "/front-mem-end/reply/listOneActP.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 front_listOne.jsp
-				successView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/reply/back_listOneActP.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					successView.forward(req, res);
+				} else {
+					String url = "/front-mem-end/reply/listOneActP.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 front_listOne.jsp
+					successView.forward(req, res);
+				}
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
+			}
+			if ("forEmp".equals(forEmp)) {
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reply/listOneActP.jsp");// 成功轉交
+				failureView.forward(req, res);
+			} else {
+
 				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/reply/front_select_reply.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("getOne_By_MemId".equals(action)) { // 來自select_page.jsp的請求
+		if ("getOne_By_MemId".equals(action))
+
+		{ // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -252,12 +272,12 @@ public class ReplyServlet extends HttpServlet {
 				String replyId = req.getParameter("replyId");
 
 				String actId = req.getParameter("actId");
-				String actIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5}$";
+				String actIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
 				if (actId == null || actId.trim().length() == 0) {
 					errorMsgs.add("活動編號: 請勿空白");
 				} else if (!actId.trim().matches(actIdReg)) {
 					// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("活動編號: 只能是大寫英文字母+數字 , 且長度必需是5");
+					errorMsgs.add("活動編號: 只能是大寫英文字母+數字 , 且長度必需是6");
 				}
 
 				String memId = req.getParameter("memId");
@@ -304,16 +324,23 @@ public class ReplyServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("replyVO", replyVO); // 含有輸入格式錯誤的replyVO物件,也存入req
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/reply/front_update_reply.jsp");
-					failureView.forward(req, res);
-					return; // 程式中斷
+					if ("forEmp".equals(forEmp)) {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/back-end/reply/front_update_reply.jsp");// 成功轉交
+						// front_update_replyreport.jsp
+						failureView.forward(req, res);
+					} else {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front-mem-end/reply/front_update_reply.jsp");
+						failureView.forward(req, res);
+						return; // 程式中斷
+					}
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
 				ReplyService replySvc = new ReplyService();
 				replyVO = replySvc.updateReply(replyId, actId, memId, replyContent, replyTime, replyVisible);
-
+				System.out.println(replyVO);
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				if ("forEmp".equals(forEmp)) {
 					String url = "/back-end/reply/back_listOne.jsp.jsp";
@@ -330,7 +357,8 @@ public class ReplyServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
 				if ("forEmp".equals(forEmp)) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/reply/back_listOne.jsp.jsp");
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/reply/back_update_reply.jsp.jsp");
 					// 成功轉交 front_update_replyreport.jsp
 					failureView.forward(req, res);
 				} else {

@@ -1,10 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.replyreport.model.*"%>
 <%@ page import="java.io.*,java.util.*,javax.servlet.*,java.text.*"%>
 
 <%
-	ReplyReportVO replyReportVO = (ReplyReportVO) request.getAttribute("replyReportVO"); //EmpServlet.java (Concroller) ¦s¤JreqªºempVOª«¥ó (¥]¬AÀ°¦£¨ú¥XªºempVO, ¤]¥]¬A¿é¤J¸ê®Æ¿ù»~®ÉªºempVOª«¥ó)
+	ReplyReportVO replyReportVO = (ReplyReportVO) request.getAttribute("replyReportVO"); //EmpServlet.java (Concroller) å­˜å…¥reqçš„empVOç‰©ä»¶ (åŒ…æ‹¬å¹«å¿™å–å‡ºçš„empVO, ä¹ŸåŒ…æ‹¬è¼¸å…¥è³‡æ–™éŒ¯èª¤æ™‚çš„empVOç‰©ä»¶)
 	System.out.println(replyReportVO);
 %>
 <html>
@@ -15,7 +15,7 @@
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>µû½×ÀËÁ|¸ê®Æ­×§ï</title>
+<title>è©•è«–æª¢èˆ‰è³‡æ–™ä¿®æ”¹</title>
 
 <style>
 table#table-1 {
@@ -106,11 +106,11 @@ th, td {
 
 
 
-	<h3>µû½×¸ê®Æ­×§ï:</h3>
+	<h3>è©•è«–è³‡æ–™ä¿®æ”¹:</h3>
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ð­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -124,43 +124,43 @@ th, td {
 
 		<div id=actrow>
 			<tr>
-				<td><b>µû½×ÀËÁ|½s¸¹:<font color=red><b></b></font></td>
+				<td><b>è©•è«–æª¢èˆ‰ç·¨è™Ÿ:<font color=red><b></b></font></td>
 				<td><%=replyReportVO.getReportId()%></td><br>
 			</tr>
 			<br>
 			<tr>
-				<td>µû½×­û¤u½s¸¹:</td>
+				<td>è©•è«–å“¡å·¥ç·¨è™Ÿ:</td>
 				<td><input type="TEXT" name="empId" class="input-group-text" 
 					size="20" value="<%=replyReportVO.getEmpId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
-				<td>·|­û½s¸¹:</td>
+				<td>æœƒå“¡ç·¨è™Ÿ:</td>
 				<td><input type="TEXT" name="memId" class="input-group-text" 
 					size="20" value="<%=replyReportVO.getMemId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
-				<td>µû½×½s¸¹:</td>
+				<td>è©•è«–ç·¨è™Ÿ:</td>
 				<td><input type="TEXT" name="replyId" class="input-group-text" 
 					size="20" value="<%=replyReportVO.getReplyId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
-				<td>ÀËÁ|µ²ªGª¬ºA:</td>
-				<td><input type="radio" name="reportResult" size="45" value="0" />«Ý³B²z
-					<input type="radio" name="reportResult" size="45" value="1" />¤w³B²z¦P·N
-					<input type="radio" name="reportResult" size="45" value="2" />¤w³B²z¤£¦P·N</td></b>
+				<td>æª¢èˆ‰çµæžœç‹€æ…‹:</td>
+				<td><input type="radio" name="reportResult" size="45" value="0" />å¾…è™•ç†
+					<input type="radio" name="reportResult" size="45" value="1" />å·²è™•ç†åŒæ„
+					<input type="radio" name="reportResult" size="45" value="2" />å·²è™•ç†ä¸åŒæ„</td></b>
 			</tr>
 		</div>
 
 
 		<!-- 	<JSP:USEBEAN ID="REPLYSVC" SCOPE="PAGE" CLASS="COM.REPLY.MODEL.REPLYSERVICE" /> -->
 		<!-- 	<tr> -->
-		<!-- 		<td>³¡ªù:<font color=red><b>*</b></font></td> -->
+		<!-- 		<td>éƒ¨é–€:<font color=red><b>*</b></font></td> -->
 		<!-- 		<td><select size="1" name="deptno"> -->
 		<%-- 			<c:forEach var="deptVO" items="${replySvc.all}"> --%>
 		<%-- 				<option value="${replyReportVO.reportId}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
@@ -172,7 +172,7 @@ th, td {
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="reportId"
 				value="<%=replyReportVO.getReportId()%>"> <input
-				type="submit" class="btn btn-success" value="°e¥X­×§ï">
+				type="submit" class="btn btn-success" value="é€å‡ºä¿®æ”¹">
 		</div>
 	</FORM>
 
@@ -182,7 +182,7 @@ th, td {
 		<h4>
 			<a
 				href="<%=request.getContextPath()%>/replyreport/front_select_replyreport.jsp"
-				class="btn btn-dark">­º­¶</a>
+				class="btn btn-dark">é¦–é </a>
 		</h4>
 
 	</div>

@@ -31,16 +31,18 @@ img {
 	align-items: center;
 }
 
-.col-lg-8{
+.col-lg-8 {
 	border: solid 1px black;
 	margin-top: 5px;
 	text-align: center;
 }
+
 .navbar-brand #logo {
-	height : 15% ;
+	height: 15%;
 }
+
 .h3, h3 {
-text-align:left;
+	text-align: left;
 }
 
 #myDropdown2 .far, .fas, .fab {
@@ -124,31 +126,40 @@ text-align:left;
 	color: black;
 }
 
-
 #title {
-	margin-top:0 !important;
+	margin-top: 0 !important;
+}
+
+#addcar {
+	position: absolute;
+	bottom: 7px;
+	right: -38px;
+}
+
+.btn-success {
+	margin-bottom : 5px;
 }
 </style>
 <body align="center">
 	<%@ include file="/front-mem-end/bar.jsp"%>
-	
-
-<c:if test="${not empty sessionScope.memVO}">
-	<div class="dropdown2">
-
-		<div id="account2" onclick="myFunction2()" class="dropbtn2">
-			<i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i>
 
 
+	<c:if test="${not empty sessionScope.memVO}">
+		<div class="dropdown2">
+
+			<div id="account2" onclick="myFunction2()" class="dropbtn2">
+				<i id="shoppingcar" class="fas fa-shopping-cart fa-2x"></i>
+
+
+			</div>
+
+			<div id="myDropdown2" class="dropdown-content2">
+				<jsp:include page="/front-mem-end/souvenir/souvenircart.jsp"
+					flush="true" />
+
+			</div>
 		</div>
-
-		<div id="myDropdown2" class="dropdown-content2">
-			<jsp:include page="/front-mem-end/souvenir/souvenircart.jsp"
-				flush="true" />
-
-		</div>
-	</div>
-</c:if>
+	</c:if>
 
 	<div class="container">
 		<div class="row">
@@ -177,7 +188,6 @@ text-align:left;
 									items="${souphSvc.getBySouId(soupVO.sou_id)}">
 									<img
 										src="${pageContext.request.contextPath}/souvenir_photo/SouvenirPhotoServlet?sou_photo_id=${souphVO.sou_photo_id}&action=getSouPhoto">
-									</a>
 								</c:forEach>
 							</div>
 							<div class="col-lg-3" id="rightside">
@@ -195,11 +205,35 @@ text-align:left;
 								<div id="secondcol">
 									<div class="distance">
 										<div>${soupVO.sou_des}</div>
+
+										<div>
+											<Form id="addcar" name="soupVO"
+												action="<%=request.getContextPath()%>/shopping/shopping.do"
+												method="POST">
+												<div align="center" style="display: inline;">
+													<input type='button' value='-' class='qtyminus' field='quantity' />
+													<input type="text" name="quantity" size="3" value=1>
+												</div>
+												
+												<input type='button' value='+' class='qtyplus' field='quantity' />
+												<input class="btn btn-success" type="submit" value="加入購物車">
+												<input type="hidden" name="sou_name" value="${soupVO.sou_name}"> 
+												<input type="hidden" name="sou_price" value="${soupVO.sou_price}">
+												<input type="hidden" name="sou_id" value="${soupVO.sou_id}">
+												<input type="hidden" name="action" value="ADD">
+											</Form>
+
+
+											<form id='myform' method='POST' action='#'>
+												
+											</form>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -214,32 +248,101 @@ text-align:left;
 	baguetteBox.run('.photogallery');
 </script>
 <script>
-		/* Demo purposes only */
-		$(".hover").mouseleave(function() {
-			$(this).removeClass("hover");
-		});
+	/* Demo purposes only */
+	$(".hover").mouseleave(function() {
+		$(this).removeClass("hover");
+	});
 
-		function myFunction2() {
-			document.getElementById("myDropdown2").classList.toggle("show2");
-		}
+	function myFunction2() {
+		document.getElementById("myDropdown2").classList.toggle("show2");
+	}
 
-		// Close the dropdown if the user clicks outside of it
-		window.onclick = function(event) {
-			if (!event.target.matches('.dropbtn2')) {
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(event) {
+		if (!event.target.matches('.dropbtn2')) {
 
-				var dropdowns = document
-						.getElementsByClassName("dropdown-content2");
-				var i;
-				for (i = 0; i < dropdowns.length; i++) {
-					var openDropdown = dropdowns[i];
-					if (openDropdown.classList.contains('show2')) {
-						openDropdown.classList.remove('show2');
-					}
+			var dropdowns = document
+					.getElementsByClassName("dropdown-content2");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+				var openDropdown = dropdowns[i];
+				if (openDropdown.classList.contains('show2')) {
+					openDropdown.classList.remove('show2');
 				}
 			}
 		}
-	</script>
+	}
 
+	$(function() {
+		// This button will increment the value
+		$('.qtyplus')
+				.click(
+						function(e) {
+							// Stop acting like a button
+							e.preventDefault();
+							// Get the field name
+							fieldName = $(this).attr('field');
+							// Get its current value
+							var currentVal = parseInt($(
+									'input[name=' + fieldName + ']').val());
+							// If is not undefined
+							if (!isNaN(currentVal)) {
+								// Increment
+								$('input[name=' + fieldName + ']').val(
+										currentVal + 1);
+							} else {
+								// Otherwise put a 0 there
+								$('input[name=' + fieldName + ']').val(0);
+							}
+						});
+		// This button will decrement the value till 0
+		$(".qtyminus")
+				.click(
+						function(e) {
+							// Stop acting like a button
+							e.preventDefault();
+							// Get the field name
+							fieldName = $(this).attr('field');
+							// Get its current value
+							var currentVal = parseInt($(
+									'input[name=' + fieldName + ']').val());
+							// If it isn't undefined or its greater than 0
+							if (!isNaN(currentVal) && currentVal > 0) {
+								// Decrement one
+								$('input[name=' + fieldName + ']').val(
+										currentVal - 1);
+							} else {
+								// Otherwise put a 0 there
+								$('input[name=' + fieldName + ']').val(0);
+							}
+						});
+	});
+</script>
+<style>
+.qty {
+  width: 40px;
+  height: 35px;
+  text-align: center;
+  border: 0;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+
+input.qtyplus {
+  width: 25px;
+  height: 35px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+}
+
+input.qtyminus {
+  width: 25px;
+  height: 35px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+}
+</style>
 </html>
 
 </body>

@@ -1,10 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.replyreport.model.*"%>
-<%-- ¦¹­¶¼È½m²ß±Ä¥Î Script ªº¼gªk¨ú­È --%>
+<%-- æ­¤é æš«ç·´ç¿’æ¡ç”¨ Script çš„å¯«æ³•å–å€¼ --%>
 
 <%
 	ReplyReportVO replyReportVO = (ReplyReportVO) request.getAttribute("replyReportVO");
-	//EmpServlet.java(Concroller), ¦s¤JreqªºreplyReportVOª«¥ó
+	//EmpServlet.java(Concroller), å­˜å…¥reqçš„replyReportVOç‰©ä»¶
 %>
 
 <html>
@@ -13,7 +13,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-<title>µû½×¸ê®Æ - listOneReplyReport.jsp</title>
+<title>è©•è«–è³‡æ–™ - listOneReplyReport.jsp</title>
 
 <style>
 table {
@@ -44,16 +44,16 @@ th, td {
 </head>
 <body bgcolor='white'>
 
-	<h3>µû½×½s¸¹¸ê®Æ - ListOneReplyReport.jsp</h3>
+	<h3>è©•è«–ç·¨è™Ÿè³‡æ–™ - ListOneReplyReport.jsp</h3>
 
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th>µû½×ÀËÁ|½s¸¹</th>
-				<th>­û¤u½s¸¹</th>
-				<th>µû½×½s¸¹</th>
-				<th>·|­û½s¸¹</th>
-				<th>µû½×ÀËÁ|µ²ªG</th>
+				<th>è©•è«–æª¢èˆ‰ç·¨è™Ÿ</th>
+				<th>å“¡å·¥ç·¨è™Ÿ</th>
+				<th>è©•è«–ç·¨è™Ÿ</th>
+				<th>æœƒå“¡ç·¨è™Ÿ</th>
+				<th>è©•è«–æª¢èˆ‰çµæœ</th>
 			</tr>
 		</thead>
 		<tbody id=tbody>
@@ -76,7 +76,7 @@ th, td {
 				<h4>
 					<a
 						href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"
-						class="btn btn-dark">¦^­º­¶</a>
+						class="btn btn-dark">å›é¦–é </a>
 				</h4>
 			</td>
 		</tr>

@@ -79,7 +79,7 @@ th, td {
 
 </head>
 <body bgcolor='white'>
-	<%@include file="/front-mem-end/bar.jsp"%>
+
 <!-- 	<table> -->
 <!-- 		<h4>我要留言</h4> -->
 <!-- 		<FORM METHOD="post" -->
@@ -153,12 +153,12 @@ th, td {
 				<%-- 				<td>${replyVO.replyVisible}</td> --%>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+						ACTION="<%=request.getContextPath()%>/reply/reply.do"
 						style="margin-bottom: 0px;">
-						<input type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="memId" value="${replyVO.memId}">
-						<input type="hidden" name="action" value="memInsert">
-						<button type="submit" value="檢舉" class="btn btn-warning">檢舉</button>
+						<input type="submit" value="刪除" class="btn btn-danger"> <input
+							type="hidden" name="replyId" value="${replyVO.replyId}">
+						<input type="hidden" name="forEmp" value="forEmp"> <input
+							type="hidden" name="action" value="delete">
 					</FORM>
 				</td>
 			</tr>
@@ -172,7 +172,7 @@ th, td {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/front-mem-end/activity_period/listActivityPeriod.jsp"
+						href="<%=request.getContextPath()%>/back-end/reply/back_select.jsp"
 						class="btn btn-dark">回上頁</a>
 				</h3>
 			</td>

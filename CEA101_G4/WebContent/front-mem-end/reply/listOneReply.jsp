@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.reply.model.*"%>
 
@@ -12,7 +12,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-<title>µû½×¸ê®Æ - listOneReply.jsp</title>
+<title>è©•è«–è³‡æ–™ - listOneReply.jsp</title>
 
 <style>
 table#table-1 {
@@ -78,17 +78,17 @@ th, td {
 
 </head>
 <body bgcolor='white'>
-	<h3>µû½×½s¸¹¸ê®Æ</h3>
+	<h3>è©•è«–ç·¨è™Ÿè³‡æ–™</h3>
 
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th>µû½×½s¸¹</th>
-				<th>¬¡°Ê´Á§O½s¸¹</th>
-				<th>·|­û½s¸¹</th>
-				<th>¬¡°Êµû½×¤º®e</th>
-				<th>¬¡°Êµû½×®É¶¡</th>
-				<th>¬¡°Êµû½×ª¬ºA</th>
+				<th>è©•è«–ç·¨è™Ÿ</th>
+				<th>æ´»å‹•æœŸåˆ¥ç·¨è™Ÿ</th>
+				<th>æœƒå“¡ç·¨è™Ÿ</th>
+				<th>æ´»å‹•è©•è«–å…§å®¹</th>
+				<th>æ´»å‹•è©•è«–æ™‚é–“</th>
+				<th>æ´»å‹•è©•è«–ç‹€æ…‹</th>
 			</tr>
 		</thead>
 		<tbody id=tbody>
@@ -111,7 +111,7 @@ th, td {
 				<h3>
 					<a
 						href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
-						class="btn btn-dark">¦^¤W­¶</a>
+						class="btn btn-dark">å›žä¸Šé </a>
 				</h3>
 			</td>
 		</tr>

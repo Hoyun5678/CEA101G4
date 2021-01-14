@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,10 +50,10 @@ a.nav-link {
 			<ul>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>§Úªºµû½×°Ï</a></li>
+						class="fa"></i>æˆ‘çš„è©•è«–å€</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
-						class="fa"></i>µû½×ÀËÁ|¬d¸ß</a></li>
+						class="fa"></i>è©•è«–æª¢èˆ‰æŸ¥è©¢</a></li>
 
 			</ul>
 		</div>
@@ -69,22 +69,22 @@ a.nav-link {
 						<b>
 							<li class="nav-item" id="active">
 								<div class="font-icon">
-									<a class="nav-link" href="#">¦í±J</a>
+									<a class="nav-link" href="#">ä½å®¿</a>
 								</div>
 						</li>
 							<li class="nav-item" id="active">
 								<div class="font-icon">
-									<a class="nav-link" href="#">ÅéÅç</a>
+									<a class="nav-link" href="#">é«”é©—</a>
 								</div>
 						</li>
 							<li class="nav-item" id="active">
 								<div class="font-icon">
-									<a class="nav-link" href="#">¦ñ¤âÂ§</a>
+									<a class="nav-link" href="#">ä¼´æ‰‹ç¦®</a>
 								</div>
 						</li>
 							<li class="nav-item" id="active">
 								<div class="font-icon">
-									<a class="nav-link" href="#">¥[¤J¥­¥x</a>
+									<a class="nav-link" href="#">åŠ å…¥å¹³å°</a>
 								</div>
 						</li>
 							<li class="nav-profile">
@@ -104,7 +104,7 @@ a.nav-link {
 		</div>
 		<div class="content">
 			<div class="content-header">
-				<h1>µû½×ÀËÁ|¸ê®Æ</h1>
+				<h1>è©•è«–æª¢èˆ‰è³‡æ–™</h1>
 			</div>
 			<%@ include
 				file="/front-mem-end/replyreport/update_replyreport_input.jsp"%>

@@ -1,18 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.replyreport.model.*"%>
 
-<%
-	ReplyReportService replyReportSvc = new ReplyReportService();
-	List<ReplyReportVO> list = replyReportSvc.getAll();
-	pageContext.setAttribute("list", list);
-%>
-
 
 <html>
 <head>
-<title>©Ò¦³µû½×ÀËÁ|¸ê®Æ - listAllReplyReport.jsp</title>
+<title>æ‰€æœ‰è©•è«–æª¢èˆ‰è³‡æ–™ - listAllReplyReport.jsp</title>
 </head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -56,9 +50,9 @@ h2 {
 <body bgcolor='white'>
 
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -69,55 +63,57 @@ h2 {
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
-				<th>ÀËÁ|½s¸¹</th>
-				<th>­û¤u½s¸¹</th>
-				<th>µû½×½s¸¹</th>
-				<th>·|­û¤º®e</th>
-				<th>ÀËÁ|µ²ªGª¬ºA</th>
+				<th>æª¢èˆ‰ç·¨è™Ÿ</th>
+				<th>å“¡å·¥ç·¨è™Ÿ</th>
+				<th>è©•è«–ç·¨è™Ÿ</th>
+				<th>æœƒå“¡å…§å®¹</th>
+				<th>æª¢èˆ‰çµæœç‹€æ…‹</th>
 				<th></th>
 				<th></th>
 
 			</tr>
-			<%@ include file="page1.file"%>
-			<c:forEach var="replyReportVO" items="${list}" begin="<%=pageIndex%>"
-				end="<%=pageIndex+rowsPerPage-1%>">
+
+			<jsp:useBean id="replyRprtSvc" scope="page"
+				class="com.replyreport.model.ReplyReportService" />
 		</thead>
+
 		<tbody id=tbody>
-			<tr>
-				<td>${replyReportVO.reportId}</td>
-				<td>${replyReportVO.empId}</td>
-				<td>${replyReportVO.replyId}</td>
-				<td>${replyReportVO.memId}</td>
-				<td>${replyReportVO.reportResult}</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="­×§ï" class="btn btn-info"> <input
-							type="hidden" name="reportId" value="${replyReportVO.reportId}">
-						<input type="hidden" name="action" value="getOne_For_Update">
-					</FORM>
-				</td>
-				<td>
-					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" value="§R°£" class="btn btn-danger"> <input
-							type="hidden" name="reportId" value="${replyReportVO.reportId}">
-						<input type="hidden" name="action" value="delete">
-					</FORM>
-				</td>
-				</c:forEach>
-			</tr>
+			<c:forEach var="replyReportVOlist"
+				items="${replyReportSvc.getReplyReportByMemId(sessionScope.memVO.mem_id)}">
+				<tr>
+					<td>${replyReportVOlist.reportId}</td>
+					<td>${replyReportVOlist.empId}</td>
+					<td>${replyReportVOlist.replyId}</td>
+					<td>${replyReportVOlist.memId}</td>
+					<td>${replyReportVOlist.reportResult}</td>
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="ä¿®æ”¹" class="btn btn-info"> <input
+								type="hidden" name="reportId" value="${replyReportVO.reportId}">
+							<input type="hidden" name="action" value="getOne_For_Update">
+						</FORM>
+					</td>
+					<td>
+						<FORM METHOD="post"
+							ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+							style="margin-bottom: 0px;">
+							<input type="submit" value="åˆªé™¤" class="btn btn-danger"> <input
+								type="hidden" name="reportId" value="${replyReportVO.reportId}">
+							<input type="hidden" name="action" value="delete">
+						</FORM>
+					</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 	<section id=page>
-		<%@ include file="page2.file"%>
 		<br>
 		<h2>
 			<a
 				href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"
-				class="btn btn-dark">¦^¤W­¶</a>
+				class="btn btn-dark">å›ä¸Šé </a>
 		</h2>
 	</section>
 </body>

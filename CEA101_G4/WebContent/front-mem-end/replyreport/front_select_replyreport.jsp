@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,10 +61,10 @@ a.nav-link {
 			<ul>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>§Úªºµû½×°Ï</a></li>
+						class="fa"></i>æˆ‘çš„è©•è«–å€</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
-						class="fa"></i>µû½×ÀËÁ|¬d¸ß</a></li>
+						class="fa"></i>è©•è«–æª¢èˆ‰æŸ¥è©¢</a></li>
 
 			</ul>
 		</div>
@@ -73,7 +73,7 @@ a.nav-link {
 
 		<div class="content">
 			<div class="content-header">
-				<h1>µû½×ÀËÁ|¸ê®Æ</h1>
+				<h1>è©•è«–æª¢èˆ‰è³‡æ–™</h1>
 			</div>
 			<%@ include file="/front-mem-end/replyreport/select_page.jsp"%>
 		</div>

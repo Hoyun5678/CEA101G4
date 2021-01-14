@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,14 +42,14 @@ a.nav-link {
 }
 </style>
 <body id=body>
-	
+
 	<section id="sidebar">
 		<%@include file="/back-end/back-index-sidebar.jsp"%>
 	</section>
 	<section id="content">
 		<div class="content">
 			<div class="content-header">
-				<h1>µû½×ÀËÁ|¸ê®Æ</h1>
+				<h1>è©•è«–æª¢èˆ‰è³‡æ–™</h1>
 			</div>
 			<%@ include file="/back-end/replyreport/listAllReplyReport.jsp"%>
 

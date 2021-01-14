@@ -18,7 +18,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<title>房間資料修改</title>
+<title>特產資料修改</title>
 <style>
 button {
 	float: right;
@@ -41,7 +41,7 @@ button {
 			<div class="container-fluid" style="padding: 0;">
 				<div class="container mt-4">
 					<div class="col-9 offset-1">
-						<h2>房間資料修改</h2>
+						<h2>特產資料修改</h2>
 						<hr>
 					</div>
 					<FORM METHOD="post"
@@ -86,7 +86,7 @@ button {
 								</div>
 								<div class="col-5 d-inline-block">
 									<textarea class="form-control" name="sou_des"
-										placeholder="寫一些民宿房間的特色介紹~"><%=(soupVO.getSou_des() == null) ? "" : soupVO.getSou_des()%></textarea>
+										placeholder="寫一些特產的特色介紹~"><%=(soupVO.getSou_des() == null) ? "" : soupVO.getSou_des()%></textarea>
 								</div>
 							</div>
 							<div class="form-group">

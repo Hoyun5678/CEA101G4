@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -55,6 +55,10 @@ a:hover {
 navbar navbar-dark bg-dark {
 	width: 50px;
 }
+
+#actrow {
+	margin-left: 150px;
+}
 </style>
 
 </head>
@@ -62,7 +66,7 @@ navbar navbar-dark bg-dark {
 <body>
 
 	<div id=container>
-		<%-- ¿ù»~ªí¦C --%>
+		<%-- éŒ¯èª¤è¡¨åˆ— --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">Error Message:</font>
 			<ul>
@@ -74,17 +78,17 @@ navbar navbar-dark bg-dark {
 
 		<nav class="navbar navbar-dark bg-dark">
 			<a
-				href='<%=request.getContextPath()%>/back-end/reply/back_AllReply.jsp'>¦C¥X©Ò¦³µû½×</a>
+				href='<%=request.getContextPath()%>/back-end/reply/back_AllReply.jsp'>åˆ—å‡ºæ‰€æœ‰è©•è«–</a>
 
 			<a
-				href='<%=request.getContextPath()%>/back-end/replyreport/back_AllReplyReport.jsp''>¦C¥X©Ò¦³µû½×ÀËÁ|</a>
+				href='<%=request.getContextPath()%>/back-end/replyreport/back_AllReplyReport.jsp''>åˆ—å‡ºæ‰€æœ‰è©•è«–æª¢èˆ‰</a>
 
 			<!-- 			<a -->
-			<%-- 				href='<%=request.getContextPath()%>/back-end/replyreport/back_addReplyReport.jsp'>·s¼W¤@µ§µû½×ÀËÁ|</a> --%>
+			<%-- 				href='<%=request.getContextPath()%>/back-end/replyreport/back_addReplyReport.jsp'>æ–°å¢žä¸€ç­†è©•è«–æª¢èˆ‰</a> --%>
 
 			<!-- 			<FORM METHOD="post" -->
 			<%-- 				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"> --%>
-			<!-- 				<b>¿é¤Jµû½×ÀËÁ|½s¸¹ (ex:REP001):</b> <input type="text" name="reportId"> -->
+			<!-- 				<b>è¼¸å…¥è©•è«–æª¢èˆ‰ç·¨è™Ÿ (ex:REP001):</b> <input type="text" name="reportId"> -->
 			<!-- 				<input type="hidden" name="action" value="getOne_For_Display"> -->
 			<!-- 				<input type="submit" value="Search" class="btn btn-info"> -->
 			<!-- 			</FORM> -->
@@ -94,16 +98,15 @@ navbar navbar-dark bg-dark {
 
 		</nav>
 		<br>
-		<div>
-			<!-- 			<FORM METHOD="post" -->
-			<%-- 				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"> --%>
-			<!-- 				<b>¿ï¾Üµû½×ÀËÁ|½s¸¹ :</b> <select size="1" name="reportId"> -->
-			<%-- 					<c:forEach var="replyReportVO" items="${replyReportSvc.all}"> --%>
-			<%-- 						<option value="${replyReportVO.reportId}">${replyReportVO.reportId} --%>
-			<%-- 					</c:forEach> --%>
-			<!-- 				</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
-			<!-- 				<input type="submit" value="Search" class="btn btn-info"> -->
-			<!-- 			</FORM> -->
+		<div id=actrow>
+			<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/reply/reply.do">
+				<b>è¼¸å…¥æ´»å‹•ç·¨è™Ÿ</b> <input type="text" placeholder="ACT001" name="actId">
+				<input type="hidden" name="action" value="getOne_By_ActId">
+				<input type="hidden" name="forEmp" value="forEmp">
+				<input type="submit" value="Search" class="btn btn-info">
+
+			</FORM>
 		</div>
 </body>
 </html>

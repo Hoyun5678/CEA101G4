@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -69,7 +69,7 @@ a:hover {
 
 
 	<div id=container>
-		<%-- ¿ù»~ªí¦C --%>
+		<%-- éŒ¯èª¤è¡¨åˆ— --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">Error Message:</font>
 			<ul>
@@ -81,55 +81,56 @@ a:hover {
 
 		<nav class="navbar navbar-dark bg-dark">
 			<a
-				href='<%=request.getContextPath()%>/front-mem-end/reply/front_AllReply.jsp'>¦C¥X§Úªº©Ò¦³µû½×</a>
+				href='<%=request.getContextPath()%>/front-mem-end/reply/front_AllReply.jsp'>åˆ—å‡ºæˆ‘çš„æ‰€æœ‰è©•è«–</a>
 			<a
-				href='<%=request.getContextPath()%>/front-mem-end/reply/front_addReply.jsp'>·s¼W¤@µ§µû½×</a>
+				href='<%=request.getContextPath()%>/front-mem-end/reply/front_addReply.jsp'>æ–°å¢žä¸€ç­†è©•è«–</a>
 
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/reply/reply.do">
-				<b>¿é¤Jµû½×½s¸¹</b> <input type="text" placeholder="RPL001" name="replyId">
-				<input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="Search" class="btn btn-info">
+			<!-- 			<FORM METHOD="post" -->
+			<%-- 				ACTION="<%=request.getContextPath()%>/reply/reply.do"> --%>
+			<!-- 				<b>è¼¸å…¥è©•è«–ç·¨è™Ÿ</b> <input type="text" placeholder="RPL001" name="replyId"> -->
+			<!-- 				<input type="hidden" name="action" value="getOne_For_Display"> -->
+			<!-- 				<input type="submit" value="Search" class="btn btn-info"> -->
 
-			</FORM>
+			<!-- 			</FORM> -->
+			<div>
+<!-- 				<FORM METHOD="post" -->
+<%-- 					ACTION="<%=request.getContextPath()%>/reply/reply.do"> --%>
+<!-- 					<b>è¼¸å…¥æ´»å‹•ç·¨è™Ÿ</b> <input type="text" placeholder="ACT001" name="actId"> -->
+<!-- 					<input type="hidden" name="action" value="getOne_By_ActId"> -->
+<!-- 					<input type="submit" value="Search" class="btn btn-info"> -->
+
+<!-- 				</FORM> -->
+			</div>
 		</nav>
 
 		<jsp:useBean id="replySvc" scope="page"
 			class="com.reply.model.ReplyService" />
 		<br>
-		<div>
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/reply/reply.do">
-				<b>¿é¤J¬¡°Ê½s¸¹</b> <input type="text" placeholder="ACT001" name="actId">
-				<input type="hidden" name="action" value="getOne_By_ActId">
-				<input type="submit" value="Search" class="btn btn-info">
 
-			</FORM>
-		</div>
 
 
 		<!-- 		<ul> -->
 		<!-- 			<li id=list> -->
 		<!-- 				<FORM METHOD="post" -->
 		<%-- 					ACTION="<%=request.getContextPath()%>/reply/reply.do"> --%>
-		<!-- 					<b>¿ï¾Üµû½×½s¸¹ :</b> <select size="1" name="replyId"> -->
+		<!-- 					<b>é¸æ“‡è©•è«–ç·¨è™Ÿ :</b> <select size="1" name="replyId"> -->
 		<%-- 						<c:forEach var="replyVO" items="${replySvc.all}"> --%>
 		<%-- 							<option class="dropdown-item" value="${replyVO.replyId}">${replyVO.replyId} --%>
 		<%-- 						</c:forEach> --%>
 		<!-- 					</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
-		<!-- 					<input type="submit" value="°e¥X" class="btn btn-info"> -->
+		<!-- 					<input type="submit" value="é€å‡º" class="btn btn-info"> -->
 		<!-- 				</FORM> -->
 		<!-- 			</li> -->
 
 		<!-- 			<li id=list> -->
 		<!-- 				<FORM METHOD="post" -->
 		<%-- 					ACTION="<%=request.getContextPath()%>/reply/reply.do"> --%>
-		<!-- 					<b>¿ï¾Ü·|­û½s¸¹:</b> <select size="1" name="replyId"> -->
+		<!-- 					<b>é¸æ“‡æœƒå“¡ç·¨è™Ÿ:</b> <select size="1" name="replyId"> -->
 		<%-- 						<c:forEach var="replyVO" items="${replySvc.all}"> --%>
 		<%-- 							<option class="dropdown-item" value="${replyVO.replyId}">${replyVO.memId} --%>
 		<%-- 						</c:forEach> --%>
 		<!-- 					</select> <input type="hidden" name="action" value="getOne_For_Display"> -->
-		<!-- 					<input type="submit" value="°e¥X" class="btn btn-info"> -->
+		<!-- 					<input type="submit" value="é€å‡º" class="btn btn-info"> -->
 		<!-- 				</FORM> -->
 		<!-- 			</li> -->
 

@@ -2,6 +2,8 @@ package com.replyreport.model;
 
 import java.util.List;
 
+import com.reply.model.ReplyVO;
+
 public class ReplyReportService {
 	private ReplyReportDAO_interface dao;
 
@@ -55,6 +57,10 @@ public class ReplyReportService {
 
 	public ReplyReportVO getOneReplyReport(String reportId) {
 		return dao.findByPrimaryKey(reportId);
+	}
+	
+	public List<ReplyReportVO> getReplyReportByMemId(String memId) {
+		return dao.findByMemId(memId);
 	}
 
 	public List<ReplyReportVO> getAll() {

@@ -37,29 +37,17 @@ a.nav-link {
 	font-size: 16px;
 }
 </style>
-
 <body id=body>
-	<%@include file="/front-mem-end/bar.jsp"%>
 	<section id="sidebar">
-		<div id="sidebar-nav">
-			<ul>
-				<li><a
-					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>我的評論區</a></li>
-				<li><a
-					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
-						class="fa"></i>評論檢舉查詢</a></li>
-
-
-			</ul>
-		</div>
+		<%@include file="/back-end/back-index-sidebar.jsp"%>
 	</section>
 	<section id="content">
 		<div class="content">
 			<div class="content-header">
-				<h1>評論資料新增</h1>
+				<h1>評論資料查詢</h1>
 			</div>
-			<%@ include file="/front-mem-end/reply/addReply.jsp"%>
+			<%@ include file="/back-end/reply/listOneActP.jsp"%>
+
 		</div>
 	</section>
 </body>

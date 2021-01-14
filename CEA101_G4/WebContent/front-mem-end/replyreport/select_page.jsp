@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -58,7 +58,7 @@ a:hover {
 <body>
 
 	<div id=container>
-		<%-- ¿ù»~ªí¦C --%>
+		<%-- éŒ¯èª¤è¡¨åˆ— --%>
 		<c:if test="${not empty errorMsgs}">
 			<font style="color: red">Error Message:</font>
 			<ul>
@@ -71,13 +71,13 @@ a:hover {
 		<nav class="navbar navbar-dark bg-dark">
 
 			<a
-				href='<%=request.getContextPath()%>/front-mem-end/replyreport/front_AllReplyReport.jsp''>¦C¥X©Ò¦³µû½×ÀËÁ|</a>
+				href='<%=request.getContextPath()%>/front-mem-end/replyreport/front_AllReplyReport.jsp''>åˆ—å‡ºæˆ‘çš„æ‰€æœ‰è©•è«–æª¢èˆ‰</a>
 			<a
-				href='<%=request.getContextPath()%>/front-mem-end//replyreport/front_addReplyReport.jsp'>·s¼W¤@µ§µû½×ÀËÁ|</a>
+				href='<%=request.getContextPath()%>/front-mem-end//replyreport/front_addReplyReport.jsp'>æ–°å¢žä¸€ç­†è©•è«–æª¢èˆ‰</a>
 
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do">
-				<b>¿é¤Jµû½×ÀËÁ|½s¸¹ (ex:REP001):</b> <input type="text" name="reportId">
+				<b>è¼¸å…¥è©•è«–æª¢èˆ‰ç·¨è™Ÿ (ex:REP001):</b> <input type="text" name="reportId">
 				<input type="hidden" name="action" value="getOne_For_Display">
 				<input type="submit" value="Search" class="btn btn-info">
 			</FORM>
@@ -90,7 +90,7 @@ a:hover {
 		<div>
 			<FORM METHOD="post"
 				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do">
-				<b>¿ï¾Üµû½×ÀËÁ|½s¸¹ :</b> <select size="1" name="reportId">
+				<b>é¸æ“‡è©•è«–æª¢èˆ‰ç·¨è™Ÿ :</b> <select size="1" name="reportId">
 					<c:forEach var="replyReportVO" items="${replyReportSvc.all}">
 						<option value="${replyReportVO.reportId}">${replyReportVO.reportId}
 					</c:forEach>
