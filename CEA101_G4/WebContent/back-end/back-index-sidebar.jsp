@@ -22,7 +22,7 @@
                     </a>
                 </div>
                 <span>首頁<br>
-                    <a href="#">
+                    <a href="<%=request.getContextPath()%>/back-end/faq/listAllFAQ.jsp">
                         FAQ
                     </a>
                     <a href="#">
