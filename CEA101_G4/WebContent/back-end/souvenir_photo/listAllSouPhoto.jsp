@@ -149,7 +149,6 @@ img {
                 <th>特產照片編號</th>
                 <th>特產編號</th>
                 <th>特產照片</th>
-                <th>特產照片敘述</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -162,7 +161,6 @@ img {
                 <td>${souphVO.sou_photo_id}</td>
                 <td>${souphVO.sou_id}</td>
 		<td><img src="${pageContext.request.contextPath}/souvenir_photo/SouvenirPhotoServlet?sou_photo_id=${souphVO.sou_photo_id}&action=getSouPhoto"></td>					
-                <td>${souphVO.sou_photo_content}</td>
                
 
 

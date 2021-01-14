@@ -89,7 +89,7 @@ buttom {
 						<b>一般特產清單</b>
 					</p>
 					<p>
-						<a href="/CEA101G4/back-end/souvenir/listAllSou.jsp"><button
+						<a href="<%=request.getContextPath()%>/back-end/souvenir/listAllSou.jsp"><button
 								class="btn btn-outline-secondary">查看</button></a>
 					</p>
 				</div>
@@ -99,7 +99,7 @@ buttom {
 						<b>一般特產管理</b>
 					</p>
 					<p>
-						<a href="/CEA101G4/back-end/souvenir/addSou.jsp"><button
+						<a href="<%=request.getContextPath()%>/back-end/souvenir/addSou.jsp"><button
 								class="btn btn-outline-secondary">增加</button></a>
 					</p>
 				</div>
@@ -108,7 +108,7 @@ buttom {
 						<b>促銷特產清單</b>
 					</p>
 					<p>
-						<a href="/CEA101G4/back-end/souvenir_discount/listAllSouDis.jsp"><button
+						<a href="<%=request.getContextPath()%>/back-end/souvenir_discount/listAllSouDis.jsp"><button
 								class="btn btn-outline-secondary">查看</button></a>
 					</p>
 				</div>
@@ -117,7 +117,7 @@ buttom {
 						<b>促銷特產管理</b>
 					</p>
 					<p>
-						<a href="/CEA101G4/back-end/souvenir_discount/addSouDis.jsp"><button
+						<a href="<%=request.getContextPath()%>/back-end/souvenir_discount/addSouDis.jsp"><button
 								class="btn btn-outline-secondary">增加</button></a>
 					</p>
 				</div>
@@ -207,7 +207,7 @@ buttom {
 						</select> <input type="hidden" name="action" value="getOne_For_Display">
 						<input class="btn btn-outline-secondary" type="submit" value="送出">
 					</FORM>
-				</div>
+				</div> 
 			</div>
 			<%-- 錯誤表列 --%>
 			<div id="error">
