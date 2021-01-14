@@ -24,7 +24,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-    <title>週期管理</title>
+    <title>活動訂單管理</title>
     <style type="text/css">
         .sidenav {
             grid-area: sidenav;
@@ -113,7 +113,7 @@
 </head>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
-    <font style="color: red">請修正以下錯誤:</font>
+    <font style="color: red">訂單下定失敗:</font>
     <ul>
         <c:forEach var="message" items="${errorMsgs}">
             <li style="color: red">${message}</li>
@@ -187,7 +187,7 @@
                                         <td class="btn_group" style="width: 100%;">
                                         
                                             <c:choose>
-                                                <c:when test="${actordVO.act_payment_status==0&&actordVO.act_order_status!=3&&actordVO.act_order_status!=2}">
+                                                <c:when test="${actordVO.act_payment_status==0}">
                                                     <form METHOD="post" ACTION="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
                                                         <button type="submit" class="btn btn-light btn-xs dt-edit" style="margin-right: 16px;">付款</button>
                                                         <input type="hidden" name="act_order_id" value="${actordVO.act_order_id}">
