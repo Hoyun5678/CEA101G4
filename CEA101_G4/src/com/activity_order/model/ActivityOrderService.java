@@ -1,8 +1,13 @@
 package com.activity_order.model;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.activity_period.model.ActivityPeriodService;
+import com.activity_product.model.ActivityProductService;
 import com.roomorder.model.RoomOrderVO;
 
 
@@ -15,7 +20,14 @@ public class ActivityOrderService {
 	public ActivityOrderService() {
 		dao = new ActivityOrderDAO();
 	}
-
+	
+	
+    public List<String> getCheckInBySellMemId(String sell_mem_id) {
+    	   	
+    	Format sfm = new SimpleDateFormat("yyyy-MM-dd");
+    	return dao.getCheckInBySellMemId(sell_mem_id);
+    }
+    	
 	public List<ActivityOrderVO> getAll() {
 		return dao.getAll();
 	}

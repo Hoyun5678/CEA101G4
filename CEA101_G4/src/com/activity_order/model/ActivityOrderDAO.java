@@ -50,6 +50,63 @@ public class ActivityOrderDAO implements ActivityOrderDAO_interface {
 				+" WHERE SELL_MEM_ID=? AND ACT_PERIOD_START>to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
 				+" AND ACT_PERIOD_START<to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
 				+" ORDER BY ACT_ORDER_ID";
+		private static final String GET_ORDER_BY_SELL_MEM_ID_STMT = "SELECT ACT_PERIOD_START"
+				+" FROM ACTIVITY_ORDER AO"
+				+" JOIN ACTIVITY_PERIOD AP ON(AO.ACT_PERIOD_ID=AP.ACT_PERIOD_ID)"
+				+" JOIN ACTIVITY_PRODUCT APR ON(APR.ACT_ID = AP.ACT_ID)"
+				+" WHERE SELL_MEM_ID=?"
+				+" ORDER BY ACT_ORDER_ID";
+		
+		@Override
+		public List<String> getCheckInBySellMemId(String sell_mem_id) {
+			List<String> list = new ArrayList<String>();
+			ActivityOrderVO actoVO = null;
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_ORDER_BY_SELL_MEM_ID_STMT);
+				pstmt.setString(1, sell_mem_id);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					list.add(rs.getString("ACT_PERIOD_START"));
+				}
+
+				// Handle any driver errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+		
+		
 		@Override
 		public List<ActivityOrderVO> getActOrdBySellMemIdAndDate(String sell_mem_id, String act_start_date) {
 			List<ActivityOrderVO> list = new ArrayList<ActivityOrderVO>();
@@ -475,6 +532,9 @@ public class ActivityOrderDAO implements ActivityOrderDAO_interface {
 //			System.out.println(actoVO3.getAct_order_remarks());
 //			System.out.println("---------------------");
 			}
+
+
+		
 
 
 	

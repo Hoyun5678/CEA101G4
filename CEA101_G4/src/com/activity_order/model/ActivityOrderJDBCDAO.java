@@ -44,7 +44,65 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 			+ " JOIN ACTIVITY_PRODUCT APR ON(APR.ACT_ID = AP.ACT_ID)"
 			+ " WHERE SELL_MEM_ID=? AND ACT_PERIOD_START>to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
 			+ " AND ACT_PERIOD_START<to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')" + " ORDER BY ACT_ORDER_ID";
+	private static final String GET_ORDER_BY_SELL_MEM_ID_STMT = "SELECT ACT_PERIOD_START"
+			+" FROM ACTIVITY_ORDER AO"
+			+" JOIN ACTIVITY_PERIOD AP ON(AO.ACT_PERIOD_ID=AP.ACT_PERIOD_ID)"
+			+" JOIN ACTIVITY_PRODUCT APR ON(APR.ACT_ID = AP.ACT_ID)"
+			+" WHERE SELL_MEM_ID=?"
+			+" ORDER BY ACT_ORDER_ID";
+	
+	@Override
+	public List<String> getCheckInBySellMemId(String sell_mem_id) {
+		List<String> list = new ArrayList<String>();
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ORDER_BY_SELL_MEM_ID_STMT);
+			pstmt.setString(1, sell_mem_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString("ACT_PERIOD_START")); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	@Override
 	public void insert(ActivityOrderVO actoVO) {
 		Connection con = null;
@@ -490,17 +548,23 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //		System.out.println("---------------------");
 
 		// 查詢 getByPK===================================
-		List<ActivityOrderVO> list = dao.getActOrdBySellMemIdAndDate("SELL001", "2021-01-26");
-		for (ActivityOrderVO aActo : list) {
-			System.out.print(aActo.getAct_order_id() + ",");
-			System.out.print(aActo.getMem_id() + ",");
-			System.out.print(aActo.getAct_period_id() + ",");
-			System.out.print(aActo.getAct_order_amount() + ",");
-			System.out.print(aActo.getAct_sum_price() + ",");
-			System.out.print(aActo.getAct_order_status() + ",");
-			System.out.print(aActo.getAct_order_remarks());
-			System.out.println();
+//		List<ActivityOrderVO> list = dao.getActOrdBySellMemIdAndDate("SELL001", "2021-01-26");
+//		for (ActivityOrderVO aActo : list) {
+//			System.out.print(aActo.getAct_order_id() + ",");
+//			System.out.print(aActo.getMem_id() + ",");
+//			System.out.print(aActo.getAct_period_id() + ",");
+//			System.out.print(aActo.getAct_order_amount() + ",");
+//			System.out.print(aActo.getAct_sum_price() + ",");
+//			System.out.print(aActo.getAct_order_status() + ",");
+//			System.out.print(aActo.getAct_order_remarks());
+//			System.out.println();
+//		}
+		List<String> list = dao.getCheckInBySellMemId("SELL001");
+		for (String str : list) {
+			System.out.print(str + ",\n");
 		}
 
 	}
+
+	
 }
