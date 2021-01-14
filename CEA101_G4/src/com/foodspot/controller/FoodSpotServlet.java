@@ -319,17 +319,16 @@ public class FoodSpotServlet extends HttpServlet {
 		try {
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 			String sell_mem_id = req.getParameter("sell_mem_id").trim();
+			System.out.println(sell_mem_id);
 			if (sell_mem_id == null || sell_mem_id.trim().length() == 0) {
 				errorMsgs.add("帳號請勿空白");
-			} else {
-				errorMsgs.add("民宿會員帳號: SELL開頭接三個可以是0-9的數字");
-			}
+			} 
 
 			String fas_spot_name = req.getParameter("fas_spot_name").trim();
-			String fs_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,100}$";
+			String fs_name_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,}$";
 			if (fas_spot_name == null || fas_spot_name.trim().length() == 0) {
 				errorMsgs.add("美食與景點名稱請勿空白");
-			} else if (!fas_spot_name.trim().matches(fs_name_Reg)) {
+			} else if (!fas_spot_name.matches(fs_name_Reg)) {
 				errorMsgs.add("美食與景點名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到100間");
 			}
 
@@ -341,11 +340,11 @@ public class FoodSpotServlet extends HttpServlet {
 				errorMsgs.add("美食與景點地址: 只能是中、英文字母、數字和_ , 且長度必需在2到300之間");
 			}
 
-			String fas_des = req.getParameter("fas_des");
+			String fas_des = req.getParameter("fas_des").trim();
 
 			String fas_des_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,300}$";
-			if (fas_des != null || fas_des.trim().length() != 0) { // 以下練習正則(規)表示式(regular-expression)
-				 if(!fas_des.trim().matches(fas_des_Reg)) { //以下練習正則(規)表示式(regular-expression)
+			if (fas_des != null || fas_des.length() != 0) { // 以下練習正則(規)表示式(regular-expression)
+				 if(!fas_des.matches(fas_des_Reg)) { //以下練習正則(規)表示式(regular-expression)
 				errorMsgs.add("美食景點敘述只能是中、英文字母、數字和_ , 且長度必需在2到300之間");
 				 }
 			}
