@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.activity_order.model.*;
 import com.activity_period.model.ActivityPeriodService;
+import com.activity_period.model.ActivityPeriodVO;
 import com.member.model.MemberVO;
 
 public class ActivityOrderServlet extends HttpServlet {
@@ -340,15 +341,27 @@ public class ActivityOrderServlet extends HttpServlet {
 					}
 					String mem_id = memVO.getMem_id();
 					String act_period_id=req.getParameter("act_period_id");
+					
+					Integer act_order_amount=null;
 					ActivityPeriodService actperSvc=new ActivityPeriodService();
-					System.out.println(req.getParameter("act_order_amount"));
-					Integer act_order_amount=Integer.parseInt(req.getParameter("act_order_amount"));
-					Double act_cur_price=actperSvc.getOneActPeriod(act_period_id).getAct_cur_price();
+					String act_order_amount_first=req.getParameter("act_order_amount");
+					String actOrdAmountReg = "^[1-9]{1,}$";
+					if(act_order_amount_first.matches(actOrdAmountReg)) {
+					act_order_amount=Integer.parseInt(act_order_amount_first);
+					}else {
+						errorMsgs.add("下訂人數 請輸入正整數");
+					}
+					ActivityPeriodVO actperVO=actperSvc.getOneActPeriod(act_period_id);
+					Double act_cur_price=actperVO.getAct_cur_price();
 					Double act_sum_price=act_order_amount*act_cur_price;
 					Integer act_order_status=1;//以確認訂單狀態
 					Integer act_payment_status=0;//付款狀態為 未付款
 					String act_order_remarks=req.getParameter("act_order_remarks");
-			
+					Integer act_sign_sum=actperVO.getAct_sign_sum();
+					System.out.println(actperVO.getAct_up_limit() +"\n"+actperVO.getAct_sign_sum()+"\n"+act_order_amount);
+					if((actperVO.getAct_up_limit()<(actperVO.getAct_sign_sum()+act_order_amount))) {
+						errorMsgs.add("報名名額超過活動上限");
+					}
 
 					ActivityOrderVO actordVO = new ActivityOrderVO();
 					actordVO.setMem_id(mem_id);
@@ -358,22 +371,27 @@ public class ActivityOrderServlet extends HttpServlet {
 					actordVO.setAct_order_status(act_order_status);
 					actordVO.setAct_payment_status(act_payment_status);
 					actordVO.setAct_order_remarks(act_order_remarks);
-			
+					
+					
+					if(!errorMsgs.isEmpty()) {
+						RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/activity_order/listOneActivityOrder.jsp");
+						failureView.forward(req, res);
+						return;
+					}
 
 					/*************************** 2.開始新增資料 ***************************************/
 					ActivityOrderService actordSvc = new ActivityOrderService();
 					actordSvc.insertActivityOrder(actordVO);
-
+					actperSvc.upDateActPerSignSum(act_period_id,act_sign_sum+act_order_amount);
 					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 					String url =req.getContextPath() + "/front-mem-end/activity_order/listOneActivityOrder.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 					res.sendRedirect(url);
 					
 
 					/*************************** 其他可能的錯誤處理 **********************************/
 				} catch (Exception e) {
 					errorMsgs.add(e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/souvenir_order/addSouvenirOrder.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/activity_order/listOneActivityOrder.jsp");
 					failureView.forward(req, res);
 				}
 			}

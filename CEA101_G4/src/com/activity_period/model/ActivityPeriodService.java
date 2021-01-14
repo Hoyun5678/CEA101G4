@@ -48,6 +48,12 @@ public class ActivityPeriodService {
 		actperVO.setAct_sign_sum(act_sign_sum);
 		dao.insert(actperVO);
 	}
+	public void upDateActPerSignSum(String act_period_id,Integer act_sign_sum) {
+		ActivityPeriodService actperSvc=new ActivityPeriodService();
+		ActivityPeriodVO actperVO = actperSvc.getOneActPeriod(act_period_id);
+		actperVO.setAct_sign_sum(act_sign_sum);
+		dao.update(actperVO);
+	}
 	
 	public void upDateActPerStatus(String act_period_id,Integer act_period_status) {
 		dao.upDateActPerStatus(act_period_id, act_period_status);
