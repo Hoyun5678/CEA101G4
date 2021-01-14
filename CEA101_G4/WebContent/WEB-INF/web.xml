@@ -203,6 +203,24 @@
 		<servlet-name>ShoppingServlet</servlet-name>
 		<url-pattern>/shopping/shopping.do</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+		<filter-name>empLoginFilter</filter-name>
+		<filter-class>filter.empLoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>empLoginFilter</filter-name>
+		<url-pattern>/back-end/emp/*</url-pattern>
+		<url-pattern>/back-end/souvenir_order/*</url-pattern>
+		<url-pattern>/back-end/news/*</url-pattern>
+		<url-pattern>/back-end/souvenir_order_detail/*</url-pattern>
+		<url-pattern>/back-end/souvenir/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
 <!-- 繼元的XML 沒有之一 -->
 <servlet>
 		<servlet-name>ReplyServlet</servlet-name>

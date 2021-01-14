@@ -248,7 +248,7 @@ table.table.table-dark.table-striped {
                                                     </c:when>
                                                 </c:choose></td>
 					<td><c:choose>
-                                                    <c:when test="${soVO.sou_shipment_status==0}">
+                                                    <c:when test="${soVO.sou_payment_status==0}">
                                                         	未付款
                                                     </c:when>
                                                     <c:when test="${soVO.sou_payment_status==1}">
@@ -263,9 +263,9 @@ table.table.table-dark.table-striped {
                                                     <c:when test="${soVO.sou_payment_status==4}">
                                                     	  退款中
                                                     </c:when>
-                                                    <c:otherwise>
-                                                      	  已退款
-                                                    </c:otherwise>
+                                                    <c:when test="${soVO.sou_payment_status==5}">
+                                                    	  已退款
+                                                    </c:when>
                                                 </c:choose></td>
 					<td><c:choose>
                                                     <c:when test="${soVO.sou_shipment_status==0}">

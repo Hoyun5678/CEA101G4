@@ -108,37 +108,49 @@ SouvenirOrderVO soVO = (SouvenirOrderVO) request.getAttribute("soVO"); //Suvenir
 			 value="<%=soVO.getSou_order_remarks()%>" readonly/></td>
 	</tr>
 	<tr>
-		<td>特產訂單運送方式:</td>
-		<td><input value= "0"
-					type="radio" name="sou_shipping_method" checked>宅配
-					<input value="1"
-					type="radio" name="sou_shipping_method" >超商取貨</td>
+		<td>特產訂單運送方式:</td><td>
+                                                            <select size="1" name="sou_shipping_method">
+                                                                <option value="0" ${soVO.sou_shipping_method==0?'selected' : '' }>宅配</option>
+                                                                <option value="1" ${soVO.sou_shipping_method==1?'selected' : '' }>超商取貨</option>
+                                                               
+                                                            </select>
+                                                        </td>
 	</tr>
 	<tr>
-		<td>特產訂單狀態:</td>
-		<td><input value= "0" type="radio" name="sou_order_status" checked>處理中
-			<input value= "1" type="radio" name="sou_order_status">已確認
-			<input value= "2" type="radio" name="sou_order_status">已完成
-			<input value= "3" type="radio" name="sou_order_status">已取消
-			<input value= "4" type="radio" name="sou_order_status">已關閉</td>
+	<td>特產訂單狀態:</td><td>
+                                                            <select size="1" name="sou_order_status">
+                                                                <option value="0" ${soVO.sou_order_status==0?'selected' : '' }>處理中</option>
+                                                                <option value="1" ${soVO.sou_order_status==1?'selected' : '' }>已確認</option>
+                                                                <option value="2" ${soVO.sou_order_status==2?'selected' : '' }>已完成</option>
+                                                                <option value="3" ${soVO.sou_order_status==3?'selected' : '' }>已取消</option>
+                                                                <option value="4" ${soVO.sou_order_status==4?'selected' : '' }>已關閉</option>
+                                                            </select>
+                                                        </td>
 	</tr>
+
 	<tr>
 		<td>特產訂單付款狀態:</td>
 		<td>
-			<input value= "0" type="radio" name="sou_payment_status" checked>未付款
-			<input value= "1" type="radio" name="sou_payment_status">付款失敗
-			<input value= "2" type="radio" name="sou_payment_status">超過付款時間
-			<input value= "3" type="radio" name="sou_payment_status">已付款
-			<input value= "4" type="radio" name="sou_payment_status">退款中
-			<input value= "5" type="radio" name="sou_payment_status">已退款</td>
+                                                            <select size="1" name="sou_payment_status">
+                                                                <option value="0" ${soVO.sou_payment_status==0?'selected' : '' }>未付款</option>
+                                                                <option value="1" ${soVO.sou_payment_status==1?'selected' : '' }>付款失敗</option>
+                                                                <option value="2" ${soVO.sou_payment_status==2?'selected' : '' }>超過付款時間</option>
+                                                                <option value="3" ${soVO.sou_payment_status==3?'selected' : '' }>已付款</option>
+                                                                <option value="4" ${soVO.sou_payment_status==4?'selected' : '' }>退款中</option>
+                                                                <option value="5" ${soVO.sou_payment_status==5?'selected' : '' }>已退款</option>
+                                                            </select>
+                                                        </td>
 	</tr>
 	<tr>
 		<td>特產訂單出貨狀態:</td>
 		<td>
-			<input value= "0" type="radio" name="sou_shipment_status" checked>訂單處理中
-			<input value= "1" type="radio" name="sou_shipment_status">準備出貨
-			<input value= "2" type="radio" name="sou_shipment_status">已出貨
-			<input value= "3" type="radio" name="sou_shipment_status">已到貨</td>
+                                                            <select size="1" name="sou_shipment_status">
+                                                                <option value="0" ${soVO.sou_shipment_status==0?'selected' : '' }>訂單處理中</option>
+                                                                <option value="1" ${soVO.sou_shipment_status==1?'selected' : '' }>準備出貨</option>
+                                                                <option value="2" ${soVO.sou_shipment_status==2?'selected' : '' }>已出貨</option>
+                                                                <option value="3" ${soVO.sou_shipment_status==3?'selected' : '' }>已到貨</option>                                                            
+                                                            </select>
+                                                        </td>
 	</tr>
 
 	<tr>
