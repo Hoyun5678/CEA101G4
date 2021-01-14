@@ -20,6 +20,7 @@ public class ReplyReportServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		String forEmp = req.getParameter("forEmp");
+		String byMem = req.getParameter("byMem");
 
 		if ("getOne_For_Display".equals(action)) { // 來自front_select_reply.jsp的請求
 
@@ -37,7 +38,7 @@ public class ReplyReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/replyreport/front_select_reply.jsp");
+							.getRequestDispatcher("/front-mem-end/replyreport/front_select_replyreport.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -51,7 +52,7 @@ public class ReplyReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/replyreport/front_select_reply.jsp");
+							.getRequestDispatcher("/front-mem-end/replyreport/front_select_replyreport.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -65,7 +66,7 @@ public class ReplyReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/replyreport/front_select_reply.jsp");
+							.getRequestDispatcher("/front-mem-end/replyreport/front_select_replyreport.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
@@ -86,7 +87,7 @@ public class ReplyReportServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-mem-end/replyreport/front_select_reply.jsp");
+						.getRequestDispatcher("/front-mem-end/replyreport/front_select_replyreport.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -125,9 +126,9 @@ public class ReplyReportServlet extends HttpServlet {
 							.getRequestDispatcher("/back-end/replyreport/back_update_replyreport.jsp");
 					failureView.forward(req, res);
 				} else {
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-mem-end/replyreport/front_AllReplyReport.jsp");
-				failureView.forward(req, res);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-mem-end/replyreport/front_AllReplyReport.jsp");
+					failureView.forward(req, res);
 				}
 			}
 		}
@@ -232,27 +233,27 @@ public class ReplyReportServlet extends HttpServlet {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 
 				String memId = req.getParameter("memId");
-				String memIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
-				if (memId == null || memId.trim().length() == 0) {
-					errorMsgs.add("會員編號: 請勿空白");
-				} else if (!memId.trim().matches(memIdReg)) {
-					// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
-				}
+//				String memIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+//				if (memId == null || memId.trim().length() == 0) {
+//					errorMsgs.add("會員編號: 請勿空白");
+//				} else if (!memId.trim().matches(memIdReg)) {
+//					// 以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
+//				}
 
 				String replyId = req.getParameter("replyId");
-				String replyIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
-				if (replyId == null || replyId.trim().length() == 0) {
-					errorMsgs.add("會員編號: 請勿空白");
-				} else if (!replyId.trim().matches(replyIdReg)) {
-					// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
-
-				}
+//				String replyIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+//				if (replyId == null || replyId.trim().length() == 0) {
+//					errorMsgs.add("會員編號: 請勿空白");
+//				} else if (!replyId.trim().matches(replyIdReg)) {
+//					// 以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
+//
+//				}
 
 				ReplyReportVO replyReportVO = new ReplyReportVO();
-				replyReportVO.setMemId(memId);
-				replyReportVO.setReplyId(replyId);
+//				replyReportVO.setMemId(memId);
+//				replyReportVO.setReplyId(replyId);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -265,7 +266,7 @@ public class ReplyReportServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				ReplyReportService replyReportSvc = new ReplyReportService();
-				replyReportVO = replyReportSvc.addReplyReportByMem(memId, replyId);
+//				replyReportVO = replyReportSvc.addReplyReportByMem(memId, replyId);
 
 				ReplyService replySvc = new ReplyService();
 				ReplyVO replyVO = replySvc.getOneReply(replyId);
@@ -274,15 +275,15 @@ public class ReplyReportServlet extends HttpServlet {
 				req.setAttribute("replyId", replyId);
 				req.setAttribute("replyContent", replyVO.getReplyContent());
 
-				System.out.println(replyVO.getReplyContent());
-				String url = "/front-mem-end/replyreport/addReplyReportByMem.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllReplyReport.jsp
+//				System.out.println(replyVO.getReplyContent());
+				RequestDispatcher successView = req
+						.getRequestDispatcher("/front-mem-end/replyreport/addReplyReportByMem.jsp"); // 新增成功後轉交listAllReplyReport.jsp
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/reply/listOneActP.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/replyreport/addReplyReportByMem.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -363,6 +364,84 @@ public class ReplyReportServlet extends HttpServlet {
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllReplyReport.jsp
 					successView.forward(req, res);
 				}
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-mem-end/replyreport/front_addReplyReport.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		if ("insertByMem".equals(action)) { // 來自addReplyReport.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+				String empId = req.getParameter("empId");
+//				String empIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5}$";
+//				if (empId == null || empId.trim().length() == 0) {
+//					errorMsgs.add("活動編號: 請勿空白");
+//				} else if (!empId.trim().matches(empId)) {
+//					// 以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("活動編號: 只能是大寫英文字母+數字 , 且長度必需是5");
+//				}
+
+				String memId = req.getParameter("memId");
+				String memIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+				if (memId == null || memId.trim().length() == 0) {
+					errorMsgs.add("會員編號: 請勿空白");
+				} else if (!memId.trim().matches(memIdReg)) {
+					// 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
+				}
+
+				String replyId = req.getParameter("replyId");
+				String replyIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+				if (replyId == null || replyId.trim().length() == 0) {
+					errorMsgs.add("會員編號: 請勿空白");
+				} else if (!replyId.trim().matches(replyIdReg)) {
+					// 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
+				}
+
+				Integer reportResult = null;
+//				try {
+//					reportResult = new Integer(req.getParameter("reportResult"));
+//					if (reportResult != 0 && reportResult != 1 && reportResult != 2) {
+//						errorMsgs.add("請填檢舉結果");
+//					}
+//				} catch (NumberFormatException e) {
+//					errorMsgs.add("請勾選檢舉狀態");
+//
+//				}
+
+				ReplyReportVO replyReportVO = new ReplyReportVO();
+				replyReportVO.setMemId(memId);
+				replyReportVO.setReplyId(replyId);
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("replyReportVO", replyReportVO); // 含有輸入格式錯誤的replyReportVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-mem-end/replyreport/front_addReplyReport.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				/*************************** 2.開始新增資料 ***************************************/
+				ReplyReportService replyReportSvc = new ReplyReportService();
+				replyReportVO = replyReportSvc.addReplyReportByMem(memId, replyId);
+
+				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				String url = "/front-mem-end/activity_period/listActivityPeriod.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {

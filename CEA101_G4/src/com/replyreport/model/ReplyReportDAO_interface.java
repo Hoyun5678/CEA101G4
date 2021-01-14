@@ -7,4 +7,5 @@ public interface ReplyReportDAO_interface {
     public void delete(String reportId);
     public ReplyReportVO findByPrimaryKey(String reportId);
     public List<ReplyReportVO> getAll();
+	public List<ReplyReportVO> findByMemId(String memId);
 }

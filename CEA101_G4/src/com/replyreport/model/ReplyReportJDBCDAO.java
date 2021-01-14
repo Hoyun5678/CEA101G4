@@ -323,4 +323,10 @@ public class ReplyReportJDBCDAO implements ReplyReportDAO_interface{
 //		}
 	}
 
+	@Override
+	public List<ReplyReportVO> findByMemId(String memId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

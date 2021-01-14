@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="BIG5"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +14,6 @@
 
 </head>
 <style>
-body {
-	margin: 0px;
-}
-
 .nav {
 	float: right;
 }
@@ -32,10 +28,6 @@ body {
 	height: 60px;
 }
 
-.nav-profile {
-	height: 60px;
-}
-
 #topbar {
 	margin-top: 0px;
 }
@@ -46,27 +38,15 @@ a.nav-link {
 }
 </style>
 <body id=body>
-	<%@include file="/front-mem-end/bar.jsp"%>
 	<section id="sidebar">
-		<div id="sidebar-nav">
-			<ul>
-				<li class="active">
-				<li><a
-					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>§Úªºµû½×°Ï</a></li>
-				<li><a
-					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
-						class="fa"></i>µû½×ÀËÁ|¬d¸ß</a></li>
-
-			</ul>
-		</div>
+		<%@include file="/back-end/back-index-sidebar.jsp"%>
 	</section>
 	<section id="content">
 		<div class="content">
 			<div class="content-header">
-				<h1>µû½×ÀËÁ|¸ê®Æ</h1>
+				<h1>è©•è«–è³‡æ–™æŸ¥è©¢</h1>
 			</div>
-			<%@ include file="/front-mem-end/replyreport/addReplyReport2.jsp"%>
+			<%@ include file="/back-end/reply/listOneActP.jsp"%>
 
 		</div>
 	</section>
