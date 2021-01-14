@@ -24,7 +24,6 @@ public class ActivityOrderService {
 	
     public List<String> getCheckInBySellMemId(String sell_mem_id) {
     	   	
-    	Format sfm = new SimpleDateFormat("yyyy-MM-dd");
     	return dao.getCheckInBySellMemId(sell_mem_id);
     }
     	
