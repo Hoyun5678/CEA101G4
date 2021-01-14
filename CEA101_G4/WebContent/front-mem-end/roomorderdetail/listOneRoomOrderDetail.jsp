@@ -7,11 +7,9 @@
 <jsp:useBean id="roomOrderDetailSvc" scope="page" class="com.roomorderdetail.model.RoomOrderDetailService" />
 <%-- <jsp:useBean id="roomOrderDetailVO" scope="page" class="com.roomorderdetail.model.RoomOrderDetailVO" /> --%>
 <jsp:useBean id="sellSvc" scope="request" class="com.sell.model.SellService" />
-<% MemberVO memVO=(MemberVO)session.getAttribute("memVO");
-%>
 <%
 RoomOrderService roSvc = new RoomOrderService();
-List<RoomOrderVO>roomOrderVO = (List<RoomOrderVO>)request.getAttribute("oneRoomOrderList");
+RoomOrderVO roomOrderVO = (RoomOrderVO)request.getAttribute("roomOrderVO");
 pageContext.setAttribute("roomOrderVO", roomOrderVO);
 %>
 <!-- roomOrderVO -->
@@ -123,7 +121,6 @@ pageContext.setAttribute("roomOrderVO", roomOrderVO);
 <div class="font-bold text-xl md:text-3xl ml-20">查看訂單明細 </div>
 <div class="container">
 <div class="row">
-<c:forEach var="roomOrderVO" items="${roomOrderVO}"> 
   
   <div class="col-lg-5" id="left">
   	<div id="roomorderpic">
@@ -194,7 +191,6 @@ pageContext.setAttribute("roomOrderVO", roomOrderVO);
   	</c:choose>
   </div>
 
-	</c:forEach>	
 	</div>
   </div>
 </body>

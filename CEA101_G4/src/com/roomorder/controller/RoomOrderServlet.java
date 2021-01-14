@@ -141,6 +141,7 @@ public class RoomOrderServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 *****************************************/
 				RoomOrderService roSvc = new RoomOrderService();
 				List<RoomOrderVO> oneRoomOrderList = roSvc.getByMemIdAndRoomOrderId(mem_id, room_order_id);
+				System.out.println(oneRoomOrderList.size()+"/n"+oneRoomOrderList.get(0));
 				RoomOrderVO roomOrderVO=oneRoomOrderList.get(0);
 				Date checkIn=roomOrderVO.getCheckInDate();
 				
@@ -159,7 +160,7 @@ public class RoomOrderServlet extends HttpServlet {
 				
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("oneRoomOrderList", oneRoomOrderList);
+				req.setAttribute("roomOrderVO", roomOrderVO);
 				req.setAttribute("countday", countday);
 				
 				String url = "/front-mem-end/roomorderdetail/listOneRoomOrderDetail.jsp";
