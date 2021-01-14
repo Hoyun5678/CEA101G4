@@ -73,7 +73,7 @@ public class ActivityOrderDAO implements ActivityOrderDAO_interface {
 				rs = pstmt.executeQuery();
 
 				while (rs.next()) {
-					list.add(rs.getString("ACT_PERIOD_START"));
+					list.add(rs.getString("ACT_PERIOD_START").substring(0,11));
 				}
 
 				// Handle any driver errors

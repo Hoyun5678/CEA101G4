@@ -65,9 +65,9 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 			pstmt = con.prepareStatement(GET_ORDER_BY_SELL_MEM_ID_STMT);
 			pstmt.setString(1, sell_mem_id);
 			rs = pstmt.executeQuery();
-
+			
 			while (rs.next()) {
-				list.add(rs.getString("ACT_PERIOD_START")); // Store the row in the list
+				list.add(rs.getString("ACT_PERIOD_START").substring(0,11)); // Store the row in the list
 			}
 
 			// Handle any driver errors
