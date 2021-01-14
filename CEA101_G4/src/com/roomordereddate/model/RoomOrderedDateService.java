@@ -33,7 +33,7 @@ public class RoomOrderedDateService {
 		return dao.getAll();
 	}
 	
-	public List<RoomOrderedDateVO> getOrderedDateByRoomId(String roomId) {
+	public List<String> getOrderedDateByRoomId(String roomId) {
 		return dao.getByRoomId(roomId);
 	}
 

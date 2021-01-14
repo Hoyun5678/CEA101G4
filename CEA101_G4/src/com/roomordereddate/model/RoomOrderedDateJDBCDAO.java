@@ -1,6 +1,7 @@
 package com.roomordereddate.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -208,8 +209,8 @@ public class RoomOrderedDateJDBCDAO implements RoomOrderedDateDAO_interface {
 	}
 
 	@Override
-	public List<RoomOrderedDateVO> getByRoomId(String roomId) {
-		List<RoomOrderedDateVO> list = new ArrayList<RoomOrderedDateVO>();
+	public List<String> getByRoomId(String roomId) {
+		List<String> list = new ArrayList<String>();
 		RoomOrderedDateVO roomOrderedDateVO = null;
 
 		Connection con = null;
@@ -229,7 +230,7 @@ public class RoomOrderedDateJDBCDAO implements RoomOrderedDateDAO_interface {
 				roomOrderedDateVO.setRoomId(rs.getString("ROOM_ID"));
 				roomOrderedDateVO.setRoomOrderId(rs.getString("ROOM_ORDER_ID"));
 				roomOrderedDateVO.setRoomOrderDate(rs.getDate("ROOM_ORDERED_DATE"));
-				list.add(roomOrderedDateVO);
+				list.add(roomOrderedDateVO.getRoomOrderedDateId());
 			}
 
 			// Handle any driver errors
@@ -264,7 +265,7 @@ public class RoomOrderedDateJDBCDAO implements RoomOrderedDateDAO_interface {
 				}
 			}
 		}
-		return list;
+		return null;
 	}
 
 

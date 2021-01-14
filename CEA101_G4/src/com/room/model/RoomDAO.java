@@ -38,12 +38,15 @@ public class RoomDAO implements RoomDAO_interface {
 	private static final String UPDATE = 
 		"UPDATE ROOM_PRODUCT SET SELL_MEM_ID=?, ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_COLLECT=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
 	private static final String UPDATE_BY_SELLMEM = 
-			"UPDATE ROOM_PRODUCT SET ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
+		"UPDATE ROOM_PRODUCT SET ROOM_NAME=?, ROOM_PRICE=?, ROOM_CAPACITY=?, ROOM_ON_TIME=?, ROOM_DES=?, ROOM_STATUS=? WHERE ROOM_ID = ?";
 	private static final String GET_BYMEMID_STMT = 
 		"SELECT * FROM ROOM_PRODUCT WHERE SELL_MEM_ID = ? ORDER BY ROOM_STATUS DESC, ROOM_ID DESC";
 	private static final String GET_BYDATERANGE_STMT = 
 		"SELECT ROOM_ID FROM ROOM_ORDERED_DATE_RECORD " + 
-		"WHERE TO_DATE(?, 'yyyy-MM-dd') in ROOM_ORDERED_DATE";	
+		"WHERE TO_DATE(?, 'yyyy-MM-dd') in ROOM_ORDERED_DATE";
+	private static final String GET_BYROOMIDANDDATE_STMT = 
+		"SELECT ROOM_ID FROM ROOM_ORDERED_DATE_RECORD " + 
+		"WHERE ROOM_ORDERED_DATE = TO_DATE(?, 'yyyy-MM-dd') AND ROOM_ID=?";	
 	
 	@Override
 	public RoomVO insert(RoomVO roomVO) {
@@ -471,6 +474,59 @@ public class RoomDAO implements RoomDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public List<RoomVO> getByRoomIdAndDateRange(String roomId, Date from, Date to) {
+		RoomService roomSvc = new RoomService();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {			
+			con = ds.getConnection();
+			List<String> listOrderedDate = new ArrayList<String>();
+			
+			long fromToLong = from.getTime();
+			do {
+				pstmt = con.prepareStatement(GET_BYROOMIDANDDATE_STMT);
+				pstmt.setString(1, new Date(fromToLong).toString());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					listOrderedDate.add(rs.getDate("ROOM_ORDERED_DATE").toString());
+				}
+				fromToLong += 24 * 60 * 60 * 1000L;
+			} while(fromToLong < to.getTime());
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return null;
 	}
 	
 	@Override

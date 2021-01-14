@@ -1,6 +1,7 @@
 package com.room.controller;
 
 import java.io.*;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,7 +9,10 @@ import java.util.stream.Collectors;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.json.JSONObject;
+
 import com.room.model.*;
+import com.roomordereddate.model.RoomOrderedDateService;
 
 public class RoomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -181,6 +185,36 @@ public class RoomServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 			
+		}
+		
+		if("checkDateRange".equals(action)) {
+
+			RoomOrderedDateService roomOrderedDateSvc = new RoomOrderedDateService();
+			String dateFrom = req.getParameter("dateFrom");
+			String dateTo = req.getParameter("dateTo");
+			String roomId = req.getParameter("roomId");
+			List<String> orderedDateList = roomOrderedDateSvc.getOrderedDateByRoomId(roomId);
+			List<String> checkList = new ArrayList<String>();
+			
+			Long dateFromLong = java.sql.Date.valueOf(dateFrom).getTime();
+			Format sfm = new SimpleDateFormat("yyyy-MM-dd");
+			while(dateFromLong < java.sql.Date.valueOf(dateTo).getTime()) {
+				checkList.add(sfm.format(new java.util.Date(dateFromLong)));
+				dateFromLong += 24* 60* 60* 1000L;
+			}
+			
+			orderedDateList.retainAll(checkList);
+			
+			PrintWriter out = res.getWriter();
+			JSONObject obj = new JSONObject();
+			if(orderedDateList.size() > 0) {
+				// 不行
+				obj.put("valid", false);
+			} else {
+				obj.put("valid", checkList);
+			}
+			out.print(obj);
+	
 		}
 		
 		
