@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,77 @@ public class ActivityOrderDAO implements ActivityOrderDAO_interface {
 
 		private static final String UPDATE = "UPDATE ACTIVITY_ORDER set MEM_ID=?, ACT_PERIOD_ID=?," + 
 							"ACT_ORDER_AMOUNT=?, ACT_SUM_PRICE=?, ACT_ORDER_STATUS=?, ACT_PAYMENT_STATUS=?, ACT_ORDER_REMARKS=? where ACT_ORDER_ID=?";
+		private static final String GET_ORDER_BY_ID_START_STMT = "SELECT ACT_ORDER_ID,MEM_ID, AO.ACT_PERIOD_ID,ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS,"
+				+"ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS,AP.ACT_ID,SELL_MEM_ID,ACT_PERIOD_START"
+				+" FROM ACTIVITY_ORDER AO"
+				+" JOIN ACTIVITY_PERIOD AP ON(AO.ACT_PERIOD_ID=AP.ACT_PERIOD_ID)"
+				+" JOIN ACTIVITY_PRODUCT APR ON(APR.ACT_ID = AP.ACT_ID)"
+				+" WHERE SELL_MEM_ID=? AND ACT_PERIOD_START>to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
+				+" AND ACT_PERIOD_START<to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
+				+" ORDER BY ACT_ORDER_ID";
+		@Override
+		public List<ActivityOrderVO> getActOrdBySellMemIdAndDate(String sell_mem_id, String act_start_date) {
+			List<ActivityOrderVO> list = new ArrayList<ActivityOrderVO>();
+			ActivityOrderVO actoVO = null;
 
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String from =act_start_date + " 00:00:00";
+			String to =act_start_date + " 23:59:59";
+			try {
+
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_ORDER_BY_ID_START_STMT);
+				pstmt.setString(1, sell_mem_id);
+				pstmt.setString(2, from);
+				pstmt.setString(3, to);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					actoVO = new ActivityOrderVO();
+					actoVO.setAct_order_id(rs.getString("ACT_ORDER_ID"));
+					actoVO.setMem_id(rs.getString("MEM_ID"));
+					actoVO.setAct_period_id(rs.getString("ACT_PERIOD_ID"));
+					actoVO.setAct_order_amount(rs.getInt("ACT_ORDER_AMOUNT"));
+					actoVO.setAct_sum_price(rs.getDouble("ACT_SUM_PRICE"));
+					actoVO.setAct_order_status(rs.getInt("ACT_ORDER_STATUS"));
+					actoVO.setAct_payment_status(rs.getInt("ACT_PAYMENT_STATUS"));
+					actoVO.setAct_order_remarks(rs.getString("ACT_ORDER_REMARKS"));
+					list.add(actoVO); // Store the row in the list
+				}
+
+				// Handle any driver errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+		
+		
 		@Override
 		public void insert(ActivityOrderVO actoVO) {
 			Connection con = null;
@@ -404,6 +475,9 @@ public class ActivityOrderDAO implements ActivityOrderDAO_interface {
 //			System.out.println(actoVO3.getAct_order_remarks());
 //			System.out.println("---------------------");
 			}
+
+
+	
 
 
 		

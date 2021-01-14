@@ -6,14 +6,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import util.Util;
-
-
-
 
 public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 	String driver = Util.DRIVER;
@@ -23,11 +22,11 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO ACTIVITY_ORDER(ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS)"
 			+ "VALUES('AO' || LPAD(AO_SEQ.NEXTVAL, 3, '0'),?,?,?,?,?,?,?)";
-	private static final String GET_ALL_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID," 
-						+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER";
-	private static final String GET_BY_MEM_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID," 
+	private static final String GET_ALL_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
+			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER";
+	private static final String GET_BY_MEM_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where MEM_ID=?";
-	private static final String GET_BY_ACT_PERIOD_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID," 
+	private static final String GET_BY_ACT_PERIOD_ID_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where ACT_PERIOD_ID=?";
 	private static final String GET_ONE_STMT = "SELECT ACT_ORDER_ID,MEM_ID, ACT_PERIOD_ID,"
 			+ "ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS, ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS FROM ACTIVITY_ORDER where ACT_ORDER_ID = ?";
@@ -36,8 +35,15 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //	private static final String DELETE_ACTIVITY_TYPE = "DELETE FROM ACTIVITY_TYPE where deptno = ?";
 //	private static final String DELETE = "DELETE FROM ACTIVITY_PRODUCT where ACT_ID = ?";
 
-	private static final String UPDATE = "UPDATE ACTIVITY_ORDER set MEM_ID=?, ACT_PERIOD_ID=?," + 
-						"ACT_ORDER_AMOUNT=?, ACT_SUM_PRICE=?, ACT_ORDER_STATUS=?, ACT_PAYMENT_STATUS=?, ACT_ORDER_REMARKS=? where ACT_ORDER_ID=?";
+	private static final String UPDATE = "UPDATE ACTIVITY_ORDER set MEM_ID=?, ACT_PERIOD_ID=?,"
+			+ "ACT_ORDER_AMOUNT=?, ACT_SUM_PRICE=?, ACT_ORDER_STATUS=?, ACT_PAYMENT_STATUS=?, ACT_ORDER_REMARKS=? where ACT_ORDER_ID=?";
+
+	private static final String GET_ORDER_BY_ID_START_STMT = "SELECT ACT_ORDER_ID,MEM_ID, AO.ACT_PERIOD_ID,ACT_ORDER_AMOUNT, ACT_SUM_PRICE, ACT_ORDER_STATUS,"
+			+ "ACT_PAYMENT_STATUS, ACT_ORDER_REMARKS,AP.ACT_ID,SELL_MEM_ID,ACT_PERIOD_START" + " FROM ACTIVITY_ORDER AO"
+			+ " JOIN ACTIVITY_PERIOD AP ON(AO.ACT_PERIOD_ID=AP.ACT_PERIOD_ID)"
+			+ " JOIN ACTIVITY_PRODUCT APR ON(APR.ACT_ID = AP.ACT_ID)"
+			+ " WHERE SELL_MEM_ID=? AND ACT_PERIOD_START>to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')"
+			+ " AND ACT_PERIOD_START<to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')" + " ORDER BY ACT_ORDER_ID";
 
 	@Override
 	public void insert(ActivityOrderVO actoVO) {
@@ -82,7 +88,6 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 			}
 		}
 	}
-	
 
 	@Override
 	public void update(ActivityOrderVO actoVO) {
@@ -131,7 +136,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 
 	@Override
 	public ActivityOrderVO findByPrimaryKey(String act_order_id) {
-		ActivityOrderVO actoVO=null;
+		ActivityOrderVO actoVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -160,12 +165,10 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -224,12 +227,10 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -255,7 +256,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public List<ActivityOrderVO> getActOrderByActPerId(String act_period_id) {
 		List<ActivityOrderVO> list = new ArrayList<ActivityOrderVO>();
@@ -263,7 +264,6 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 
 		try {
 
@@ -288,12 +288,75 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+
+	public List<ActivityOrderVO> getActOrdBySellMemIdAndDate(String sell_mem_id, String act_start_date) {
+		List<ActivityOrderVO> list = new ArrayList<ActivityOrderVO>();
+		ActivityOrderVO actoVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String from =act_start_date + " 00:00:00";
+		String to =act_start_date + " 23:59:59";
+		
+		try {
+
+			Class.forName(driver);
+
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ORDER_BY_ID_START_STMT);
+			pstmt.setString(1, sell_mem_id);
+			pstmt.setString(2, from);
+			pstmt.setString(3, to);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				actoVO = new ActivityOrderVO();
+				actoVO.setAct_order_id(rs.getString("ACT_ORDER_ID"));
+				actoVO.setMem_id(rs.getString("MEM_ID"));
+				actoVO.setAct_period_id(rs.getString("ACT_PERIOD_ID"));
+				actoVO.setAct_order_amount(rs.getInt("ACT_ORDER_AMOUNT"));
+				actoVO.setAct_sum_price(rs.getDouble("ACT_SUM_PRICE"));
+				actoVO.setAct_order_status(rs.getInt("ACT_ORDER_STATUS"));
+				actoVO.setAct_payment_status(rs.getInt("ACT_PAYMENT_STATUS"));
+				actoVO.setAct_order_remarks(rs.getString("ACT_ORDER_REMARKS"));
+				list.add(actoVO); // Store the row in the list
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -328,7 +391,6 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-
 		try {
 
 			Class.forName(driver);
@@ -352,12 +414,10 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -383,8 +443,9 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 		}
 		return list;
 	}
+
 	public static void main(String[] args) {
-		ActivityOrderJDBCDAO dao=new ActivityOrderJDBCDAO();
+		ActivityOrderJDBCDAO dao = new ActivityOrderJDBCDAO();
 		// 新增 insert====================================
 //		ActivityOrderVO actoVO = new ActivityOrderVO();
 //		actoVO.setMem_id("MEM001");
@@ -395,7 +456,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //		actoVO.setAct_payment_status(0);
 //		actoVO.setAct_order_remarks("想收集夏天的熱");
 //		dao.insert(actoVO);
-		//修改 update=====================================
+		// 修改 update=====================================
 //		ActivityOrderVO actoVO2=new ActivityOrderVO();
 //		actoVO2.setMem_id("MEM001");
 //		actoVO2.setAct_period_id("AP001");
@@ -406,7 +467,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //		actoVO2.setAct_order_remarks("你是不是專題快不行了 ㄎㄎ");
 //		actoVO2.setAct_order_id("AO001");
 //		dao.update(actoVO2);
-		//查詢 getAll====================================
+		// 查詢 getAll====================================
 //		List<ActivityOrderVO> list = dao.getAll();
 //		for (ActivityOrderVO aActo : list) {
 //			System.out.print(aActo.getAct_order_id() + ",");
@@ -417,7 +478,7 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //			System.out.print(aActo.getAct_order_status() + ",");
 //			System.out.print(aActo.getAct_order_remarks());
 //			System.out.println();
-		//查詢 getByPK===================================
+		// 查詢 getByPK===================================
 //		ActivityOrderVO actoVO3 = dao.findByPrimaryKey("AO003");
 //		System.out.println(actoVO3.getMem_id() + ",");
 //		System.out.println(actoVO3.getAct_period_id() + ",");
@@ -427,17 +488,19 @@ public class ActivityOrderJDBCDAO implements ActivityOrderDAO_interface {
 //		System.out.println(actoVO3.getAct_payment_status());
 //		System.out.println(actoVO3.getAct_order_remarks());
 //		System.out.println("---------------------");
+
+		// 查詢 getByPK===================================
+		List<ActivityOrderVO> list = dao.getActOrdBySellMemIdAndDate("SELL001", "2021-01-26");
+		for (ActivityOrderVO aActo : list) {
+			System.out.print(aActo.getAct_order_id() + ",");
+			System.out.print(aActo.getMem_id() + ",");
+			System.out.print(aActo.getAct_period_id() + ",");
+			System.out.print(aActo.getAct_order_amount() + ",");
+			System.out.print(aActo.getAct_sum_price() + ",");
+			System.out.print(aActo.getAct_order_status() + ",");
+			System.out.print(aActo.getAct_order_remarks());
+			System.out.println();
 		}
 
-
-	
-		
-		
 	}
-
-	
-
-
-
-
-
+}

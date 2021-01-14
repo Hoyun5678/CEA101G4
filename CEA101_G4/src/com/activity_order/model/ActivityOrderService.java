@@ -3,6 +3,8 @@ package com.activity_order.model;
 import java.util.List;
 import java.util.Set;
 
+import com.roomorder.model.RoomOrderVO;
+
 
 
 
@@ -34,6 +36,9 @@ public class ActivityOrderService {
 	
 	public void insertActivityOrder(ActivityOrderVO actordVO) {
 		dao.insert(actordVO);
+	}
+	public List<ActivityOrderVO> getActOrdrBySellMemIdAndDate(String sell_mem_id, String act_start_date) {
+		return dao.getActOrdBySellMemIdAndDate(sell_mem_id, act_start_date);
 	}
 
 
