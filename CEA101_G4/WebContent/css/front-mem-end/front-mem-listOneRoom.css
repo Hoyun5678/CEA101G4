@@ -44,6 +44,7 @@
 		background-color: #679186;
 		color: white;
 	}
+	
 	.orderedRange {
 		background-color: #679186;
 		color: white;
@@ -78,4 +79,10 @@
 	.nextMonth:active, .lastMonth:active {
 		top: 1px;
 		left: 1px;
+	}
+	
+	
+	
+	#emptyarea .col-3 {
+		text-align: center;
 	}

@@ -48,7 +48,6 @@ color:#dc3545;
 .black_heart{
 color:black;
 }
-
 </style>
 
 </head>
@@ -224,22 +223,20 @@ color:black;
 					</table>
 				</div>
 			</div>
-                <div class="row justify-content-center" id="emptyarea">
-                    <div class="col-3" id="checkin">
-                        <div class="datetitle">入住日期</div> 
-                        <input readonly type="text" name="checkInDate" value="${checkInDate}" /> 
-                        
-              
-                    </div>
-                    <div class="col-3" id="checkout">
-                        <div class="datetitle">退房日期</div>
-                        <input readonly type="text" name="checkOutDate" value="${checkOutDate}" />
-                    </div>
-                    <div class="col-3" id="change">
-                        <div id="day">共選了<span id='dayCount'>一</span>晚</div>
-                        <input id="changebtn" type="button" value="更改搜尋條件" name="changedate">
-                    </div>
-                </div>
+			<div class="row justify-content-center d-flex align-items-center" id="emptyarea">
+			    <div class="col-3" id="checkin" style=''>
+			        <div class="datetitle">入住日期</div> 
+			        <input readonly type="text" name="checkInDate" value="${checkInDate}" /> 
+			    </div>
+			    <div class="col-3" id="checkout">
+			        <div class="datetitle">退房日期</div>
+			        <input readonly type="text" name="checkOutDate" value="${checkOutDate}" />
+			    </div>
+			    <div class="col-3" id="change">
+			        <div id="day">共選了<span id='dayCount'>一</span>晚</div>
+<!-- 			        <input id="changebtn" type="button" value="更改搜尋條件" name="changedate"> -->
+			    </div>
+			</div>
 <!--MODAL更改時間-->
 				<div id="myModal" class="modal">
 					<div class="modal-content">

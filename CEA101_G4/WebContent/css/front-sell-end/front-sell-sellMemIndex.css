@@ -79,4 +79,14 @@
 		top: 1px;
 		left: 1px;
 	}
+	
+	button.btn-link {
+		color: #679186;
+		width: 100%;
+		text-align: start;
+	}
+	button.btn-link:hover {
+		color: #486662;
+	}
+	
 

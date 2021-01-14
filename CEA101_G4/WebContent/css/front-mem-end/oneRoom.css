@@ -426,15 +426,15 @@
             display: grid;
             margin-top: 15px;
         }
-        #checkin :after {
-            content: "";
-            position: absolute;
-            border-left: 1px solid #96A9C4;
-            height: 30px;
-            top: 50px;
-            bottom: 0px;
-            left: 230px!important;
-        }
+/*         #checkin :after { */
+/*             content: ""; */
+/*             position: absolute; */
+/*             border-left: 1px solid #96A9C4; */
+/*             height: 30px; */
+/*             top: 50px; */
+/*             bottom: 0px; */
+/*             left: 230px!important; */
+/*         } */
 
         #changebtn {
             border: 1px solid #ced3df;
