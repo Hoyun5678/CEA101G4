@@ -355,7 +355,9 @@
                                 </tr>
                                 <input type="hidden" name="action" value="insert">
                                 <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
-                                <input type="submit" class="submitBtn" value="參加">
+                                <tr>
+                                <td><input type="submit" class="submitBtn" value="參加"></td>
+                                </tr>
                             </form>
                         </table>
                         <!-- button先放這 -->
