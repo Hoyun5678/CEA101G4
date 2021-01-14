@@ -234,12 +234,7 @@ public class FoodSpotServlet extends HttpServlet {
 				
 				String fas_des = req.getParameter("fas_des");
 
-				String fas_des_Reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,300}$";
-				if (fas_des != null || fas_des.trim().length() != 0) { // 以下練習正則(規)表示式(regular-expression)
-					 if(!fas_des.trim().matches(fas_des_Reg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("美食景點敘述只能是中、英文字母、數字和_ , 且長度必需在2到300之間");
-					 }
-				}
+				
 				
 				byte[] fas_photo = null;
 				Part part = req.getPart("fas_photo");

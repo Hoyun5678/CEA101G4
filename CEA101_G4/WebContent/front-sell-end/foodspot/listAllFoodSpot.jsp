@@ -2,13 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.foodspot.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.sell.model.*"%>
 
-<%
-    FoodSpotService fsSvc = new FoodSpotService();
-    List<FoodSpotVO> list = fsSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
+<%-- 此頁練習採用 EL 的寫法取值 --%>
+<jsp:useBean id="fsSvc" scope="page" class="com.foodspot.model.FoodSpotService" />
+
+<c:set var="sellVO" scope="page" value="${sellVO}"/>
+<!-- //     FoodSpotService fsSvc = new FoodSpotService(); -->
+<!-- //     List<FoodSpotVO> list = (List<FoodSpotVO>)request.getAttribute("fsVO1"); -->
+<!-- //     pageContext.setAttribute("list",list); -->
+ 
 
 
 <html>
@@ -94,7 +97,6 @@
 <thead>
 	<tr id ="th">
 		<th>美食與景點編號</th>
-		<th>民宿會員編號</th>
 		<th>美食與景點名稱</th>
 		<th>美食景點地址</th>
 		<th>美食景點敘述</th>
@@ -109,11 +111,11 @@
 	
 <%-- 	<%@ include file="page1.file" %>  --%>
  <tbody>
-	<c:forEach var="fsVO" items="${list}">
+ <c:forEach var="fsVO" items="${fsSvc.getOneBySell(sellVO.sellMemId)}">
+
 		
 		<tr class="td">
 		<td>${fsVO.fas_id}</td>
-		<td>${fsVO.sell_mem_id}</td>
 		<td>${fsVO.fas_spot_name}</td>
 		<td>${fsVO.fas_add}</td>
 		<td>${fsVO.fas_des}</td>
