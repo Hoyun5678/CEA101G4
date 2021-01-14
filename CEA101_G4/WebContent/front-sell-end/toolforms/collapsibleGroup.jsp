@@ -54,7 +54,7 @@
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
 					<button class="btn btn-link" data-toggle="collapse" data-target="#CollapseAct${actStatus.count}" aria-expanded="true" aria-controls="CollapseAct${actStatus.count}" style="text-decoration: none;" >
-						訂購者: ${memSvc.getOneMem(actordVO.mem_id).mem_name}
+						訂購者: ${memSvc.getOneMem(actordVO.mem_id).mem_name} ${memSvc.getOneMem(actordVO.mem_id).mem_tel}
 						
 					</button>
 				</h5>
