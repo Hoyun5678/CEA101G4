@@ -217,7 +217,7 @@
         /* 燈箱樣式結束 */
         
 		/*查無資料文字 */
-		div.noQuery{
+		.noQuery{
 		margin-top: 45px;
     	text-align: center;
     	background-color: #c5aa33c4;
@@ -234,7 +234,7 @@
           }
 		
 		
-		div.noQuery h3{
+		.noQuery h3{
 		font-weight:bold;
 		color: #fff;
 		}
@@ -341,23 +341,30 @@
                         <table class="itemTable">
                             <form method="post" action="<%=request.getContextPath()%>/ActivityOrder/ActivityOrder.do">
                                 <tr>
-                                    <td>活動介紹</td>
+                                    <td>活動介紹:</td>
                                 </tr>
                                 <tr>
                                     <td>${actproSvc.getOneActPro(actperVO.act_id).act_des}</td>
                                 </tr>
-                                <tr>
-                                    <td>活動參與人數</td>
-                                    <td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td>
-                                </tr>
-                                <tr>
-                                    <td>備註: <input type="textarea" name="act_order_remarks"></td>
-                                </tr>
-                                <input type="hidden" name="action" value="insert">
-                                <input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
-                                <tr>
-                                <td><input type="submit" class="submitBtn" value="參加"></td>
-                                </tr>
+                                 <c:choose>
+                                     <c:when test="${actperVO.act_sign_sum<actperVO.act_up_limit}">
+                                         <tr>
+                                    		<td>參與人數:</td>
+                                    		<td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td>
+                                		</tr>
+                               			 <tr>
+                                    		<td>備註: <input type="textarea" name="act_order_remarks" style="height: 80px;"></td>
+                                		</tr>
+                                		<input type="hidden" name="action" value="insert">
+                               			<input type="hidden" name="act_period_id" value="${actperVO.act_period_id}">
+                                		<tr>
+                                			<td><input type="submit" class="submitBtn" value="參加"></td>
+                                		</tr>
+                                    </c:when>
+                                    <c:otherwise>
+                                                    		<tr><td class="noQuery"><h3>報名已額滿</h3></td></tr>
+                                     </c:otherwise>
+                                 </c:choose>
                             </form>
                         </table>
                         <!-- button先放這 -->
