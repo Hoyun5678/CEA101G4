@@ -140,6 +140,7 @@ table.table.table-dark.table-striped {
 							<th>特產訂單付款狀態</th>
 							<th>特產訂單出貨狀態</th>
 							<th>特產訂購日期</th>
+							<th></th>
 						</tr>
 						<jsp:useBean id="soSvc" scope="page"
 							class="com.souvenir_order.model.SouvenirOrderService" />
