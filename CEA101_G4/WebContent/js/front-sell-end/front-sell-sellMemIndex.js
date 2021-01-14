@@ -110,7 +110,6 @@
         $(document).ready(function() {
             var contextPath = $('[name="contextPath"]').val();
             var urlTarget = contextPath + '/front-sell-end/toolforms/collapsibleGroup.jsp';
-            var urlTarget2 = contextPath + '/front-sell-end/toolforms/activityGroup.jsp';
 
             let yearList = document.getElementById('yearList')
             let monthList = document.getElementById('monthList')
@@ -163,21 +162,6 @@
                 })
                 
                 
-                 $.ajax({
-                    url: urlTarget2,
-                    type: 'POST',
-                    data: {
-                        'sell_mem_id': $('#sellMemId').val(),
-                        'act_start_date': sel.attr('value'),
-                    },
-                    success: function(data) {
-                        //                          console.log(data);
-                        $('#accordion').stop(true, true).fadeOut(100, function() {
-                            $('.displaySelectedDate h4').html(sel.attr('value') + '  今日活動訂單報到名單');
-                            $(this).html(data);
-                        }).fadeIn(400);
-                    }
-                })
             })
 
             $(document).on('click', '.lastMonth span', function() {
