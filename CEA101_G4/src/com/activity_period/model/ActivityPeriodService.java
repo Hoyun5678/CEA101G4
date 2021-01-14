@@ -4,6 +4,7 @@ package com.activity_period.model;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.activity_period.model.ActivityPeriodVO;
 
@@ -17,7 +18,9 @@ public class ActivityPeriodService {
 	}
 
 	public List<ActivityPeriodVO> getAll() {
-		return dao.getAll();
+		return dao.getAll().stream()
+				.filter(e -> e.getAct_period_status()==1)
+				.collect(Collectors.toList());
 	}
 	public List<ActivityPeriodVO> getAllActPerByActId(String act_id) {
 		return dao.getAllActPerByActId(act_id);

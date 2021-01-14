@@ -153,8 +153,10 @@ public class ActivityPeriodServlet extends HttpServlet {
 								comQueMap.put("datefilter1",new String[]{datefilter1});
 								
 							}
-							
-							List<ActivityPeriodVO>  queryFinalList=actperSvc.getAll(comQueMap);
+							List<ActivityPeriodVO>checkList=actperSvc.getAll(comQueMap);
+							List<ActivityPeriodVO>  queryFinalList=checkList.stream()
+									.filter(e -> e.getAct_period_status()==1)
+									.collect(Collectors.toList());
 							
 							
 							
