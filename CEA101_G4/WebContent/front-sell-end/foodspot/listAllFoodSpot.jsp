@@ -4,7 +4,7 @@
 <%@ page import="com.foodspot.model.*"%>
 <%@ page import="com.sell.model.*"%>
 
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+
 <jsp:useBean id="fsSvc" scope="page" class="com.foodspot.model.FoodSpotService" />
 
 <c:set var="sellVO" scope="page" value="${sellVO}"/>
