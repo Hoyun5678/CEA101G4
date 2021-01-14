@@ -13,6 +13,7 @@ public interface RoomOrderedDateDAO_interface {
     public void delete(String roomOrderedDateId);
     public List<RoomOrderedDateVO> getAll();
     public List<String> getByRoomId(String roomId);
+	List<String> getBySellMemId(String sellMemId);
 	
 
 }

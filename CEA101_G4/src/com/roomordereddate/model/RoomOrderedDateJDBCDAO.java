@@ -269,6 +269,13 @@ public class RoomOrderedDateJDBCDAO implements RoomOrderedDateDAO_interface {
 	}
 
 
+	@Override
+	public List<String> getBySellMemId(String sellMemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 	
 	

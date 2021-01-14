@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.room.model.*"%>
 <%@ page import="com.sell.model.*"%>
-
+<jsp:useBean id="roomOrderedDateSvc" scope="page" class="com.roomordereddate.model.RoomOrderedDateService" />
 <html>
 <head>
     <!-- Required meta tags -->
@@ -14,14 +14,7 @@
       rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sellMemIndex.css">
     
-	<title>所有房間資料 - listAllRoom.jsp</title>
-	<style>
-		
-		.lastMonth:active, .nextMonth:active {
-			left: 2px;
-			top: 2px;
-		}
-	</style>
+	<title>所有房間資料</title>
 </head>
 <body>
 	<div id="viewport">
@@ -35,6 +28,7 @@
                     	<div class="leftContainer">
 	                        <div class="calendarDiv">
 	                        	<div class="d-flex">
+	                        	<input type="hidden" name="orderedList" value='${roomOrderedDateSvc.getOrderedDateBySellMemId(sellVO.sellMemId)}'>
 		                        	<div class="mr-auto align-content-center lastMonth">
 		                        		<span class="material-icons">
 		                        			keyboard_arrow_left

@@ -54,38 +54,12 @@
 			right: 5%;
 			bottom: 5%;
 		}
-		
-		#greyBack {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			cursor: pointer;
-			background-color: rgba(0, 0, 0, 0.3);
-		}
-		
-		#uploadPics .container {
-			background-color: rgba(255, 255, 255, 1);
-			border-radius: 10px;
-	 		height: 60%;
-	 		width: 50%;
-			position: absolute;
-			padding: 10px;
-			left: 25%;
-			top: 10%;
-		}
-	
+			
 		.imgBox img {
 			max-width: 100%;
 			max-height: 100%;
 		}
-		
-		#formFileMultiple {
-			width: 100%;
-			height: 100%;
-			border: 1px solid red;
-		}
+
 	</style>
 </head>
 <body>

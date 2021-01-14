@@ -36,6 +36,10 @@ public class RoomOrderedDateDAO implements RoomOrderedDateDAO_interface {
 				"SELECT * FROM ROOM_ORDERED_DATE_RECORD";
 		private static final String GET_BYROOMID_STMT = 
 				"SELECT ROOM_ORDERED_DATE FROM ROOM_ORDERED_DATE_RECORD WHERE ROOM_ID=? ORDER BY ROOM_ORDERED_DATE";
+		private static final String GET_BYSELLMEMID_STMT = 
+				"SELECT ROOM_ORDERED_DATE " + 
+				"FROM ROOM_ORDERED_DATE_RECORD JOIN ROOM_PRODUCT ON ROOM_PRODUCT.ROOM_ID = ROOM_ORDERED_DATE_RECORD.ROOM_ID " + 
+				"WHERE SELL_MEM_ID=? ORDER BY ROOM_ORDERED_DATE";
 		private static final String DELETE = 
 				"DELETE FROM ROOM_ORDERED_DATE_RECORD WHERE ROOM_ORDERED_DATE_ID = ?";
 		
@@ -220,6 +224,56 @@ public class RoomOrderedDateDAO implements RoomOrderedDateDAO_interface {
 				rs = pstmt.executeQuery();
 				Format sfm = new SimpleDateFormat("yyyy-MM-dd");
 
+				while (rs.next()) {
+					
+					list.add(sfm.format(new java.util.Date(rs.getDate(1).getTime())));
+				}
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return list;
+		}
+		
+		@Override
+		public List<String> getBySellMemId(String sellMemId) {
+			List<String> list = new ArrayList<String>();
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_BYSELLMEMID_STMT);
+				pstmt.setString(1, sellMemId);
+				rs = pstmt.executeQuery();
+				Format sfm = new SimpleDateFormat("yyyy-MM-dd");
+				
 				while (rs.next()) {
 					
 					list.add(sfm.format(new java.util.Date(rs.getDate(1).getTime())));

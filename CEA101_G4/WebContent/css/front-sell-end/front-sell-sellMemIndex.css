@@ -19,7 +19,7 @@
 
 	.calendarBody thead tr td {
 	    font-weight: bold;
-	    color: DodgerBlue;
+	    color: #679186;
 	    font-size: 16px;
 	}
 	.calendarBody td {
@@ -28,20 +28,30 @@
 	    height: 35px;
 	    font-size: 14px;
 	    box-sizing: border-box;
+	    user-select: none;
 	}
-	.calendarBody .passedDate {
-	    background-color: #ccc;
+	.calendarBody .passedDate a {
+	    color: #ADADAD;
+	    text-decoration: line-through;
+	}
+	
+	.calendarBody .orderedDate {
+		border-color: #ADADAD;
+	    border-style: dashed;
+	    cursor: pointer;
 	}
 	
 	.calendarBody .currentDate a {
-	    color: #CE0000;
+	    color: #f17d05 !important;
 	    font-weight: bold;
 	}
 	
 	.calendarBody td.onSelect {
-		border: 2px solid red;
-		background-color: #FFFFB9;
-/* 		.animate */
+		background-color: #679186;
+	}
+	
+	.calendarBody td.onSelect a {
+		color: white;
 	}
 	
 	.calendarBody a {
@@ -56,11 +66,17 @@
 		text-align: center;
 		margin-top: 1em;
 	}
-	
-	.material-icons:hover {
-/* 		background-color: grey; */
+	.nextMonth, .lastMonth {
 		transform: scale(1.2);
-		user-select: none;
 		cursor: pointer;
+		color: #679186;
+	}
+	.nextMonth:hover, .lastMonth:hover {
+		user-select: none;
+		position: relative;
+	}
+	.nextMonth:active, .lastMonth:active {
+		top: 1px;
+		left: 1px;
 	}
 

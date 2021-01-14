@@ -11,18 +11,12 @@
 		margin-block-end: 0.5em;
 		text-align: center;
 	}
+	
 	.yearMonth {
-		color: DodgerBlue;
-	}
-
-	.calendarBody thead tr td {
-	    font-weight: bold;
-	    color: DodgerBlue;
-	    font-size: 16px;
+		color: #679186;
 	}
 	
 	.calendarBody td {
-/* 		border: 2px solid transparent; */
 	    text-align: center;
 	    width: 50px;
 	    height: 35px;
@@ -42,19 +36,20 @@
 	}
 	
 	.calendarBody .currentDate a {
-	    color: #CE0000 !important;
+	    color: #f17d05 !important;
 	    font-weight: bold;
 	}
 	
 	.calendarBody td.onSelect {
-		border: 2px solid red;
-		background-color: #FFFFB9;
+		background-color: #679186;
+		color: white;
 	}
 	.orderedRange {
-		background-color: #FFFFB9;
+		background-color: #679186;
+		color: white;
 	}
 	
-	.calendarBody td:not(.passedDate):not(.orderedDate), .material-icons {
+	.calendarBody td:not(.passedDate):not(.orderedDate) {
 		cursor: pointer;
 	}
 	
@@ -64,4 +59,23 @@
 
 	.calendarBody a:hover, .calendar a:focus {
 	    text-decoration: none;
+	}
+	
+	[name='checkInDate'], [name='checkOutDate'] {
+		text-align: center;
+		user-select: none;
+	}
+	
+	.nextMonth, .lastMonth {
+		transform: scale(1.2);
+		cursor: pointer;
+		color: #679186;
+	}
+	.nextMonth:hover, .lastMonth:hover {
+		user-select: none;
+		position: relative;
+	}
+	.nextMonth:active, .lastMonth:active {
+		top: 1px;
+		left: 1px;
 	}

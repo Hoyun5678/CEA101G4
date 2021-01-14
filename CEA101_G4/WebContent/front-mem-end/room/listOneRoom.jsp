@@ -90,7 +90,7 @@ color:black;
 	<div class="container">
 		<div class="upside">
 			<div class="row">
-                    <div class="photogallery">
+				<div class="photogallery">
                     <div class="row">
                             <div class="col-lg-8">
                                 <a class="lightbox" id="bigpic" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
@@ -224,19 +224,19 @@ color:black;
 					</table>
 				</div>
 			</div>
-                <div class="row" id="emptyarea">
-                    <div class="col-lg-4" id="checkin">
+                <div class="row justify-content-center" id="emptyarea">
+                    <div class="col-3" id="checkin">
                         <div class="datetitle">入住日期</div> 
                         <input readonly type="text" name="checkInDate" value="${checkInDate}" /> 
                         
               
                     </div>
-                    <div class="col-lg-4" id="checkout">
+                    <div class="col-3" id="checkout">
                         <div class="datetitle">退房日期</div>
                         <input readonly type="text" name="checkOutDate" value="${checkOutDate}" />
                     </div>
-                    <div class="col-lg-4" id="change">
-                        <div id="day">共選了一晚</div>
+                    <div class="col-3" id="change">
+                        <div id="day">共選了<span id='dayCount'>一</span>晚</div>
                         <input id="changebtn" type="button" value="更改搜尋條件" name="changedate">
                     </div>
                 </div>

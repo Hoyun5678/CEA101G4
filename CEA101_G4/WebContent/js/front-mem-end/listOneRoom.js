@@ -146,9 +146,7 @@
             		  return $(this).attr("value");
             		});
             	onSelectedVal.sort();
-            	
     			$.ajax({
-    				
 					url: urlTarget,
 					type: "POST",
 					data: {
@@ -160,23 +158,19 @@
 					success: function(data) {
 						var re = JSON.parse(data);
 						let resultList = re.valid
-						console.log("re.valid = " + resultList);
 						$('.calendarBody tbody td').removeClass('onSelect');
 						if(resultList === false) {
 							console.log('result = false')
 						} else {
-							resultList.forEach(element => $('[value="' + element + '"]').addClass('orderedRange'))
+							resultList.forEach(element => $('td[value="' + element + '"]').addClass('orderedRange'))
 							$('[value="' + onSelectedVal[1] + '"]').addClass('orderedRange')
 							$('[name="checkInDate"]').val(onSelectedVal[0]);
 							$('[name="checkOutDate"]').val(onSelectedVal[1]);
+							$('#dayCount').html(resultList.length);
 						}
-						
-
 					}
     			});
-
             }            
-
         })
 
         $(document).on('click', '.lastMonth', function() {

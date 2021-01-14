@@ -36,5 +36,9 @@ public class RoomOrderedDateService {
 	public List<String> getOrderedDateByRoomId(String roomId) {
 		return dao.getByRoomId(roomId);
 	}
+	
+	public List<String> getOrderedDateBySellMemId(String sellMemId) {
+		return dao.getBySellMemId(sellMemId);
+	}
 
 }

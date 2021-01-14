@@ -57,7 +57,7 @@
 
             return false
         }
-
+        let orderedList = $('[name="orderedList"').val().split(/\, |\[|\]/);
         let drawCal = function(firstDateOfMonth) {
             //              console.log('firstDateOfMonth = ' + firstDateOfMonth);
             let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -88,13 +88,16 @@
                         a.innerText = day.toString()
                         let setDate = new Date(firstDateOfMonth.getFullYear(), firstDateOfMonth.getMonth(), day)
                         td.setAttribute('value', setDate.yyyymmdd())
-                        a.setAttribute('href', '#')
+//                        a.setAttribute('href', '#')
                         if (isPassedDate(setDate)) {
                             td.classList.add('passedDate')
                         } else if (isCurrentDate(setDate)) {
                             td.classList.add('currentDate');
                             td.classList.add('onSelect');
                         }
+                        if(orderedList.indexOf(setDate.yyyymmdd()) > -1) {
+                        	td.classList.add('orderedDate');
+                        };
                     }
                     td.appendChild(a)
                     tr.appendChild(td)
@@ -107,7 +110,6 @@
         $(document).ready(function() {
             var contextPath = $('[name="contextPath"]').val();
             var urlTarget = contextPath + '/front-sell-end/toolforms/collapsibleGroup.jsp';
-            //              console.log('url = ' + urlTarget);
 
             let yearList = document.getElementById('yearList')
             let monthList = document.getElementById('monthList')
