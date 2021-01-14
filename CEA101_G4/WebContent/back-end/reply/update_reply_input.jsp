@@ -195,6 +195,7 @@ form {
 		<div id=submit>
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>">
+				<input type="hidden" name="forEmp" value="forEmp">
 			<input type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>
@@ -204,7 +205,7 @@ form {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/back-end/reply/back_select.jsp"
+						href="<%=request.getContextPath()%>/back-end/reply/back_AllReply.jsp"
 						class="btn btn-dark">回上頁</a>
 				</h3>
 			</td>

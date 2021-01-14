@@ -134,7 +134,8 @@ h2 {
 						style="margin-bottom: 0px;">
 						<input type="submit" value="§R°£" class="btn btn-danger"> <input
 							type="hidden" name="replyId" value="${replyVO.replyId}">
-						<input type="hidden" name="action" value="delete">
+						<input type="hidden" name="forEmp" value="forEmp"> <input
+							type="hidden" name="action" value="delete">
 					</FORM>
 				</td>
 				<!-- 				<td> -->

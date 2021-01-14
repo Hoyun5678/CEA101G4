@@ -72,18 +72,33 @@ th, td {
 	font-size: 14px;
 	text-align: center;
 }
+#addReply{
+	margin-right:100px;
+}
 </style>
 
 </head>
 <body bgcolor='white'>
 	<%@include file="/front-mem-end/bar.jsp"%>
-	<figure class="figure">
-		<img
-			src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_id=${act_id}&action=getListActPhoByActId"
-			class="figure-img img-fluid rounded" alt="活動示意圖">
-		<figcaption class="figure-caption">活動示意圖</figcaption>
-		<td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
-	</figure>
+	<table>
+		<tr>
+		
+			<figure class="figure">
+				<img
+					src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_id=${act_id}&action=getListActPhoByActId"
+					class="figure-img img-fluid rounded" alt="活動示意圖">
+				<figcaption class="figure-caption">活動示意圖</figcaption>
+				<td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
+
+			</figure>
+		<tr>
+		<tr id=addReply>
+			<td>
+				<a
+					href='<%=request.getContextPath()%>/front-mem-end/reply/front_addReply.jsp'>新增一筆評論</a>
+			</td>
+		<tr>
+	</table>
 
 	<div class=title>
 		<h3>活動留言</h3>

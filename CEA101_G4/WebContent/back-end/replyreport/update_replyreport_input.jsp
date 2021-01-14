@@ -125,26 +125,27 @@ th, td {
 		<div id=actrow>
 			<tr>
 				<td><b>評論檢舉編號:<font color=red><b></b></font></td>
-				<td><%=replyReportVO.getReportId()%></td><br>
+				<td><%=replyReportVO.getReportId()%></td>
+				<br>
 			</tr>
 			<br>
 			<tr>
-				<td>評論員工編號:</td>
-				<td><input type="TEXT" name="empId" class="input-group-text" 
-					size="20" value="<%=replyReportVO.getEmpId()%>" /></td>
+				<td>負責員工編號:</td>
+				<td><input type="TEXT" name="empId" class="input-group-text"
+					size="20" value="EMP001" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>會員編號:</td>
-				<td><input type="TEXT" name="memId" class="input-group-text" 
+				<td><input type="TEXT" name="memId" class="input-group-text"
 					size="20" value="<%=replyReportVO.getMemId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>評論編號:</td>
-				<td><input type="TEXT" name="replyId" class="input-group-text" 
+				<td><input type="TEXT" name="replyId" class="input-group-text"
 					size="20" value="<%=replyReportVO.getReplyId()%>" /></td>
 			</tr>
 		</div>
@@ -153,7 +154,8 @@ th, td {
 				<td>檢舉結果狀態:</td>
 				<td><input type="radio" name="reportResult" size="45" value="0" />待處理
 					<input type="radio" name="reportResult" size="45" value="1" />已處理同意
-					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td></b>
+					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td>
+				</b>
 			</tr>
 		</div>
 
@@ -172,6 +174,7 @@ th, td {
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="reportId"
 				value="<%=replyReportVO.getReportId()%>"> <input
+				type="hidden" name="forEmp" value="forEmp"><input
 				type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>
@@ -181,7 +184,7 @@ th, td {
 
 		<h4>
 			<a
-				href="<%=request.getContextPath()%>/back-end/replyreport/back_select_replyreport.jsp"
+				href="<%=request.getContextPath()%>/back-end/replyreport/back_select.jsp"
 				class="btn btn-dark">首頁</a>
 		</h4>
 

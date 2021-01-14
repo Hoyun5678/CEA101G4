@@ -71,10 +71,16 @@ public class ReplyReportServlet extends HttpServlet {
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("replyReportVO", replyReportVO); // 資料庫取出的replyReportVO物件,存入req
-				String url = "/front-mem-end/replyreport/front_listOne.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 front_listOne.jsp
-				successView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/front_listOne.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					successView.forward(req, res);
+				} else {
+					req.setAttribute("replyReportVO", replyReportVO); // 資料庫取出的replyReportVO物件,存入req
+					String url = "/front-mem-end/replyreport/front_listOne.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 front_listOne.jsp
+					successView.forward(req, res);
+				}
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
@@ -114,9 +120,15 @@ public class ReplyReportServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				if ("forEmp".equals(forEmp)) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/replyreport/back_update_replyreport.jsp");
+					failureView.forward(req, res);
+				} else {
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/front-mem-end/replyreport/front_AllReplyReport.jsp");
 				failureView.forward(req, res);
+				}
 			}
 		}
 
@@ -190,10 +202,16 @@ public class ReplyReportServlet extends HttpServlet {
 				replyReportVO = replyReportSvc.updateReplyReport(reportId, empId, memId, replyId, reportResult);
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("replyReportVO", replyReportVO); // 資料庫update成功後,正確的的replyReportVO物件,存入req
-				String url = "/front-mem-end/replyreport/front_listOne.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交front_listOne.jsp
-				successView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/back_listOne.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					successView.forward(req, res);
+				} else {
+					req.setAttribute("replyReportVO", replyReportVO); // 資料庫update成功後,正確的的replyReportVO物件,存入req
+					String url = "/front-mem-end/replyreport/front_listOne.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交front_listOne.jsp
+					successView.forward(req, res);
+				}
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
@@ -248,14 +266,14 @@ public class ReplyReportServlet extends HttpServlet {
 				/*************************** 2.開始新增資料 ***************************************/
 				ReplyReportService replyReportSvc = new ReplyReportService();
 				replyReportVO = replyReportSvc.addReplyReportByMem(memId, replyId);
-				
-				ReplyService replySvc =  new ReplyService();
+
+				ReplyService replySvc = new ReplyService();
 				ReplyVO replyVO = replySvc.getOneReply(replyId);
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				req.setAttribute("memId", memId);
 				req.setAttribute("replyId", replyId);
 				req.setAttribute("replyContent", replyVO.getReplyContent());
-				
+
 				System.out.println(replyVO.getReplyContent());
 				String url = "/front-mem-end/replyreport/addReplyReportByMem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllReplyReport.jsp
@@ -264,8 +282,7 @@ public class ReplyReportServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-mem-end/reply/listOneActP.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/reply/listOneActP.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -337,9 +354,15 @@ public class ReplyReportServlet extends HttpServlet {
 				replyReportVO = replyReportSvc.addReplyReport(empId, memId, replyId, reportResult);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/replyreport/listAllReplyReport.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllReplyReport.jsp
-				successView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/back_AllReplyReport.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					successView.forward(req, res);
+				} else {
+					String url = "/front-mem-end/replyreport/front_AllReplyReport.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllReplyReport.jsp
+					successView.forward(req, res);
+				}
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
@@ -366,9 +389,15 @@ public class ReplyReportServlet extends HttpServlet {
 				replyReportSvc.deleteReplyReport(reportId);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/front-mem-end/replyreport/listAllReplyReport.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/back_AllReplyReport.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					successView.forward(req, res);
+				} else {
+					String url = "/front-mem-end/replyreport/front_AllReplyReport.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+					successView.forward(req, res);
+				}
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
