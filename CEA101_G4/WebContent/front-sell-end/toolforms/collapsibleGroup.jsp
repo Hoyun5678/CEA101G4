@@ -13,6 +13,11 @@
 <!-- 小何的東西 -->
 <c:set var='actordList' scope='page' value='${actordSvc.getActOrdrBySellMemIdAndDate(sellMemId, checkInDate)}' />
 <c:set var='roomOrderList' scope='page' value='${roomOrderSvc.getBySellMemIdAndDate(sellMemId, checkInDate)}' />
+	<c:if test="${not empty roomOrderList}">
+		<div class='roomList title'>
+			<h4>民宿入住清單：</h4>
+		</div>
+	</c:if>
 	<c:forEach var="roomOrderVO" items="${roomOrderList}" varStatus="userStatus">
 		<div class="card">
 			<div class="card-header" id="headingOne">
@@ -39,6 +44,11 @@
 		</div>
 	</c:forEach>
 	
+	<c:if test="${not empty actordList}">
+		<div class='actList title'>
+			<h4>活動訂單列表：</h4>
+		</div>
+	</c:if>
 	<c:forEach var="actordVO" items="${actordList}" varStatus="actStatus">
 		<div class="card">
 			<div class="card-header" id="headingOne">

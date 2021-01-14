@@ -75,9 +75,6 @@
                         </div>
                         
                         <div class="onSelectRoomOrder col-7">
-                        	<div class="displaySelectedDate">
-                        		<h4>預計Check in 列表</h4>
-                        	</div>
                         	<div id="accordion">
                         	</div>
                     	</div>
