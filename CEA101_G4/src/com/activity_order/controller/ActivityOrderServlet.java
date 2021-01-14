@@ -345,7 +345,8 @@ public class ActivityOrderServlet extends HttpServlet {
 					Integer act_order_amount=null;
 					ActivityPeriodService actperSvc=new ActivityPeriodService();
 					String act_order_amount_first=req.getParameter("act_order_amount");
-					String actOrdAmountReg = "^[1-9]{1,}$";
+					System.out.println(act_order_amount);
+					String actOrdAmountReg = "^[0-9]{1,}$";
 					if(act_order_amount_first.matches(actOrdAmountReg)) {
 					act_order_amount=Integer.parseInt(act_order_amount_first);
 					}else {
