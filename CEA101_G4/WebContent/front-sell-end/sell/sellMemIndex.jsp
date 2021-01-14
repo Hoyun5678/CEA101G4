@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.room.model.*"%>
 <%@ page import="com.sell.model.*"%>
-<jsp:useBean id="roomOrderedDateSvc" scope="page" class="com.roomordereddate.model.RoomOrderedDateService" />
+<jsp:useBean id="roomOrderSvc" scope="page" class="com.roomorder.model.RoomOrderService" />
 <html>
 <head>
     <!-- Required meta tags -->
@@ -28,7 +28,7 @@
                     	<div class="leftContainer">
 	                        <div class="calendarDiv">
 	                        	<div class="d-flex">
-	                        	<input type="hidden" name="orderedList" value='${roomOrderedDateSvc.getOrderedDateBySellMemId(sellVO.sellMemId)}'>
+	                        	<input type="hidden" name="orderedList" value='${roomOrderSvc.getCheckInBySellMemId(sellVO.sellMemId)}'>
 		                        	<div class="mr-auto align-content-center lastMonth">
 		                        		<span class="material-icons">
 		                        			keyboard_arrow_left

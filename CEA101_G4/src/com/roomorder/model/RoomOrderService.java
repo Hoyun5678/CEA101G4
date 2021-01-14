@@ -2,7 +2,10 @@ package com.roomorder.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.roomorderdetail.model.RoomOrderDetailVO;
 
@@ -115,6 +118,14 @@ public class RoomOrderService {
 	public List<RoomOrderVO> getBySellMemId(String sellMemId) {
 		return dao.getBySellMemId(sellMemId);
 	}
+	
+	public List<String> getCheckInBySellMemId(String sellMemId) {
+		Format sfm = new SimpleDateFormat("yyyy-MM-dd");
+		return dao.getBySellMemId(sellMemId).stream()
+				.map(VO -> sfm.format(new java.util.Date(VO.getCheckInDate().getTime())))
+				.collect(Collectors.toList());
+	}
+	
 	public List<RoomOrderVO> getByMemIdAndRoomOrderId(String memId, String roomOrderId){
 		return dao.getByMemIdAndRoomOrderId(memId, roomOrderId);
 	}
