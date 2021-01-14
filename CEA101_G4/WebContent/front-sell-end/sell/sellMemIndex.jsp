@@ -3,6 +3,7 @@
 <%@ page import="com.room.model.*"%>
 <%@ page import="com.sell.model.*"%>
 <jsp:useBean id="roomOrderSvc" scope="page" class="com.roomorder.model.RoomOrderService" />
+<jsp:useBean id="actordSvc" scope="page" class="com.activity_order.model.ActivityOrderService" />
 <html>
 <head>
     <!-- Required meta tags -->
@@ -29,6 +30,7 @@
 	                        <div class="calendarDiv">
 	                        	<div class="d-flex">
 	                        	<input type="hidden" name="orderedList" value='${roomOrderSvc.getCheckInBySellMemId(sellVO.sellMemId)}'>
+		                        <input type="hidden" name="actOrderList" value='${actordSvc.getCheckInBySellMemId(sellVO.sellMemId)}'>
 		                        	<div class="mr-auto align-content-center lastMonth">
 		                        		<span class="material-icons">
 		                        			keyboard_arrow_left

@@ -58,6 +58,7 @@
             return false
         }
         let orderedList = $('[name="orderedList"').val().split(/\, |\[|\]/);
+        let actOrderList=$('[name="actOrderList"').val();
         let drawCal = function(firstDateOfMonth) {
             //              console.log('firstDateOfMonth = ' + firstDateOfMonth);
             let monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -98,6 +99,13 @@
                         if(orderedList.indexOf(setDate.yyyymmdd()) > -1) {
                         	td.classList.add('orderedDate');
                         };
+                        if(actOrderList.indexOf(setDate.yyyymmdd()) > -1){
+                        	td.classList.add('actorderedDate');
+                        }
+                        if(actOrderList.indexOf(setDate.yyyymmdd()) > -1 && 
+                        		orderedList.indexOf(setDate.yyyymmdd()) > -1){
+                        	td.classList.add('bothorderedDate');
+                        }
                     }
                     td.appendChild(a)
                     tr.appendChild(td)

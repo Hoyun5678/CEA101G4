@@ -41,6 +41,19 @@
 	    cursor: pointer;
 	}
 	
+	.calendarBody .actorderedDate {
+		border-color: rgb(0, 188, 212);
+	    border-style: dashed;
+	    cursor: pointer;
+	}
+	.calendarBody .bothorderedDate {
+		border-color: rgb(198 210 44);
+    border-style: dashed;
+    cursor: pointer;
+	}
+	
+	
+	
 	.calendarBody .currentDate a {
 	    color: #f17d05 !important;
 	    font-weight: bold;
