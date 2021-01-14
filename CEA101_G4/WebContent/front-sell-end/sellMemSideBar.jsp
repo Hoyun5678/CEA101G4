@@ -32,27 +32,27 @@ opacity: 0.4;
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/front-sell-end/sell/listOneSell.jsp">
-            	<i class="zmdi zmdi-link"></i> 民宿會員基本資料管理
+            	<i class="zmdi zmdi-face"></i> 基本資料管理
             </a>
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/front-sell-end/room/listAllRoom.jsp">
-            	<i class="zmdi zmdi-widgets"></i> 房間管理 </a>
+            	<i class="zmdi zmdi-home"></i> 房間管理 </a>
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/front-sell-end/roomorder/listAllRoomOrder.jsp"> <i class="zmdi zmdi-calendar"></i> 房間訂單管理 </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/front-sell-end/activity_product/listOneActivityProduct.jsp"> <i class="zmdi zmdi-calendar"></i> 活動管理 </a>
+            <a href="<%=request.getContextPath()%>/front-sell-end/activity_product/listOneActivityProduct.jsp"> <i class="zmdi zmdi-collection-item"></i> 活動管理 </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/front-sell-end/activity_period/listOneActivityPeriod.jsp"> <i class="zmdi zmdi-calendar"></i> 活動期別管理 </a>
+            <a href="<%=request.getContextPath()%>/front-sell-end/activity_period/listOneActivityPeriod.jsp"> <i class="zmdi zmdi-notifications-none"></i> 活動期別管理 </a>
         </li>
         <li>
             <a href="<%=request.getContextPath()%>/front-sell-end/activity_order/sellListOneActivityOrder.jsp"> <i class="zmdi zmdi-settings"></i> 活動訂單管理 </a>
         </li>
         <li>
-            <a href="<%=request.getContextPath()%>/front-sell-end/foodspot/listAllFoodSpot.jsp"> <i class="zmdi zmdi-settings"></i> 美食與景點管理 </a>
+            <a href="<%=request.getContextPath()%>/front-sell-end/foodspot/listAllFoodSpot.jsp"> <i class="zmdi zmdi-pin"></i> 美食與景點管理 </a>
         </li>
     </ul>
 </div>

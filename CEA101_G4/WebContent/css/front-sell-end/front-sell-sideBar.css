@@ -73,6 +73,10 @@ body {
   margin-right: 16px;
 }
 
+#sidebar .nav li {
+	width: 100%;
+}
+
 .nav>li>a {
     position: relative;
     display: block;
