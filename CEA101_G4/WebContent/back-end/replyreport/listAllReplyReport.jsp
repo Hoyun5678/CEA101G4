@@ -58,7 +58,7 @@ a {
 }
 
 .content {
-	height: 200%;
+	height: 100%;
 }
 </style>
 
