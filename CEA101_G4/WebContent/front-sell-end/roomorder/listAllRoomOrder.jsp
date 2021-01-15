@@ -3,6 +3,7 @@
 <%@ page import="com.roomorder.model.*"%>
 
 <jsp:useBean id="roomOrderSvc" scope="page" class="com.roomorder.model.RoomOrderService" />
+<jsp:useBean id="roomSvc" scope="page" class="com.room.model.RoomService" />
 <jsp:useBean id="roomOrderDetailSvc" scope="page" class="com.roomorderdetail.model.RoomOrderDetailService" />
 <c:set var="list" scope="page" value="${roomOrderSvc.getAll()}"/>
 
@@ -45,7 +46,7 @@
 					<c:set var="roomOrderVO" value="${roomOrderVO}" scope="request"/>
 						<c:set var="roomOrderDetailVO" scope="page" value="${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId)}" />
 						<tr>
-							<td>${roomOrderDetailVO.room_id}</td>
+							<td>${roomSvc.getOneRoom(roomOrderDetailVO.room_id).roomName}</td>
 							<td>${roomOrderVO.checkInDate} <br>~ ${roomOrderVO.checkOutDate}</td>
 							<td>${roomOrderDetailVO.room_guest_name}</td>
 							<td>${roomOrderVO.roomOrderSum}</td>

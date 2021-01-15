@@ -128,7 +128,7 @@
             monthList.addEventListener('change', changeMonth)
             let today = new Date()
 
-            for (let i = 1971; i <= 2050; i++) {
+            for (let i = 2020; i <= 2050; i++) {
                 let option = document.createElement('option')
                 yearList.appendChild(option)
                 option.value = i
