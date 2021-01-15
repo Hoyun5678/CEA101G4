@@ -93,6 +93,7 @@ figcaption {
 
 .snip1268 img {
 	max-width: 100%;
+	max-height: 100%;
 	vertical-align: top;
 	-webkit-transition: opacity 0.35s;
 	transition: opacity 0.35s;

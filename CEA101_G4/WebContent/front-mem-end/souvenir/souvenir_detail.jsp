@@ -454,6 +454,12 @@
 	right:0;
 }
 
+#detailPhoto {
+	width:450px;
+	height:297.9px;
+
+}
+
 .btn-success {
 	margin-bottom: 5px;
 }
@@ -489,7 +495,7 @@
 						<div class="item">
 							<c:forEach var="souphVO"
 								items="${souphSvc.getBySouId(soupVO.sou_id)}">
-								<img
+								<img id="detailPhoto"
 									src="${pageContext.request.contextPath}/souvenir_photo/SouvenirPhotoServlet?sou_photo_id=${souphVO.sou_photo_id}&action=getSouPhoto">
 							</c:forEach>
 						</div>
