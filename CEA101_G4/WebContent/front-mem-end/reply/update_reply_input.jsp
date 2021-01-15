@@ -172,15 +172,15 @@ form {
 
 			<td>活動評論內容:<textarea name="replyContent" class="form-control"
 					aria-label="With textarea"><%=replyVO.getReplyContent()%></Textarea>
-		</div>
+		</div></b>
 
-		<div id=actrow>
+<!-- 		<div id=actrow> -->
 
-			<td>活動評論狀態:</td>
-			<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示
-				<input type="radio" name="replyVisible" size="45" value="1" />顯示</td> </b>
+<!-- 			<td>活動評論狀態:</td> -->
+<!-- 			<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示 -->
+<!-- 				<input type="radio" name="replyVisible" size="45" value="1" />顯示</td> </b> -->
 
-		</div>
+<!-- 		</div> -->
 
 
 		
@@ -197,7 +197,8 @@ form {
 
 		<div id=submit>
 			<input type="hidden" name="action" value="update"> <input
-				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>">
+				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>"> <input
+				type="hidden" name="replyVisivle" value="0">
 			<input type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>

@@ -56,16 +56,16 @@ a.nav-link {
 </style>
 <body id=body>
 	<%@include file="/front-mem-end/bar.jsp"%>
+
 	<section id="sidebar">
 		<div id="sidebar-nav">
 			<ul>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"><i
-						class="fa"></i>我的評論區</a></li>
+						class="fa"></i>我的評論</a></li>
 				<li><a
 					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"><i
 						class="fa"></i>評論檢舉查詢</a></li>
-
 			</ul>
 		</div>
 	</section>
@@ -75,8 +75,22 @@ a.nav-link {
 			<div class="content-header">
 				<h1>評論檢舉資料</h1>
 			</div>
+
+			<!-- 			<button class="btn btn-primary"> -->
+			<!-- 				<a -->
+			<%-- 					href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"> --%>
+			<!-- 					<i -->
+			<!-- 					class="fa"></i>我的評論區</a> -->
+			<!-- 			</button> -->
+			<!-- 			<button class="btn btn-primary"> -->
+			<!-- 				<a -->
+			<%-- 					href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"> --%>
+			<!-- 					<i -->
+			<!-- 					class="fa"></i>評論檢舉查詢</a> -->
+			<!-- 			</button> -->
 			<%@ include file="/front-mem-end/replyreport/select_page.jsp"%>
 		</div>
+
 	</section>
 </body>
 </html>

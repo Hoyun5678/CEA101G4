@@ -63,52 +63,54 @@ h2 {
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
+				<th>會員編號</th>
 				<th>檢舉編號</th>
-				<th>員工編號</th>
 				<th>評論編號</th>
-				<th>會員內容</th>
-				<th>檢舉結果狀態</th>
 				<th></th>
 				<th></th>
 
 			</tr>
 
-			<jsp:useBean id="replyRprtSvc" scope="page"
+			<jsp:useBean id="replyReportSvc" scope="page"
 				class="com.replyreport.model.ReplyReportService" />
 		</thead>
 
-		<tbody id=tbody>
-			<c:forEach var="replyReportVOlist"
-				items="${replyReportSvc.getReplyReportByMemId(sessionScope.memVO.mem_id)}">
-				<tr>
-					<td>${replyReportVOlist.reportId}</td>
-					<td>${replyReportVOlist.empId}</td>
-					<td>${replyReportVOlist.replyId}</td>
-					<td>${replyReportVOlist.memId}</td>
-					<td>${replyReportVOlist.reportResult}</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="修改" class="btn btn-info"> <input
-								type="hidden" name="reportId" value="${replyReportVO.reportId}">
-							<input type="hidden" name="action" value="getOne_For_Update">
-						</FORM>
-					</td>
-					<td>
-						<FORM METHOD="post"
-							ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-							style="margin-bottom: 0px;">
-							<input type="submit" value="刪除" class="btn btn-danger"> <input
-								type="hidden" name="reportId" value="${replyReportVO.reportId}">
-							<input type="hidden" name="action" value="delete">
-						</FORM>
-					</td>
-				</tr>
+		<c:forEach var="replyReportVOlist"
+			items="${replyReportSvc.getReplyReportByMemId(sessionScope.memVO.mem_id)}">
+
+				<tbody id=tbody>
+
+					<tr>
+						<td>${replyReportVOlist.memId}</td>
+						<td>${replyReportVOlist.reportId}</td>
+						<%-- 					<td>${replyReportVOlist.empId}</td> --%>
+						<td>${replyReportVOlist.replyId}</td>
+						<%-- 					<td>${replyReportVOlist.reportResult}</td> --%>
+						<td>
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" value="修改" class="btn btn-info"> <input
+									type="hidden" name="reportId" value="${replyReportVO.reportId}">
+								<input type="hidden" name="action" value="getOne_For_Update">
+							</FORM>
+						</td>
+						<td>
+							<FORM METHOD="post"
+								ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+								style="margin-bottom: 0px;">
+								<input type="submit" value="刪除" class="btn btn-danger">
+								<input type="hidden" name="reportId"
+									value="${replyReportVO.reportId}"> <input type="hidden"
+									name="action" value="delete">
+							</FORM>
+						</td>
+					</tr>
 			</c:forEach>
-		</tbody>
+			</tbody>
 	</table>
 	<section id=page>
+
 		<br>
 		<h2>
 			<a

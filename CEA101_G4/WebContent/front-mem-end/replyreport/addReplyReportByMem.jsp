@@ -129,7 +129,7 @@ textarea.form-control {
 			<tr>
 				<td>會員編號:</td>
 				<td><input type="TEXT" name="memId" class="input-group-text"
-					value="<%=memId%>" /></td>
+					value="${ memId}" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
@@ -137,7 +137,7 @@ textarea.form-control {
 			<tr>
 				<td>評論編號:</td>
 				<td><input type="TEXT" name="replyId" class="input-group-text"
-					value="<%=replyId%>" /></td>
+					value="${ replyId}" /></td>
 			</tr>
 			<tr>
 				<td>評論內容:</td>

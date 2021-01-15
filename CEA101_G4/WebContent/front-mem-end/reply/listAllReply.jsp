@@ -106,7 +106,7 @@ h2 {
 				class="com.reply.model.ReplyService" />
 		</thead>
 		<c:forEach var="replyVOlist"
-			items="${replySvc.getReplyByMemId(sessionScope.memVO.mem_id)}">
+			items="${replySvc.getReplyByMemId(sessionScope.memVO.mem_id)}" >
 			<tbody id=tbody>
 				<tr>
 					<td>${replyVOlist.memId}</td>

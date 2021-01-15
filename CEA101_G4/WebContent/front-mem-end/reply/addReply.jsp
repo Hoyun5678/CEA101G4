@@ -4,6 +4,9 @@
 
 <%
 	ReplyVO replyVO = (ReplyVO) request.getAttribute("replyVO");
+	String memId = request.getParameter("memId");
+	String replyId = request.getParameter("actId");
+	String replyContent = request.getParameter("replyContent");
 %>
 <%-- <%= replyVO==null %>--${replyVO.deptno}-- --%>
 
@@ -125,14 +128,14 @@ form {
 		<div id=actrow>
 			<tr>
 				<td><b>活動編號:</td>
-				<td><input type="TEXT" class="input-group-text"
-					name="actId"
-					value="<%=(replyVO == null) ? "AP00" : replyVO.getActId()%>" /></td>
+				<td><input type="TEXT" class="input-group-text" name="actId"
+					value="<%=(replyVO == null) ? "ACT00" : replyVO.getActId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
-		<jsp:useBean id="replySvc" scope="page" class="com.reply.model.ReplyService"/>
-			
+			<jsp:useBean id="replySvc" scope="page"
+				class="com.reply.model.ReplyService" />
+
 			<tr>
 				<td>一般會員編號:</td>
 				<td><input type="TEXT" class="input-group-text" name="memId"
@@ -153,16 +156,15 @@ form {
 
 
 		<div id=actrow>
-<!-- 			<tr> -->
-<!-- 				<td>活動評論狀態:</td> -->
-<!-- 				<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示 -->
-<!-- 					<input type="radio" name="replyVisible" size="45" value="1" />顯示</td></b> -->
-<!-- 			</tr> -->
+			<!-- 			<tr> -->
+			<!-- 				<td>活動評論狀態:</td> -->
+			<!-- 				<td><input type="radio" name="replyVisible" size="45" value="0" />不顯示 -->
+			<!-- 					<input type="radio" name="replyVisible" size="45" value="1" />顯示</td></b> -->
+			<!-- 			</tr> -->
 		</div>
 		<div id=submit>
-			<input type="hidden" name="action" value="insert"> 
-			<input type="hidden" name="replyVisible" value=0>
-			<input
+			<input type="hidden" name="action" value="insert"> <input
+				type="hidden" name="replyVisible" value=0> <input
 				type="submit" class="btn btn-success" value="送出新增">
 		</div>
 	</FORM>
