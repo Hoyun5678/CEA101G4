@@ -91,6 +91,9 @@
 								<label id="roomSearchBtn"
 									for="checkyes"><span class="fas fa-search"></span>
 								</label>
+								<label class='smallBtn d-none' 
+									for="checkyes"><span class="fas fa-search"></span>
+								</label>
 							</div>
 						</div>
 					</div>
@@ -108,6 +111,9 @@
 							</div>
 							<div class="bigbig">
 								<label id="actSearchBtn"
+									for="checkyes2"><span class="fas fa-search"></span>
+								</label>
+								<label class='smallBtn d-none' 
 									for="checkyes2"><span class="fas fa-search"></span>
 								</label>
 							</div>

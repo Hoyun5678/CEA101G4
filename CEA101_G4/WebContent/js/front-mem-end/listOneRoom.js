@@ -161,9 +161,11 @@
 						$('.calendarBody tbody td').removeClass('onSelect');
 						if(resultList === false) {
 							console.log('result = false')
+							$('[name="checkInDate"]').val('');
+							$('[name="checkOutDate"]').val('');
 						} else {
 							resultList.forEach(element => $('td[value="' + element + '"]').addClass('orderedRange'))
-							$('[value="' + onSelectedVal[1] + '"]').addClass('orderedRange')
+							$('td[value="' + onSelectedVal[1] + '"]').addClass('orderedRange')
 							$('[name="checkInDate"]').val(onSelectedVal[0]);
 							$('[name="checkOutDate"]').val(onSelectedVal[1]);
 							$('#dayCount').html(resultList.length);
