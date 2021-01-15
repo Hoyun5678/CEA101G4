@@ -86,7 +86,7 @@ a.nav-link {
 			<div class="content-header">
 				<h1>評論區</h1>
 			</div>
-			<%@ include file="/front-mem-end/reply/select_page.jsp"%>
+			<%@ include file="/front-mem-end/reply/listAllReply.jsp"%>
 		</div>
 	</section>
 

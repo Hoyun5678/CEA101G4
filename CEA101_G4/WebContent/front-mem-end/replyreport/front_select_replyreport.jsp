@@ -88,7 +88,7 @@ a.nav-link {
 			<!-- 					<i -->
 			<!-- 					class="fa"></i>評論檢舉查詢</a> -->
 			<!-- 			</button> -->
-			<%@ include file="/front-mem-end/replyreport/select_page.jsp"%>
+			<%@ include file="/front-mem-end/replyreport/listAllReplyReport.jsp"%>
 		</div>
 
 	</section>
