@@ -120,9 +120,8 @@ public class RoomOrderService {
 	}
 	
 	public List<String> getCheckInBySellMemId(String sellMemId) {
-		Format sfm = new SimpleDateFormat("yyyy-MM-dd");
 		return dao.getBySellMemId(sellMemId).stream()
-				.map(VO -> sfm.format(new java.util.Date(VO.getCheckInDate().getTime())))
+				.map(VO -> VO.getCheckInDate().toString())
 				.collect(Collectors.toList());
 	}
 	

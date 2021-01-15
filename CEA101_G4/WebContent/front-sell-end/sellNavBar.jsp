@@ -12,7 +12,7 @@
 			</a>
 		</div>
 		<div class='dropdown d-flex align-items-center sellMemNav'>
-			<a class="dropdown-toggle" data-toggle='dropdown'>${ not empty sellVO ? sellVO.sellMemName: "User" }
+			<a class="dropdown-toggle" data-toggle='dropdown'>${ not empty sellVO ? sellVO.sellRoomName: "User" }
         		<span class='caret'></span>
         	</a>
         	<ul class='dropdown-menu dropdown-menu-right'>
