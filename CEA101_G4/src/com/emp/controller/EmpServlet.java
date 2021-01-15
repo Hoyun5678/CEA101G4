@@ -351,7 +351,7 @@ public class EmpServlet extends HttpServlet {
 				errorMsgs.add("密碼錯誤唷");
 			} else if (empVO.getEmp_account().equals(emp_account) && (empVO.getEmp_pwd().equals(emp_pwd))) {
 				session.setAttribute("empVO", empVO);
-				String url = "/back-end/back-index-sidebar.jsp";
+				String url = "/back-end/back-index.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			}
@@ -364,7 +364,7 @@ public class EmpServlet extends HttpServlet {
 
 		}
 //		員工登出===============================================================
-		if ("log_out".equals(action)) {
+		if ("emp_log_out".equals(action)) {
 			HttpSession session = req.getSession();
 			session.invalidate();
 //		重導至首頁=============================================================
