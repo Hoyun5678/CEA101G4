@@ -188,8 +188,8 @@ th, td {
 
 		<h4>
 			<a
-				href="<%=request.getContextPath()%>/back-end/replyreport/back_select.jsp"
-				class="btn btn-dark">首頁</a>
+				href="<%=request.getContextPath()%>/back-end/replyreport/back_AllReplyReport.jsp"
+				class="btn btn-dark">上一頁</a>
 		</h4>
 
 	</div>
