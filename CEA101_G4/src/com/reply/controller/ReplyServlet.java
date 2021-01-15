@@ -140,6 +140,7 @@ public class ReplyServlet extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("listReplyVO", listReplyVO); // 資料庫取出的replyVO物件,存入req
+				
 				req.setAttribute("actId", actId);
 				req.setAttribute("act_id", actId);
 
@@ -317,7 +318,7 @@ public class ReplyServlet extends HttpServlet {
 
 				Integer replyVisible = null;
 //				try {
-					replyVisible = new Integer(req.getParameter("replyVisible"));
+				replyVisible = new Integer(req.getParameter("replyVisible"));
 //					if (replyVisible != 0 && replyVisible != 1) {
 //						errorMsgs.add("請勾選評論狀態");
 //					}
@@ -523,8 +524,14 @@ public class ReplyServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/reply/front_AllReply.jsp");
-				failureView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					RequestDispatcher successView = req.getRequestDispatcher("/back-end/reply/back_AllReply.jsp");// 成功轉交
+					// front_update_replyreport.jsp
+					successView.forward(req, res);
+				} else {
+					RequestDispatcher failureView = req.getRequestDispatcher("/front-mem-end/reply/front_AllReply.jsp");
+					failureView.forward(req, res);
+				}
 			}
 		}
 	}

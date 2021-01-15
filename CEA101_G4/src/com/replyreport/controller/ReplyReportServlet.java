@@ -112,6 +112,10 @@ public class ReplyReportServlet extends HttpServlet {
 					String url = "/back-end/replyreport/back_update_replyreport.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
 					successView.forward(req, res);
+				} else if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/back_AllReply.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					successView.forward(req, res);
 				} else {
 					String url = "/front-mem-end/replyreport/front_update_replyreport.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
@@ -125,6 +129,10 @@ public class ReplyReportServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/back-end/replyreport/back_update_replyreport.jsp");
 					failureView.forward(req, res);
+				} else if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/back_AllReply.jsp";
+					RequestDispatcher failureView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					failureView.forward(req, res);
 				} else {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/front-mem-end/replyreport/front_AllReplyReport.jsp");
@@ -133,7 +141,9 @@ public class ReplyReportServlet extends HttpServlet {
 			}
 		}
 
-		if ("update".equals(action)) { // 來自front_update_replyreport.jsp的請求
+		if ("update".equals(action))
+
+		{ // 來自front_update_replyreport.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -145,42 +155,42 @@ public class ReplyReportServlet extends HttpServlet {
 				String reportId = req.getParameter("reportId");
 
 				String empId = req.getParameter("empId");
-				String empIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{5}$";
-				if (empId == null || empId.trim().length() == 0) {
-					errorMsgs.add("活動編號: 請勿空白");
-				} else if (!empId.trim().matches(empId)) {
-					// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("活動編號: 只能是大寫英文字母+數字 , 且長度必需是5");
-				}
+//				String empIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+//				if (empId == null || empId.trim().length() == 0) {
+//					errorMsgs.add("活動編號: 請勿空白");
+//				} else if (!empId.trim().matches(empId)) {
+//					// 以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("活動編號: 只能是大寫英文字母+數字 , 且長度必需是6");
+//				}
 
 				String memId = req.getParameter("memId");
-				String memIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
-				if (memId == null || memId.trim().length() == 0) {
-					errorMsgs.add("會員編號: 請勿空白");
-				} else if (!memId.trim().matches(memIdReg)) {
-					// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
-				}
+//				String memIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+//				if (memId == null || memId.trim().length() == 0) {
+//					errorMsgs.add("會員編號: 請勿空白");
+//				} else if (!memId.trim().matches(memIdReg)) {
+//					// 以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是6");
+//				}
 
 				String replyId = req.getParameter("replyId");
-				String replyIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
-				if (replyId == null || replyId.trim().length() == 0) {
-					errorMsgs.add("會員編號: 請勿空白");
-				} else if (!replyId.trim().matches(replyIdReg)) {
-					// 以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是5");
-				}
+//				String replyIdReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{6}$";
+//				if (replyId == null || replyId.trim().length() == 0) {
+//					errorMsgs.add("會員編號: 請勿空白");
+//				} else if (!replyId.trim().matches(replyIdReg)) {
+//					// 以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("會員編號: 只能是大寫英文字母+數字 , 且長度必需是6"
+//				}
 
-				Integer reportResult = null;
-				try {
-					reportResult = new Integer(req.getParameter("reportResult"));
-					if (reportResult != 0 && reportResult != 1) {
-						errorMsgs.add("請勾選檢舉狀態");
-					}
-				} catch (NumberFormatException e) {
-					errorMsgs.add("請勾選檢舉狀態");
-
-				}
+				Integer reportResult =  new Integer(req.getParameter("reportResult"));
+//				try {
+//					reportResult = new Integer(req.getParameter("reportResult"));
+//					if (reportResult != 0 && reportResult != 1) {
+//						errorMsgs.add("請勾選檢舉狀態");
+//					}
+//				} catch (NumberFormatException e) {
+//					errorMsgs.add("請勾選檢舉狀態");
+//
+//				}
 
 				ReplyReportVO replyReportVO = new ReplyReportVO();
 				replyReportVO.setReportId(reportId);
@@ -192,10 +202,17 @@ public class ReplyReportServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("replyReportVO", replyReportVO); // 含有輸入格式錯誤的replyReportVO物件,也存入req
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/front-mem-end/replyreport/front_update_replyreport.jsp");
-					failureView.forward(req, res);
-					return; // 程式中斷
+					if ("forEmp".equals(forEmp)) {
+						String url = "/back-end/replyreport/back_AllReply.jsp";
+						RequestDispatcher failureView = req.getRequestDispatcher(url);// 成功轉交
+																						// front_update_replyreport.jsp
+						failureView.forward(req, res);
+					} else {
+						RequestDispatcher failureView = req
+								.getRequestDispatcher("/front-mem-end/replyreport/front_update_replyreport.jsp");
+						failureView.forward(req, res);
+						return; // 程式中斷
+					}
 				}
 
 				/*************************** 2.開始修改資料 *****************************************/
@@ -217,9 +234,15 @@ public class ReplyReportServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-mem-end/replyreport/front_update_replyreport.jsp");
-				failureView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					String url = "/back-end/replyreport/back_AllReplyReport.jsp";
+					RequestDispatcher failureView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
+					failureView.forward(req, res);
+				} else {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-mem-end/replyreport/front_update_replyreport.jsp");
+					failureView.forward(req, res);
+				}
 			}
 		}
 		if ("memInsert".equals(action)) { // 來自addReplyReport.jsp的請求
@@ -481,9 +504,16 @@ public class ReplyReportServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:" + e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/front-mem-end/replyreport/front_AllReplyReport.jsp");
-				failureView.forward(req, res);
+				if ("forEmp".equals(forEmp)) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/replyreport/back_AllReplyReport.jsp");// 成功轉交
+																									// front_update_replyreport.jsp
+					failureView.forward(req, res);
+				} else {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-mem-end/replyreport/front_AllReplyReport.jsp");
+					failureView.forward(req, res);
+				}
 			}
 		}
 	}

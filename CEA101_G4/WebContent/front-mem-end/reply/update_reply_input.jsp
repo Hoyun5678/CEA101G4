@@ -198,7 +198,7 @@ form {
 		<div id=submit>
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>"> <input
-				type="hidden" name="replyVisivle" value="0">
+				type="hidden" name="replyVisible" value="0">
 			<input type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>

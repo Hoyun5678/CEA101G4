@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.activity_period.model.*"%>
 <%@ page import="com.reply.model.*"%>
 <%@ page import="java.util.*"%>
 
@@ -10,6 +11,7 @@
 	String memId = request.getParameter("memId");
 	String replyId = request.getParameter("replyId");
 	String replyContent = request.getParameter("replyContent");
+	String actId = request.getParameter("actId");
 
 	ReplyService replySvc = new ReplyService();
 	List<ReplyVO> list = replySvc.getAll();
@@ -100,7 +102,11 @@ textarea.form-control {
 }
 
 #submit {
-	text-align: center;
+	margin-left:585px;
+}
+
+#tbody:hover {
+	background-color: e9ecef;
 }
 </style>
 
@@ -200,24 +206,19 @@ textarea.form-control {
 	</table>
 	<div id=comment>
 		<h5>張貼留言</h5>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reply/reply.do">
 		<textarea class="form-control" aria-label="With textarea"
-			name="replyContent"
-			value="<%=(replyVO == null) ? "" : replyVO.getReplyContent()%>"
-			placeholder="我要留言..."></textarea>
-	</div>
-	<br>
-	<div id=submit>
-		<%-- 	<%pageContent.getAttribute()%> --%>
-		<FORM METHOD="post"
-			ACTION="<%=request.getContextPath()%>/reply/reply.do">
+			name="replyContent" value="" placeholder="我要留言..."></textarea>
+	
+
+	
+			
 			<input type="hidden" name="action" value="insert"> <input
-				type="hidden" name="actId" value="ACT001"> <input
+				type="hidden" name="actId" value="${actId}"> <input
 				type="hidden" name="memId" value="${sessionScope.memVO.mem_id}">
-			<input type="hidden" name="replyVisible" value=0> <input
-				type="hidden" name="replyContent"
-				value="<%=(replyVO == null) ? "" : replyVO.getReplyContent()%>">
+			<input type="hidden" name="replyVisible" value=0> 
 			<input type="hidden" name="byMem" value="byMem">
-			<button onclick="myFunction1()" class="btn btn-success" type="submit">送出新增</button>
+			<button onclick="myFunction1()" class="btn btn-success" id=submit type="submit">送出新增</button>
 		</FORM>
 	</div>
 	<div id=backhome>
@@ -234,7 +235,7 @@ textarea.form-control {
 	</div>
 	<script>
 		function myFunction1() {
-			alert("新增成功");
+			alert("留言成功");
 		}
 	</script>
 </body>

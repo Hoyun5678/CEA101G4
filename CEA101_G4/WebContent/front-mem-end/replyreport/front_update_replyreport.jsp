@@ -59,49 +59,6 @@ a.nav-link {
 		</div>
 	</section>
 	<section id="content">
-		<div id="header">
-			<div class="header-nav">
-				<div class="menu-button">
-					<!--<i class="fa fa-navicon"></i>-->
-				</div>
-				<div class="nav">
-					<ul>
-						<b>
-							<li class="nav-item" id="active">
-								<div class="font-icon">
-									<a class="nav-link" href="#">住宿</a>
-								</div>
-						</li>
-							<li class="nav-item" id="active">
-								<div class="font-icon">
-									<a class="nav-link" href="#">體驗</a>
-								</div>
-						</li>
-							<li class="nav-item" id="active">
-								<div class="font-icon">
-									<a class="nav-link" href="#">伴手禮</a>
-								</div>
-						</li>
-							<li class="nav-item" id="active">
-								<div class="font-icon">
-									<a class="nav-link" href="#">加入平台</a>
-								</div>
-						</li>
-							<li class="nav-profile">
-								<div class="nav-profile-name">
-
-									<a
-										href="<%=request.getContextPath()%>/front-mem-end/mem/memLogin.jsp">
-										<i class="fas fa-bars 4x" id="list"></i> <i
-										class="far fa-user-circle fa-2x" id="user"></i>
-									</a>
-								</div>
-						</li>
-						</b>
-					</ul>
-				</div>
-			</div>
-		</div>
 		<div class="content">
 			<div class="content-header">
 				<h1>評論檢舉資料</h1>

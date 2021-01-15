@@ -172,11 +172,14 @@ th, td {
 		<!-- 	</tr> -->
 
 		<div id=submit>
-			<input type="hidden" name="action" value="update"> <input
-				type="hidden" name="reportId"
-				value="<%=replyReportVO.getReportId()%>"> <input
-				type="hidden" name="forEmp" value="forEmp"><input
-				type="submit" class="btn btn-success" value="送出修改">
+			<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do">
+				<input type="hidden" name="action" value="update"> <input
+					type="hidden" name="reportId"
+					value="<%=replyReportVO.getReportId()%>"> <input
+					type="hidden" name="forEmp" value="forEmp"><input
+					type="submit" class="btn btn-success" value="送出修改">
+			</FORM>
 		</div>
 	</FORM>
 

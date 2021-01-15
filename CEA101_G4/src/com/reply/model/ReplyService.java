@@ -21,6 +21,19 @@ public class ReplyService {
 
 		return replyVO;
 	}
+	
+	public ReplyVO addReplyByMem(String actId, String memId, String replyContent, Integer replyVisible) {
+
+		ReplyVO replyVO = new ReplyVO();
+
+		replyVO.setActId(actId);
+		replyVO.setMemId(memId);
+		replyVO.setReplyContent(replyContent);
+		replyVO.setReplyVisible(replyVisible);
+		dao.insert(replyVO);
+
+		return replyVO;
+	}
 
 	public ReplyVO updateReply(String replyId, String actId, String memId, String replyContent,
 			java.sql.Timestamp replyTime, Integer replyVisible) {
