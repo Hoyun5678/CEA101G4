@@ -143,7 +143,32 @@
 
 <%-- <%@ include file="page2.file" %> --%>
 </div>
-
+  <script type="text/javascript">
+//      	 $('input#btn_del').on('click',function(){
+    		
+//      	 event.preventDefault();
+     		 
+//  		 Swal.fire({
+//  			 title: '確定刪除嗎?',
+//   			 text: "資料將一去不復返!",
+//   			 icon: 'warning',
+//  			 showCancelButton: true,
+//  			 confirmButtonColor: '#3085d6',
+//  			 cancelButtonColor: '#d33',
+//              confirmButtonText: '確定!',
+//              cancelButtonText:'取消!',
+             
+// 		 }).then((result) => {
+// 	 		 if (result.isConfirmed) {
+// 	    		Swal.fire(
+// 	     		 '已成功刪除!'
+// 	         	)
+// 	  		}
+//  		})
+// 		});
+    	
+   	 </script> 
+    
     	 
       
 <script>
