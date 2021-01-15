@@ -204,7 +204,7 @@ public class ReplyReportServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				if ("forEmp".equals(forEmp)) {
-					String url = "/back-end/replyreport/back_listOne.jsp";
+					String url = "/back-end/replyreport/back_AllReplyReport.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 front_update_replyreport.jsp
 					successView.forward(req, res);
 				} else {
