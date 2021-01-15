@@ -7,6 +7,9 @@
 
 <%
 	ReplyVO replyVO = (ReplyVO) request.getAttribute("replyVO");
+	String memId = request.getParameter("memId");
+	String replyId = request.getParameter("replyId");
+	String replyContent = request.getParameter("replyContent");
 
 	ReplyService replySvc = new ReplyService();
 	List<ReplyVO> list = replySvc.getAll();
@@ -211,7 +214,8 @@ textarea.form-control {
 				type="hidden" name="actId" value="ACT001"> <input
 				type="hidden" name="memId" value="${sessionScope.memVO.mem_id}">
 			<input type="hidden" name="replyVisible" value=0> <input
-				type="hidden" name="replyContent" value="${replyVO.replyContent}">
+				type="hidden" name="replyContent"
+				value="<%=(replyVO == null) ? "" : replyVO.getReplyContent()%>">
 			<input type="hidden" name="byMem" value="byMem">
 			<button onclick="myFunction1()" class="btn btn-success" type="submit">送出新增</button>
 		</FORM>
