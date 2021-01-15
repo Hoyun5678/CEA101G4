@@ -293,9 +293,9 @@ color:black;
                         </div>
                     </div>
                     <div class="map">
-                        <button class="active first"></button>
-                        <button class="second"></button>
-                        <button class="third"></button>
+                        <button type="button" class="active first"></button>
+                        <button type="button" class="second"></button>
+                        <button type="button" class="third"></button>
                     </div>
                 </div>
             </div>
