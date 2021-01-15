@@ -58,7 +58,7 @@ a {
 }
 
 .content {
-	height: 200%;
+	height: 100%;
 }
 </style>
 
@@ -101,7 +101,7 @@ a {
 				<td>${replyReportVO.reportResult}</td>
 				<td>
 					<FORM METHOD="post"
-						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+						ACTION="<%=request.getContextPath()%>/reply/reply.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="查看" class="btn btn-info"> <input
 							type="hidden" name="replyId" value="${replyReportVO.replyId}">

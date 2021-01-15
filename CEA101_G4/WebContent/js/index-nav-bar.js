@@ -1,11 +1,17 @@
         $(function() {
             $('div#room_act').click(function() {
+            	$('#roomSearchBtn').removeClass('d-none');
+            	$('#actSearchBtn').removeClass('d-none');
+            	$('.smallBtn').addClass('d-none');
                 $('#room').show();
                 $('#room_act').addClass("nav_active");
                 $('#act_act').removeClass("nav_active");
                 $('#act').hide();
             });
             $('div#act_act').click(function() {
+            	$('#roomSearchBtn').removeClass('d-none');
+            	$('#actSearchBtn').removeClass('d-none');
+            	$('.smallBtn').addClass('d-none');
                 $('#act').show();
                 $('#act_act').addClass("nav_active");
                 $('#room_act').removeClass("nav_active");
@@ -52,6 +58,10 @@
 
             $(window).scroll(function() {
                 if ($(window).scrollTop() >= 3) {
+                	// 縮小
+                	$('#roomSearchBtn').addClass('d-none');
+                	$('#actSearchBtn').addClass('d-none');
+                	$('.smallBtn').removeClass('d-none');
                     $('.header').addClass('upup');
                     $('.cc').hide();
                     $('.justify-content-md-center').addClass('shsh');
@@ -59,12 +69,18 @@
                     $('.shsh').click(function() {
                         $('.header').removeClass('upup');
                         $('.header').addClass('open');
+                    	$('#roomSearchBtn').removeClass('d-none');
+                    	$('#actSearchBtn').removeClass('d-none');
+                    	$('.smallBtn').addClass('d-none');
                         $('.cc').show();
                         $('.justify-content-md-center').removeClass('shsh');
 
 
                     });
                 } else {
+                	$('#roomSearchBtn').removeClass('d-none');
+                	$('#actSearchBtn').removeClass('d-none');
+                	$('.smallBtn').addClass('d-none');
                     $('.header').removeClass('upup');
                     $('.header').removeClass('open');
                     $('.cc').show();

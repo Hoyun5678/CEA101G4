@@ -75,15 +75,14 @@ a:hover {
 			<a
 				href='<%=request.getContextPath()%>/front-mem-end//replyreport/front_addReplyReport.jsp'>新增一筆評論檢舉</a>
 
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do">
-				<b>輸入評論檢舉編號 (ex:REP001):</b> <input type="text" name="repsortId">
-				<input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="Search" class="btn btn-info">
-			</FORM>
+<!-- 			<FORM METHOD="post" -->
+<%-- 				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"> --%>
+<!-- 				<b>輸入評論檢舉編號 (ex:REP001):</b> <input type="text" name="repsortId"> -->
+<!-- 				<input type="hidden" name="action" value="getOne_For_Display"> -->
+<!-- 				<input type="submit" value="Search" class="btn btn-info"> -->
+<!-- 			</FORM> -->
 			<jsp:useBean id="replyReportSvc" scope="page"
-				class="com.replyreport.model.ReplyReportService" />
-
+				class="com.replyreport.model.ReplyReportService" /> 
 
 		</nav>
 		<br>

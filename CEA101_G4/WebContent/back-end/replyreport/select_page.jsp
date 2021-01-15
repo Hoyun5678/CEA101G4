@@ -57,7 +57,7 @@ navbar navbar-dark bg-dark {
 }
 
 #actrow {
-	margin-left: 150px;
+	margin-left: 270px;
 }
 </style>
 

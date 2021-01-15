@@ -67,7 +67,7 @@ h2 {
 				<th>檢舉編號</th>
 				<th>評論編號</th>
 				<th></th>
-				<th></th>
+				
 
 			</tr>
 
@@ -86,22 +86,22 @@ h2 {
 						<%-- 					<td>${replyReportVOlist.empId}</td> --%>
 						<td>${replyReportVOlist.replyId}</td>
 						<%-- 					<td>${replyReportVOlist.reportResult}</td> --%>
-						<td>
-							<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
-								style="margin-bottom: 0px;">
-								<input type="submit" value="修改" class="btn btn-info"> <input
-									type="hidden" name="reportId" value="${replyReportVO.reportId}">
-								<input type="hidden" name="action" value="getOne_For_Update">
-							</FORM>
-						</td>
+<!-- 						<td> -->
+<!-- 							<FORM METHOD="post" -->
+<%-- 								ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do" --%>
+<!-- 								style="margin-bottom: 0px;"> -->
+<!-- 								<input type="submit" value="修改" class="btn btn-info"> <input -->
+<%-- 									type="hidden" name="reportId" value="${replyReportVOlist.reportId}"> --%>
+<!-- 								<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 							</FORM> -->
+<!-- 						</td> -->
 						<td>
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
 								style="margin-bottom: 0px;">
 								<input type="submit" value="刪除" class="btn btn-danger">
 								<input type="hidden" name="reportId"
-									value="${replyReportVO.reportId}"> <input type="hidden"
+									value="${replyReportVOlist.reportId}"> <input type="hidden"
 									name="action" value="delete">
 							</FORM>
 						</td>

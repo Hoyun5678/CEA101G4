@@ -193,14 +193,15 @@ form {
 
 
 		<div id=submit>
-			<input type="hidden" name="action" value="update"> <input
-				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>">
-			<input type="hidden" name="actId" value="<%=replyVO.getActId()%>">
-			<input type="hidden" name="replyContent"
-				value="<%=replyVO.getReplyContent()%>"> <input type="hidden"
-				name="replyTime" value="<%=replyVO.getReplyTime()%>"> <input
-				type="hidden" name="forEmp" value="forEmp"> <input
-				type="submit" class="btn btn-success" value="審核送出">
+			
+				<input type="hidden" name="action" value="update"> <input
+					type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>">
+				<input type="hidden" name="actId" value="<%=replyVO.getActId()%>">
+				<input type="hidden" name="replyContent"
+					value="<%=replyVO.getReplyContent()%>"> <input
+					type="hidden" name="replyTime" value="<%=replyVO.getReplyTime()%>">
+				<input type="hidden" name="forEmp" value="forEmp"> <input
+					type="submit" class="btn btn-success" value="審核送出">
 		</div>
 	</FORM>
 

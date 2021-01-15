@@ -106,7 +106,7 @@ th, td {
 
 
 
-	<h3>評論資料修改:</h3>
+	<h3>評論檢舉修改:</h3>
 
 	<%-- 錯誤表列 --%>
 	<c:if test="${not empty errorMsgs}">
@@ -125,37 +125,38 @@ th, td {
 		<div id=actrow>
 			<tr>
 				<td><b>評論檢舉編號:<font color=red><b></b></font></td>
-				<td><%=replyReportVO.getReportId()%></td><br>
+				<td><%=replyReportVO.getReportId()%></td>
+				<br>
 			</tr>
 			<br>
-			<tr>
-				<td>評論員工編號:</td>
-				<td><input type="TEXT" name="empId" class="input-group-text" 
-					size="20" value="<%=replyReportVO.getEmpId()%>" /></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td>評論員工編號:</td> -->
+<!-- 				<td><input type="TEXT" name="empId" class="input-group-text" -->
+<%-- 					size="20" value="<%=replyReportVO.getEmpId()%>" /></td> --%>
+<!-- 			</tr> -->
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>會員編號:</td>
-				<td><input type="TEXT" name="memId" class="input-group-text" 
+				<td><input type="TEXT" name="memId" class="input-group-text"
 					size="20" value="<%=replyReportVO.getMemId()%>" /></td>
 			</tr>
 		</div>
 		<div id=actrow>
 			<tr>
 				<td>評論編號:</td>
-				<td><input type="TEXT" name="replyId" class="input-group-text" 
+				<td><input type="TEXT" name="replyId" class="input-group-text"
 					size="20" value="<%=replyReportVO.getReplyId()%>" /></td>
 			</tr>
 		</div>
-		<div id=actrow>
-			<tr>
-				<td>檢舉結果狀態:</td>
-				<td><input type="radio" name="reportResult" size="45" value="0" />待處理
-					<input type="radio" name="reportResult" size="45" value="1" />已處理同意
-					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td></b>
-			</tr>
-		</div>
+<!-- 		<div id=actrow> -->
+			<!-- 			<tr> -->
+			<!-- 				<td>檢舉結果狀態:</td> -->
+			<!-- 				<td><input type="radio" name="reportResult" size="45" value="0" />待處理 -->
+			<!-- 					<input type="radio" name="reportResult" size="45" value="1" />已處理同意 -->
+			<!-- 					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</td></b> -->
+			<!-- 			</tr> -->
+<!-- 		</div> -->
 
 
 		<!-- 	<JSP:USEBEAN ID="REPLYSVC" SCOPE="PAGE" CLASS="COM.REPLY.MODEL.REPLYSERVICE" /> -->
@@ -172,6 +173,7 @@ th, td {
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="reportId"
 				value="<%=replyReportVO.getReportId()%>"> <input
+				type="hidden" name="replyResult" value="0"><input
 				type="submit" class="btn btn-success" value="送出修改">
 		</div>
 	</FORM>

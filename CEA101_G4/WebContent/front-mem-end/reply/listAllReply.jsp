@@ -97,7 +97,7 @@ h2 {
 				<th>活動期別編號</th>
 				<th>活動評論內容</th>
 				<th>活動評論時間</th>
-				<th>活動評論狀態</th>
+<!-- 				<th>活動評論狀態</th> -->
 				<th></th>
 				<th></th>
 
@@ -115,7 +115,7 @@ h2 {
 					<td>${replyVOlist.replyContent}</td>
 					<td><fmt:formatDate value="${replyVOlist.replyTime}"
 							type="both" /></td>
-					<td>${replyVOlist.replyVisible}</td>
+<%-- 					<td>${replyVOlist.replyVisible}</td> --%>
 					<td>
 						<FORM METHOD="post"
 							ACTION="<%=request.getContextPath()%>/reply/reply.do"

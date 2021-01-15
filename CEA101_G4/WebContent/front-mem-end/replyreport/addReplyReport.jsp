@@ -141,17 +141,18 @@ form {
 			</tr>
 		</div>
 		<div id=actrow>
-			<tr>
-				<td>檢舉結果狀態:</td>
-				<td><input type="radio" name="reportResult" size="45" value="0" />待處理
-					<input type="radio" name="reportResult" size="45" value="1" />已處理同意
-					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</b></td>
-			</tr>
+			<!-- 			<tr> -->
+			<!-- 				<td>檢舉結果狀態:</td> -->
+			<!-- 				<td><input type="radio" name="reportResult" size="45" value="0" />待處理 -->
+			<!-- 					<input type="radio" name="reportResult" size="45" value="1" />已處理同意 -->
+			<!-- 					<input type="radio" name="reportResult" size="45" value="2" />已處理不同意</b></td> -->
+			<!-- 			</tr> -->
 		</div>
 		<div id=submit>
 
 			<br> <input type="hidden" name="action" value="insert">
-			<input type="submit" class="btn btn-success" value="送出新增">
+			<input type="hidden" name="replyResult" value="0"> <input
+				type="submit" class="btn btn-success" value="送出新增">
 		</div>
 	</FORM>
 

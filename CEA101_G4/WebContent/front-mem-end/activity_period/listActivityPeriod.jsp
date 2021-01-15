@@ -350,7 +350,7 @@
                                      <c:when test="${actperVO.act_sign_sum<actperVO.act_up_limit}">
                                          <tr>
                                     		<td>參與人數:</td>
-                                    		<td><input type="number" name="act_order_amount" min="1" max="20" step="1" value="1"></td>
+                                    		<td><input type="number" name="act_order_amount" min="1" max="100" step="1" value="1"></td>
                                 		</tr>
                                			 <tr>
                                     		<td>備註: <input type="textarea" name="act_order_remarks" style="height: 80px;"></td>

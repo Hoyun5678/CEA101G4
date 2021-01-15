@@ -114,7 +114,7 @@ th, td {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/back-end/reply/back_AllReply.jsp"
+						href="<%=request.getContextPath()%>/back-end/replyreport/back_AllReplyReport.jsp"
 						class="btn btn-dark">回上頁</a>
 				</h3>
 			</td>

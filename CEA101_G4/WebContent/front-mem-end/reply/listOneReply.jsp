@@ -111,7 +111,7 @@ th, td {
 				<h3>
 					<a
 						href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
-						class="btn btn-dark">回上頁</a>
+						class="btn btn-dark">回首頁</a>
 				</h3>
 			</td>
 		</tr>

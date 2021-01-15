@@ -172,6 +172,7 @@ th, td {
 		<!-- 	</tr> -->
 
 		<div id=submit>
+<<<<<<< HEAD
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="reportId"
 				value="<%=replyReportVO.getReportId()%>"> <input
@@ -187,6 +188,26 @@ th, td {
 			<a
 				href="<%=request.getContextPath()%>/back-end/replyreport/back_select.jsp"
 				class="btn btn-dark">首頁</a>
+=======
+			<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do">
+				<input type="hidden" name="action" value="update"> <input
+					type="hidden" name="reportId"
+					value="<%=replyReportVO.getReportId()%>"> <input
+					type="hidden" name="forEmp" value="forEmp"><input
+					type="submit" class="btn btn-success" value="送出修改">
+			</FORM>
+		</div>
+	</FORM>
+
+	<br>
+	<div id=backhome>
+
+		<h4>
+			<a
+				href="<%=request.getContextPath()%>/back-end/replyreport/back_AllReplyReport.jsp"
+				class="btn btn-dark">上一頁</a>
+>>>>>>> branch 'main' of https://github.com/Hoyun5678/CEA101G4.git
 		</h4>
 
 	</div>
