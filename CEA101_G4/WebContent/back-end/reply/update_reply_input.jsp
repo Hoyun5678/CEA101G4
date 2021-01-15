@@ -116,8 +116,6 @@ form {
 </head>
 <body bgcolor='white'>
 
-
-
 	<h4>評論資料修改:</h4>
 
 	<%-- 錯誤表列 --%>
@@ -150,6 +148,12 @@ form {
 			</tr>
 		</div>
 		<div id=actrow>
+
+			<td>活動編號:</td>
+			<td><input type="hidden" name="actId"
+				value="<%=replyVO.getActId()%>"><%=replyVO.getActId()%></td>
+		</div>
+		<div id=actrow>
 			<tr>
 				<td>活動評論時間:</td>
 				<td><input type="hidden" name="replyTime"
@@ -162,15 +166,10 @@ form {
 
 		<div id=actrow>
 
-			<td>活動期別編號:</td>
-			<td><input type="hidden" name="actId"
-				value="<%=replyVO.getActId()%>"><%=replyVO.getActId()%></td>
-		</div>
-
-		<div id=actrow>
-
-			<td>活動評論內容:<textarea name="replyContent" class="form-control"
-					aria-label="With textarea"><%=replyVO.getReplyContent()%></Textarea>
+			<td>活動評論內容: <input type="hidden" name="actId"
+				value="<%=replyVO.getReplyContent()%>"><%=replyVO.getReplyContent()%></td>
+			<!-- 			<textarea name="replyContent" class="form-control" -->
+			<%-- 				aria-label="With textarea"><%=replyVO.getReplyContent()%></Textarea> --%>
 		</div>
 
 		<div id=actrow>
@@ -196,12 +195,12 @@ form {
 		<div id=submit>
 			<input type="hidden" name="action" value="update"> <input
 				type="hidden" name="replyId" value="<%=replyVO.getReplyId()%>">
-			<input type="hidden" name="replyId" value="<%=replyVO.getActId()%>">
-			<input type="hidden" name="replyId"
+			<input type="hidden" name="actId" value="<%=replyVO.getActId()%>">
+			<input type="hidden" name="replyContent"
 				value="<%=replyVO.getReplyContent()%>"> <input type="hidden"
-				name="replyId" value="<%=replyVO.getReplyTime()%>"> <input
+				name="replyTime" value="<%=replyVO.getReplyTime()%>"> <input
 				type="hidden" name="forEmp" value="forEmp"> <input
-				type="submit" class="btn btn-success" value="送出修改">
+				type="submit" class="btn btn-success" value="審核送出">
 		</div>
 	</FORM>
 

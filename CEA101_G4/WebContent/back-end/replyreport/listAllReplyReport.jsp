@@ -85,6 +85,7 @@ a {
 				<th>檢舉結果狀態</th>
 				<th></th>
 				<th></th>
+				<th></th>
 
 
 			</tr>
@@ -99,15 +100,22 @@ a {
 				<td>${replyReportVO.memId}</td>
 				<td>${replyReportVO.reportResult}</td>
 				<td>
-					<!-- 					<button type="submit" value="查看" class="btn btn-info"> -->
-					<!-- 						<a --> <%-- 							href='<%=request.getContextPath()%>/reply/reply.do?replyId=${replyVO.replyId}&action=getOne_For_Display'> --%>
-					<!-- 							查看</a> --> <!-- 					</button> -->
-
-
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
 						style="margin-bottom: 0px;">
 						<input type="submit" value="查看" class="btn btn-info"> <input
+							type="hidden" name="replyId" value="${replyReportVO.replyId}">
+						<input type="hidden" name="forEmp" value="forEmp"> <input
+							type="hidden" name="action" value="getOne_For_Display">
+					</FORM>
+				</td>
+
+
+				<td>
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
+						style="margin-bottom: 0px;">
+						<input type="submit" value="修改" class="btn btn-info"> <input
 							type="hidden" name="reportId" value="${replyReportVO.reportId}">
 						<input type="hidden" name="forEmp" value="forEmp"> <input
 							type="hidden" name="action" value="getOne_For_Update">

@@ -1,4 +1,3 @@
-<< HEAD
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -106,7 +105,7 @@ h2 {
 				<th>活動評論狀態</th>
 				<th></th>
 				<th></th>
-				<th></th>
+
 			</tr>
 			<%@ include file="page1.file"%>
 			<c:forEach var="replyVO" items="${list}" begin="<%=pageIndex%>"
@@ -133,7 +132,8 @@ h2 {
 					<FORM METHOD="post"
 						ACTION="<%=request.getContextPath()%>/reply/reply.do"
 						style="margin-bottom: 0px;">
-						<input type="submit" value="刪除" class="btn btn-danger"> <input
+						<input type="submit" value="刪除" class="btn btn-danger"> 
+						<input
 							type="hidden" name="replyId" value="${replyVO.replyId}">
 						<input type="hidden" name="forEmp" value="forEmp"> <input
 							type="hidden" name="action" value="delete">

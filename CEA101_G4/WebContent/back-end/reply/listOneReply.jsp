@@ -90,6 +90,9 @@ th, td {
 				<th>活動評論內容</th>
 				<th>活動評論時間</th>
 				<th>活動評論狀態</th>
+
+
+				
 			</tr>
 		</thead>
 		<tbody id=tbody>
@@ -111,7 +114,7 @@ th, td {
 			<td>
 				<h3>
 					<a
-						href="<%=request.getContextPath()%>/back-end/replyreport/back_AllReplyReport.jsp"
+						href="<%=request.getContextPath()%>/back-end/reply/back_AllReply.jsp"
 						class="btn btn-dark">回上頁</a>
 				</h3>
 			</td>
