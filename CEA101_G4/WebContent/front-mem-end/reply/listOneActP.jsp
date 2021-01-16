@@ -111,21 +111,23 @@ textarea.form-control {
 
 div.img_block {
 	width: 600px;
-	margin: 50px;
+	margin:50px;
+
 }
+
+
 </style>
 
 </head>
 <body bgcolor='white'>
 	<%@include file="/front-mem-end/bar.jsp"%>
-	<jsp:useBean id="actphoSvc" scope="page"
-		class="com.activity_photo.model.ActivityPhotoService" />
+<%-- <jsp:useBean id="actphoSvc" scope="page" class="com.activity_photo.model.ActivityPhotoService" /> --%>
 	<div class="img_block">
 
 		<td><img class="img-fluid" id=photo
 			src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_id=${act_id}&action=getListActPhoByActId"
 			alt="活動示意圖"></td>
-		<td>${actphoSvc.getOneActPro(actperVO.act_id).act_name}</td>
+		<td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
 
 	</div>
 	<!-- 	<nav class="navbar navbar-dark bg-dark"> -->
