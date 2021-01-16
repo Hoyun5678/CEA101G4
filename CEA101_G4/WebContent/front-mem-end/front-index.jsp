@@ -355,29 +355,26 @@
 				</div>
 			</div>
 		</section>
-		<section>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		</section>
+	
 	</main>
 	<footer>
 		<div class="foo conta" style="text-align: center;">
 			<div class="fooco">SuperGoing</div>
 			<div>E-mail：你最愛的民宿平台@gmail.com</div>
 			<div>Tele：2933-3939</div>
-			<div></div>
+			<div class="copy">
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/front-mem-end/faq/listAllFAQ.jsp'">
+								FAQ
+			</button>
+			</div>
+				<div class="copy">
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/front-mem-end/news/listNews.jsp'">
+								最新消息
+			</button>
+			</div>
 		</div>
 		<div class="foo logo">
-			<div class="copy"></div>
+			
 		</div>
 	</footer>
 </body>
