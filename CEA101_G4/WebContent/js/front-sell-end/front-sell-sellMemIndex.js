@@ -142,6 +142,28 @@
                 if (monOptions[i].value === today.getMonth().toString()) monOptions[i].selected = true
             }
             drawCal(new Date(today.getFullYear(), today.getMonth(), 1))
+            
+            
+            //ws
+    		var MyPoint = "/NotifyWS";
+	    	var host = window.location.host;
+	    	var path = window.location.pathname;
+	    	var webCtx = path.substring(0, path.indexOf('/', 1));
+	    	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+	    	console.log('endPointURL = ' + endPointURL);
+	    	var webSocket = new WebSocket(endPointURL);
+	    	webSocket.onmessage = function(event) {
+	    		console.log('on msg')
+	    		var jsonObj = JSON.parse(event.data);
+	    		let type = jsonObj.type;
+	    		let msg = jsonObj.msg;
+	    		let chDate = jsonObj.checkInDate;
+	    		$('td[value="' + chDate + '"]').fadeOut(0, function() {
+	    			$(this).addClass('orderedDate');
+	    		}).fadeIn(1000);
+	    		Command: toastr['success'](msg, type)
+	    	};
+            
 
 
             $(document).on('click', '.calendarBody tbody td', function() {

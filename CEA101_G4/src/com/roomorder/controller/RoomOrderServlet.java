@@ -791,6 +791,7 @@ public class RoomOrderServlet extends HttpServlet {
 					JSONObject data = new JSONObject();
 					data.put("type", "民宿訂單");
 					data.put("msg", "您有一筆新的民宿訂單成立囉~!");
+					data.put("checkInDate", checkInDate);
 					wsSessions.forEach(e -> e.getAsyncRemote().sendText(data.toString()));
 				}
 				
