@@ -366,12 +366,13 @@
 			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/front-mem-end/faq/listAllFAQ.jsp'">
 								FAQ
 			</button>
-			</div>
-				<div class="copy">
 			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/front-mem-end/news/listNews.jsp'">
 								最新消息
 			</button>
 			</div>
+				
+			
+			
 		</div>
 		<div class="foo logo">
 			
