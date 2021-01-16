@@ -112,6 +112,16 @@ pageContext.setAttribute("roomOrderVO", roomOrderVO);
 	margin-top:20px;
 	text-align:center;
 	}
+	.btn_upd{
+	background-color: #626b79;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 30px;
+	}
+	.btn_upd.hover{
+	background-color:grey;
+	}
 	
 	</style>
 </head>
@@ -125,7 +135,7 @@ pageContext.setAttribute("roomOrderVO", roomOrderVO);
   <div class="col-lg-5" id="left">
   	<div id="roomorderpic">
   		<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId).room_id}&action=getOnePhotoByRoomId") style="object-fit:cover;height:270px;">
-  		<div>${sellSvc. getOneSell(roomOrderVO.sellMemId).sellRoomName}地址:${sellSvc. getOneSell(roomOrderVO.sellMemId).sellMemAddress}</div>
+  		<div style="font-weight:600;">${sellSvc. getOneSell(roomOrderVO.sellMemId).sellRoomName}地址:${sellSvc. getOneSell(roomOrderVO.sellMemId).sellMemAddress}</div>
   	</div>
   	<div class="guestInfo">
   		<div class="title">入住者姓名:</div><div class="value">${roomOrderDetailSvc.getOneRoomOrderDetail(roomOrderVO.roomOrderId).room_guest_name}</div>
@@ -156,7 +166,7 @@ pageContext.setAttribute("roomOrderVO", roomOrderVO);
 		<h6>聯繫住宿以獲得解答，或提出特殊要求。</h6>	
   		<div>${sellSvc.getOneSell(roomOrderVO.sellMemId).sellMemTel}</div>
   	</div>
-  	<div>訂單狀態:
+  	<div style="margin-top:40px;font-weight:600;font-size:22px;">訂單狀態:
   	<c:choose>
 		<c:when test="${roomOrderVO.roomOrderStatus ==0}"> 
 			待審核
