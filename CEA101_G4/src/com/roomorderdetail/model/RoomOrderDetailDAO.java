@@ -188,7 +188,6 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
 			pstmt.setString(1, room_order_id);
-			System.out.println("room order id = " + room_order_id);
 
 			rs = pstmt.executeQuery();
 
@@ -196,17 +195,11 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 				
 				rodVO = new RoomOrderDetailVO();
 				rodVO.setRoom_order_id(rs.getString("room_order_id"));
-				System.out.println("2room order id = " + room_order_id);
 				rodVO.setRoom_id(rs.getString("room_id"));
-				System.out.println("room id = ");
 				rodVO.setRoom_cur_price(rs.getInt("room_cur_price"));
-				System.out.println("room_cur_price = ");
 				rodVO.setRoom_guest_name(rs.getString("room_guest_name"));
-				System.out.println("room_guest_name = ");
 				rodVO.setRoom_guest_mail(rs.getString("room_guest_mail"));
-				System.out.println("room_guest_mail = ");
 				rodVO.setRoom_guest_tel(rs.getString("room_guest_tel"));	
-				System.out.println("room_guest_tel = ");
 			}
 
 			// Handle any driver errors
@@ -322,18 +315,15 @@ public class RoomOrderDetailDAO implements RoomOrderDetailDAO_interface {
 			
 			pstmt.executeUpdate();
 			
-			System.out.println("1. order detail DAO -> insrt from order()");
 			RoomOrderedDateDAO dao = new RoomOrderedDateDAO();
 			long checkInDateToLong = checkInDate.getTime();
 			RoomOrderedDateVO aRoomOrderedDate = null;
-			System.out.println("2. order detail DAO -> insrt from order()");
 			do {
 				aRoomOrderedDate = new RoomOrderedDateVO();
 				aRoomOrderedDate.setRoomOrderId(roomOrderId);
 				aRoomOrderedDate.setRoomId(roomId);
 				Date d = new Date(checkInDateToLong);
 				aRoomOrderedDate.setRoomOrderDate(d);
-				System.out.println("roomOrderId = " + roomOrderId + " , roomId = " + roomId + " , Date = " + d.toString());
 				dao.insertFromOrderDetail(aRoomOrderedDate, con);
 				checkInDateToLong += 24 * 60 * 60 * 1000L;
 			} while(checkInDateToLong < checkOutDate.getTime());

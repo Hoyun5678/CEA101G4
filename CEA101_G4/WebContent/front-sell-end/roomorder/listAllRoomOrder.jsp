@@ -136,9 +136,9 @@
 							  </FORM>
 							</td>
 							<td>
-								<form method="POST" action='<%=request.getContextPath()%>/' style="margin-bottom: 0px;">
+								<form method="POST" action='<%=request.getContextPath()%>/front-sell-end/roomorder/listOneRoomOrder.jsp' style="margin-bottom: 0px;">
 									<input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
-									<button type="button" class="btn btn-primary editOrderBtn">修改</button>
+									<button type="submit" class="btn btn-primary editOrderBtn">修改</button>
 								</form>
 							</td>
 						</tr>
