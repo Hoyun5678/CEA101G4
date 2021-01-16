@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">    
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-listAllRoom.css">
     
-	<title>所有房間訂單資料 - listAllRoom.jsp</title>
+	<title>所有房間訂單資料</title>
 </head>
 <body>
 	<c:if test="${not empty sellVO}">
@@ -136,7 +136,7 @@
 							  </FORM>
 							</td>
 							<td>
-								<form method="POST" action='<%=request.getContextPath()%>/'>
+								<form method="POST" action='<%=request.getContextPath()%>/' style="margin-bottom: 0px;">
 									<input type="hidden" name="roomOrderId"  value="${roomOrderVO.roomOrderId}">
 									<button type="button" class="btn btn-primary editOrderBtn">修改</button>
 								</form>

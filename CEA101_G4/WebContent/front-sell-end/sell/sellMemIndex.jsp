@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sellMemIndex.css">
     
 	<title>所有房間資料</title>
@@ -93,7 +94,44 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/front-sell-end/front-sell-sellMemIndex.js"></script>
+    	<script>
+		toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "3000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+		$(document).ready(function() {
+	        //WS
+	    	var MyPoint = "/NotifyWS";
+	    	var host = window.location.host;
+	    	var path = window.location.pathname;
+	    	var webCtx = path.substring(0, path.indexOf('/', 1));
+	    	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+	    	console.log('endPointURL = ' + endPointURL);
+	    	var webSocket = new WebSocket(endPointURL);
+	    	webSocket.onmessage = function(event) {
+	    		console.log('on msg')
+	    		var jsonObj = JSON.parse(event.data);
+	    		let type = jsonObj.type;
+	    		let msg = jsonObj.msg;
+	    		Command: toastr['success'](msg, type)
+	    	};
+		})
+	</script>
 
     
 </body>
