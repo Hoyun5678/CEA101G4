@@ -99,7 +99,7 @@ h2 {
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/replyReport/replyReport.do"
 								style="margin-bottom: 0px;">
-								<input type="submit" value="刪除" class="btn btn-danger">
+								<input type="submit" value="取消檢舉" class="btn btn-danger">
 								<input type="hidden" name="reportId"
 									value="${replyReportVOlist.reportId}"> <input type="hidden"
 									name="action" value="delete">
@@ -111,12 +111,12 @@ h2 {
 	</table>
 	<section id=page>
 
-		<br>
-		<h2>
-			<a
-				href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp"
-				class="btn btn-dark">回上頁</a>
-		</h2>
+<!-- 		<br> -->
+<!-- 		<h2> -->
+<!-- 			<a -->
+<%-- 				href="<%=request.getContextPath()%>/front-mem-end/replyreport/front_select_replyreport.jsp" --%>
+<!-- 				class="btn btn-dark">回上頁</a> -->
+<!-- 		</h2> -->
 	</section>
 </body>
 </html>

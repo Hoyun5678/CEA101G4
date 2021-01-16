@@ -102,62 +102,32 @@ textarea.form-control {
 }
 
 #submit {
-	margin-left:585px;
+	margin-left: 585px;
 }
 
 #tbody:hover {
 	background-color: e9ecef;
+}
+
+div.img_block {
+	width: 600px;
+	margin: 50px;
 }
 </style>
 
 </head>
 <body bgcolor='white'>
 	<%@include file="/front-mem-end/bar.jsp"%>
+	<jsp:useBean id="actphoSvc" scope="page"
+		class="com.activity_photo.model.ActivityPhotoService" />
+	<div class="img_block">
 
-	<!-- 	<table> -->
-	<!-- 		<h4>我要留言</h4> -->
-	<!-- 		<FORM METHOD="post" -->
-	<%-- 			ACTION="<%=request.getContextPath()%>/reply/reply.do" name="form1"> --%>
+		<td><img class="img-fluid" id=photo
+			src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_id=${act_id}&action=getListActPhoByActId"
+			alt="活動示意圖"></td>
+		<td>${actphoSvc.getOneActPro(actperVO.act_id).act_name}</td>
 
-	<!-- 			<div id=actrow> -->
-	<!-- 				<tr> -->
-	<!-- 					<td><b>活動編號:</td> -->
-	<!-- 					<td><input type="TEXT" class="input-group-text" name="actId" -->
-	<%-- 						 />${replyVO.actId}</td> --%>
-	<!-- 				</tr> -->
-	<!-- 			</div> -->
-	<!-- 			<div id=actrow> -->
-	<!-- 				<tr> -->
-	<!-- 					<td><input type="hidden" class="input-group-text" name="memId" -->
-	<!-- 						value="memId" /></td> -->
-	<!-- 				</tr> -->
-	<!-- 			</div> -->
-	<!-- 			<div id=actrow> -->
-	<!-- 				<tr> -->
-	<!-- 					<td>活動評論內容:</td> -->
-
-	<!-- 					<td><textarea class="form-control" aria-label="With textarea" -->
-	<!-- 							name="replyContent" size="45" -->
-	<!-- 							value="replyContent"></textarea></td> -->
-	<!-- 				</tr> -->
-	<!-- 			</div> -->
-	<!-- 		</FORM> -->
-
-	<table>
-		<tr span=3>
-			<td>
-				<figure class="figure">
-					<img
-						src="<%=request.getContextPath()%>/ActivityPhoto/ActivityPhoto.do?act_id=${act_id}&action=getListActPhoByActId"
-						class="figure-img img-fluid rounded" alt="活動示意圖">
-					<figcaption class="figure-caption">活動示意圖</figcaption>
-					<td>${actproSvc.getOneActPro(actperVO.act_id).act_name}</td>
-
-				</figure>
-			<td>
-		</tr>
-
-	</table>
+	</div>
 	<!-- 	<nav class="navbar navbar-dark bg-dark"> -->
 	<!-- 		<a -->
 	<%-- 			href='<%=request.getContextPath()%>/front-mem-end/reply/front_addReply.jsp'>新增一筆評論</a> --%>
@@ -173,7 +143,7 @@ textarea.form-control {
 				<th>活動評論內容</th>
 				<th>活動評論時間</th>
 				<th></th>
-				<th></th>
+
 
 				<!-- 				<th>活動評論狀態</th> -->
 			</tr>
@@ -206,19 +176,21 @@ textarea.form-control {
 	</table>
 	<div id=comment>
 		<h5>張貼留言</h5>
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reply/reply.do">
-		<textarea class="form-control" aria-label="With textarea"
-			name="replyContent" value="" placeholder="我要留言..."></textarea>
-	
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/reply/reply.do">
+			<textarea class="form-control" aria-label="With textarea"
+				name="replyContent" value="" placeholder="我要留言..."></textarea>
 
-	
-			
+
+
+
 			<input type="hidden" name="action" value="insert"> <input
 				type="hidden" name="actId" value="${actId}"> <input
 				type="hidden" name="memId" value="${sessionScope.memVO.mem_id}">
-			<input type="hidden" name="replyVisible" value=0> 
-			<input type="hidden" name="byMem" value="byMem">
-			<button onclick="myFunction1()" class="btn btn-success" id=submit type="submit">送出新增</button>
+			<input type="hidden" name="replyVisible" value=0> <input
+				type="hidden" name="byMem" value="byMem">
+			<button onclick="myFunction1()" class="btn btn-success" id=submit
+				type="submit">送出新增</button>
 		</FORM>
 	</div>
 	<div id=backhome>

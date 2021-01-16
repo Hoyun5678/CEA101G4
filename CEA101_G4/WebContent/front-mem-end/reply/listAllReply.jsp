@@ -148,11 +148,11 @@ h2 {
 	</table>
 	<section id=page>
 
-		<h2>
-			<a
-				href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp"
-				class="btn btn-dark">回上頁</a>
-		</h2>
+<!-- 		<h2> -->
+<!-- 			<a -->
+<%-- 				href="<%=request.getContextPath()%>/front-mem-end/reply/front_select_reply.jsp" --%>
+<!-- 				class="btn btn-dark">回上頁</a> -->
+<!-- 		</h2> -->
 
 	</section>
 </body>
