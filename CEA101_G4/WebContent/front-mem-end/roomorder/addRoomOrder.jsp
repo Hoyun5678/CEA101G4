@@ -209,24 +209,24 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
                                 </div>
                             </div>
                         </div>
-                        <div style="font-size:16px;margin-top: 5px;">請輸入信用卡資料<button type="button" class="button" onClick="rememberCC()" id="ccBtn">使用相同信用卡</button></div>
+                        <div style="font-size:16px;margin-top: 5px;">請輸入信用卡資料<button type="button" style="padding:3px;margin-left:40px;" class="button" onClick="rememberCC()" id="ccBtn">使用相同信用卡</button></div>
                         <div class="form-container">
                             <div class="field-container">
-                                <label for="name">Name</label>
+                                <label for="name" style="margin:0px;display: unset;">Name</label>
                                 <input id="name" maxlength="20" type="text" required>
                             </div>
                             <div class="field-container">
-                                <label for="cardnumber">Card Number</label><span id="generatecard">generate random</span>
+                                <label for="cardnumber" style="margin:0px; display: unset;">Card Number</label><span id="generatecard">generate random</span>
                                 <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric" required>
                                 <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 </svg>
                             </div>
                             <div class="field-container">
-                                <label for="expirationdate">Expiration (mm/yy)</label>
+                                <label for="expirationdate" style="margin:0px; display: unset;">Expiration (mm/yy)</label>
                                 <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric" required>
                             </div>
                             <div class="field-container">
-                                <label for="securitycode">Security Code</label>
+                                <label for="securitycode" style="margin:0px; display: unset;">Security Code</label>
                                 <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" required>
                             </div>
                         </div>

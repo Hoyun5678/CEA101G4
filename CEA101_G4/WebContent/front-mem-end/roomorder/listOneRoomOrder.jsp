@@ -66,7 +66,7 @@
                                             <tr>
                                                 <td class="contentleft"> ${roomSvc.getOneRoom(roomOrderDetailVO.room_id).roomName}</td>
                                                 <td class="contentcenter">${countday}</td>
-                                                <td class="contentright"> ${roomSvc.getOneRoom(roomOrderDetailVO.room_id).roomPrice} </td>
+                                                <td class="contentright">$ ${roomSvc.getOneRoom(roomOrderDetailVO.room_id).roomPrice} </td>
                                             </tr>
                                         </table>
                                     </td>
@@ -76,7 +76,7 @@
                                         <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 <td class="bottomleft"> 總共 </td>
-                                                <td class="bottomleft">${roomOrderVO.roomOrderSum}</td>
+                                                <td class="bottomleft">$ ${roomOrderVO.roomOrderSum}</td>
                                             </tr>
                                         </table>
                                     </td>
