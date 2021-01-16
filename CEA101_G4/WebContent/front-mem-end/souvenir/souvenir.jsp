@@ -24,7 +24,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>backend-index</title>
+<title>特產商品</title>
 <link href="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js">
 <!-- icon圖示  https://ionicons.com/ -->
 <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>

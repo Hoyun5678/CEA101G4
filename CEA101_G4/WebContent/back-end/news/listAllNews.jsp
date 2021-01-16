@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>所有員工資料 - listAllNews.jsp</title>
+<title>最新消息</title>
 
 <style>
   table#table-1 {

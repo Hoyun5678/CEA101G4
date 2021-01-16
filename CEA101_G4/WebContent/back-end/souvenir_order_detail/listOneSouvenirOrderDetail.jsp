@@ -9,7 +9,7 @@
 
 <html>
 <head>
-<title>特產訂單明細資料 - listOneSouvenir_Order_detail.jsp</title>
+<title>特產訂單明細資料</title>
 
 <style>
 table#table-1 {

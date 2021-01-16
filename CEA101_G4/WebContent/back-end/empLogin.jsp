@@ -23,7 +23,7 @@
 <link rel="mask-icon" type=""
 	href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
 	color="#111" />
-<title>登入會員</title>
+<title>員工登入</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
 	type="text/javascript"></script>

@@ -236,7 +236,7 @@ table.table.table-dark.table-striped {
 												test="${(soVO.sou_order_status!=2)&&(soVO.sou_order_status!=3) }">
 												<form METHOD="post"
 													ACTION="<%=request.getContextPath()%>/souvenir_order/souvenir_order.do">
-													<button type="submit" class="btn btn-light btn-xs dt-edit"
+													<button onclick="cancel" type="submit" class="btn btn-light btn-xs dt-edit"
 														style="margin-right: 16px;">取消訂單</button>
 													<input type="hidden" name="sou_order_id"
 														value="${soVO.sou_order_id}"> <input type="hidden"

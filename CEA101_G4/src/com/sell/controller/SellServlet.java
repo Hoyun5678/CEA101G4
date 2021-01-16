@@ -662,7 +662,7 @@ public class SellServlet extends HttpServlet {
 				} 
 				
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("sellVO", sellVO);
+					
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/front-sell-end/sellMemLogin.jsp");
 					failureView.forward(req, res);

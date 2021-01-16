@@ -357,6 +357,7 @@ public class EmpServlet extends HttpServlet {
 			}
 
 			if (!errorMsgs.isEmpty()) {
+				req.setAttribute("empVO", empVO);
 				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/empLogin.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷

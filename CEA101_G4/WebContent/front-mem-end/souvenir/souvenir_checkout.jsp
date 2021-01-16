@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>確認購買資訊</title>
 </head>
 <style>
 @import
@@ -309,11 +309,16 @@ button:hover {
 					</span>
 				</div>
 				<input type="hidden" name="action" value="insert">
-				<button type="submit">下訂單</button>
+				<button onclick="check()" type="submit">下訂單</button>
 			</div>
 			<!-- Yorder -->
 		</div>
 	</div>
+	<script>
+		function check(){`
+			alert("訂單成立");
+		}
+	</script>
 </body>
 
 </html>

@@ -23,7 +23,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
-<title>所有特產訂單資料 - listAllSouvenir_Order.jsp</title>
+<title>所有特產訂單資料</title>
 
 <style>
 table#table-1 {

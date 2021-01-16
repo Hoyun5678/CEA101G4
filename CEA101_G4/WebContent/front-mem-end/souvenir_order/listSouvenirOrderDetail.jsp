@@ -13,7 +13,7 @@
 
 <html>
 <head>
-<title>複合查詢 - listSouvenirOrderDetails_ByCompositeQuery.jsp</title>
+<title>訂單明細</title>
 
 <style>
 table#table-1 {
