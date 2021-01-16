@@ -31,6 +31,7 @@
         }
         #sellinfo {
             color: #686d67;
+             font-weight:600;
         }
         #orderimg {
             width: 160px;
@@ -53,16 +54,16 @@
             display: grid;
             margin-top: 15px;
         }
-        #checkin :after {
-            content: "";
-            position: absolute;
-            border-right: 1px solid #7e978e;
-            height: 50px;
-            bottom: 280px;
-            top: 280px;
-            left: 365px;
-        }
-        /*         #checkout :after {
+/*         #checkin : { */
+/*             content: ""; */
+/*             position: absolute; */
+/*             border-right: 1px solid #7e978e; */
+/*             height: 50px; */
+/*             bottom: 280px; */
+/*             top: 280px; */
+/*             left: 365px; */
+/*         } */
+        /*         #checkout : {
             content: "";
             position: absolute;
             border-bottom: 1px solid #7e978e;
@@ -71,7 +72,7 @@
             top: 180px;
         } */
 
-        /*         #stay :after {
+        /*         #stay : {
             content: "";
             position: absolute;
             border-bottom: 1px solid #7e978e;
@@ -79,7 +80,7 @@
             left: 80px;
             top: 285px;
         }
-        #choosetype :after {
+        #choosetype : {
             content: "";
             position: absolute;
             border-bottom: 1px solid #7e978e;
@@ -105,6 +106,7 @@
         #ordthird {
             text-align: center;
             margin-left: 5px;
+            margin-top:30px;
         }
         #arrtime {
             font-weight: 600;
@@ -112,12 +114,14 @@
             /* margin-left: 25px; */
             color: #464b45;
             margin-left: 15px;
+            margin-top:30px;
         }
         #seltime {
             margin-top: 7px;
         }
         #checkin {
             margin-right: 10px;
+            margin-left: 50px!important;
         }
         #checkout {
             margin-left: 10px;

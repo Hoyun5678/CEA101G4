@@ -86,70 +86,89 @@ color:black;
             </div>
         </div>
     </div>
-	<div class="container">
-		<div class="upside">
-			<div class="row">
-				<div class="photogallery">
-                    <div class="row">
-                            <div class="col-lg-8">
-                                <a class="lightbox" id="bigpic" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
+	 <div class="container">
+            <div class="upside">
+                <div class="row">
+                 <div class="col-lg-9">
+                    <div class="photogallery">
+                        <div class="row">
+                            <div class="col-lg-8" style="width:570px;height:428.5px;">
+                                <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
                                     <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="col-lg up">
+                            <div class="col-lg-4" style="width:285px;height:428.5px;">
+                                <div class="col-lg up" style="width:285px;height:214.75px;padding:0px;">
                                     <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[1].roomPhotoId}&action=getOnePhoto">
                                         <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[1].roomPhotoId}&action=getOnePhoto">
                                     </a>
                                 </div>
-                                <div class="col-lg down">
+                                <div class="col-lg down" style="width:285px;height:214.75px;padding:0px;">
                                     <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[2].roomPhotoId}&action=getOnePhoto">
                                         <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[2].roomPhotoId}&action=getOnePhoto">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4">
+                        <div class="row" style="width:855px;height:214.75px;">
+                            <div class="col-lg-4" style="width:285px;height:214.75px;">
                                 <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[3].roomPhotoId}&action=getOnePhoto">
                                     <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[3].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4" style="width:285px;height:214.75px;">
                                 <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[4].roomPhotoId}&action=getOnePhoto">
                                     <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[4].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4" style="width:285px;height:214.75px;">
                                 <a class="lightbox" href="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[5].roomPhotoId}&action=getOnePhoto">
                                     <img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[5].roomPhotoId}&action=getOnePhoto">
                                 </a>
                             </div>
                         </div>
-                       
+                    </div>
                     </div>
                     <div class="col-lg-3" id="rightside">
+                     <div id="firstcol">
+                        <div id="ratingscore">
+                            <h4 id="score">9.2</h4>
+                        </div>
+                        <div id="scoremeaning">
+                            <div id="up">完美，太漂亮了吧</div>
+                            <div id="down">/10 (89則評論)</div>
+                        </div>
+                        <div class="keyword">老闆娘太正</div>
+                        <div class="keyword">房間舒適</div>
                     </div>
-                
-		</div>
+                    <div id="secondcol">
+                        <div class="distance">
+                            <div style="font-weight:600;margin-bottom:10px;">人氣景點</div>
+                            <div>中壢觀光夜市------------5.72 km </div>
+                            <div>中壢----------------------5.94 km</div>
+                            <div>華泰名品城---------------6.79 km</div>
+                            <div>虎頭山公園---------------6.91 km</div>
+                        </div>
+                    </div>
+                    <div id="thirdcol">
+                        <div class="googlemap">
+                            放地圖的地方
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
+                    <div class="col-lg-9">
+                    <div style="font-style:Microsoft JhengHei;font-size:16px;">以善待家人的心情珍惜來訪旅人與生活土地。 在日光綠築我們客製化服務每個旅人需求，在相同如家溫暖裡留下不一樣新鮮回憶。 如同健康生活初衷，我們謙卑與自然學習共生的方式，打造日光綠築成為一間有生命隨四季變化的綠建築。 我們由衷希望帶起一場生活革命，以全新角度看待健康生活這件事，與大家一同分享來自日光田野間的感動......
+                   	日光綠築融合生態工法綠建築，使用隔熱玻璃，種植親水落羽松引入冬山河水。形成通風採光冬暖夏涼，自然宜人的生態棲地。 在日光綠築可以感受萬物生命四季更迭，在這裏每刻光景都不一樣。有青綠秧苗、金黃水稻，還有盛夏落羽松、秋日楓紅。 我們在田野間以透明帷幕收納四季美景，拉近起居、農場、人及自然間的距離。
+                   	</div>
+                   	</div>
+                    
                     <div class="col-lg-3">
                     </div>
                 </div>
-                <h5 id="emptitle">空房情形</h5>
+                <h5 id="emptitle" style="text-align: center;">空房情形</h5>
                 
                 <c:set var='roomOrderedDateList' scope='page' value='${roomOrderedDateSvc.getOrderedDateByRoomId(roomVO.roomId)}' />
                 <input type="hidden" name='roomOrderedDateList' value='${roomOrderedDateList}' />
@@ -237,15 +256,6 @@ color:black;
 <!-- 			        <input id="changebtn" type="button" value="更改搜尋條件" name="changedate"> -->
 			    </div>
 			</div>
-<!--MODAL更改時間-->
-				<div id="myModal" class="modal">
-					<div class="modal-content">
-				<span>入住日期: <input name="start_date" id="start_date" type="text" style="width:120px;"><i class="far fa-calendar-alt"></i></span>
-  				<span>退房日期: <input name="end_date"   id="end_date"   type="text" style="width:120px;"><i class="far fa-calendar-alt"></i></span>
-					
-    				<span class="close">&times;</span>
- 					</div>
-				</div>
 				
                 <div class="bookroom">
                     <div class="room_header">
@@ -259,9 +269,7 @@ color:black;
                                   
                         <div class="roomGrid roompic">
                         	<div> ${roomVO.roomName}</div>
-                        	<c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" begin="1" end="1">    
-						 		<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoVO.roomPhotoId}&action=getOnePhoto" style="width:160px;height:120px;"> 
-                       		</c:forEach>
+                        	<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomPhotoList[0].roomPhotoId}&action=getOnePhoto">
                         </div>                  
                         <div class="roomGrid roominfo">${roomVO.roomDes}</div>
                         <div class="roomGrid roompeo">${roomVO.roomCapacity}位</div>
@@ -365,32 +373,7 @@ color:black;
       	  		});
 //       		}
         	})
-        //MODAL更改時間
-         // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var changebtn = document.getElementById("changebtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        changebtn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+    
     </script>
     
 

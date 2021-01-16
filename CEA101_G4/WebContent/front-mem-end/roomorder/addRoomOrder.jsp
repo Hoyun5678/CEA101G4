@@ -44,7 +44,7 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
                     <div class="infotitle">您的訂房資訊</div>
                     
                     
-                    <div class="row"> 
+                    <div class="row" style="margin:0px;"> 
 <%--                     <c:forEach var="roomPhotoVO" items="${roomphotoSvc.getByRoomId()}" begin="1" end="1">                   --%>
                         <div class="col-lg-6" id="orderpic">
                             <img id="orderimg" src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomId=${roomVO.roomId}&action=getOnePhotoByRoomId">                       
@@ -52,13 +52,13 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
 <%--                         </c:forEach> --%>
                       
                         <div class="col-lg-6" id="sellinfo">               
-                            <div class="sellname">${sellSvc.getOneSell(roomOrderVO.sellMemId).sellRoomName}</div>
+                            <div class="sellname" style="margin-top:30px;">${sellSvc.getOneSell(roomOrderVO.sellMemId).sellRoomName}</div>
                             											
                             <div class="selladd"><i class="fas fa-map-marker-alt"></i>${sellSvc.getOneSell(roomOrderVO.sellMemId).sellMemAddress}</div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4" id="checkin">
+                        <div class="col-lg-4" id="checkin" style="margin-left: 50px;">
                             <div class="datetitle">入住日期 ${roomOrderVO.checkInDate}</div>
                         </div>
                         <div class="col-lg-4" id="checkout">

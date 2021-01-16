@@ -39,7 +39,7 @@
                         <td align="center" style="padding: 0px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                 <tr>
-                                    <td id="icon"> <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;" /><br>
+                                    <td id="icon"> <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;margin: auto;" /><br>
                                         <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> 感謝您的預定! </h2>
                                     </td>
                                 </tr>

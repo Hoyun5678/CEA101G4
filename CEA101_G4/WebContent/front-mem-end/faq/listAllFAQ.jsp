@@ -19,7 +19,8 @@
 .main{
     width: 80%;
     height: 100%;
-    margin: auto;}
+    margin: auto;
+ }
 </style>
 <link href='//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css' rel='stylesheet'></link>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" > </script>
