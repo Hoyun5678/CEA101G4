@@ -7,94 +7,94 @@
 <%
 	SouvenirTypeVO soutVO = (SouvenirTypeVO) request.getAttribute("soutVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
-<%=soutVO == null%>--${soutVO.sou_type_id}--
+
 <html>
+
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>特產種類修改 - update_soutype_input.jsp</title>
-
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<title>特產資料修改</title>
 <style>
-table#table-1 {
-	background-color: #CCCCFF;
-	border: 2px solid black;
-	text-align: center;
+button {
+	float: right;
 }
 
-table#table-1 h4 {
-	color: red;
-	display: block;
-	margin-bottom: 1px;
-}
-
-h4 {
-	color: blue;
-	display: inline;
+.help-block {
+	color: #E60000;
+	font-weight: bold;
 }
 </style>
-
-<style>
-table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-
-table, th, td {
-	border: 0px solid #CCCCFF;
-}
-
-th, td {
-	padding: 1px;
-}
-</style>
-
 </head>
-<body bgcolor='white'>
 
-	<table id="table-1">
-		<tr>
-			<td>
-				<h3>特產種類修改 - update_soutype_input.jsp</h3>
-				<h4>
-					<a href="/CEA101G4/back-end/souvenir_type/select_soutype_page.jsp">回首頁</a>
-				</h4>
-			</td>
-		</tr>
-	</table>
-
-	<h3>資料修改:</h3>
-
-	<%-- 錯誤表列 --%>
-	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">請修正以下錯誤:</font>
-		<ul>
-			<c:forEach var="message" items="${errorMsgs}">
-				<li style="color: red">${message}</li>
-			</c:forEach>
-		</ul>
-	</c:if>
-
-	<FORM METHOD="post"
-		ACTION="<%=request.getContextPath()%>/souvenir_type/SouvenirTypeServlet"
-		name="form1">
-		<table>
-			<tr>
-				<td>特產種類編號:<font color=red><b>*</b></font></td>
-				<td><%=soutVO.getSou_type_id()%></td>
-			</tr>
-
-			<tr>
-				<td>特產種類名稱:</td>
-				<td><input type="TEXT" name="sou_type_name" size="45"
-					value="<%=soutVO.getSou_type_name()%>" /></td>
-			</tr>
-			
-		</table>
-		<br> <input type="hidden" name="action" value="update"> <input
-			type="hidden" name="sou_type_id" value="<%=soutVO.getSou_type_id()%>"> <input
-			type="submit" value="送出修改">
-	</FORM>
+<body>
+<div id="wrapper">
+		<%@ include file="/back-end/back-index-sidebar.jsp"%>
+<div id="page-content-wrapper">
+<br>
+	<div id="viewport">
+		<div id="content">
+			<div class="container-fluid" style="padding: 0;">
+				<div class="container mt-4">
+					<div class="col-9 offset-1">
+						<h2>特產種類修改</h2>
+						<hr>
+					</div>
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/souvenir_type/SouvenirTypeServlet"
+						name="form1">
+						<div class="form-group">
+							<div class="col-4 d-inline-block">
+								<label class="d-flex justify-content-end">特產種類編號:</label>
+							</div>
+							<div class="col-5 d-inline-block">
+								<input type="text" class="form-control" name="sou_type_id"
+									value="<%=soutVO.getSou_type_id()%>" />
+							</div>
+						</div>
+						<div class="form-group">
+							
+							<div class="form-group">
+								<div class="col-4 d-inline-block">
+									<label class="d-flex justify-content-end">特產種類名稱:</label>
+								</div>
+								<div class="col-5 d-inline-block">
+									<input type="text" class="form-control" id="roomCapacity"
+										name="sou_type_name" value="<%=soutVO.getSou_type_name()%>" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-10">
+									<input type="hidden" name="action" value="update"> <input
+			type="hidden" name="sou_type_id" value="<%=soutVO.getSou_type_id()%>">
+									<button type="submit" class="btn btn-primary">送出修改</button>
+								</div>
+							</div>
+					</form>
+					<div class="row">
+						<c:if test="${not empty errorMsgs}">
+							<%-- 錯誤表列 from Servlet --%>
+							<div class="alert alert-danger col-lg-6 col-lg-offset-1"
+								role="alert" id="titleAndError">
+								<font style="color: red">請修正以下錯誤:</font>
+								<ul>
+									<c:forEach var="message" items="${errorMsgs}">
+										<li style="color: red">${message}</li>
+									</c:forEach>
+								</ul>
+							</div>
+						</c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
 </body>
 
 </html>

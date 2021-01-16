@@ -100,20 +100,13 @@ font {
 
 </head>
 <body>
-	<br>
-	<div class="container-fluid" id="titleAndError">
 
-		<table id="table-1">
-			<tr>
-				<td >
-					<h3>所有特產資料 - listAllSou.jsp</h3>
-					<h4>
-						<a id="local" href="/CEA101G4/back-end/souvenir_type/select_soutype_page.jsp">回首頁</a>
-					</h4>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<div id="wrapper">
+		<%@ include file="/back-end/back-index-sidebar.jsp"%>
+		
+		<div id="page-content-wrapper">
+	<br>
+
 
 
 	<%-- 錯誤表列 --%>
@@ -136,10 +129,8 @@ font {
 				
 			</tr>
 		</thead>
-		<%@ include file="page1.file"%>
 
-		<c:forEach var="soutVO" items="${list}" begin="<%=pageIndex%>"
-			end="<%=pageIndex+rowsPerPage-1%>">
+		<c:forEach var="soutVO" items="${list}" >
 
 			<tr>
 				<td>${soutVO.sou_type_id}</td>
@@ -166,7 +157,8 @@ font {
 			</tr>
 		</c:forEach>
 	</table>
-	<%@ include file="page2.file"%>
+	</div>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>

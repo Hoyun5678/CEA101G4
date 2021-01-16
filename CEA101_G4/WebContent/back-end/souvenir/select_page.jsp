@@ -96,7 +96,7 @@ buttom {
 				
 				<div class="col-3">
 					<p>
-						<b>一般特產管理</b>
+						<b>一般特產新增</b>
 					</p>
 					<p>
 						<a href="<%=request.getContextPath()%>/back-end/souvenir/addSou.jsp"><button
@@ -105,19 +105,19 @@ buttom {
 				</div>
 				<div class="col-3">
 					<p>
-						<b>促銷特產清單</b>
+						<b>特產種類清單</b>
 					</p>
 					<p>
-						<a href="<%=request.getContextPath()%>/back-end/souvenir_discount/listAllSouDis.jsp"><button
+						<a href="<%=request.getContextPath()%>/back-end/souvenir_type/listAllSouType.jsp"><button
 								class="btn btn-outline-secondary">查看</button></a>
 					</p>
 				</div>
 				<div class="col-3">
 					<p>
-						<b>促銷特產管理</b>
+						<b>特產種類新增</b>
 					</p>
 					<p>
-						<a href="<%=request.getContextPath()%>/back-end/souvenir_discount/addSouDis.jsp"><button
+						<a href="<%=request.getContextPath()%>/back-end/souvenir_type/addSouType.jsp"><button
 								class="btn btn-outline-secondary">增加</button></a>
 					</p>
 				</div>

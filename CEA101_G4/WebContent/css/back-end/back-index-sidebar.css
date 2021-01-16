@@ -77,7 +77,12 @@
             z-index: 1001;
             position: absolute;
             left: 15%;
-            top: 95%;
+            top: 93%;
+        }
+        
+        
+        #loginout {
+ color: #818181 !important;
         }
         #leftImg {
             width: 180px;

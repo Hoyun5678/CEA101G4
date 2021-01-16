@@ -67,7 +67,7 @@
                 </span>
             </ul>
             <c:if test="${not empty sessionScope.empVO}">
-            <h4 id="login">${empVO.emp_name}<a href=" <%=request.getContextPath()%>/emp/emp.do?action=emp_log_out">登出</h4></a>
+            <h4 id="login">${empVO.emp_name}<a id="loginout" href=" <%=request.getContextPath()%>/emp/emp.do?action=emp_log_out">登出</h4></a>
             </c:if>
             <c:if test="${empty sessionScope.empVO}">
             <a href="<%=request.getContextPath()%>/back-end/emp/empLogin.jsp" id="login"> 員工登入 </a>

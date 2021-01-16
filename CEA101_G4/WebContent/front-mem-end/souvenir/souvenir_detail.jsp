@@ -253,6 +253,7 @@
 	line-height: 36px;
 	color: #fff;
 	cursor: pointer;
+	margin-left:12px;
 }
 
 .product-count .qtyminus {
@@ -266,6 +267,7 @@
 .product-count .qty {
 	width: 60px;
 	text-align: center;
+	margin: 10px 0px;
 }
 
 .round-black-btn {
@@ -449,7 +451,7 @@
 }
 
 #addcar {
-	position: absolute;
+/* 	position: absolute; */
 	bottom: 7px;
 	right:0;
 }
@@ -487,7 +489,7 @@
 	<div class="pd-wrap">
 		<div class="container">
 			<div class="heading-section">
-				<h2>Product Details</h2>
+				<h2>特產詳情</h2>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -521,33 +523,7 @@
 								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
 						</div>
 					</div>
-					<div id="thumb" class="owl-carousel product-thumb">
-						<div class="item">
-							<img
-								src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" />
-						</div>
-						<div class="item">
-							<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-							<img
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-							<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-							<img
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-						<div class="item">
-							<img src="https://i.ytimg.com/vi/PJ_zomNMK_s/maxresdefault.jpg" />
-						</div>
-						<div class="item">
-							<img
-								src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQI6nUmObt62eDkqNSmIvCN_KkQExtbpJmUbVx_eTh_Y3v3r-Jw" />
-						</div>
-					</div>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="product-dtl">
@@ -583,14 +559,14 @@
 									<option>XL</option>
 								</select>
 							</div>
-							<div class="col-md-6">
-								<label for="color">Color</label> <select id="color" name="color"
-									class="form-control">
-									<option>Blue</option>
-									<option>Green</option>
-									<option>Red</option>
-								</select>
-							</div>
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<label for="color">Color</label> <select id="color" name="color" -->
+<!-- 									class="form-control"> -->
+<!-- 									<option>Blue</option> -->
+<!-- 									<option>Green</option> -->
+<!-- 									<option>Red</option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
 						</div>
 
 						<Form id="addcar" name="soupVO"
@@ -598,9 +574,11 @@
 							method="POST">
 							<div class="product-count" class="display-flex">
 								<label for="size">Quantity</label>
-								<div class="qtyminus">-</div>
+																<div class="qtyplus">+</div>
+								
 								<input type="text" name="quantity" value="1" class="qty">
-								<div class="qtyplus">+</div>
+																<div class="qtyminus">-</div>
+								
 								<input class="round-black-btn" type="submit" value="加入購物車">
 								<input type="hidden" name="sou_name" value="${soupVO.sou_name}">
 								<input type="hidden" name="sou_price"
@@ -626,16 +604,17 @@
 				</ul>
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="description"
-						role="tabpanel" aria-labelledby="description-tab">Lorem
-						ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-						minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-						aliquip ex ea commodo consequat. Duis aute irure dolor in
-						reprehenderit in voluptate velit esse cillum dolore eu fugiat
-						nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-						sunt in culpa qui officia deserunt mollit anim id est laborum. Sed
-						ut perspiciatis unde omnis iste natus error sit voluptatem
-						accusantium doloremque laudantium, totam rem aperiam.</div>
+						role="tabpanel" aria-labelledby="description-tab">
+						退款及退貨<br>
+如閣下於收貨後發現產品出現以下情況，可向我們要求退貨及更換產品。惟所有退貨或更換要求必須在收貨後七 ( 7 )日內進行：<br>
+(i)	產品已損壞 /包裝不完整<br>
+(ii)	懷疑出現品質問題<br>
+(iii)	遺漏或錯誤送遞產品<br>
+閣下必須就上述要求提供證明以供核實，包括：<br>
+(i)	出示有效文件 / 證據證明有問題之產品於 supergoing.com 購買; 及<br>
+(ii)	把有問題之產品的影像拍攝並透過電郵 / facebook message 發送給我們作為證據。<br>
+所有上述要求一經核實，我們會於七 ( 7 )日內就相同產品安排退貨及更換。如果該產品沒有存貨，我們可從閣下的付款閘口中退回該產品的金額。
+						</div>
 					<div class="tab-pane fade" id="review" role="tabpanel"
 						aria-labelledby="review-tab">
 						<div class="review-heading">REVIEWS</div>
@@ -684,7 +663,7 @@
 				style="text-align: center; font-size: 14px; padding-bottom: 20px;">
 				Get free icon packs for your next project at <a
 					href="http://iiicons.in/" target="_blank"
-					style="color: #ff5e63; font-weight: bold;">www.iiicons.in</a>
+					style="color: #ff5e63; font-weight: bold;">www.soupergoing.com</a>
 			</div>
 		</div>
 	</div>

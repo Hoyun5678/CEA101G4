@@ -154,7 +154,7 @@ public class SouvenirTypeServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("soutVO", soutVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/back-end/souvenir_type/listOneSouType.jsp";
+				String url = "/back-end/souvenir_type/listAllSouType.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
 

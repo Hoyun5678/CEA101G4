@@ -188,6 +188,10 @@ select#soflow-color {
 
 </head>
 <body bgcolor='white'>
+<div id="wrapper">
+		<%@ include file="/back-end/back-index-sidebar.jsp"%>
+		
+		<div id="page-content-wrapper">
 	<div align="center">
 <!-- 					<h4> -->
 <!-- 						<a href="/CEA101G4/back-end/souvenir/select_page.jsp">回首頁</a> -->
@@ -204,6 +208,7 @@ select#soflow-color {
 				</c:forEach>
 			</ul>
 		</c:if>
+		<br>
 
 		<FORM METHOD="post"
 			ACTION="<%=request.getContextPath()%>/souvenir_type/SouvenirTypeServlet"
@@ -232,6 +237,8 @@ select#soflow-color {
 		</FORM>
 
 
+	</div>
+	</div>
 	</div>
 	
 </body>
