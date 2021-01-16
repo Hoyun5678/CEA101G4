@@ -181,8 +181,8 @@ public class ActivityPeriodDAO implements ActivityPeriodDAO_interface {
 					actperVO.setAct_id(rs.getString("act_id"));
 					actperVO.setAct_sign_start(rs.getTimestamp("act_sign_start"));
 					actperVO.setAct_sign_end(rs.getTimestamp("act_sign_end"));
-					actperVO.setAct_period_start(rs.getTimestamp("act_period_end"));
-					actperVO.setAct_period_end(rs.getTimestamp("act_period_start"));
+					actperVO.setAct_period_start(rs.getTimestamp("act_period_start"));
+					actperVO.setAct_period_end(rs.getTimestamp("act_period_end"));
 					actperVO.setAct_up_limit(rs.getInt("act_up_limit"));
 					actperVO.setAct_low_limit(rs.getInt("act_low_limit"));
 					actperVO.setAct_cur_price(rs.getDouble("act_cur_price"));
