@@ -246,10 +246,10 @@
 				
 
 	$('.testBtn').click(function() {
-		$("[name='mem_account']").val("memtest_01");
+		$("[name='mem_account']").val("pikachu");
 		$("[name='mem_pwd']").val("Abc123456");
 		$("[name='mem_pwd_re']").val("Abc123456");
-		$("[name='mem_name']").val("蔡孟軒");
+		$("[name='mem_name']").val("皮卡丘");
 		$("[name='mem_birth']").val("1987-08-07");
 		$("[name='mem_tel']").val("0911234567");
 		$("[name='mem_address']").val("桃園市中壢區復興路46號9樓");
