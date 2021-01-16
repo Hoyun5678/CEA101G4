@@ -5,6 +5,7 @@
 
 <jsp:useBean id="roomSvc" scope="page" class="com.room.model.RoomService" />
 <jsp:useBean id="roomphotoSvc" scope="page" class="com.roomphoto.model.RoomPhotoService" />
+<jsp:useBean id="sellSvc" scope="page" class="com.sell.model.SellService" />
 <html>
 <head>
 	
@@ -21,6 +22,14 @@
      .container-fluid .carousel-inner img {
         height:650px !important;
      }
+     .gMap {
+     	overflow: hidden;
+     }
+     iframe {
+     	width: 100%;
+     	border-radius: 10px;
+     }
+     
 </style>
     
 <title>房間搜尋</title>
@@ -72,44 +81,54 @@
 		<div class="container" id="searchResultRoomList">
 			<c:forEach var="roomVO" items="${not empty list ? list: roomSvc.all}" varStatus="rowStatus">
 			<div class="row roomContent">
-			<div class="col-4 imgCol">
-				<div id="indicators${rowStatus.index}" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
-						<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" varStatus="status">
-							<li data-target="#indicators${rowStatus.index}" data-slide-to='<c:out value="${status.index}" />' class=""></li>
-						</c:forEach>
-					</ol>
-				<div class="carousel-inner">
-					<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}">
-					<div class="carousel-item">
-						<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto&scaleSize=500" class="d-block">
+				<div class="col-4 imgCol">
+					<div id="indicators${rowStatus.index}" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}" varStatus="status">
+								<li data-target="#indicators${rowStatus.index}" data-slide-to='<c:out value="${status.index}" />' class=""></li>
+							</c:forEach>
+						</ol>
+						<div class="carousel-inner">
+							<c:forEach var="roomphotoVO" items="${roomphotoSvc.getByRoomId(roomVO.roomId)}">
+							<div class="carousel-item">
+								<img src="<%=request.getContextPath()%>/roomphoto/roomphoto.do?roomPhotoId=${roomphotoVO.roomPhotoId}&action=getOnePhoto&scaleSize=500" class="d-block">
+							</div>
+							</c:forEach>
+			
+						</div>
+						<a class="carousel-control-prev" href="#indicators${rowStatus.index}" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#indicators${rowStatus.index}" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
 					</div>
-					</c:forEach>
-	
 				</div>
-				<a class="carousel-control-prev" href="#indicators${rowStatus.index}" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#indicators${rowStatus.index}" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
+				<div class="col-3 desCol">
+					房間名稱: ${roomVO.roomName}<br>
+					住宿價格/天: ${roomVO.roomPrice}<br>
+					房間容納人數: ${roomVO.roomCapacity}<br>
+<%-- 					房間敘述: ${roomVO.roomDes} --%>
 				</div>
-			</div>
-			<div class="col-7 desCol">
-				房間名稱: ${roomVO.roomName}<br>
-				住宿價格/天: ${roomVO.roomPrice}<br>
-				房間容納人數: ${roomVO.roomCapacity}<br>
-				房間敘述: ${roomVO.roomDes}
-			</div>
-			<div class="col">
+			<div class="col-1">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do">
 				     <input type="hidden" name="roomId"  value="${roomVO.roomId}">
 				     <input type="hidden" name="datefilter"  value="${datefilter}">
 				     <input type="hidden" name="action"	value="checkRoomDetail">
-				     <button type="submit" class="btn btn-secondary detailBtn">查看</button>
+				     <button type="submit" class="btn btn-info detailBtn">查看</button>
 				</FORM>
+			</div>
+			<c:set var='sellVO' value='${sellSvc.getOneSell(roomVO.sellMemId)}' scope='page' />
+			<div class="col-4 gMap">
+				<iframe 
+				    width="360"
+				    height="200"
+					frameborder="0" 
+					style="border:0"
+					src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDK-5rFDe76_LASpBLJJSHYd1JM7W9ttWg&zoom=14&center=${sellVO.sellLatitude},${sellVO.sellLongitud}">
+				</iframe>
 			</div>
 			</div>
 	
