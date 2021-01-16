@@ -145,12 +145,10 @@
 
 
             $(document).on('click', '.calendarBody tbody td', function() {
-//                console.log($(this).attr('value'));
                 var sel = $(this);
                 $('.calendarBody td').removeClass('onSelect');
-                //                  sel.stop(true, true).addClass('onSelect', 3000);
                 sel.fadeOut(0, function() {
-                    $(this).addClass('onSelect'); //or any other class
+                    $(this).addClass('onSelect');
                 }).fadeIn(400);
 
                 $.ajax({
@@ -161,15 +159,11 @@
                         'checkInDate': sel.attr('value'),
                     },
                     success: function(data) {
-                        //                          console.log(data);
                         $('#accordion').stop(true, true).fadeOut(100, function() {
-                            $('.displaySelectedDate h4').html(sel.attr('value') + '  預計Check in 列表');
                             $(this).html(data);
                         }).fadeIn(400);
                     }
                 })
-                
-                
             })
 
             $(document).on('click', '.lastMonth span', function() {
@@ -196,9 +190,5 @@
                 delCal(new Date($('#yearList').val(), $('#monthList').val(), 1), drawCal)
                 
             })
-            
-            
             $('.onSelect').click();
-
-
         })

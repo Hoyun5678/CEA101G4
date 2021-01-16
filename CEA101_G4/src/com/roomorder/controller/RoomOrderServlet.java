@@ -6,6 +6,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.json.JSONObject;
+
 import com.alibaba.fastjson.JSON;
 import com.member.model.MemberVO;
 import com.room.model.RoomService;
@@ -780,6 +782,18 @@ public class RoomOrderServlet extends HttpServlet {
 						expectArrTime, roomOrderRemarks, roomOrderSum, roomOrderStatus, roomPaymentStatus, list);
 				roomOrderVO = roomOrderService.getOneRoomOrder(roomOrderVO.getRoomOrderId());
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+				
+				// ws
+				HttpSession userSession = req.getSession();
+				Set<javax.websocket.Session> wsSessions = (Set<javax.websocket.Session>) userSession.getAttribute("wsSessions");
+				System.out.println("wsSessions = " + wsSessions);
+				if (wsSessions != null && wsSessions.size() > 0) {
+					JSONObject data = new JSONObject();
+					data.put("type", "民宿訂單");
+					data.put("msg", "您有一筆新的民宿訂單成立囉~!");
+					wsSessions.forEach(e -> e.getAsyncRemote().sendText(data.toString()));
+				}
+				
 				String url = "/front-mem-end/roomorder/listOneRoomOrder.jsp";
 				req.setAttribute("roomOrderVO", roomOrderVO);
 				req.setAttribute("countday", countday+"");
