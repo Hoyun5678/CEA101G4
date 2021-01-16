@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 
 import com.activity_order.model.*;
 import com.activity_period.model.ActivityPeriodService;
@@ -383,7 +386,23 @@ public class ActivityOrderServlet extends HttpServlet {
 					ActivityOrderService actordSvc = new ActivityOrderService();
 					actordSvc.insertActivityOrder(actordVO);
 					actperSvc.upDateActPerSignSum(act_period_id,act_sign_sum+act_order_amount);
+					String act_period_start_formate=actperSvc.getOneActPeriod(act_period_id).getAct_period_start()
+							.toString().substring(0, 11).trim();
+					System.out.println(act_period_start_formate);
 					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+					
+					HttpSession userSession = req.getSession();
+					Set<javax.websocket.Session> wsSessions = (Set<javax.websocket.Session>) userSession.getAttribute("wsSessions");
+					if (wsSessions != null && wsSessions.size() > 0) {
+						JSONObject data = new JSONObject();
+						data.put("type", "活動訂單");
+						data.put("msg", "您有一筆新的活動訂單成立囉~!");
+						data.put("checkInDate", act_period_start_formate);
+						wsSessions.forEach(e -> e.getAsyncRemote().sendText(data.toString()));
+					}
+					
+					
+					
 					String url =req.getContextPath() + "/front-mem-end/activity_order/listOneActivityOrder.jsp";
 					res.sendRedirect(url);
 					
