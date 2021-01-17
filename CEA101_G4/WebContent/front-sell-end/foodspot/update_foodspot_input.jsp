@@ -19,6 +19,7 @@
 <body bgcolor='white'>
 <%@ include file="/front-sell-end/sellMemSideBar.jsp" %>
 
+
 <%-- 錯誤表列 --%>
 <div>
 <c:if test="${not empty errorMsgs}">
@@ -40,18 +41,9 @@
     <div class="col-8" style="padding-top:10px;padding-left: 14px;">   
            <%=fsVO.getFas_id()%>
     </div>
-    </div>
-		
-	<div class="row">
-	<div class="col-4">
-       <span>民宿會員編號:</span>
-    </div>
-    <div class="col-8" style="padding-top:10px;padding-left: 14px;">   
-       ${fsVO.sell_mem_id}
-           <input type="hidden" name="sell_mem_id" 
-			 value="<%= fsVO.getSell_mem_id()%>" />
-    </div>
-    </div>
+</div>
+
+<input type="hidden" name="sell_mem_id" value="<%= fsVO.getSell_mem_id()%>" />
 
 <div class="row">
 	<div class="col-4">
@@ -130,6 +122,7 @@
 <input type="submit" value="送出修改">
 </div>
 </FORM>
+</div>
 <script>
 
 function preview() {

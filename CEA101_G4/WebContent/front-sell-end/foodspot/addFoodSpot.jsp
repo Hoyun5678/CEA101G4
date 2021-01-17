@@ -22,29 +22,10 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 <%@ include file="/front-sell-end/sellMemSideBar.jsp" %> 
 	
 <%-- 錯誤表列 --%>
-<div>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-</div>
-
-<div class="container">
+<div class="container">		
 <h3>新增美食與景點</h3>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/foodspot/foodspot.do" name="form1" enctype="multipart/form-data">
-<div class="row">
-	<div class="col-4">
-       <label for="sellmemid" class="text-small-uppercase">民宿會員編號:</label>
-    </div>
-    <div class="col-8"style=" padding-top: 14px;padding-left: 10px;">   
-    		${sellVO.sellMemId}
-           <input type="hidden" name="sell_mem_id" value="${sellVO.sellMemId}" />
-    </div>
-    </div>
+<input type="hidden" name="sell_mem_id" value="${sellVO.sellMemId}" />
 
 <div class="row">
 	<div class="col-4">
@@ -106,6 +87,18 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 		<input type="submit" value="送出新增">
 </div>
 	</FORM>
+	<c:if test="${not empty errorMsgs}">
+				<div class="col-9 offset-1" style="background-color:lightgrey;color">
+					<div class="alert alert-danger" role="alert">
+						<strong>新增失敗，請修正以下錯誤:</strong>
+						<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li>${message}
+						</c:forEach>
+						</ul>
+					</div>
+				</div>
+			</c:if>
 	</div>
 
 <script>
