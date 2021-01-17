@@ -10,7 +10,9 @@
 <html>
 
 <head>
-    <title></title>
+<link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" />
+    <title>SuperGoing訂單成立</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

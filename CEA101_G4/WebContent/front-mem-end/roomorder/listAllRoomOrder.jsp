@@ -10,13 +10,15 @@
 <html>
 
 <head>
+<link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.1/tailwind.min.css'>
-    <title>房間訂單 </title>
+    <title>SuperGoing房間訂單 </title>
     <style>
         * {
     font-family: Arial, sans;

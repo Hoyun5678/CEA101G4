@@ -12,7 +12,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>FAQ</title>
+<title>FAQ管理</title>
 
 
 <style>
@@ -42,7 +42,7 @@
 		font-weight:300;
 		padding:5px 5px 5px 5px;
 	    float:right;
-		margin-bottom:30px;
+		margin:10px;
 		border-radius:5%;
 	}
 </style>
@@ -57,9 +57,7 @@
 <div id="page-content-wrapper">
 <br>
 <div id="content" style="margin-right: 20px">
-               
- 
-            <h2>常見問答集管理</h2>  
+  <h2>常見問答集管理</h2>  
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -72,10 +70,7 @@
 
 <div>
 <div class="main">
-<div class="right">
 <button type="button" class="btn" id="add" onclick="window.location.href='<%=request.getContextPath()%>/back-end/faq/addFAQ.jsp'"><i class="fa fa-plus" style="padding-right:5px"></i>新增</button>
-
-</div>
 <table class="table table-striped align-middle" id="tb" >
 <thead>
 	<tr id ="th">

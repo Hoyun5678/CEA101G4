@@ -18,8 +18,10 @@ MemberVO memVO=(MemberVO)session.getAttribute("memVO");
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" />
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>SuperGoing-您正在預訂一間房間</title>
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/addorder.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/creditcard.css">

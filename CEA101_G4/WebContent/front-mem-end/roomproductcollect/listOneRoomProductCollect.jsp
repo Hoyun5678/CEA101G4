@@ -16,16 +16,14 @@ RoomProductCollectService rpcSvc = new RoomProductCollectService();
 List<String> rpcListMem = (List<String>)request.getAttribute("rpcListMem");
 pageContext.setAttribute("rpcListMem", rpcListMem);
 %>
-
-
-
 <html>
 <head>
-
 <meta charset="UTF-8">
+<link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/index.css" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
-<title>我的收藏</title>
+<title>SuperGoing-我的收藏</title>
 <style>
 
 
