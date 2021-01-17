@@ -52,7 +52,7 @@
                             	<label class="d-flex justify-content-end">預計抵達時間:</label>
                             </div>                    	
                         	<div class="col-5 d-inline-block">
-                            	<label><fmt:formatDate value="${roomOrderVO.expectArrTime}" pattern="yyyy-MM-dd HH:mm"/></label>
+                            	<label><fmt:formatDate value="${roomOrderVO.expectArrTime}" pattern="HH:mm"/></label>
                             </div>
 						</div>
 						<div class="form-group">
