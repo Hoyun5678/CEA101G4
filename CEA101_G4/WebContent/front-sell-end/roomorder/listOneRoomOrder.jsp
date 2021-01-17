@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.sell.model.*"%>
 <jsp:useBean id="roomOrderService" scope="page" class="com.roomorder.model.RoomOrderService" />
 <jsp:useBean id="roomOrderDetailSvc" scope="page" class="com.roomorderdetail.model.RoomOrderDetailService" />
@@ -51,7 +52,7 @@
                             	<label class="d-flex justify-content-end">預計抵達時間:</label>
                             </div>                    	
                         	<div class="col-5 d-inline-block">
-                            	<label>${roomOrderVO.expectArrTime}</label>
+                            	<label><fmt:formatDate value="${roomOrderVO.expectArrTime}" pattern="yyyy-MM-dd HH:mm"/></label>
                             </div>
 						</div>
 						<div class="form-group">
