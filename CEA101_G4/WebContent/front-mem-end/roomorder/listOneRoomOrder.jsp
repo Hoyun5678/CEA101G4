@@ -41,7 +41,7 @@
                                 <tr>
                                     <td id="icon"> <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;margin: auto;" /><br>
                                         <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> 感謝您的預定! </h2>
-                                    </td>
+                                  
                                 </tr>
                                 <tr>
                                     <td id="word">

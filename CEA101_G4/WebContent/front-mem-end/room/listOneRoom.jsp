@@ -151,9 +151,12 @@ color:black;
                         </div>
                     </div>
                     <div id="thirdcol">
+                        
                         <div class="googlemap">
-                            放地圖的地方
+                            <iframe width="255px" height="200px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyApgPPHUGkfdZcb0Teerhh7AStmD4zWPWE&q=${sellVO.sellMemAddress}" allowfullscreen>
+                            </iframe>
                         </div>
+                       
                     </div>
                 </div>
             </div>

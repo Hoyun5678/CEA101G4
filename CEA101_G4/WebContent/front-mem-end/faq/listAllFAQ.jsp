@@ -16,11 +16,177 @@
 
 
 <style>
-.main{
-    width: 80%;
-    height: 100%;
-    margin: auto;
- }
+
+
+#faq {
+  max-width: 700px;
+  margin: auto;
+  padding: 0 15px;
+  text-align: center;
+}
+
+section.faq {
+  padding-top: 2em;
+  padding-bottom: 3em;
+}
+
+#faq ul {
+  text-align: left;
+}
+.transition, p, ul li i:before, ul li i:after {
+  transition: all 0.3s;
+}
+
+#faq .no-select, #faq h2 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+#faq h2 {
+  color: #cc071e;
+  font-family: 'Microsoft JhengHei';
+  font-size: 16px;
+  
+  text-align: left;
+  padding: 15px 15px 0;
+  text-transform: none;
+  font-weight: 600;
+/*   letter-spacing: 1px; */
+  display: block;
+  margin: 0;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#faq p {
+  color: #333;
+  text-align: left;
+  font-family: 'hm_light', sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  position: relative;
+  overflow: hidden;
+  max-height: 250px;
+  will-change: max-height;
+  contain: layout;
+  display: inline-block;
+  opacity: 1;
+  transform: translate(0, 0);
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding: 0 50px 0 15px;
+  transition: .3s opacity, .6s max-height;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  z-index: 2;
+}
+
+#faq ul {
+  list-style: none;
+  perspective: 900;
+  padding: 0;
+  margin: 0;
+}
+#faq ul li {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  /*padding-bottom: 4px;*/
+  /*padding-top: 18px;*/
+  background: #fff;
+  box-shadow: 0 3px 10px -2px rgba(0,0,0,0.1);
+  -webkit-tap-highlight-color: transparent;
+}
+#faq ul li + li {
+  margin-top: 15px;
+}
+#faq ul li:last-of-type {
+  padding-bottom: 0;
+}
+#faq ul li i {
+  position: absolute;
+  transform: translate(-6px, 0);
+  margin-top: 28px;
+  right: 15px;
+}
+#faq ul li i:before, ul li i:after {
+  content: "";
+  position: absolute;
+  background-color: #cc071e;
+  width: 3px;
+  height: 9px;
+}
+#faq ul li i:before {
+  transform: translate(-2px, 0) rotate(45deg);
+}
+#faq ul li i:after {
+  transform: translate(2px, 0) rotate(-45deg);
+}
+#faq ul li input[type=checkbox] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  touch-action: manipulation;
+}
+#faq ul li input[type=checkbox]:checked ~ h2 {
+  color: #000;
+}
+#faq ul li input[type=checkbox]:checked ~ p {
+  /*margin-top: 0;*/
+  max-height: 0;
+  transition: .3s;
+  opacity: 0;
+  /*transform: translate(0, 50%);*/
+}
+#faq ul li input[type=checkbox]:checked ~ i:before {
+  transform: translate(2px, 0) rotate(45deg);
+}
+#faq ul li input[type=checkbox]:checked ~ i:after {
+  transform: translate(-2px, 0) rotate(-45deg);
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+a,
+a:visited,
+a:focus,
+a:active,
+a:link {
+  text-decoration: none;
+  outline: 0;
+}
+
+a {
+  color: currentColor;
+  transition: .2s ease-in-out;
+}
+
+
+/* ul { */
+/*   padding: 0; */
+/*   list-style: none; */
+/* } */
+
 </style>
 <link href='//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css' rel='stylesheet'></link>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" > </script>
@@ -29,75 +195,40 @@
 </head>
 <body>
 <%@ include file="/front-mem-end/bar.jsp" %> 
-            <h2>常見問答集</h2>  
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
-
-<div>
-<div class="main">
-<div class="right">
-
+           
+<div id="faq">
+        <div style="font-weight:600;font-size:20px;color:#cc071e;">常見問答集</div>  
+        <ul>
+           
+           <c:forEach var="faqVO" items="${list}">
+            <li>
+                <input type="checkbox" checked>
+                <i></i>
+              
+                <h2><td>${faqVO.faq_question}</td></h2>
+                <p>${faqVO.faq_answer}</p>
+               
+            </li>
+             </c:forEach>
+        </ul>
 </div>
-<table class="table table-striped align-middle" id="tb" >
-<thead>
-	<tr id ="th">
-		<th>問與答編號</th>
-		<th>問答提問</th>
-		<th>問答解答</th>
 
-	</tr>
-	</thead>
-<%-- 	<%@ include file="page1.file" %>  --%>
-	<tbody>
-	<c:forEach var="faqVO" items="${list}">
+
+
+<!-- 		<th>問與答編號</th> -->
+<!-- 		<th>問答提問</th> -->
+<!-- 		<th>問答解答</th> -->
+
+<%-- 	<c:forEach var="faqVO" items="${list}"> --%>
 		
-		<tr>
-		<td>${faqVO.faq_id}</td>
-		<td>${faqVO.faq_question}</td>
-		<td>${faqVO.faq_answer}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
-<%-- <%@ include file="page2.file" %> --%>
-</div>
-</div>
-</div>
- <script>
-
-     $('#tb').DataTable({
-     language: {
-     "emptyTable": "無資料...",
-     "processing": "處理中...",
-     "loadingRecords": "載入中...",
-     "lengthMenu": "每頁 _MENU_ 筆資料",
-     "zeroRecords": "無搜尋結果",
-     "info": "_START_ 至 _END_ / 共 _TOTAL_ 筆",
-     "infoEmpty": "尚無資料",
-     "infoFiltered": "(從 _MAX_ 筆資料過濾)",
-     "infoPostFix": "",
-     "search": "搜尋關鍵字:",
-     "paginate": {
-     "first": "首頁",
-     "last": "末頁",
-     "next": "下頁",
-     "previous": "前頁"
-     },
-     "aria": {
-     "sortAscending": ": 升冪",
-     "sortDescending": ": 降冪"
-     }
-     }
-     });
-     
-</script>
+<!-- 		<tr> -->
+<%-- 		<td>${faqVO.faq_id}</td> --%>
+<%-- 		<td>${faqVO.faq_question}</td> --%>
+<%-- 		<td>${faqVO.faq_answer}</td> --%>
+<!-- 		</tr> -->
+<%-- 	</c:forEach> --%>
+	
+ 
 
 </body>
 </html>
