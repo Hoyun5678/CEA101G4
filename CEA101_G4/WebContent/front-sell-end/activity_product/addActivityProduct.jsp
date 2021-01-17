@@ -17,6 +17,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sideBar.css" />
+	<link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
 
 
 
