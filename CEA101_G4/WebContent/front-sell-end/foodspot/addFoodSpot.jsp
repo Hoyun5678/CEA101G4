@@ -14,6 +14,7 @@ FoodSpotVO fsVO = (FoodSpotVO) request.getAttribute("fsVO");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/front-sell-end/front-sell-food.css">
 <title>美食景點資料新增 </title>
+<link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
 
 
 </head>

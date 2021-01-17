@@ -15,6 +15,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-mem-end/front-mem-room.css">
+    <link rel="Shortcut Icon" type="image/x-icon" href="<%=request.getContextPath()%>/image/LOGO/tiger.png" />
     <style type="text/css">
     img {
      	weight: 100%;

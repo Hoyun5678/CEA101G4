@@ -16,7 +16,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/front-sell-end/front-sell-sellMemIndex.css">
     
-	<title>所有房間資料</title>
+	<title>民宿會員首頁</title>
 </head>
 <body>
 	<div id="viewport">
