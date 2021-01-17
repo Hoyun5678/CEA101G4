@@ -58,27 +58,25 @@
 		font-weight:300;
 		padding:3px 5px 3px 5px;
 	    float:right;
-		margin-bottom:30px;
+		margin:10px;
 	}
 </style>
 
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js" > </script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-<script src="${pageContext.request.contextPath}/js/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/js/sweetalert2.all.min.js"></script> --%>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
 </head>
 
   
 
 <body>
 <%@ include file="/front-sell-end/sellMemSideBar.jsp" %> 
+<%@ include file="/front-sell-end/sellNavBar.jsp"%>
 
  <div class="content">
-        <div class="content-header">
-            <h2>美食與景點管理</h2>
-            </div>  
-
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -90,11 +88,11 @@
 </c:if>
     
 <div class="main" style="margin-left: 255px;width: 1000px;"/>
+
+<table class="table table-striped align-middle" id="tb" >
 <div class="right">
 <button type="button" class="btn" id="add" onclick="window.location.href='<%=request.getContextPath()%>/front-sell-end/foodspot/addFoodSpot.jsp'"><i class="fa fa-plus" style="padding-right:5px"></i>新增</button>
-
 </div>
-<table class="table table-striped align-middle" id="tb" >
 <thead>
 	<tr id ="th">
 		<th>美食與景點編號</th>
