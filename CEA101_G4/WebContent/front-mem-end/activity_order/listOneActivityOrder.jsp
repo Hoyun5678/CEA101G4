@@ -184,7 +184,7 @@
                                             </c:choose>
                                         </td>
                                         <td>${actordVO.act_order_remarks}</td>
-                                        <td class="btn_group" style="width: 100%;">
+                                        <td class="btn_group" style="width: 100%; justify-content: center;">
                                         
                                             <c:choose>
                                                 <c:when test="${actordVO.act_payment_status==0}">

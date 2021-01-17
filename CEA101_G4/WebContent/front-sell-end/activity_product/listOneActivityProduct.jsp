@@ -156,7 +156,7 @@ width:50px;}
 											<th>活動敘述</th>
 											<th>活動地點</th>
 											<th style="text-align: center; width: 100px;"><button
-													type="button" data-func="dt-add"
+													type="button" data-func="dt-add" style="width: 90px;"
 													class="btn btn-success btn-xs dt-add"
 													onclick="location.href='<%=request.getContextPath()%>/front-sell-end/activity_product/addActivityProduct.jsp'">
 													新增活動</button></th>
@@ -178,7 +178,7 @@ width:50px;}
 												<td>${actproVO.act_price}</td>
 												<td class="act_content" style="max-width: 100px;">${actproVO.act_des}</td>
 												<td>${actproVO.act_add}</td>
-												<td class="btn_group" style="width: 100%;">
+												<td class="btn_group" style="width: 100%;justify-content: center;">
 													<form METHOD="post"
 														ACTION="<%=request.getContextPath()%>/ActivityProduct/ActivityProduct.do">
 														<button type="submit"
