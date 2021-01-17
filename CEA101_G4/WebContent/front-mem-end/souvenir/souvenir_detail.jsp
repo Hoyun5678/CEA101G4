@@ -255,13 +255,18 @@
 	cursor: pointer;
 	margin-left:12px;
 }
+.product-dtl *{
+	text-align:left;
+}
 
 .product-count .qtyminus {
 	border-radius: 3px 0 0 3px;
+	text-align: center !important;
 }
 
 .product-count .qtyplus {
 	border-radius: 0 3px 3px 0;
+	text-align: center !important;
 }
 
 .product-count .qty {
