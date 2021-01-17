@@ -106,10 +106,13 @@
 						</a>
 					</div>
 				</div>
+				<c:set var='sellVO' value='${sellSvc.getOneSell(roomVO.sellMemId)}' scope='page' />
 				<div class="col-3 desCol">
 					房間名稱: ${roomVO.roomName}<br>
-					住宿價格/天: ${roomVO.roomPrice}<br>
+					所屬民宿: ${sellVO.sellRoomName}<br>
+					住宿價格 /晚: ${roomVO.roomPrice}<br>
 					房間容納人數: ${roomVO.roomCapacity}<br>
+					地址: ${sellVO.sellMemAddress}<br>
 <%-- 					房間敘述: ${roomVO.roomDes} --%>
 				</div>
 			<div class="col-1">
@@ -120,7 +123,6 @@
 				     <button type="submit" class="btn btn-info detailBtn">查看</button>
 				</FORM>
 			</div>
-			<c:set var='sellVO' value='${sellSvc.getOneSell(roomVO.sellMemId)}' scope='page' />
 			<div class="col-4 gMap">
 				<iframe 
 				    width="360"
