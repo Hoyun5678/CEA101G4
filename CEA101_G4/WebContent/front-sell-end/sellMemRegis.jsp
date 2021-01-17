@@ -227,16 +227,13 @@
 			
 			
 			$('.testBtn').click(function() {
-// 				$("[name='sellMemAccount']").val("testAccount001");
-// 				$("[name='sellMemPwd']").val("asdfasdf");
-// 				$("[name='sellMemPwdRe']").val("asdfasdf");
-				$("[name='sellMemName']").val("何昀");
-				$("[name='sellMemBirth']").val("1999-11-11");
+				$("[name='sellMemName']").val("大衛海鮮");
+				$("[name='sellMemBirth']").val("1999-09-09");
 				$("[name='sellMemTel']").val("0911234567");
-				$("[name='sellRoomName']").val("民宿的名字很重要嗎?");
-				$("[name='sellMemAddress']").val("桃園市龍潭區梅龍一街22巷10號");
-				$("[name='sellMemMail']").val("test@gmail.com");
-				$("[name='sellMemIdNumber']").val("u109888222");
+				$("[name='sellRoomName']").val("海鮮屋");
+				$("[name='sellMemAddress']").val("桃園市中壢區46號9樓");
+				$("[name='sellMemMail']").val("DavidSeafood@gmail.com");
+				$("[name='sellMemIdNumber']").val("U123456789");
 				$("[name='sellGender'][value='0']").prop("checked", true);
 			});
 			
