@@ -340,13 +340,14 @@
             display: block;
             width: 17.5em;
             height: 12em;
+            object-fit:cover;
 
         }
         .card>.content {
             background: #3a4440;
             border-bottom-left-radius: inherit;
             border-bottom-right-radius: inherit;
-            padding: 1em;
+            padding: 8px;
             text-align: center;
         }
         .card>.content>h1, .card>.content>h3 {

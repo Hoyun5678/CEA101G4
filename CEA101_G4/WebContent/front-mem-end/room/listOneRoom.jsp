@@ -296,9 +296,10 @@ color:black;
                         <c:forEach var="fsVO" items="${fsSvc.getOneBySell(roomVO.sellMemId)}">
                             <div class="card">
                                 <img src="${pageContext.request.contextPath}/foodspot/foodspot.do?fas_id=${fsVO.fas_id}&action=getFSPhoto">
-                                <div class="content">
+                                <div class="content" style="width:280px;height:87.7px;">
                                     <h1>${fsVO.fas_spot_name}</h1>
                                     <h3>${fsVO.fas_des}</h3>
+                                    <h3>${fsVO.fas_add}</h3>
                                 </div>
                             </div>
                         </c:forEach>
