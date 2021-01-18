@@ -60,7 +60,7 @@
 					<div class="align-self-center underline" id="sou_act">
 						<a href="<%=request.getContextPath()%>/front-mem-end/souvenir/souvenir.jsp"><h4>特產</h4></a>
 					</div>
-					<div class="align-self-center underline" style="width: 120px;">
+					<div class="align-self-center underline" style="white-space:nowrap;">
 						<c:if test="${not empty sessionScope.memVO}">
 							<a href="<%=request.getContextPath()%>/front-mem-end/mem/listOneMem.jsp"><h4>${memVO.mem_name}你好<i class="fas fa-child fa-1x" style="color: ghostwhite;"></i></h4></a>
 						</c:if>
