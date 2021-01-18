@@ -114,7 +114,7 @@
 </head>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
-    <font style="color: red">訂單下定失敗:</font>
+    <font style="color: red">訂單下訂失敗:</font>
     <ul>
         <c:forEach var="message" items="${errorMsgs}">
             <li style="color: red">${message}</li>
