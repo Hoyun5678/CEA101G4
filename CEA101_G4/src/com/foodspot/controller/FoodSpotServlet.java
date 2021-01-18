@@ -350,9 +350,7 @@ public class FoodSpotServlet extends HttpServlet {
 			
 				in.read(fas_photo);
 				in.close();
-			if (fas_photo != null || fas_photo.length != 0) { // 以下練習正則(規)表示式(regular-expression)
-					 errorMsgs.add("美食景點照片不可空白");
-				 }
+			
 				
 			
 			Double fas_latitude = null;
