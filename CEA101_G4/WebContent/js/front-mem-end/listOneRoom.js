@@ -11,8 +11,6 @@
 	    }
 	}
 	
-
-
     Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1 // getMonth is zero-based
         var dd = this.getDate()
@@ -94,7 +92,6 @@
                         td.classList.add('passedDate')
                     } else if (isCurrentDate(setDate)) {
                         td.classList.add('currentDate');
-                        td.classList.add('onSelect');
                     }
                     
                     if(orderedList.indexOf(setDate.yyyymmdd()) > -1) {
@@ -120,6 +117,9 @@
 	$(document).ready(function() {
 //		let orderedListStr = $('[name="roomOrderedDateList"]').val();
 //		console.log(orderedList)
+		
+		
+		
 		let today = new Date();
 		let currentStart = today;
 		var contextPath = $('[name="contextPath"]').val();
@@ -127,7 +127,7 @@
         
         delCal(new Date(today.getFullYear(), today.getMonth(), 1), drawCal)
         
-        $(document).on('click', '.calendarBody tbody td:not(.passedDate):not(.orderedDate)', function() {
+        $(document).on('click', '.calendarBody tbody td:not(.passedDate)', function() {
         	let onSelectList = $('.onSelect');
         	let orderRangeList = $('.orderedRange');
         	let sel = $(this);
@@ -163,6 +163,7 @@
 							console.log('result = false')
 							$('[name="checkInDate"]').val('');
 							$('[name="checkOutDate"]').val('');
+							$('#dayCount').html('');
 						} else {
 							resultList.forEach(element => $('td[value="' + element + '"]').addClass('orderedRange'))
 							$('td[value="' + onSelectedVal[1] + '"]').addClass('orderedRange')
@@ -200,5 +201,7 @@
             
         });
         
+        $('.calendarBody tbody td[value="' + $('input[name="checkInDate"]').val() + '"]').click();
+        $('.calendarBody tbody td[value="' + $('input[name="checkOutDate"]').val() + '"]').click();
 		
 	});

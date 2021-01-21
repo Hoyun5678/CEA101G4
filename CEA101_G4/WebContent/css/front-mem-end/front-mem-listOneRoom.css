@@ -50,7 +50,7 @@
 		color: white;
 	}
 	
-	.calendarBody td:not(.passedDate):not(.orderedDate) {
+	.calendarBody td:not(.passedDate) {
 		cursor: pointer;
 	}
 	

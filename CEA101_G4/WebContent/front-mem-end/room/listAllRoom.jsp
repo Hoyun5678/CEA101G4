@@ -119,20 +119,20 @@
 			<div class="col-1">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/room/room.do">
 				     <input type="hidden" name="roomId"  value="${roomVO.roomId}">
-				     <input type="hidden" name="datefilter"  value="${datefilter}">
+				     <input type="hidden" name="datefilter"  value="">
 				     <input type="hidden" name="action"	value="checkRoomDetail">
 				     <button type="submit" class="btn btn-info detailBtn">查看</button>
 				</FORM>
 			</div>
-			<div class="col-4 gMap">
-				<iframe 
-				    width="360"
-				    height="200"
-					frameborder="0" 
-					style="border:0"
-					src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDK-5rFDe76_LASpBLJJSHYd1JM7W9ttWg&zoom=14&center=${sellVO.sellLatitude},${sellVO.sellLongitud}">
-				</iframe>
-			</div>
+<!-- 			<div class="col-4 gMap"> -->
+<!-- 				<iframe  -->
+<!-- 				    width="360" -->
+<!-- 				    height="200" -->
+<!-- 					frameborder="0"  -->
+<!-- 					style="border:0" -->
+<%-- 					src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDK-5rFDe76_LASpBLJJSHYd1JM7W9ttWg&zoom=14&center=${sellVO.sellLatitude},${sellVO.sellLongitud}"> --%>
+<!-- 				</iframe> -->
+<!-- 			</div> -->
 			</div>
 	
 		</c:forEach>
@@ -145,9 +145,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script>
+
     	$(document).ready(function() {
+
     		$(".carousel-indicators li:first-child").addClass("active");
 			$(".carousel-inner .carousel-item:first-child").addClass("active");
+			
+			$('input[name="datefilter"]').bind('change', function() {
+				$('.roomContent [name="datefilter"]').val($('#room [name="datefilter"]').val());
+			})
     	});
 	</script>
     
